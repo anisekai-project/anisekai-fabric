@@ -4,7 +4,10 @@
   "package": "me.anisekai.mixins",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "CustomToolBlockInteractionMixin"
+    "AbstractBlockMixin",
+    "BlockItemMixin",
+    "BlockMixin",
+    "accessors.BlockEntityMixin"
   ],
   "client": [],
   "server": [],
