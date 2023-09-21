@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S  ",
+    "CCC",
+    "S S"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "item": "minecraft:dark_oak_slab"
+    }
+  },
+  "result": {
+    "item": "anisekai:dark_oak_chair",
+    "count": 1
+  }
+}

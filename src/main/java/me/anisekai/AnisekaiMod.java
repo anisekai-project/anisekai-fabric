@@ -1,0 +1,33 @@
+package me.anisekai;
+
+import me.anisekai.entities.chair.ChairEntity;
+import me.anisekai.registries.ModBlocks;
+import me.anisekai.registries.ModEntities;
+import me.anisekai.registries.ModItems;
+import me.anisekai.registries.ModTags;
+import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class AnisekaiMod implements ModInitializer {
+
+    public static final Logger LOGGER = LoggerFactory.getLogger(AnisekaiMod.class);
+    public static final String MOD_ID = "anisekai";
+
+    /**
+     * Runs the mod initializer.
+     */
+    @Override
+    public void onInitialize() {
+
+        LOGGER.info("Registered {} blocks", ModBlocks.blocks().size());
+        LOGGER.info("Registered {} items", ModItems.items().size());
+        ModItems.addToInventory();
+        LOGGER.info("Registered {} entities", ModEntities.entities().size());
+        LOGGER.info("Loaded {} item tags", ModTags.itemTags().size());
+
+        FabricDefaultAttributeRegistry.register(ModEntities.CHAIR_ENTITY, ChairEntity.createMobAttributes());
+    }
+
+}

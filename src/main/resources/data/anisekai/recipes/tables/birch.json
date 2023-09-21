@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    " S ",
+    " C "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "item": "minecraft:birch_slab"
+    },
+    "B": {
+      "item": "minecraft:birch_planks"
+    }
+  },
+  "result": {
+    "item": "anisekai:birch_table",
+    "count": 1
+  }
+}

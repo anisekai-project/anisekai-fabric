@@ -1,0 +1,27 @@
+{
+  "replace": false,
+  "values": [
+    "anisekai:acacia_chair",
+    "anisekai:bamboo_chair",
+    "anisekai:birch_chair",
+    "anisekai:cherry_chair",
+    "anisekai:crimson_chair",
+    "anisekai:dark_oak_chair",
+    "anisekai:jungle_chair",
+    "anisekai:mangrove_chair",
+    "anisekai:oak_chair",
+    "anisekai:spruce_chair",
+    "anisekai:warped_chair",
+    "anisekai:acacia_table",
+    "anisekai:bamboo_table",
+    "anisekai:birch_table",
+    "anisekai:cherry_table",
+    "anisekai:crimson_table",
+    "anisekai:dark_oak_table",
+    "anisekai:jungle_table",
+    "anisekai:mangrove_table",
+    "anisekai:oak_table",
+    "anisekai:spruce_table",
+    "anisekai:warped_table"
+  ]
+}

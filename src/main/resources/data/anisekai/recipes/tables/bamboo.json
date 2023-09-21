@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    " S ",
+    " C "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "item": "minecraft:bamboo_slab"
+    },
+    "B": {
+      "item": "minecraft:bamboo_block"
+    }
+  },
+  "result": {
+    "item": "anisekai:bamboo_table",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    " S ",
+    " C "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "item": "minecraft:jungle_slab"
+    },
+    "B": {
+      "item": "minecraft:jungle_planks"
+    }
+  },
+  "result": {
+    "item": "anisekai:jungle_table",
+    "count": 1
+  }
+}

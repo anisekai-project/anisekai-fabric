@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S  ",
+    "CCC",
+    "S S"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "item": "minecraft:mangrove_slab"
+    }
+  },
+  "result": {
+    "item": "anisekai:mangrove_chair",
+    "count": 1
+  }
+}
