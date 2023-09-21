@@ -1,8 +1,8 @@
 package me.anisekai.registries;
 
 import me.anisekai.AnisekaiMod;
-import me.anisekai.blocks.chair.ChairBlock;
-import me.anisekai.blocks.chair.TableBlock;
+import me.anisekai.blocks.ChairBlock;
+import me.anisekai.blocks.TableBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registries;

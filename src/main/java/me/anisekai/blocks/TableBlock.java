@@ -1,4 +1,4 @@
-package me.anisekai.blocks.chair;
+package me.anisekai.blocks;
 
 import me.anisekai.utils.VoxelUtils;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;

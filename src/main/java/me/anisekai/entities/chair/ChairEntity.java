@@ -1,6 +1,6 @@
 package me.anisekai.entities.chair;
 
-import me.anisekai.blocks.chair.ChairBlock;
+import me.anisekai.blocks.ChairBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Dismounting;

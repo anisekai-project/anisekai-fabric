@@ -1,4 +1,4 @@
-package me.anisekai.blocks.chair;
+package me.anisekai.blocks;
 
 import me.anisekai.entities.chair.ChairEntity;
 import me.anisekai.registries.ModEntities;
