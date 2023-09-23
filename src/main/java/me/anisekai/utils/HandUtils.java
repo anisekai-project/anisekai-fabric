@@ -14,6 +14,14 @@ public class HandUtils {
 
     }
 
+    public static ItemStack getHandStack(PlayerEntity entity, Hand hand) {
+
+        return switch (hand) {
+            case MAIN_HAND -> entity.getMainHandStack();
+            case OFF_HAND -> entity.getOffHandStack();
+        };
+    }
+
     public static Optional<HandContent> getHandContent(TagKey<Item> tag, PlayerEntity player, Hand currentHand) {
 
         ItemStack mainHandStack = player.getMainHandStack();

@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values":  [
+    "anisekai:acacia_stairs",
+    "anisekai:bamboo_stairs",
+    "anisekai:birch_stairs",
+    "anisekai:cherry_stairs",
+    "anisekai:crimson_stairs",
+    "anisekai:dark_oak_stairs",
+    "anisekai:jungle_stairs",
+    "anisekai:mangrove_stairs",
+    "anisekai:oak_stairs",
+    "anisekai:spruce_stairs",
+    "anisekai:warped_stairs"
+  ]
+}

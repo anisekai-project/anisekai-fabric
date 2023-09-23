@@ -1,0 +1,23 @@
+{
+  "variants": {
+    "facing=north": {
+      "model":  "anisekai:block/oak_stairs",
+      "uvlock": true
+    },
+    "facing=east":  {
+      "model":  "anisekai:block/oak_stairs",
+      "y":      90,
+      "uvlock": true
+    },
+    "facing=south": {
+      "model":  "anisekai:block/oak_stairs",
+      "y":      180,
+      "uvlock": true
+    },
+    "facing=west":  {
+      "model":  "anisekai:block/oak_stairs",
+      "y":      270,
+      "uvlock": true
+    }
+  }
+}

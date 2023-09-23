@@ -1,5 +1,23 @@
 {
   "variants": {
-    "": { "model": "anisekai:block/cherry_table" }
+    "facing=north": {
+      "model":  "anisekai:block/cherry_table",
+      "uvlock": false
+    },
+    "facing=east":  {
+      "model":  "anisekai:block/cherry_table",
+      "uvlock": false,
+      "y":      90
+    },
+    "facing=south": {
+      "model":  "anisekai:block/cherry_table",
+      "uvlock": false,
+      "y":      180
+    },
+    "facing=west":  {
+      "model":  "anisekai:block/cherry_table",
+      "uvlock": false,
+      "y":      270
+    }
   }
 }

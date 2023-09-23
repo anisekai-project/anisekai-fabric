@@ -1,0 +1,11 @@
+{
+  "type":        "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "anisekai:bamboo_stairs"
+    }
+  ],
+  "result":      {
+    "item": "minecraft:bamboo_stairs"
+  }
+}

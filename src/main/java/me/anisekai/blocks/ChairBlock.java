@@ -1,7 +1,8 @@
 package me.anisekai.blocks;
 
 import me.anisekai.entities.chair.ChairEntity;
-import me.anisekai.registries.ModEntities;
+import me.anisekai.interfaces.Seatable;
+import me.anisekai.utils.HandUtils;
 import me.anisekai.utils.VoxelUtils;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
@@ -10,6 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.Items;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.OverlayMessageS2CPacket;
@@ -23,6 +25,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -32,9 +35,8 @@ import net.minecraft.world.WorldAccess;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
-public class ChairBlock extends HorizontalFacingBlock implements Waterloggable {
+public class ChairBlock extends HorizontalFacingBlock implements Waterloggable, Seatable {
 
     // <editor-fold desc="Voxels">
 
@@ -83,8 +85,6 @@ public class ChairBlock extends HorizontalFacingBlock implements Waterloggable {
     ));
 
     // </editor-fold>
-
-    private final float height = 0.4f;
 
     public ChairBlock(Block block) {
 
@@ -150,7 +150,7 @@ public class ChairBlock extends HorizontalFacingBlock implements Waterloggable {
         BlockPos   above      = pos.offset(Direction.UP);
         BlockState aboveState = world.getBlockState(above);
 
-        if (player.isSpectator() || player.isSneaking()) {
+        if (player.isSpectator() || player.isSneaking() || HandUtils.getHandStack(player, hand).isOf(Items.DEBUG_STICK)) {
             return ActionResult.FAIL;
         }
 
@@ -173,42 +173,22 @@ public class ChairBlock extends HorizontalFacingBlock implements Waterloggable {
         } else if (!active.isEmpty()) {
             hasPassenger.forEach(Entity::stopRiding);
             return ActionResult.SUCCESS;
-        } else if (this.sitEntity(world, pos, state, player) == ActionResult.SUCCESS) {
+        } else if (ChairEntity.sitEntity(world, pos, state, this, player) == ActionResult.SUCCESS) {
             return ActionResult.SUCCESS;
         }
         return ActionResult.CONSUME;
     }
 
+    @Override
+    public Vec3d getSitOffsetFrom(Vec3d pos) {
 
-    public ActionResult sitEntity(World world, BlockPos pos, BlockState state, Entity entityToSit) {
+        return pos.add(0.5, 0.4, 0.5);
+    }
 
-        double px = pos.getX() + 0.5;
-        double py = pos.getY() + this.height;
-        double pz = pos.getZ() + 0.5;
+    @Override
+    public float getSitYaw(BlockState state) {
 
-        float       yaw         = state.get(FACING).asRotation();
-        ChairEntity chairEntity = Objects.requireNonNull(ModEntities.CHAIR_ENTITY.create(world));
-        chairEntity.refreshPositionAndAngles(px, py, pz, yaw, 0);
-        chairEntity.setNoGravity(true);
-        chairEntity.setSilent(true);
-        chairEntity.setInvisible(false);
-        chairEntity.setInvulnerable(true);
-        chairEntity.setAiDisabled(true);
-        chairEntity.setNoDrag(true);
-        chairEntity.setHeadYaw(yaw);
-        chairEntity.setYaw(yaw);
-        chairEntity.setBodyYaw(yaw);
-        if (world.spawnEntity(chairEntity)) {
-            entityToSit.startRiding(chairEntity, true);
-            entityToSit.setYaw(yaw);
-            entityToSit.setHeadYaw(yaw);
-            chairEntity.setYaw(yaw);
-            chairEntity.setBodyYaw(yaw);
-            chairEntity.setHeadYaw(yaw);
-
-            return ActionResult.SUCCESS;
-        }
-        return ActionResult.CONSUME;
+        return state.get(FACING).asRotation();
     }
 
 }

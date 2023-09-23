@@ -1,11 +1,11 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type":    "minecraft:crafting_shaped",
   "pattern": [
     "BBB",
     " S ",
     " C "
   ],
-  "key": {
+  "key":     {
     "S": {
       "item": "minecraft:stick"
     },
@@ -16,8 +16,8 @@
       "item": "minecraft:mangrove_planks"
     }
   },
-  "result": {
-    "item": "anisekai:mangrove_table",
+  "result":  {
+    "item":  "anisekai:mangrove_table",
     "count": 1
   }
 }

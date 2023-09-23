@@ -1,0 +1,23 @@
+{
+  "variants": {
+    "facing=north": {
+      "model":  "anisekai:block/dark_oak_stool",
+      "uvlock": false
+    },
+    "facing=east":  {
+      "model":  "anisekai:block/dark_oak_stool",
+      "uvlock": false,
+      "y":      90
+    },
+    "facing=south": {
+      "model":  "anisekai:block/dark_oak_stool",
+      "uvlock": false,
+      "y":      180
+    },
+    "facing=west":  {
+      "model":  "anisekai:block/dark_oak_stool",
+      "uvlock": false,
+      "y":      270
+    }
+  }
+}

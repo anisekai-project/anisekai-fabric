@@ -2,10 +2,7 @@ package me.anisekai.blocks;
 
 import me.anisekai.utils.VoxelUtils;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.Waterloggable;
+import net.minecraft.block.*;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
@@ -20,7 +17,7 @@ import net.minecraft.world.WorldAccess;
 
 import java.util.Arrays;
 
-public class TableBlock extends Block implements Waterloggable {
+public class TableBlock extends HorizontalFacingBlock implements Waterloggable {
 
     private static final VoxelShape SHAPE = VoxelUtils.make(Arrays.asList(
             VoxelShapes.cuboid(0.3125, 0, 0.3125, 0.6875, 0.0625, 0.6875),
@@ -31,14 +28,17 @@ public class TableBlock extends Block implements Waterloggable {
     public TableBlock(Block block) {
 
         super(FabricBlockSettings.copy(block));
-        this.setDefaultState(this.getDefaultState().with(Properties.WATERLOGGED, false));
+        this.setDefaultState(
+                this.getDefaultState()
+                    .with(Properties.HORIZONTAL_FACING, Direction.NORTH)
+                    .with(Properties.WATERLOGGED, false)
+        );
     }
-
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
 
-        builder.add(Properties.WATERLOGGED);
+        builder.add(Properties.HORIZONTAL_FACING, Properties.WATERLOGGED);
     }
 
     @Override
@@ -67,6 +67,7 @@ public class TableBlock extends Block implements Waterloggable {
     public BlockState getPlacementState(ItemPlacementContext ctx) {
 
         return super.getPlacementState(ctx)
+                    .with(Properties.HORIZONTAL_FACING, ctx.getHorizontalPlayerFacing().getOpposite())
                     .with(Properties.WATERLOGGED, ctx.getWorld().getFluidState(ctx.getBlockPos()).isOf(Fluids.WATER));
     }
 

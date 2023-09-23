@@ -1,11 +1,11 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type":    "minecraft:crafting_shaped",
   "pattern": [
     "S  ",
     "CCC",
     "S S"
   ],
-  "key": {
+  "key":     {
     "S": {
       "item": "minecraft:stick"
     },
@@ -13,8 +13,8 @@
       "item": "minecraft:acacia_slab"
     }
   },
-  "result": {
-    "item": "anisekai:acacia_chair",
+  "result":  {
+    "item":  "anisekai:acacia_chair",
     "count": 1
   }
 }

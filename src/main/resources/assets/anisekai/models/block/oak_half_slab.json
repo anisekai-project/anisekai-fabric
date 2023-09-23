@@ -1,0 +1,8 @@
+{
+  "parent":   "anisekai:block/base/half_slab",
+  "textures": {
+    "particle": "minecraft:block/oak_planks",
+    "side":     "minecraft:block/oak_log",
+    "step":     "minecraft:block/oak_planks"
+  }
+}

@@ -1,23 +1,23 @@
 {
   "variants": {
     "facing=north": {
-      "model": "anisekai:block/bamboo_chair",
+      "model":  "anisekai:block/bamboo_chair",
       "uvlock": false
     },
-    "facing=east": {
-      "model": "anisekai:block/bamboo_chair",
+    "facing=east":  {
+      "model":  "anisekai:block/bamboo_chair",
       "uvlock": false,
-      "y": 90
+      "y":      90
     },
     "facing=south": {
-      "model": "anisekai:block/bamboo_chair",
+      "model":  "anisekai:block/bamboo_chair",
       "uvlock": false,
-      "y": 180
+      "y":      180
     },
-    "facing=west": {
-      "model": "anisekai:block/bamboo_chair",
+    "facing=west":  {
+      "model":  "anisekai:block/bamboo_chair",
       "uvlock": false,
-      "y": 270
+      "y":      270
     }
   }
 }

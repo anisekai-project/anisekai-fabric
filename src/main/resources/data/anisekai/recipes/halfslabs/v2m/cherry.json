@@ -1,0 +1,12 @@
+{
+  "type":        "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:cherry_slab"
+    }
+  ],
+  "result":      {
+    "item": "anisekai:cherry_half_slab",
+    "count": 2
+  }
+}

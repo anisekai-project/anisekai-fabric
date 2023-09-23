@@ -1,0 +1,12 @@
+{
+  "type":        "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:jungle_slab"
+    }
+  ],
+  "result":      {
+    "item": "anisekai:jungle_half_slab",
+    "count": 2
+  }
+}

@@ -1,11 +1,11 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type":    "minecraft:crafting_shaped",
   "pattern": [
     "S  ",
     "CCC",
     "S S"
   ],
-  "key": {
+  "key":     {
     "S": {
       "item": "minecraft:stick"
     },
@@ -13,8 +13,8 @@
       "item": "minecraft:crimson_slab"
     }
   },
-  "result": {
-    "item": "anisekai:crimson_chair",
+  "result":  {
+    "item":  "anisekai:crimson_chair",
     "count": 1
   }
 }

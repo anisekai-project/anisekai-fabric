@@ -1,0 +1,12 @@
+{
+  "type":        "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:dark_oak_slab"
+    }
+  ],
+  "result":      {
+    "item": "anisekai:dark_oak_half_slab",
+    "count": 2
+  }
+}

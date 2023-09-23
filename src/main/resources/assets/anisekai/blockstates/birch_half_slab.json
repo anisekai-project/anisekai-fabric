@@ -1,0 +1,23 @@
+{
+  "variants": {
+    "facing=north": {
+      "model":  "anisekai:block/birch_half_slab",
+      "uvlock": true
+    },
+    "facing=east":  {
+      "model":  "anisekai:block/birch_half_slab",
+      "uvlock": true,
+      "y":      90
+    },
+    "facing=south": {
+      "model":  "anisekai:block/birch_half_slab",
+      "uvlock": true,
+      "y":      180
+    },
+    "facing=west":  {
+      "model":  "anisekai:block/birch_half_slab",
+      "uvlock": true,
+      "y":      270
+    }
+  }
+}

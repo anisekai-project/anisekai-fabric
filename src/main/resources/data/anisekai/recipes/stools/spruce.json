@@ -1,0 +1,19 @@
+{
+  "type":    "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "S S"
+  ],
+  "key":     {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "item": "minecraft:spruce_slab"
+    }
+  },
+  "result":  {
+    "item":  "anisekai:spruce_stool",
+    "count": 1
+  }
+}

@@ -16,16 +16,31 @@ public final class ModTags {
             new Identifier(AnisekaiMod.MOD_ID, "chairs")
     );
 
+    public static final TagKey<Item> HALF_SLABS = TagKey.of(
+            RegistryKeys.ITEM,
+            new Identifier(AnisekaiMod.MOD_ID, "half_slabs")
+    );
+
+    public static final TagKey<Item> STAIRS = TagKey.of(
+            RegistryKeys.ITEM,
+            new Identifier(AnisekaiMod.MOD_ID, "stairs")
+    );
+
     public static final TagKey<Item> TABLES = TagKey.of(
             RegistryKeys.ITEM,
             new Identifier(AnisekaiMod.MOD_ID, "tables")
+    );
+
+    public static final TagKey<Item> STOOLS = TagKey.of(
+            RegistryKeys.ITEM,
+            new Identifier(AnisekaiMod.MOD_ID, "stools")
     );
 
     private ModTags() {}
 
     public static List<TagKey<Item>> itemTags() {
 
-        return Arrays.asList(CHAIRS, TABLES);
+        return Arrays.asList(CHAIRS, HALF_SLABS, STAIRS, TABLES, STOOLS);
     }
 
 }

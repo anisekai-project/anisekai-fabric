@@ -1,11 +1,11 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type":    "minecraft:crafting_shaped",
   "pattern": [
     "BBB",
     " S ",
     " C "
   ],
-  "key": {
+  "key":     {
     "S": {
       "item": "minecraft:stick"
     },
@@ -16,8 +16,8 @@
       "item": "minecraft:spruce_planks"
     }
   },
-  "result": {
-    "item": "anisekai:spruce_table",
+  "result":  {
+    "item":  "anisekai:spruce_table",
     "count": 1
   }
 }

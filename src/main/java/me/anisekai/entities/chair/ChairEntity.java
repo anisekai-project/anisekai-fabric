@@ -1,12 +1,11 @@
 package me.anisekai.entities.chair;
 
 import me.anisekai.blocks.ChairBlock;
+import me.anisekai.interfaces.Seatable;
+import me.anisekai.registries.ModEntities;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.Dismounting;
-import net.minecraft.entity.EntityPose;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
@@ -19,7 +18,44 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+import java.util.Objects;
+
 public class ChairEntity extends MobEntity {
+
+    public static ActionResult sitEntity(World world, BlockPos pos, BlockState state, Seatable seatable, Entity entity) {
+
+        Vec3d vec   = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
+        Vec3d sitAt = seatable.getSitOffsetFrom(vec);
+        float yaw   = seatable.getSitYaw(state);
+
+        ChairEntity chairEntity = Objects.requireNonNull(ModEntities.CHAIR_ENTITY.create(world));
+        chairEntity.refreshPositionAndAngles(sitAt.getX(), sitAt.getY(), sitAt.getZ(), yaw, 0);
+
+        chairEntity.setNoGravity(true);
+        chairEntity.setSilent(true);
+        chairEntity.setInvisible(false);
+        chairEntity.setInvulnerable(true);
+        chairEntity.setAiDisabled(true);
+        chairEntity.setNoDrag(true);
+        chairEntity.setHeadYaw(yaw);
+        chairEntity.setYaw(yaw);
+        chairEntity.setBodyYaw(yaw);
+
+        if (world.spawnEntity(chairEntity)) {
+            entity.startRiding(chairEntity, true);
+            entity.setYaw(yaw);
+            entity.setHeadYaw(yaw);
+
+            chairEntity.setYaw(yaw);
+            chairEntity.setBodyYaw(yaw);
+            chairEntity.setHeadYaw(yaw);
+
+            return ActionResult.SUCCESS;
+        }
+        return ActionResult.CONSUME;
+
+    }
+
 
     public ChairEntity(EntityType<? extends ChairEntity> type, World world) {
 
