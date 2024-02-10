@@ -10,14 +10,14 @@
       "item": "minecraft:stick"
     },
     "C": {
-      "item": "minecraft:bamboo_slab"
+      "item": "minecraft:acacia_slab"
     },
     "B": {
-      "item": "minecraft:bamboo_block"
+      "item": "minecraft:acacia_planks"
     }
   },
   "result":  {
-    "item":  "anisekai:bamboo_table",
+    "item":  "anisekai:acacia_table",
     "count": 1
   }
 }

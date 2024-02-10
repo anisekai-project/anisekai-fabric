@@ -1,19 +1,16 @@
 package me.anisekai.blocks;
 
-import me.anisekai.interfaces.Seatable;
+import me.anisekai.blocks.composed.SeatBlock;
 import me.anisekai.utils.VoxelUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.Waterloggable;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
 
 import java.util.Arrays;
 
-public class StoolBlock extends ChairBlock implements Waterloggable, Seatable {
+public class StoolBlock extends SeatBlock {
 
     // <editor-fold desc="Voxels">
 
@@ -29,13 +26,19 @@ public class StoolBlock extends ChairBlock implements Waterloggable, Seatable {
 
     public StoolBlock(Block block) {
 
-        super(block);
+        super(block, VOXEL);
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+    public Vec3d getSitOffsetFrom(Vec3d pos) {
 
-        return VOXEL;
+        return pos.add(0.5, 0.4, 0.5);
+    }
+
+    @Override
+    public float getSitYaw(BlockState state) {
+
+        return state.get(FACING).asRotation();
     }
 
 }

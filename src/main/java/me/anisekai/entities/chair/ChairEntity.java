@@ -1,6 +1,6 @@
 package me.anisekai.entities.chair;
 
-import me.anisekai.blocks.ChairBlock;
+import me.anisekai.blocks.composed.SeatBlock;
 import me.anisekai.interfaces.Seatable;
 import me.anisekai.registries.ModEntities;
 import net.minecraft.block.Block;
@@ -69,7 +69,7 @@ public class ChairEntity extends MobEntity {
         BlockState state = this.getWorld().getBlockState(this.getBlockPos());
         Block      block = state.getBlock();
 
-        if ((!this.hasPassengers() && !this.getWorld().isClient) || !(block instanceof ChairBlock)) {
+        if ((!this.hasPassengers() && !this.getWorld().isClient) || !(block instanceof SeatBlock)) {
             this.removeAllPassengers();
             this.discard();
         }
@@ -111,8 +111,7 @@ public class ChairEntity extends MobEntity {
             for (EntityPose entityPose : passenger.getPoses()) {
                 Box box = passenger.getBoundingBox(entityPose);
 
-                for (int i = 0; i < is.length; i++) {
-                    int[] js = is[i];
+                for (int[] js : is) {
                     mutable.set(blockPos.getX() + js[1], blockPos.getY() + 0.3, blockPos.getZ() - js[0]);
                     double d = this.getWorld().getDismountHeight(mutable);
                     if (Dismounting.canDismountInBlock(d)) {

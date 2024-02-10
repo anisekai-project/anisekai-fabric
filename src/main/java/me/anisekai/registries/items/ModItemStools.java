@@ -2,7 +2,6 @@ package me.anisekai.registries.items;
 
 import me.anisekai.AnisekaiMod;
 import me.anisekai.registries.blocks.ModBlockStools;
-import me.anisekai.registries.blocks.ModBlockStools;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;

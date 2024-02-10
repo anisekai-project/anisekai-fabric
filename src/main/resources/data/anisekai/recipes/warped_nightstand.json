@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "___",
+    "O O",
+    "/_/"
+  ],
+  "key": {
+    "_": {
+      "item": "minecraft:warped_slab"
+    },
+    "O": {
+      "item": "minecraft:warped_planks"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result":  {
+    "item":  "anisekai:warped_nightstand",
+    "count": 1
+  }
+}

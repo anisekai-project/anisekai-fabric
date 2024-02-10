@@ -1,6 +1,7 @@
 {
   "type":    "minecraft:crafting_shaped",
   "pattern": [
+    "S  ",
     "CCC",
     "S S"
   ],
@@ -9,11 +10,11 @@
       "item": "minecraft:stick"
     },
     "C": {
-      "item": "minecraft:birch_slab"
+      "item": "minecraft:acacia_slab"
     }
   },
   "result":  {
-    "item":  "anisekai:birch_chair",
+    "item":  "anisekai:acacia_chair",
     "count": 1
   }
 }

@@ -2,7 +2,6 @@ package me.anisekai.registries.blocks;
 
 import me.anisekai.AnisekaiMod;
 import me.anisekai.blocks.StairsBlock;
-import me.anisekai.blocks.StairsBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registries;

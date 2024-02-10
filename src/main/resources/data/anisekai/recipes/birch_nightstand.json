@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "___",
+    "O O",
+    "/_/"
+  ],
+  "key": {
+    "_": {
+      "item": "minecraft:birch_slab"
+    },
+    "O": {
+      "item": "minecraft:birch_planks"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result":  {
+    "item":  "anisekai:birch_nightstand",
+    "count": 1
+  }
+}

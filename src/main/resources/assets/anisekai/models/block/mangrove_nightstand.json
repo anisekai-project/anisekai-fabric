@@ -1,0 +1,9 @@
+{
+  "parent":   "anisekai:block/base/nightstand",
+  "textures": {
+    "0":        "minecraft:block/mangrove_log",
+    "1":        "minecraft:block/mangrove_planks",
+    "2":        "minecraft:block/stripped_mangrove_log",
+    "particle": "minecraft:block/mangrove_log"
+  }
+}

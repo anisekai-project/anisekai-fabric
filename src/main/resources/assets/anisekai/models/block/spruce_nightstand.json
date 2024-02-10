@@ -1,0 +1,9 @@
+{
+  "parent":   "anisekai:block/base/nightstand",
+  "textures": {
+    "0":        "minecraft:block/spruce_log",
+    "1":        "minecraft:block/spruce_planks",
+    "2":        "minecraft:block/stripped_spruce_log",
+    "particle": "minecraft:block/spruce_log"
+  }
+}

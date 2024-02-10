@@ -1,0 +1,7 @@
+{
+  "parent":   "anisekai:block/base/nightstand_feet_side",
+  "textures": {
+    "0":        "block/cherry_log",
+    "particle": "block/cherry_log"
+  }
+}

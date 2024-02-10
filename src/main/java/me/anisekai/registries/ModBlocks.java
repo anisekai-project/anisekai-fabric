@@ -18,6 +18,7 @@ public final class ModBlocks {
         blocks.addAll(ModBlockStairs.blocks());
         blocks.addAll(ModBlockTables.blocks());
         blocks.addAll(ModBlockStools.blocks());
+        blocks.addAll(ModBlockNightstands.blocks());
         return blocks;
     }
 

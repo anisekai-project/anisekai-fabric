@@ -21,6 +21,7 @@ public final class ModItems {
         items.addAll(ModItemStairs.items());
         items.addAll(ModItemStools.items());
         items.addAll(ModItemTables.items());
+        items.addAll(ModItemNightstands.items());
         return items;
     }
 
@@ -35,7 +36,8 @@ public final class ModItems {
                     () -> ModItemHalfSlabs.ACACIA,
                     () -> ModItemStairs.ACACIA,
                     () -> ModItemStools.ACACIA,
-                    () -> ModItemTables.ACACIA
+                    () -> ModItemTables.ACACIA,
+                    () -> ModItemNightstands.ACACIA
             );
 
             content.addAfter(
@@ -44,7 +46,8 @@ public final class ModItems {
                     () -> ModItemHalfSlabs.BAMBOO,
                     () -> ModItemStairs.BAMBOO,
                     () -> ModItemStools.BAMBOO,
-                    () -> ModItemTables.BAMBOO
+                    () -> ModItemTables.BAMBOO,
+                    () -> ModItemNightstands.BAMBOO
             );
 
             content.addAfter(
@@ -53,7 +56,8 @@ public final class ModItems {
                     () -> ModItemHalfSlabs.BIRCH,
                     () -> ModItemStairs.BIRCH,
                     () -> ModItemStools.BIRCH,
-                    () -> ModItemTables.BIRCH
+                    () -> ModItemTables.BIRCH,
+                    () -> ModItemNightstands.BIRCH
             );
 
             content.addAfter(
@@ -62,7 +66,8 @@ public final class ModItems {
                     () -> ModItemHalfSlabs.CHERRY,
                     () -> ModItemStairs.CHERRY,
                     () -> ModItemStools.CHERRY,
-                    () -> ModItemTables.CHERRY
+                    () -> ModItemTables.CHERRY,
+                    () -> ModItemNightstands.CHERRY
             );
 
             content.addAfter(
@@ -71,7 +76,8 @@ public final class ModItems {
                     () -> ModItemHalfSlabs.CRIMSON,
                     () -> ModItemStairs.CRIMSON,
                     () -> ModItemStools.CRIMSON,
-                    () -> ModItemTables.CRIMSON
+                    () -> ModItemTables.CRIMSON,
+                    () -> ModItemNightstands.CRIMSON
             );
 
             content.addAfter(
@@ -80,7 +86,8 @@ public final class ModItems {
                     () -> ModItemHalfSlabs.DARK_OAK,
                     () -> ModItemStairs.DARK_OAK,
                     () -> ModItemStools.DARK_OAK,
-                    () -> ModItemTables.DARK_OAK
+                    () -> ModItemTables.DARK_OAK,
+                    () -> ModItemNightstands.DARK_OAK
             );
 
             content.addAfter(
@@ -89,7 +96,8 @@ public final class ModItems {
                     () -> ModItemHalfSlabs.JUNGLE,
                     () -> ModItemStairs.JUNGLE,
                     () -> ModItemStools.JUNGLE,
-                    () -> ModItemTables.JUNGLE
+                    () -> ModItemTables.JUNGLE,
+                    () -> ModItemNightstands.JUNGLE
             );
 
             content.addAfter(
@@ -98,7 +106,8 @@ public final class ModItems {
                     () -> ModItemHalfSlabs.MANGROVE,
                     () -> ModItemStairs.MANGROVE,
                     () -> ModItemStools.MANGROVE,
-                    () -> ModItemTables.MANGROVE
+                    () -> ModItemTables.MANGROVE,
+                    () -> ModItemNightstands.MANGROVE
             );
 
             content.addAfter(
@@ -107,7 +116,8 @@ public final class ModItems {
                     () -> ModItemHalfSlabs.OAK,
                     () -> ModItemStairs.OAK,
                     () -> ModItemStools.OAK,
-                    () -> ModItemTables.OAK
+                    () -> ModItemTables.OAK,
+                    () -> ModItemNightstands.OAK
             );
 
             content.addAfter(
@@ -116,7 +126,8 @@ public final class ModItems {
                     () -> ModItemHalfSlabs.SPRUCE,
                     () -> ModItemStairs.SPRUCE,
                     () -> ModItemStools.SPRUCE,
-                    () -> ModItemTables.SPRUCE
+                    () -> ModItemTables.SPRUCE,
+                    () -> ModItemNightstands.SPRUCE
             );
 
             content.addAfter(
@@ -125,7 +136,8 @@ public final class ModItems {
                     () -> ModItemHalfSlabs.WARPED,
                     () -> ModItemStairs.WARPED,
                     () -> ModItemStools.WARPED,
-                    () -> ModItemTables.WARPED
+                    () -> ModItemTables.WARPED,
+                    () -> ModItemNightstands.WARPED
             );
         });
     }

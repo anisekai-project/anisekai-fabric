@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "___",
+    "O O",
+    "/_/"
+  ],
+  "key": {
+    "_": {
+      "item": "minecraft:dark_oak_slab"
+    },
+    "O": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result":  {
+    "item":  "anisekai:dark_oak_nightstand",
+    "count": 1
+  }
+}
