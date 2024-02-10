@@ -3,14 +3,15 @@ package me.anisekai.blocks;
 import me.anisekai.blockentities.NightstandBlockEntity;
 import me.anisekai.blocks.composed.OrientableStorageBlock;
 import me.anisekai.utils.VoxelUtils;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockEntityProvider;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.ConnectingBlock;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.state.property.Property;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -25,10 +26,6 @@ import java.util.Map;
 import java.util.Optional;
 
 public class NightstandBlock extends OrientableStorageBlock<NightstandBlockEntity> implements BlockEntityProvider {
-
-
-    // <editor-fold desc="Model Properties">
-    // </editor-fold>
 
     // <editor-fold desc="Voxels">
 

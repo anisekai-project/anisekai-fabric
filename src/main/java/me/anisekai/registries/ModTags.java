@@ -1,7 +1,6 @@
 package me.anisekai.registries;
 
 import me.anisekai.AnisekaiMod;
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;

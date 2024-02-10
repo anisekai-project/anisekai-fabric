@@ -1,19 +1,11 @@
 package me.anisekai;
 
-import com.mojang.datafixers.types.Func;
-import org.lwjgl.opengl.NVVertexArrayRange;
-
-import java.io.Console;
 import java.io.File;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.OpenOption;
-import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 public class AnisekaiHelper {
 
