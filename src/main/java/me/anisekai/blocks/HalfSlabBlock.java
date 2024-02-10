@@ -5,8 +5,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.enums.SlabType;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.context.LootContextParameterSet;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.function.BooleanBiFunction;
@@ -15,6 +18,9 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class HalfSlabBlock extends OrientableBlock {
 
@@ -90,6 +96,16 @@ public class HalfSlabBlock extends OrientableBlock {
         return layer0 && layer1 && layer2 && layer3;
     }
 
+    public int getLayerCount(BlockState state) {
+
+        int layer0 = state.get(LAYER_0) ? 1 : 0;
+        int layer1 = state.get(LAYER_1) ? 1 : 0;
+        int layer2 = state.get(LAYER_2) ? 1 : 0;
+        int layer3 = state.get(LAYER_3) ? 1 : 0;
+
+        return layer0 + layer1 + layer2 + layer3;
+    }
+
     public boolean isAffectingLayer0(double y) {
 
         return y < 0.25;
@@ -160,6 +176,18 @@ public class HalfSlabBlock extends OrientableBlock {
             return !state.get(layer);
         }
         return false;
+    }
+
+    @Override
+    public List<ItemStack> getDroppedStacks(BlockState state, LootContextParameterSet.Builder builder) {
+
+        if (state.isOf(this)) {
+            Item item = this.asItem();
+            ItemStack stack = new ItemStack(item, this.getLayerCount(state));
+            return List.of(stack);
+        }
+
+        return super.getDroppedStacks(state, builder);
     }
 
 }
