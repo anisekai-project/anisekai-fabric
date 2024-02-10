@@ -1,23 +1,40 @@
 {
-  "variants": {
-    "facing=north": {
-      "model":  "anisekai:block/dark_oak_half_slab",
-      "uvlock": true
+  "multipart": [
+    {
+      "apply": {
+        "model":  "anisekai:block/dark_oak_half_slab_l3",
+        "uvlock": false
+      },
+      "when":  {
+        "layer3": true
+      }
     },
-    "facing=east":  {
-      "model":  "anisekai:block/dark_oak_half_slab",
-      "uvlock": true,
-      "y":      90
+    {
+      "apply": {
+        "model":  "anisekai:block/dark_oak_half_slab_l2",
+        "uvlock": false
+      },
+      "when":  {
+        "layer2": true
+      }
     },
-    "facing=south": {
-      "model":  "anisekai:block/dark_oak_half_slab",
-      "uvlock": true,
-      "y":      180
+    {
+      "apply": {
+        "model":  "anisekai:block/dark_oak_half_slab_l1",
+        "uvlock": false
+      },
+      "when":  {
+        "layer1": true
+      }
     },
-    "facing=west":  {
-      "model":  "anisekai:block/dark_oak_half_slab",
-      "uvlock": true,
-      "y":      270
+    {
+      "apply": {
+        "model":  "anisekai:block/dark_oak_half_slab_l0",
+        "uvlock": false
+      },
+      "when":  {
+        "layer0": true
+      }
     }
-  }
+  ]
 }
