@@ -2,10 +2,10 @@
   "type":        "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "anisekai:acacia_stairs"
+      "item": "minecraft:##STRS##"
     }
   ],
   "result":      {
-    "item": "minecraft:acacia_stairs"
+    "item": "anisekai:##WOOD##_stairs"
   }
 }

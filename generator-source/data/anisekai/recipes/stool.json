@@ -9,11 +9,11 @@
       "item": "minecraft:stick"
     },
     "C": {
-      "item": "minecraft:acacia_slab"
+      "item": "minecraft:##SLAB##"
     }
   },
   "result":  {
-    "item":  "anisekai:acacia_stool",
+    "item":  "anisekai:##WOOD##_stool",
     "count": 1
   }
 }

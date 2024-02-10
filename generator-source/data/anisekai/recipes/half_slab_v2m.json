@@ -2,10 +2,11 @@
   "type":        "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "minecraft:acacia_stairs"
+      "item": "minecraft:##SLAB##"
     }
   ],
   "result":      {
-    "item": "anisekai:acacia_stairs"
+    "item": "anisekai:##WOOD##_half_slab",
+    "count": 2
   }
 }

@@ -1,0 +1,8 @@
+{
+  "parent":   "anisekai:block/base/table",
+  "textures": {
+    "0":        "minecraft:block/##PLKS##",
+    "1":        "minecraft:block/##LOG##",
+    "particle": "minecraft:block/##PLKS##"
+  }
+}

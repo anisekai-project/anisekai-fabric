@@ -1,0 +1,23 @@
+{
+  "variants": {
+    "facing=north": {
+      "model":  "anisekai:block/##WOOD##_chair",
+      "uvlock": false
+    },
+    "facing=east":  {
+      "model":  "anisekai:block/##WOOD##_chair",
+      "uvlock": false,
+      "y":      90
+    },
+    "facing=south": {
+      "model":  "anisekai:block/##WOOD##_chair",
+      "uvlock": false,
+      "y":      180
+    },
+    "facing=west":  {
+      "model":  "anisekai:block/##WOOD##_chair",
+      "uvlock": false,
+      "y":      270
+    }
+  }
+}

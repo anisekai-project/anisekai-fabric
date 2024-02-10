@@ -1,0 +1,8 @@
+{
+  "parent":   "anisekai:block/base/half_slab_l3",
+  "textures": {
+    "particle": "minecraft:block/##PLKS##",
+    "side":     "minecraft:block/##LOG##",
+    "step":     "minecraft:block/##PLKS##"
+  }
+}
