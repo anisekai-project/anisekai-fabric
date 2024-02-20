@@ -1,0 +1,243 @@
+{
+	"meta": {
+		"format_version": "4.9",
+		"model_format": "java_block",
+		"box_uv": false
+	},
+	"name": "Table",
+	"parent": "",
+	"ambientocclusion": true,
+	"front_gui_light": false,
+	"visible_box": [1, 1, 0],
+	"variable_placeholders": "",
+	"variable_placeholder_buttons": [],
+	"unhandled_root_fields": {},
+	"resolution": {
+		"width": 16,
+		"height": 16
+	},
+	"elements": [
+		{
+			"name": "cube",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [5, 0, 5],
+			"to": [11, 1, 11],
+			"autouv": 1,
+			"color": 6,
+			"origin": [0, 0, 0],
+			"faces": {
+				"north": {
+					"uv": [0, 0, 6, 1],
+					"texture": 1
+				},
+				"east": {
+					"uv": [0, 0, 6, 1],
+					"texture": 1
+				},
+				"south": {
+					"uv": [0, 0, 6, 1],
+					"texture": 1
+				},
+				"west": {
+					"uv": [0, 0, 6, 1],
+					"texture": 1
+				},
+				"up": {
+					"uv": [0, 0, 6, 6],
+					"texture": 1
+				},
+				"down": {
+					"uv": [0, 0, 6, 6],
+					"texture": 1
+				}
+			},
+			"type": "cube",
+			"uuid": "8f027414-becf-bad5-25d5-2db3c95c3c83"
+		},
+		{
+			"name": "cube",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [7, 1, 7],
+			"to": [9, 14, 9],
+			"autouv": 1,
+			"color": 0,
+			"origin": [0, 0, 0],
+			"faces": {
+				"north": {
+					"uv": [0, 0, 2, 13],
+					"texture": 1
+				},
+				"east": {
+					"uv": [0, 0, 2, 13],
+					"texture": 1
+				},
+				"south": {
+					"uv": [0, 0, 2, 13],
+					"texture": 1
+				},
+				"west": {
+					"uv": [0, 0, 2, 13],
+					"texture": 1
+				},
+				"up": {
+					"uv": [0, 0, 2, 2]
+				},
+				"down": {
+					"uv": [0, 0, 2, 2]
+				}
+			},
+			"type": "cube",
+			"uuid": "dd8eee67-4139-60a7-51b2-a93edfa67652"
+		},
+		{
+			"name": "cube",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [0, 14, 0],
+			"to": [16, 16, 16],
+			"autouv": 1,
+			"color": 4,
+			"origin": [0, 0, 0],
+			"faces": {
+				"north": {
+					"uv": [0, 0, 16, 2],
+					"texture": 0
+				},
+				"east": {
+					"uv": [0, 0, 16, 2],
+					"texture": 0
+				},
+				"south": {
+					"uv": [0, 0, 16, 2],
+					"texture": 0
+				},
+				"west": {
+					"uv": [0, 0, 16, 2],
+					"texture": 0
+				},
+				"up": {
+					"uv": [0, 0, 16, 16],
+					"texture": 0
+				},
+				"down": {
+					"uv": [0, 0, 16, 16],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "71fde822-56de-be96-5cea-781fc20fda4b"
+		}
+	],
+	"outliner": [
+		{
+			"name": "table_leg",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"uuid": "8cb91fa8-9611-8e14-fee4-cad9dc1cda5b",
+			"export": true,
+			"mirror_uv": false,
+			"isOpen": true,
+			"locked": false,
+			"visibility": true,
+			"autouv": 0,
+			"children": ["8f027414-becf-bad5-25d5-2db3c95c3c83", "dd8eee67-4139-60a7-51b2-a93edfa67652"]
+		},
+		"71fde822-56de-be96-5cea-781fc20fda4b"
+	],
+	"textures": [
+		{
+			"path": "C:\\Users\\conta\\OneDrive\\Documents\\workspaces\\minecraft\\sources\\assets\\minecraft\\textures\\block\\oak_planks.png",
+			"name": "oak_planks.png",
+			"folder": "block",
+			"namespace": "minecraft",
+			"id": "table_top",
+			"width": 16,
+			"height": 16,
+			"uv_width": 16,
+			"uv_height": 16,
+			"particle": true,
+			"layers_enabled": false,
+			"sync_to_project": "",
+			"render_mode": "default",
+			"render_sides": "auto",
+			"frame_time": 1,
+			"frame_order_type": "loop",
+			"frame_order": "",
+			"frame_interpolate": false,
+			"visible": true,
+			"internal": true,
+			"saved": true,
+			"uuid": "2b818e9f-68d2-1176-9b6f-70f4379e977b",
+			"relative_path": "C:/Users/conta/OneDrive/Documents/workspaces/minecraft/sources/assets/minecraft/textures/block/oak_planks.png",
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAVlJREFUOE91U8FKAzEUTJCC21ZZVkR7KcVe+xN+gODFs+ClP+An9O5FvImf4LVn/8MiQtmKsuTQdgWRLfPqlNm05pLk5WXyZt7Ej++vq/Jn6ZJG0zWTPRePZfn7b3zy9u48AHAJIBj59MsladulrX0D5eA5Y3ko7Mg/311VcSL2uBAW37WCAIrBfKvg4fa8mhXr10+z9YvYfxQLW59kLZuxx1rjWBsFcH/NP12/c1x7MY5BD1JBdZ00q1Ng2SgVCWWYb/TQ0lUX/zS6MBEpGl+goGe97paQqo0fXg4MgFyhg2rA2zynVszZaIAD5Xh0eLDlCQ0gF600ABpJE+I2UhfO5p0wd/7l8aaK1VUg9p4x8kcHrALVYJcPqA+1oScIaBWg30DkX0BF1oVQ1LxBX+j/MCtrj+lx5Qpw4/z36bTVBkBe6gUaiT7Y9TcAahqo35UzebLn+hd4tgJnUgM/K1gwfwAAAABJRU5ErkJggg=="
+		},
+		{
+			"path": "C:\\Users\\conta\\OneDrive\\Documents\\workspaces\\minecraft\\sources\\assets\\minecraft\\textures\\block\\oak_log.png",
+			"name": "oak_log.png",
+			"folder": "block",
+			"namespace": "minecraft",
+			"id": "table_leg",
+			"width": 16,
+			"height": 16,
+			"uv_width": 16,
+			"uv_height": 16,
+			"particle": false,
+			"layers_enabled": false,
+			"sync_to_project": "",
+			"render_mode": "default",
+			"render_sides": "auto",
+			"frame_time": 1,
+			"frame_order_type": "loop",
+			"frame_order": "",
+			"frame_interpolate": false,
+			"visible": true,
+			"internal": true,
+			"saved": true,
+			"uuid": "13008b07-7db4-c382-5046-4376cd9ca42c",
+			"relative_path": "C:/Users/conta/OneDrive/Documents/workspaces/minecraft/sources/assets/minecraft/textures/block/oak_log.png",
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAWNJREFUOE9tkztKBEEQhqtjRRYfbOKugcGKgqKIIBoJLih6AE30CoKB1zDzBl7ASFPFRAQNREGTWZPFB4toPPI3fk3N2p00VdP1VdVfNeFwd6l87PRsfXHcOt1v07m8K2ynPV2xV+ea1qgP2sXNa3r71vuxAGBrZdKu7wsbqw1EwP72fMX2gKlGLSZKAAW0JkaiMwdQhQrSrVMBHB+slafnD6YMIgpAADa3Eo0OD0WA2rl96loQQH3J6R8CXJ5tplZ8AjSLAIlHVoSiZLRZaNWjgPgTYG9zpvRlUxp6yFYCbvn91AIA9YfSClC5yspoASuZ/5bG+P75FUf3XHykEQEgQKLJxy14BFCW+vUAZWPeaEDvVJwAekifuWmgUxbgJ0D/fqGoig2VTUw4Odooz65e0nYhlkrWguVWmraUJAI8MTcuieZHHYX5O5VF8n+kQKx4/7/g3/0DsG39G8kP5JdIYv8CYR14YImgBlUAAAAASUVORK5CYII="
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, 45, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 225, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"ground": {
+			"translation": [0, 3, 0],
+			"scale": [0.25, 0.25, 0.25]
+		},
+		"gui": {
+			"rotation": [30, 225, 0],
+			"scale": [0.625, 0.625, 0.625]
+		},
+		"fixed": {
+			"scale": [0.5, 0.5, 0.5]
+		}
+	}
+}

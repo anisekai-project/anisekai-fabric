@@ -1,0 +1,302 @@
+{
+	"meta": {
+		"format_version": "4.9",
+		"model_format": "java_block",
+		"box_uv": false
+	},
+	"name": "Fishing Basket",
+	"parent": "",
+	"ambientocclusion": true,
+	"front_gui_light": false,
+	"visible_box": [1, 1, 0],
+	"variable_placeholders": "",
+	"variable_placeholder_buttons": [],
+	"unhandled_root_fields": {},
+	"resolution": {
+		"width": 16,
+		"height": 16
+	},
+	"elements": [
+		{
+			"name": "seat",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [1, 10, 1],
+			"to": [15, 12, 15],
+			"autouv": 0,
+			"color": 7,
+			"origin": [0, 0, 0],
+			"faces": {
+				"north": {
+					"uv": [1, 1, 15, 3],
+					"texture": 2
+				},
+				"east": {
+					"uv": [1, 1, 15, 3],
+					"texture": 2
+				},
+				"south": {
+					"uv": [1, 1, 15, 3],
+					"texture": 2
+				},
+				"west": {
+					"uv": [1, 1, 15, 3],
+					"texture": 2
+				},
+				"up": {
+					"uv": [1, 1, 15, 15],
+					"texture": 2
+				},
+				"down": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				}
+			},
+			"type": "cube",
+			"uuid": "43f07c95-b517-5c20-4154-bd7213fe2d12"
+		},
+		{
+			"name": "shell",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [1, 0, 1],
+			"to": [15, 10, 15],
+			"autouv": 0,
+			"color": 9,
+			"origin": [0, 0, 0],
+			"faces": {
+				"north": {
+					"uv": [1, 3, 15, 13],
+					"texture": 0
+				},
+				"east": {
+					"uv": [1, 3, 15, 13],
+					"texture": 0
+				},
+				"south": {
+					"uv": [1, 3, 15, 13],
+					"texture": 0
+				},
+				"west": {
+					"uv": [1, 3, 15, 13],
+					"texture": 0
+				},
+				"up": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"down": {
+					"uv": [1, 2, 15, 16],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "863dc198-99d7-8183-4cbd-783fdd7da975"
+		},
+		{
+			"name": "hinge",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [11, 9, 15],
+			"to": [13, 11, 16],
+			"autouv": 0,
+			"color": 6,
+			"origin": [0, 0, 0],
+			"faces": {
+				"north": {
+					"uv": [1, 0, 3, 2],
+					"texture": 1
+				},
+				"east": {
+					"uv": [1, 0, 3, 2],
+					"texture": 1
+				},
+				"south": {
+					"uv": [1, 0, 3, 2],
+					"texture": 1
+				},
+				"west": {
+					"uv": [1, 0, 3, 2],
+					"texture": 1
+				},
+				"up": {
+					"uv": [1, 0, 3, 2],
+					"texture": 1
+				},
+				"down": {
+					"uv": [1, 0, 3, 2],
+					"texture": 1
+				}
+			},
+			"type": "cube",
+			"uuid": "79d5d390-426d-d464-bb44-0abdff86b2da"
+		},
+		{
+			"name": "hinge",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [3, 9, 15],
+			"to": [5, 11, 16],
+			"autouv": 0,
+			"color": 6,
+			"origin": [0, 0, 0],
+			"faces": {
+				"north": {
+					"uv": [1, 0, 3, 2],
+					"texture": 1
+				},
+				"east": {
+					"uv": [1, 0, 3, 2],
+					"texture": 1
+				},
+				"south": {
+					"uv": [1, 0, 3, 2],
+					"texture": 1
+				},
+				"west": {
+					"uv": [1, 0, 3, 2],
+					"texture": 1
+				},
+				"up": {
+					"uv": [1, 0, 3, 2],
+					"texture": 1
+				},
+				"down": {
+					"uv": [1, 0, 3, 2],
+					"texture": 1
+				}
+			},
+			"type": "cube",
+			"uuid": "51342c45-fdab-1b3f-bc04-546bc8765c00"
+		}
+	],
+	"outliner": [
+		"863dc198-99d7-8183-4cbd-783fdd7da975",
+		"43f07c95-b517-5c20-4154-bd7213fe2d12",
+		"79d5d390-426d-d464-bb44-0abdff86b2da",
+		"51342c45-fdab-1b3f-bc04-546bc8765c00"
+	],
+	"textures": [
+		{
+			"path": "C:\\Users\\conta\\OneDrive\\Documents\\workspaces\\minecraft\\sources\\assets\\minecraft\\textures\\block\\bamboo_mosaic.png",
+			"name": "bamboo_mosaic.png",
+			"folder": "block",
+			"namespace": "minecraft",
+			"id": "shell",
+			"width": 16,
+			"height": 16,
+			"uv_width": 16,
+			"uv_height": 16,
+			"particle": false,
+			"layers_enabled": false,
+			"sync_to_project": "",
+			"render_mode": "default",
+			"render_sides": "auto",
+			"frame_time": 1,
+			"frame_order_type": "loop",
+			"frame_order": "",
+			"frame_interpolate": false,
+			"visible": true,
+			"internal": true,
+			"saved": true,
+			"uuid": "7137337d-e732-2181-d1fa-79da8e4a9f41",
+			"relative_path": "C:/Users/conta/OneDrive/Documents/workspaces/minecraft/sources/assets/minecraft/textures/block/bamboo_mosaic.png",
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAbJJREFUOE91U81KAlEUPhfNqdGsMaLIEhQD+4EIokW7lkFFT9AD9CI9Q28QtGoRLVwEQhElVERBBLVQA5EaM50YUya+O53LZZjuZs4d5nzn+zkjioebXmYqRbZt09XNB80VLNLvswtJipsDxKfj/MgS71ALABTyGarVKnT32KZcNq4AcF9bGaGYkSTTTCgQx2mrWgLwRDQszSconZ6hpv1GF+VPyuQHyYpF/6ZGNCZ9WYvL4y3Psizqui3ZwADMyHW7ZBgx1RgsFAMGgARI0hlE+/7k4SFBX9+efOKgVh7oDbmJccWIPUBDmA/i9GjDW8xmlYnQDACkAk9wx4EPcdNn0nF8/dIDAEyPGlRtuvT80CLEpt/xETyAF3x0T0TpZNvzUf18+XDO0D85Fv13gKiU9zzkyvo4Y9yRBIzSF2t1OUVI7aXekIxljKyNp7NGu9sjMNAXTY8ZmysO9telhDCNeIeJWCyw4VUH4Gu9SrfX7z4DzlTPGnUv0pfug3LwX+G9EU+lXQkQljOa4EFQAgMiZnFf3PH0XHU/EC08CPtXWJL0gPXreXMd9IBTgISz8wb9AiSaSDp9VPo/AAAAAElFTkSuQmCC"
+		},
+		{
+			"path": "C:\\Users\\conta\\OneDrive\\Documents\\workspaces\\minecraft\\sources\\assets\\minecraft\\textures\\block\\stonecutter_bottom.png",
+			"name": "stonecutter_bottom.png",
+			"folder": "block",
+			"namespace": "minecraft",
+			"id": "hinges",
+			"width": 16,
+			"height": 16,
+			"uv_width": 16,
+			"uv_height": 16,
+			"particle": true,
+			"layers_enabled": false,
+			"sync_to_project": "",
+			"render_mode": "default",
+			"render_sides": "auto",
+			"frame_time": 1,
+			"frame_order_type": "loop",
+			"frame_order": "",
+			"frame_interpolate": false,
+			"visible": true,
+			"internal": true,
+			"saved": true,
+			"uuid": "55fc060e-cb0c-7850-6ac0-4251e54ebd64",
+			"relative_path": "C:/Users/conta/OneDrive/Documents/workspaces/minecraft/sources/assets/minecraft/textures/block/stonecutter_bottom.png",
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAOJJREFUOE+lkzsSgzAMRE0VwxVI6dpdOIiPTTrXlOEKhlTJrEHO2nwmM7gCLJ60K6lyzn3UhVMBYIxRTdMkjL7p+Dy/5wwdQkjv8zSp1ziqCLDWxgsOABAggQiUwd77BdA9uh95zco/HCnsn/0CuLdtjNF1nUmJ31Y5nFkqHYYhl8CZjipgSakCkYDLvYwCRmaYJ5WeelAaKhBOkCpAG3HE+T3TypYClADSxn+cZ3gGOHObdTMgeYA2whiRUbbvSFJm4p5G7j2P92YOeBLPDOTRRtymAiHzYpU7In5ky3Rhm9UXuFapYYqaSJgAAAAASUVORK5CYII="
+		},
+		{
+			"path": "C:\\Users\\conta\\OneDrive\\Documents\\workspaces\\minecraft\\sources\\assets\\minecraft\\textures\\block\\bamboo_block.png",
+			"name": "bamboo_block.png",
+			"folder": "block",
+			"namespace": "minecraft",
+			"id": "seat",
+			"width": 16,
+			"height": 16,
+			"uv_width": 16,
+			"uv_height": 16,
+			"particle": false,
+			"layers_enabled": false,
+			"sync_to_project": "",
+			"render_mode": "default",
+			"render_sides": "auto",
+			"frame_time": 1,
+			"frame_order_type": "loop",
+			"frame_order": "",
+			"frame_interpolate": false,
+			"visible": true,
+			"internal": true,
+			"saved": true,
+			"uuid": "93b7f917-fa12-b7d8-bb56-bcd11a159e9f",
+			"relative_path": "C:/Users/conta/OneDrive/Documents/workspaces/minecraft/sources/assets/minecraft/textures/block/bamboo_block.png",
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAXZJREFUOE9tk19Kw0AYxCcPQjS21kIboa1ai6IggvjiJTyOF9ADeBKv4AEE0QfRYsE/1EJTqWLTaCqYyLcy4cu2j8vuzs43v1nn+PQgbe2V0X8K8XA/QnXVw/ZuCaMgRucuRG3dxXLVw2T8g5urYW5f1o4I1FslfAwi9J5jc2GlWcAkSnB7OYRXmUOzWTT7fEDWIigPOCdnh+mS75kD7m+CzX0fi40yxt13dK4D9OPUONIOpwSqG4XsQK0+j4q/gLfgC73X78yyCMxyaByIgMzMGWmZF5hBEk6mHGYjMKStnaIJ7TOI0G6PwDX3bYdZiAyFIQ4ew5wAQ9QPdF/ifwqCUWMTCnZo4kguECsdZhkQGw9orBxJBBprLkhNsDrnF0epjU1jkh4Qo4QqAqQmazPCLGwciQL2miPmMhCMEpJkYGeim8mqmyrrHtjdn8VdmskRcwJsmt19m7vuhfkL+jPZn0U308ZISrki6e+quy8YeUFTkQf/ACnWp9ar6xUJAAAAAElFTkSuQmCC"
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, 45, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 225, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"ground": {
+			"translation": [0, 3, 0],
+			"scale": [0.25, 0.25, 0.25]
+		},
+		"gui": {
+			"rotation": [30, 225, 0],
+			"scale": [0.625, 0.625, 0.625]
+		},
+		"fixed": {
+			"scale": [0.5, 0.5, 0.5]
+		}
+	}
+}
