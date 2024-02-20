@@ -1,35 +1,40 @@
 package me.anisekai.blocks;
 
 import me.anisekai.blockentities.NightstandBlockEntity;
-import me.anisekai.blocks.composed.OrientableStorageBlock;
-import me.anisekai.utils.VoxelUtils;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ConnectingBlock;
+import me.anisekai.interfaces.Connectable;
+import me.anisekai.interfaces.Orientable;
+import me.anisekai.interfaces.StorageContainer;
+import me.anisekai.utils.BlockUtils;
+import me.anisekai.utils.RotatableShape;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.Util;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
-import java.util.Map;
 import java.util.Optional;
 
-public class NightstandBlock extends OrientableStorageBlock<NightstandBlockEntity> implements BlockEntityProvider {
+public class NightstandBlock extends Block implements BlockEntityProvider, StorageContainer<NightstandBlockEntity>, Connectable, Orientable, Waterloggable {
 
-    // <editor-fold desc="Voxels">
-
-    public static final VoxelShape VOXEL_NORTH = VoxelUtils.make(Arrays.asList(
+    public static final RotatableShape SHAPE = new RotatableShape(Arrays.asList(
             VoxelShapes.cuboid(0, 0.125, 0, 1, 0.1875, 1),
             VoxelShapes.cuboid(0, 0.1875, 0, 0.0625, 1, 1),
             VoxelShapes.cuboid(0.9375, 0.1875, 0, 1, 1, 1),
@@ -40,66 +45,41 @@ public class NightstandBlock extends OrientableStorageBlock<NightstandBlockEntit
             VoxelShapes.cuboid(0.0625, 0.625, 0.0625, 0.9375, 0.9375, 0.1875),
             VoxelShapes.cuboid(0.3125, 0.3125, 0, 0.6875, 0.375, 0.0625),
             VoxelShapes.cuboid(0.3125, 0.75, 0, 0.6875, 0.8125, 0.0625)
-
     ));
-
-    public static final VoxelShape VOXEL_EAST = VoxelUtils.make(Arrays.asList(
-            VoxelShapes.cuboid(0, 0.125, 0, 1, 0.1875, 1),
-            VoxelShapes.cuboid(0, 0.1875, 0, 1, 1, 0.0625),
-            VoxelShapes.cuboid(0, 0.1875, 0.9375, 1, 1, 1),
-            VoxelShapes.cuboid(0.0625, 0.1875, 0.0625, 0.125, 0.9375, 0.9375),
-            VoxelShapes.cuboid(0, 0.9375, 0.0625, 1, 1, 0.9375),
-            VoxelShapes.cuboid(0.125, 0.5, 0.0625, 1, 0.625, 0.9375),
-            VoxelShapes.cuboid(0.8125, 0.1875, 0.0625, 0.9375, 0.5, 0.9375),
-            VoxelShapes.cuboid(0.8125, 0.625, 0.0625, 0.9375, 0.9375, 0.9375),
-            VoxelShapes.cuboid(0.9375, 0.3125, 0.3125, 1, 0.375, 0.6875),
-            VoxelShapes.cuboid(0.9375, 0.75, 0.3125, 1, 0.8125, 0.6875)
-    ));
-
-    public static final VoxelShape VOXEL_SOUTH = VoxelUtils.make(Arrays.asList(
-            VoxelShapes.cuboid(0, 0.125, 0, 1, 0.1875, 1),
-            VoxelShapes.cuboid(0.9375, 0.1875, 0, 1, 1, 1),
-            VoxelShapes.cuboid(0, 0.1875, 0, 0.0625, 1, 1),
-            VoxelShapes.cuboid(0.0625, 0.1875, 0.0625, 0.9375, 0.9375, 0.125),
-            VoxelShapes.cuboid(0.0625, 0.9375, 0, 0.9375, 1, 1),
-            VoxelShapes.cuboid(0.0625, 0.5, 0.125, 0.9375, 0.625, 1),
-            VoxelShapes.cuboid(0.0625, 0.1875, 0.8125, 0.9375, 0.5, 0.9375),
-            VoxelShapes.cuboid(0.0625, 0.625, 0.8125, 0.9375, 0.9375, 0.9375),
-            VoxelShapes.cuboid(0.3125, 0.3125, 0.9375, 0.6875, 0.375, 1),
-            VoxelShapes.cuboid(0.3125, 0.75, 0.9375, 0.6875, 0.8125, 1)
-    ));
-
-    public static final VoxelShape VOXEL_WEST = VoxelUtils.make(Arrays.asList(
-            VoxelShapes.cuboid(0, 0.125, 0, 1, 0.1875, 1),
-            VoxelShapes.cuboid(0, 0.1875, 0.9375, 1, 1, 1),
-            VoxelShapes.cuboid(0, 0.1875, 0, 1, 1, 0.0625),
-            VoxelShapes.cuboid(0.875, 0.1875, 0.0625, 0.9375, 0.9375, 0.9375),
-            VoxelShapes.cuboid(0, 0.9375, 0.0625, 1, 1, 0.9375),
-            VoxelShapes.cuboid(0, 0.5, 0.0625, 0.875, 0.625, 0.9375),
-            VoxelShapes.cuboid(0.0625, 0.1875, 0.0625, 0.1875, 0.5, 0.9375),
-            VoxelShapes.cuboid(0.0625, 0.625, 0.0625, 0.1875, 0.9375, 0.9375),
-            VoxelShapes.cuboid(0, 0.3125, 0.3125, 0.0625, 0.375, 0.6875),
-            VoxelShapes.cuboid(0, 0.75, 0.3125, 0.0625, 0.8125, 0.6875)
-    ));
-    // </editor-fold>
-
-    protected static final Map<Direction, BooleanProperty> FACING_PROPERTIES =
-            ConnectingBlock.FACING_PROPERTIES.entrySet()
-                                             .stream()
-                                             .filter(entry -> entry.getKey().getAxis().isHorizontal())
-                                             .collect(Util.toMap());
 
     public NightstandBlock(Block block) {
 
-        super(block, VOXEL_NORTH, VOXEL_EAST, VOXEL_SOUTH, VOXEL_WEST);
+        super(FabricBlockSettings.copy(block));
 
         this.setDefaultState(
                 this.getDefaultState()
+                    .with(Properties.HORIZONTAL_FACING, Direction.NORTH)
+                    .with(Properties.WATERLOGGED, false)
                     .with(Properties.NORTH, false)
                     .with(Properties.EAST, false)
                     .with(Properties.SOUTH, false)
                     .with(Properties.WEST, false)
         );
+    }
+
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+
+        super.appendProperties(builder);
+        builder.add(
+                Properties.HORIZONTAL_FACING,
+                Properties.WATERLOGGED,
+                Properties.NORTH,
+                Properties.EAST,
+                Properties.WEST,
+                Properties.SOUTH
+        );
+    }
+
+    @Override
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+
+        return this.getOrientedShapes().getShape(state.get(Properties.HORIZONTAL_FACING));
     }
 
     @Override
@@ -123,54 +103,57 @@ public class NightstandBlock extends OrientableStorageBlock<NightstandBlockEntit
         return other.isOf(this) && other.get(Properties.HORIZONTAL_FACING) == current.get(Properties.HORIZONTAL_FACING);
     }
 
-
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
 
-        World          world        = ctx.getWorld();
-        BlockPos       pos          = ctx.getBlockPos();
-        BlockState     currentState = super.getPlacementState(ctx);
-        Direction.Axis axis         = currentState.get(Properties.HORIZONTAL_FACING).getAxis();
+        BlockState state = super.getPlacementState(ctx)
+                                .with(Properties.WATERLOGGED, BlockUtils.isContextWater(ctx))
+                                .with(Properties.HORIZONTAL_FACING, ctx.getHorizontalPlayerFacing().getOpposite());
 
-        if (axis == Direction.Axis.X) {
-            return currentState
-                    .with(Properties.NORTH, this.canConnectTo(currentState, world.getBlockState(pos.north())))
-                    .with(Properties.SOUTH, this.canConnectTo(currentState, world.getBlockState(pos.south())))
-                    .with(Properties.EAST, false)
-                    .with(Properties.WEST, false);
-        } else if (axis == Direction.Axis.Z) {
-            return currentState
-                    .with(Properties.EAST, this.canConnectTo(currentState, world.getBlockState(pos.east())))
-                    .with(Properties.WEST, this.canConnectTo(currentState, world.getBlockState(pos.west())))
-                    .with(Properties.NORTH, false)
-                    .with(Properties.SOUTH, false);
-        }
-
-        return currentState;
+        return this.applyPlacementConnection(ctx.getWorld(), ctx.getBlockPos(), state);
     }
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
 
-        Direction facingDirection = state.get(Properties.HORIZONTAL_FACING);
-
-        if (facingDirection.getAxis() != direction.getAxis() && FACING_PROPERTIES.containsKey(direction)) {
-            return state.with(FACING_PROPERTIES.get(direction), this.canConnectTo(state, neighborState));
+        if (state.get(Properties.WATERLOGGED)) {
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+
+        BlockState blockState = this.tryConnect(state, direction, neighborState);
+        return super.getStateForNeighborUpdate(blockState, direction, neighborState, world, pos, neighborPos);
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+    public FluidState getFluidState(BlockState state) {
 
-        builder.add(
-                Properties.HORIZONTAL_FACING,
-                Properties.WATERLOGGED,
-                Properties.NORTH,
-                Properties.EAST,
-                Properties.WEST,
-                Properties.SOUTH
-        );
+        if (state.get(Properties.WATERLOGGED)) {
+            return Fluids.WATER.getStill(false);
+        }
+        return super.getFluidState(state);
+    }
+
+    @Override
+    public Block asBlock() {
+
+        return this;
+    }
+
+    @Override
+    public RotatableShape getOrientedShapes() {
+
+        return SHAPE;
+    }
+
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+
+        if (world.isClient) {
+            return ActionResult.SUCCESS;
+        }
+
+        this.getBlockEntityInstance(world.getBlockEntity(pos)).ifPresent(player::openHandledScreen);
+        return ActionResult.CONSUME;
     }
 
 }

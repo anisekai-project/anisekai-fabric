@@ -1,8 +1,8 @@
 package me.anisekai.blockentities;
 
 import me.anisekai.inventories.ImplementedInventory;
+import me.anisekai.inventories.constrained.ConstrainedContainerScreenHandler;
 import me.anisekai.registries.ModBlockEntities;
-import me.anisekai.registries.blocks.ModBlockNightstands;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,22 +13,24 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.screen.GenericContainerScreenHandler;
-import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
-public class NightstandBlockEntity extends BlockEntity implements ImplementedInventory, NamedScreenHandlerFactory {
+import java.io.File;
+import java.util.Optional;
 
-    private final DefaultedList<ItemStack> items = DefaultedList.ofSize(9, ItemStack.EMPTY);
+public class FishingBasketBlockEntity extends BlockEntity implements ImplementedInventory {
 
-    public NightstandBlockEntity(BlockPos pos, BlockState state) {
+    private final DefaultedList<ItemStack> items = DefaultedList.ofSize(27, ItemStack.EMPTY);
 
-        super(ModBlockEntities.NIGHTSTAND, pos, state);
+    public FishingBasketBlockEntity(BlockPos pos, BlockState state) {
+
+        super(ModBlockEntities.FISHING_BASKET, pos, state);
     }
 
     @Override
@@ -54,7 +56,7 @@ public class NightstandBlockEntity extends BlockEntity implements ImplementedInv
     protected void writeNbt(NbtCompound nbt) {
 
         super.writeNbt(nbt);
-        Inventories.writeNbt(nbt, this.items);
+        Inventories.writeNbt(nbt, this.items, false);
     }
 
     @Override
@@ -67,14 +69,32 @@ public class NightstandBlockEntity extends BlockEntity implements ImplementedInv
     @Override
     public Text getDisplayName() {
 
-        return Text.translatable("inventory.anisekai.nightstand");
+        File file = null;
+
+        Optional.ofNullable(file)
+                .map(File::getName)
+                .orElse(null);
+
+        return Text.translatable("inventory.anisekai.fishing_basket");
     }
 
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
 
-        return new GenericContainerScreenHandler(ScreenHandlerType.GENERIC_9X1, syncId, playerInventory, this,1);
+        return ConstrainedContainerScreenHandler.create(syncId, playerInventory, this);
+    }
+
+    @Override
+    public boolean isValid(int slot, ItemStack stack) {
+
+        return stack.isIn(ItemTags.FISHES);
+    }
+
+    @Override
+    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
+
+        return this.isValid(slot, stack);
     }
 
 }

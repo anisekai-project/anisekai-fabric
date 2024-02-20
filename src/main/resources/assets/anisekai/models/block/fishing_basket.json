@@ -1,0 +1,93 @@
+{
+  "credit":   "Made with Blockbench",
+  "textures": {
+    "shell":    "minecraft:block/bamboo_mosaic",
+    "particle": "minecraft:block/stonecutter_bottom",
+    "hinges":   "minecraft:block/stonecutter_bottom",
+    "seat":     "minecraft:block/bamboo_block"
+  },
+  "elements": [
+    {
+      "name":  "shell",
+      "from":  [1, 0, 1],
+      "to":    [15, 10, 15],
+      "faces": {
+        "north": {"uv": [1, 3, 15, 13], "texture": "#shell"},
+        "east":  {"uv": [1, 3, 15, 13], "texture": "#shell"},
+        "south": {"uv": [1, 3, 15, 13], "texture": "#shell"},
+        "west":  {"uv": [1, 3, 15, 13], "texture": "#shell"},
+        "down":  {"uv": [1, 2, 15, 16], "texture": "#shell"}
+      }
+    },
+    {
+      "name":  "seat",
+      "from":  [1, 10, 1],
+      "to":    [15, 12, 15],
+      "faces": {
+        "north": {"uv": [1, 1, 15, 3], "texture": "#seat"},
+        "east":  {"uv": [1, 1, 15, 3], "texture": "#seat"},
+        "south": {"uv": [1, 1, 15, 3], "texture": "#seat"},
+        "west":  {"uv": [1, 1, 15, 3], "texture": "#seat"},
+        "up":    {"uv": [1, 1, 15, 15], "texture": "#seat"}
+      }
+    },
+    {
+      "name":  "hinge",
+      "from":  [11, 9, 15],
+      "to":    [13, 11, 16],
+      "faces": {
+        "north": {"uv": [1, 0, 3, 2], "texture": "#hinges"},
+        "east":  {"uv": [1, 0, 3, 2], "texture": "#hinges"},
+        "south": {"uv": [1, 0, 3, 2], "texture": "#hinges"},
+        "west":  {"uv": [1, 0, 3, 2], "texture": "#hinges"},
+        "up":    {"uv": [1, 0, 3, 2], "texture": "#hinges"},
+        "down":  {"uv": [1, 0, 3, 2], "texture": "#hinges"}
+      }
+    },
+    {
+      "name":  "hinge",
+      "from":  [3, 9, 15],
+      "to":    [5, 11, 16],
+      "faces": {
+        "north": {"uv": [1, 0, 3, 2], "texture": "#hinges"},
+        "east":  {"uv": [1, 0, 3, 2], "texture": "#hinges"},
+        "south": {"uv": [1, 0, 3, 2], "texture": "#hinges"},
+        "west":  {"uv": [1, 0, 3, 2], "texture": "#hinges"},
+        "up":    {"uv": [1, 0, 3, 2], "texture": "#hinges"},
+        "down":  {"uv": [1, 0, 3, 2], "texture": "#hinges"}
+      }
+    }
+  ],
+  "display":  {
+    "thirdperson_righthand": {
+      "rotation": [0, -180, 0],
+      "scale":    [0.5, 0.5, 0.5]
+    },
+    "thirdperson_lefthand":  {
+      "rotation": [0, -180, 0],
+      "scale":    [0.5, 0.5, 0.5]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, -180, 0],
+      "scale":    [0.5, 0.5, 0.5]
+    },
+    "firstperson_lefthand":  {
+      "rotation": [0, -180, 0],
+      "scale":    [0.5, 0.5, 0.5]
+    },
+    "ground":                {
+      "rotation":    [0, 0, 0],
+      "translation": [0, 3, 0],
+      "scale":       [0.25, 0.25, 0.25]
+    },
+    "gui":                   {
+      "rotation":    [30, -140, 0],
+      "translation": [0, -1.5, 0],
+      "scale":       [0.5, 0.5, 0.5]
+    },
+    "fixed":                 {
+      "translation": [0, -1.25, -2.5],
+      "scale":       [0.5, 0.5, 0.5]
+    }
+  }
+}

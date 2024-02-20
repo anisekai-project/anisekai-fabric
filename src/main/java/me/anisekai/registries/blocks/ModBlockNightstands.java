@@ -82,27 +82,6 @@ public final class ModBlockNightstands {
             new NightstandBlock(Blocks.WARPED_STAIRS)
     );
 
-
-    public static final BlockEntityType<NightstandBlockEntity> BLOCK_ENTITY = Registry.register(
-            Registries.BLOCK_ENTITY_TYPE,
-            new Identifier(AnisekaiMod.MOD_ID, "nightstand"),
-            FabricBlockEntityTypeBuilder.create(
-                    NightstandBlockEntity::new,
-                    ACACIA,
-                    BAMBOO,
-                    BIRCH,
-                    CHERRY,
-                    CRIMSON,
-                    DARK_OAK,
-                    JUNGLE,
-                    MANGROVE,
-                    OAK,
-                    SPRUCE,
-                    WARPED
-            ).build()
-    );
-
-
     private ModBlockNightstands() {}
 
     public static List<Block> blocks() {

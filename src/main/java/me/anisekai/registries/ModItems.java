@@ -1,15 +1,27 @@
 package me.anisekai.registries;
 
+import me.anisekai.AnisekaiMod;
 import me.anisekai.registries.items.*;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.Items;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public final class ModItems {
+
+    public static final Item FISHING_BASKET = Registry.register(
+            Registries.ITEM,
+            new Identifier(AnisekaiMod.MOD_ID, "fishing_basket"),
+            new BlockItem(ModBlocks.FISHING_BASKET, new FabricItemSettings().maxCount(64))
+    );
 
     private ModItems() {}
 
@@ -22,11 +34,17 @@ public final class ModItems {
         items.addAll(ModItemStools.items());
         items.addAll(ModItemTables.items());
         items.addAll(ModItemNightstands.items());
+
+        items.add(FISHING_BASKET);
         return items;
     }
 
     @SuppressWarnings("UnstableApiUsage")
     public static void addToInventory() {
+
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> {
+            content.add(() -> ModItems.FISHING_BASKET);
+        });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(content -> {
 

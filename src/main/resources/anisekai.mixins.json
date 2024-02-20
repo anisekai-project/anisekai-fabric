@@ -1,17 +1,14 @@
 {
-  "required": true,
-  "minVersion": "0.8",
-  "package": "me.anisekai.mixins",
+  "required":           true,
+  "minVersion":         "0.8",
+  "package":            "me.anisekai.mixins",
   "compatibilityLevel": "JAVA_17",
-  "mixins": [
-    "AbstractBlockMixin",
-    "BlockItemMixin",
-    "BlockMixin",
-    "accessors.BlockEntityMixin"
+  "mixins":             [
+    "AbstractBlockMixin", "BlockItemMixin", "BlockMixin", "FishingBobberEntityMixin", "accessors.BlockEntityMixin"
   ],
-  "client": [],
-  "server": [],
-  "injectors": {
+  "client":             [],
+  "server":             [],
+  "injectors":          {
     "defaultRequire": 1
   }
 }

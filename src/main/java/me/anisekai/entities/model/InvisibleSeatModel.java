@@ -1,16 +1,16 @@
-package me.anisekai.entities;
+package me.anisekai.entities.model;
 
 import com.google.common.collect.ImmutableList;
-import me.anisekai.entities.chair.ChairEntity;
+import me.anisekai.entities.seat.InvisibleSeatEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.AnimalModel;
 import net.minecraft.client.render.entity.model.EntityModelPartNames;
 
-public class EmptyModel extends AnimalModel<ChairEntity> {
+public class InvisibleSeatModel extends AnimalModel<InvisibleSeatEntity> {
 
     private final ModelPart base;
 
-    public EmptyModel(ModelPart modelPart) {
+    public InvisibleSeatModel(ModelPart modelPart) {
 
         this.base = modelPart.getChild(EntityModelPartNames.CUBE);
     }
@@ -28,7 +28,7 @@ public class EmptyModel extends AnimalModel<ChairEntity> {
     }
 
     @Override
-    public void setAngles(ChairEntity entity, float limbAngle, float limbDistance, float customAngle, float headYaw, float headPitch) {
+    public void setAngles(InvisibleSeatEntity entity, float limbAngle, float limbDistance, float customAngle, float headYaw, float headPitch) {
 
     }
 

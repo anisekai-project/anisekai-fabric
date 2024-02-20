@@ -1,28 +1,31 @@
 package me.anisekai.blocks;
 
-import me.anisekai.blocks.composed.OrientableBlock;
+import me.anisekai.utils.BlockUtils;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
-import net.minecraft.block.enums.SlabType;
+import net.minecraft.block.Waterloggable;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContextParameterSet;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.WorldAccess;
 
-import java.util.Arrays;
 import java.util.List;
 
-public class HalfSlabBlock extends OrientableBlock {
+public class HalfSlabBlock extends Block implements Waterloggable {
 
     public static final BooleanProperty LAYER_3 = BooleanProperty.of("layer3");
     public static final BooleanProperty LAYER_2 = BooleanProperty.of("layer2");
@@ -36,10 +39,11 @@ public class HalfSlabBlock extends OrientableBlock {
 
     public HalfSlabBlock(Block block) {
 
-        super(block);
+        super(FabricBlockSettings.copy(block));
 
         this.setDefaultState(
                 this.getDefaultState()
+                    .with(Properties.WATERLOGGED, false)
                     .with(LAYER_0, false)
                     .with(LAYER_1, false)
                     .with(LAYER_2, false)
@@ -48,15 +52,24 @@ public class HalfSlabBlock extends OrientableBlock {
     }
 
     @Override
-    public boolean hasSidedTransparency(BlockState state) {
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
 
-        boolean layer0 = state.get(LAYER_0);
-        boolean layer1 = state.get(LAYER_1);
-        boolean layer2 = state.get(LAYER_2);
-        boolean layer3 = state.get(LAYER_3);
-        return !layer0 || !layer1 || !layer2 || !layer3;
+        super.appendProperties(builder);
+        builder.add(
+                Properties.HORIZONTAL_FACING,
+                Properties.WATERLOGGED,
+                LAYER_0,
+                LAYER_1,
+                LAYER_2,
+                LAYER_3
+        );
     }
 
+    @Override
+    public boolean hasSidedTransparency(BlockState state) {
+
+        return !this.isFull(state);
+    }
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
@@ -77,13 +90,6 @@ public class HalfSlabBlock extends OrientableBlock {
         }
 
         return shape;
-    }
-
-    @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-
-        super.appendProperties(builder);
-        builder.add(LAYER_3, LAYER_2, LAYER_1, LAYER_0);
     }
 
     public boolean isFull(BlockState state) {
@@ -147,6 +153,15 @@ public class HalfSlabBlock extends OrientableBlock {
     }
 
     @Override
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+
+        if (state.get(Properties.WATERLOGGED)) {
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+        }
+        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+    }
+
+    @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
 
         BlockPos        pos   = ctx.getBlockPos();
@@ -154,11 +169,13 @@ public class HalfSlabBlock extends OrientableBlock {
         double          y     = ctx.getHitPos().y - ctx.getBlockPos().getY();
         BooleanProperty layer = this.getAffectedLayerAt(state, y);
 
-        if (state.isOf(this)) {
-            return state.with(layer, true);
-        }
+        BlockState placementState =
+                state.isOf(this) ?
+                        state.with(layer, true)
+                        : super.getPlacementState(ctx).with(layer, true);
 
-        return super.getPlacementState(ctx).with(layer, true);
+        return placementState
+                .with(Properties.WATERLOGGED, BlockUtils.isContextWater(ctx) && !this.isFull(placementState));
     }
 
     @Override
@@ -182,12 +199,21 @@ public class HalfSlabBlock extends OrientableBlock {
     public List<ItemStack> getDroppedStacks(BlockState state, LootContextParameterSet.Builder builder) {
 
         if (state.isOf(this)) {
-            Item item = this.asItem();
+            Item      item  = this.asItem();
             ItemStack stack = new ItemStack(item, this.getLayerCount(state));
             return List.of(stack);
         }
 
         return super.getDroppedStacks(state, builder);
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState state) {
+
+        if (state.get(Properties.WATERLOGGED)) {
+            return Fluids.WATER.getStill(false);
+        }
+        return super.getFluidState(state);
     }
 
 }

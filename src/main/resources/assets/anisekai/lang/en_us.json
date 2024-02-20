@@ -66,5 +66,8 @@
   "block.anisekai.crimson_nightstand":  "Crimson Nightstand",
   "block.anisekai.warped_nightstand":   "Warped Nightstand",
   "inventory.anisekai.nightstand":      "Nightstand",
+  "block.anisekai.fishing_basket":      "Fishing Basket",
+  "inventory.anisekai.fishing_basket":  "Fishing Basket",
+  "anisekai.message.fishing":           "You fished %s x%s",
   "action.chair.blocked":               "You can't safely sit there"
 }

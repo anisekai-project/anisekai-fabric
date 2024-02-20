@@ -1,25 +1,98 @@
 package me.anisekai.blocks;
 
-import me.anisekai.blocks.composed.OrientableBlock;
+import me.anisekai.interfaces.Orientable;
+import me.anisekai.utils.BlockUtils;
+import me.anisekai.utils.RotatableShape;
 import me.anisekai.utils.VoxelUtils;
-import net.minecraft.block.Block;
-import net.minecraft.block.Waterloggable;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.*;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.Properties;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.WorldAccess;
 
 import java.util.Arrays;
 
-public class TableBlock extends OrientableBlock implements Waterloggable {
+public class TableBlock extends Block implements Waterloggable, Orientable {
 
-    private static final VoxelShape SHAPE = VoxelUtils.make(Arrays.asList(
+    private static final VoxelShape VOXEL = VoxelUtils.make(Arrays.asList(
             VoxelShapes.cuboid(0.3125, 0, 0.3125, 0.6875, 0.0625, 0.6875),
             VoxelShapes.cuboid(0.4375, 0.0625, 0.4375, 0.5625, 0.875, 0.5625),
             VoxelShapes.cuboid(0, 0.875, 0, 1, 1, 1)
     ));
 
+    private static final RotatableShape SHAPE = new RotatableShape(VOXEL, VOXEL, VOXEL, VOXEL);
+
     public TableBlock(Block block) {
 
-        super(block, SHAPE);
+        super(FabricBlockSettings.copy(block));
+
+        this.setDefaultState(
+                super.getDefaultState()
+                     .with(Properties.HORIZONTAL_FACING, Direction.NORTH)
+                     .with(Properties.WATERLOGGED, false)
+        );
+    }
+
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+
+        super.appendProperties(builder);
+        builder.add(
+                Properties.HORIZONTAL_FACING,
+                Properties.WATERLOGGED
+        );
+    }
+
+    @Override
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+
+        return this.getOrientedShapes().getShape(state.get(Properties.HORIZONTAL_FACING));
+    }
+
+    @Override
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+
+        return super.getPlacementState(ctx)
+                    .with(Properties.WATERLOGGED, BlockUtils.isContextWater(ctx))
+                    .with(Properties.HORIZONTAL_FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+    }
+
+    @Override
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+
+        if (state.get(Properties.WATERLOGGED)) {
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+        }
+        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState state) {
+
+        if (state.get(Properties.WATERLOGGED)) {
+            return Fluids.WATER.getStill(false);
+        }
+        return super.getFluidState(state);
+    }
+
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+
+        return BlockRenderType.MODEL;
+    }
+
+    @Override
+    public RotatableShape getOrientedShapes() {
+
+        return SHAPE;
     }
 
 }

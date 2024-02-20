@@ -1,6 +1,6 @@
-package me.anisekai.blocks.composed;
+package me.anisekai.blocks.feature;
 
-import me.anisekai.entities.chair.ChairEntity;
+import me.anisekai.entities.seat.InvisibleSeatEntity;
 import me.anisekai.interfaces.Seatable;
 import me.anisekai.utils.HandUtils;
 import net.minecraft.block.Block;
@@ -16,25 +16,17 @@ import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class SeatBlock extends OrientableBlock implements Seatable {
+public abstract class SeatBlock extends Block implements Seatable {
 
-    public SeatBlock(Block block, VoxelShape north, VoxelShape east, VoxelShape south, VoxelShape west) {
+    public SeatBlock(Settings settings) {
 
-        super(block, north, east, south, west);
-    }
-
-    public SeatBlock(Block block, VoxelShape shape) {
-
-        super(block, shape);
+        super(settings);
     }
 
     @Override
@@ -44,12 +36,30 @@ public abstract class SeatBlock extends OrientableBlock implements Seatable {
             return ActionResult.CONSUME;
         }
 
-        BlockPos   above      = pos.offset(Direction.UP);
-        BlockState aboveState = world.getBlockState(above);
+        boolean isSpectator = player.isSpectator();
+        boolean isSneaking = player.isSneaking();
+        boolean hasDebugStick = HandUtils.getHandStack(player, hand).isOf(Items.DEBUG_STICK);
 
-        if (player.isSpectator() || player.isSneaking() || HandUtils.getHandStack(player, hand).isOf(Items.DEBUG_STICK)) {
+        if (isSpectator || isSneaking || hasDebugStick) {
             return ActionResult.FAIL;
         }
+
+        return this.onRightClick(state, world, pos, player, hand, hit);
+    }
+
+    public final Vec3d getLocalHitPos(BlockPos pos, Position hit) {
+
+        return new Vec3d(
+                hit.getX() - pos.getX(),
+                hit.getY() - pos.getY(),
+                hit.getZ() - pos.getZ()
+        );
+    }
+
+    public ActionResult onRightClick(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+
+        BlockPos   above      = pos.offset(Direction.UP);
+        BlockState aboveState = world.getBlockState(above);
 
         if (aboveState.isSolidBlock(world, above) && player instanceof ServerPlayerEntity serverPlayer) {
             Packet<ClientPlayPacketListener> p = new OverlayMessageS2CPacket(Text.translatable("action.chair.blocked"));
@@ -57,8 +67,8 @@ public abstract class SeatBlock extends OrientableBlock implements Seatable {
             return ActionResult.FAIL;
         }
 
-        List<ChairEntity> active = world.getEntitiesByClass(
-                ChairEntity.class,
+        List<InvisibleSeatEntity> active = world.getEntitiesByClass(
+                InvisibleSeatEntity.class,
                 new Box(pos),
                 Entity::hasPassengers
         );
@@ -70,7 +80,7 @@ public abstract class SeatBlock extends OrientableBlock implements Seatable {
         } else if (!active.isEmpty()) {
             hasPassenger.forEach(Entity::stopRiding);
             return ActionResult.SUCCESS;
-        } else if (ChairEntity.sitEntity(world, pos, state, this, player) == ActionResult.SUCCESS) {
+        } else if (Seatable.sit(world, pos, state, this, player) == ActionResult.SUCCESS) {
             return ActionResult.SUCCESS;
         }
         return ActionResult.CONSUME;
