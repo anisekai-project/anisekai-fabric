@@ -15,7 +15,7 @@ public class ModCondenserRecipes {
     private static void createLogRecipe(String name, Item log, Item sapling) {
 
         CondenserBlock.registerConsuming(
-                new Identifier(AnisekaiMod.MOD_ID, "condenser/" + name),
+                new Identifier(AnisekaiMod.MOD_ID, "condenser/log/" + name),
                 new ItemStack(log),
                 stack -> stack.isOf(sapling),
                 stack -> stack.isOf(Items.DIRT),
@@ -30,6 +30,26 @@ public class ModCondenserRecipes {
                 0
         );
     }
+
+    private static void createLeavesRecipe(String name, Item leaves, Item sapling) {
+
+        CondenserBlock.registerConsuming(
+                new Identifier(AnisekaiMod.MOD_ID, "condenser/leaves/" + name),
+                new ItemStack(leaves),
+                stack -> stack.isOf(sapling),
+                stack -> stack.isOf(Items.DIRT),
+                stack -> stack.isOf(Items.BONE_MEAL),
+                stack -> stack.isOf(Items.SHEARS),
+                new ItemStack(leaves, 12),
+                Blocks.DARK_OAK_LEAVES.getHardness() * CondenserBlock.CONDENSER_LIMITER_FACTOR,
+                5,
+                SoundEvents.BLOCK_AZALEA_LEAVES_HIT,
+                SoundEvents.BLOCK_AZALEA_LEAVES_BREAK,
+                1,
+                0
+        );
+    }
+
 
     public static void init() {
 
@@ -69,6 +89,16 @@ public class ModCondenserRecipes {
         createLogRecipe("mangrove", Items.MANGROVE_LOG, Items.MANGROVE_PROPAGULE);
         createLogRecipe("oak", Items.OAK_LOG, Items.OAK_SAPLING);
         createLogRecipe("spruce", Items.SPRUCE_LOG, Items.SPRUCE_SAPLING);
+
+        createLeavesRecipe("acacia", Items.ACACIA_LEAVES, Items.ACACIA_SAPLING);
+        createLeavesRecipe("birch", Items.BIRCH_LEAVES, Items.BIRCH_SAPLING);
+        createLeavesRecipe("cherry", Items.CHERRY_LEAVES, Items.CHERRY_SAPLING);
+        createLeavesRecipe("dark_oak", Items.DARK_OAK_LEAVES, Items.DARK_OAK_SAPLING);
+        createLeavesRecipe("jungle", Items.JUNGLE_LEAVES, Items.JUNGLE_SAPLING);
+        createLeavesRecipe("mangrove", Items.MANGROVE_LEAVES, Items.MANGROVE_PROPAGULE);
+        createLeavesRecipe("oak", Items.OAK_LEAVES, Items.OAK_SAPLING);
+        createLeavesRecipe("spruce", Items.SPRUCE_LEAVES, Items.SPRUCE_SAPLING);
+
 
         CondenserBlock.registerConsuming(
                 new Identifier(AnisekaiMod.MOD_ID, "condenser/dirt"),

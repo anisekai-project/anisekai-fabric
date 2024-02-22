@@ -105,6 +105,13 @@ public abstract class CondenserRecipe {
                 this.getTool().test(condenser.getStack(CondenserBlockEntity.TOOL_SLOT));
     }
 
+    public boolean isJammed(CondenserBlockEntity condenser) {
+
+        return this.areIngredientsCompatible(condenser) &&
+                !this.canOutput(condenser) &&
+                this.getTool().test(condenser.getStack(CondenserBlockEntity.TOOL_SLOT));
+    }
+
     public boolean areIngredientsCompatible(CondenserBlockEntity condenser) {
 
         ItemStack ingredientOne = condenser.getStack(CondenserBlockEntity.INGREDIENT_ONE_SLOT);

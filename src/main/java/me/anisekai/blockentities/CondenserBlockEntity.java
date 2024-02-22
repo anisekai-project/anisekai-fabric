@@ -194,8 +194,15 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
 
         this.syncRecipeStatus();
         if (this.activeRecipe == null) {
+            world.setBlockState(
+                    pos,
+                    state.with(Properties.LIT, false).with(CondenserBlock.JAMMED, false),
+                    Block.NOTIFY_ALL
+            );
             return;
         }
+
+        this.currentTick = (this.currentTick + 1) % 5;
 
         if (!this.activeRecipe.canContinueProcessing(this)) {
             this.progress        = 0;
@@ -206,20 +213,26 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
 
             world.setBlockState(
                     pos,
-                    state.with(Properties.LIT, false),
+                    state.with(Properties.LIT, false)
+                         .with(CondenserBlock.JAMMED, this.activeRecipe.isJammed(this)),
                     Block.NOTIFY_ALL
             );
+
+            if (this.currentTick == 0 && this.activeRecipe.isJammed(this)) {
+                world.playSound(null, pos, SoundEvents.BLOCK_NOTE_BLOCK_BASS.value(), SoundCategory.BLOCKS, 0.1f, 1.0f);
+            }
 
             return;
         }
 
         world.setBlockState(
                 pos,
-                state.with(Properties.LIT, true),
+                state.with(Properties.LIT, true).with(CondenserBlock.JAMMED, false),
                 Block.NOTIFY_ALL
         );
 
         this.progress += this.progressPerTick;
+
 
         float progressPerSecond = this.progressPerTick * 20;
         float speed             = progressPerSecond / this.activeRecipe.getBaseWorkRate();
@@ -275,8 +288,6 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
             this.markDirty();
             return;
         }
-
-        this.currentTick = (this.currentTick + 1) % 5;
 
         if (this.currentTick == 0 && this.activeRecipe.getWorkingSound() != null) {
             world.playSound(null, pos, this.activeRecipe.getWorkingSound(), SoundCategory.BLOCKS, 0.1f, 1.0f);

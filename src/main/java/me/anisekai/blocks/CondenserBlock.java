@@ -14,10 +14,13 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -32,9 +35,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Predicate;
 
 public class CondenserBlock extends BlockWithEntity implements Orientable, StorageContainer<CondenserBlockEntity> {
@@ -42,7 +43,8 @@ public class CondenserBlock extends BlockWithEntity implements Orientable, Stora
     public static final Map<Identifier, CondenserRecipe> RECIPES = new HashMap<>();
 
     // Because it allows passive farming, the rate should be limited.
-    public static final int CONDENSER_LIMITER_FACTOR = 200;
+    public static final int             CONDENSER_LIMITER_FACTOR = 200;
+    public static final BooleanProperty JAMMED                   = BooleanProperty.of("jammed");
 
     public static void registerGenerative(Identifier id, ItemStack condensedStack, Predicate<ItemStack> ingredientOne, Predicate<ItemStack> ingredientTwo, Predicate<ItemStack> booster, Predicate<ItemStack> tool, ItemStack output, float workRate, float boosterBonus, SoundEvent workingSound, SoundEvent generateSound) {
 
@@ -98,6 +100,7 @@ public class CondenserBlock extends BlockWithEntity implements Orientable, Stora
                 super.getDefaultState()
                      .with(Properties.HORIZONTAL_FACING, Direction.NORTH)
                      .with(Properties.LIT, false)
+                     .with(JAMMED, false)
         );
     }
 
@@ -127,7 +130,7 @@ public class CondenserBlock extends BlockWithEntity implements Orientable, Stora
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
 
         super.appendProperties(builder);
-        builder.add(Properties.HORIZONTAL_FACING, Properties.LIT);
+        builder.add(Properties.HORIZONTAL_FACING, Properties.LIT, JAMMED);
     }
 
     @Override
@@ -147,7 +150,8 @@ public class CondenserBlock extends BlockWithEntity implements Orientable, Stora
 
         return super.getPlacementState(ctx)
                     .with(Properties.HORIZONTAL_FACING, ctx.getHorizontalPlayerFacing().getOpposite())
-                    .with(Properties.LIT, false);
+                    .with(Properties.LIT, false)
+                    .with(JAMMED, false);
     }
 
 
@@ -214,6 +218,15 @@ public class CondenserBlock extends BlockWithEntity implements Orientable, Stora
         if (state.hasBlockEntity() && !state.isOf(newState.getBlock())) {
             world.removeBlockEntity(pos);
         }
+    }
+
+    @Override
+    public List<ItemStack> getDroppedStacks(BlockState state, LootContextParameterSet.Builder builder) {
+
+        Block     block = state.getBlock();
+        Item      item  = block.asItem();
+        ItemStack stack = new ItemStack(item);
+        return Collections.singletonList(stack);
     }
 
 }
