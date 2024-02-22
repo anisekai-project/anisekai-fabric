@@ -1,6 +1,7 @@
 package me.anisekai.registries;
 
 import me.anisekai.AnisekaiMod;
+import me.anisekai.blockentities.CondenserBlockEntity;
 import me.anisekai.blockentities.FishingBasketBlockEntity;
 import me.anisekai.blockentities.NightstandBlockEntity;
 import me.anisekai.registries.blocks.ModBlockNightstands;
@@ -43,10 +44,21 @@ public class ModBlockEntities {
             ).build()
     );
 
+    public static final BlockEntityType<CondenserBlockEntity> CONDENSER = Registry.register(
+            Registries.BLOCK_ENTITY_TYPE,
+            new Identifier(AnisekaiMod.MOD_ID, "condenser"),
+            FabricBlockEntityTypeBuilder.create(
+                    CondenserBlockEntity::new,
+                    ModBlocks.CONDENSER
+            ).build()
+    );
+
     public static List<BlockEntityType<?>> blockEntities() {
+
         return Arrays.asList(
                 NIGHTSTAND,
-                FISHING_BASKET
+                FISHING_BASKET,
+                CONDENSER
         );
     }
 

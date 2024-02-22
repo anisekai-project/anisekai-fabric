@@ -30,21 +30,6 @@ public interface StorageContainer<T extends BlockEntity & ImplementedInventory> 
         return blockEntity instanceof NamedScreenHandlerFactory ? (NamedScreenHandlerFactory) blockEntity : null;
     }
 
-    default void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-
-        if (state.isOf(newState.getBlock())) {
-            return;
-        }
-
-        this.getBlockEntityInstance(world.getBlockEntity(pos)).ifPresent(inv -> {
-            ItemScatterer.spawn(world, pos, inv);
-            world.updateComparators(pos, this.asBlock());
-        });
-
-        if (state.hasBlockEntity() && !state.isOf(newState.getBlock())) {
-            world.removeBlockEntity(pos);
-        }
-    }
 
     default boolean hasComparatorOutput(BlockState state) {
 

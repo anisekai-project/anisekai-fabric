@@ -84,7 +84,7 @@ public class AnisekaiHelper {
         }
     }
 
-    private static List<String> woods = Arrays.asList(
+    public static final List<String> WOODS = Arrays.asList(
             "acacia",
             "bamboo",
             "birch",
@@ -121,7 +121,7 @@ public class AnisekaiHelper {
         for (File file : files) {
             String content = Files.readString(file.toPath());
 
-            for (String wood : woods) {
+            for (String wood : WOODS) {
                 String filename = String.format("%s_%s", wood, file.getName());
                 File   apply    = toOuput.apply(file, filename);
 
@@ -130,6 +130,6 @@ public class AnisekaiHelper {
             }
         }
 
-        System.out.printf("Deployed %s files for %s source files.", files.size() * woods.size(), files.size());
+        System.out.printf("Deployed %s files for %s source files.", files.size() * WOODS.size(), files.size());
     }
 }

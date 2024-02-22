@@ -2,19 +2,19 @@
   "type":    "minecraft:crafting_shaped",
   "pattern": [
     "SSS",
-    "C C",
-    "CCC"
+    "SDS",
+    "SSS"
   ],
   "key":     {
     "S": {
-      "item": "minecraft:bamboo_slab"
+      "item": "minecraft:deepslate"
     },
-    "C": {
-      "item": "minecraft:bamboo_planks"
+    "D": {
+      "item": "minecraft:diamond"
     }
   },
   "result":  {
-    "item":  "anisekai:fishing_basket",
+    "item":  "anisekai:condenser",
     "count": 1
   }
 }

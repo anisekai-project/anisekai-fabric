@@ -1,0 +1,129 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model":  "anisekai:block/condenser",
+        "uvlock": false
+      },
+      "when":  {
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model":  "anisekai:block/condenser",
+        "uvlock": false,
+        "y":      90
+      },
+      "when":  {
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model":  "anisekai:block/condenser",
+        "uvlock": false,
+        "y":      180
+      },
+      "when":  {
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model":  "anisekai:block/condenser",
+        "uvlock": false,
+        "y":      270
+      },
+      "when":  {
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model":  "anisekai:block/condenser_lit",
+        "uvlock": false
+      },
+      "when":  {
+        "facing": "north",
+        "lit":    true
+      }
+    },
+    {
+      "apply": {
+        "model":  "anisekai:block/condenser_lit",
+        "uvlock": false,
+        "y":      90
+      },
+      "when":  {
+        "facing": "east",
+        "lit":    true
+      }
+    },
+    {
+      "apply": {
+        "model":  "anisekai:block/condenser_lit",
+        "uvlock": false,
+        "y":      180
+      },
+      "when":  {
+        "facing": "south",
+        "lit":    true
+      }
+    },
+    {
+      "apply": {
+        "model":  "anisekai:block/condenser_lit",
+        "uvlock": false,
+        "y":      270
+      },
+      "when":  {
+        "facing": "west",
+        "lit":    true
+      }
+    },
+    {
+      "apply": {
+        "model":  "anisekai:block/condenser_unlit",
+        "uvlock": false
+      },
+      "when":  {
+        "facing": "north",
+        "lit":    false
+      }
+    },
+    {
+      "apply": {
+        "model":  "anisekai:block/condenser_unlit",
+        "uvlock": false,
+        "y":      90
+      },
+      "when":  {
+        "facing": "east",
+        "lit":    false
+      }
+    },
+    {
+      "apply": {
+        "model":  "anisekai:block/condenser_unlit",
+        "uvlock": false,
+        "y":      180
+      },
+      "when":  {
+        "facing": "south",
+        "lit":    false
+      }
+    },
+    {
+      "apply": {
+        "model":  "anisekai:block/condenser_unlit",
+        "uvlock": false,
+        "y":      270
+      },
+      "when":  {
+        "facing": "west",
+        "lit":    false
+      }
+    }
+  ]
+}

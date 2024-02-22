@@ -1,5 +1,6 @@
 package me.anisekai.blocks;
 
+import me.anisekai.blockentities.FishingBasketBlockEntity;
 import me.anisekai.blockentities.NightstandBlockEntity;
 import me.anisekai.interfaces.Connectable;
 import me.anisekai.interfaces.Orientable;
@@ -10,15 +11,18 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -154,6 +158,23 @@ public class NightstandBlock extends Block implements BlockEntityProvider, Stora
 
         this.getBlockEntityInstance(world.getBlockEntity(pos)).ifPresent(player::openHandledScreen);
         return ActionResult.CONSUME;
+    }
+
+    @Override
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+
+        if (state.isOf(newState.getBlock())) {
+            return;
+        }
+
+        this.getBlockEntityInstance(world.getBlockEntity(pos)).ifPresent(inv -> {
+            ItemScatterer.spawn(world, pos, inv);
+            world.updateComparators(pos, this.asBlock());
+        });
+
+        if (state.hasBlockEntity() && !state.isOf(newState.getBlock())) {
+            world.removeBlockEntity(pos);
+        }
     }
 
 }

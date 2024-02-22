@@ -69,12 +69,6 @@ public class FishingBasketBlockEntity extends BlockEntity implements Implemented
     @Override
     public Text getDisplayName() {
 
-        File file = null;
-
-        Optional.ofNullable(file)
-                .map(File::getName)
-                .orElse(null);
-
         return Text.translatable("inventory.anisekai.fishing_basket");
     }
 

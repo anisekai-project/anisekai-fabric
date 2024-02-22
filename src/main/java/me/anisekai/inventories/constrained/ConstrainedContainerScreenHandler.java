@@ -1,6 +1,7 @@
 package me.anisekai.inventories.constrained;
 
-import me.anisekai.AnisekaiMod;
+import me.anisekai.inventories.slots.ConstrainedSlot;
+import me.anisekai.registries.ModScreenHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -19,7 +20,7 @@ public class ConstrainedContainerScreenHandler extends ScreenHandler {
     public static ConstrainedContainerScreenHandler create(int syncId, PlayerInventory playerInventory, SidedInventory inventory) {
 
         return new ConstrainedContainerScreenHandler(
-                AnisekaiMod.CONSTRAINED_INVENTORY,
+                ModScreenHandler.CONSTRAINED_INVENTORY,
                 syncId,
                 playerInventory,
                 inventory
@@ -29,7 +30,7 @@ public class ConstrainedContainerScreenHandler extends ScreenHandler {
     public static ConstrainedContainerScreenHandler createConstrained(int syncId, PlayerInventory playerInventory) {
 
         return new ConstrainedContainerScreenHandler(
-                AnisekaiMod.CONSTRAINED_INVENTORY,
+                ModScreenHandler.CONSTRAINED_INVENTORY,
                 syncId,
                 playerInventory,
                 new SimpleInventory(27)

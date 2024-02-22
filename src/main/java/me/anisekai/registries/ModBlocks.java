@@ -1,12 +1,11 @@
 package me.anisekai.registries;
 
 import me.anisekai.AnisekaiMod;
+import me.anisekai.blocks.CondenserBlock;
 import me.anisekai.blocks.FishingBasketBlock;
 import me.anisekai.registries.blocks.*;
-import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -22,6 +21,12 @@ public final class ModBlocks {
             new FishingBasketBlock(Blocks.BAMBOO_PLANKS)
     );
 
+    public static final Block CONDENSER = Registry.register(
+            Registries.BLOCK,
+            new Identifier(AnisekaiMod.MOD_ID, "condenser"),
+            new CondenserBlock()
+    );
+
     private ModBlocks() {}
 
     public static List<Block> blocks() {
@@ -35,6 +40,7 @@ public final class ModBlocks {
         blocks.addAll(ModBlockNightstands.blocks());
 
         blocks.add(FISHING_BASKET);
+        blocks.add(CONDENSER);
         return blocks;
     }
 

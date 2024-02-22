@@ -6,6 +6,8 @@ import me.anisekai.entities.renderer.InvisibleSeatRenderer;
 import me.anisekai.inventories.constrained.ConstrainedContainerScreen;
 import me.anisekai.registries.ModEntities;
 import me.anisekai.registries.ModModels;
+import me.anisekai.registries.ModScreenHandler;
+import me.anisekai.screen.condenser.CondenserScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -23,7 +25,9 @@ public class AnisekaiModClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(ModModels.EMPTY_MODEL, InvisibleSeatModel::getTexturedModelData);
 
         EntityRendererRegistry.register(ModEntities.INVISIBLE_SEAT_ENTITY, InvisibleSeatRenderer::new);
-        HandledScreens.register(AnisekaiMod.CONSTRAINED_INVENTORY, ConstrainedContainerScreen::new);
+
+        HandledScreens.register(ModScreenHandler.CONSTRAINED_INVENTORY, ConstrainedContainerScreen::new);
+        HandledScreens.register(ModScreenHandler.CONDENSER, CondenserScreen::new);
     }
 
 }

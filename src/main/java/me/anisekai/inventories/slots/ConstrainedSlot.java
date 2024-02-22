@@ -1,4 +1,4 @@
-package me.anisekai.inventories.constrained;
+package me.anisekai.inventories.slots;
 
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;

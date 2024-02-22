@@ -69,5 +69,7 @@
   "block.anisekai.fishing_basket":      "Fishing Basket",
   "inventory.anisekai.fishing_basket":  "Fishing Basket",
   "anisekai.message.fishing":           "You fished %s x%s",
+  "block.anisekai.condenser":           "Condenser",
+  "inventory.anisekai.condenser":       "Condenser",
   "action.chair.blocked":               "You can't safely sit there"
 }

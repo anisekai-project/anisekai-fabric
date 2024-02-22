@@ -23,6 +23,12 @@ public final class ModItems {
             new BlockItem(ModBlocks.FISHING_BASKET, new FabricItemSettings().maxCount(64))
     );
 
+    public static final Item CONDENSER = Registry.register(
+            Registries.ITEM,
+            new Identifier(AnisekaiMod.MOD_ID, "condenser"),
+            new BlockItem(ModBlocks.CONDENSER, new FabricItemSettings().maxCount(64))
+    );
+
     private ModItems() {}
 
     public static List<Item> items() {
@@ -36,6 +42,7 @@ public final class ModItems {
         items.addAll(ModItemNightstands.items());
 
         items.add(FISHING_BASKET);
+        items.add(CONDENSER);
         return items;
     }
 
@@ -44,6 +51,7 @@ public final class ModItems {
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> {
             content.add(() -> ModItems.FISHING_BASKET);
+            content.add(() -> ModItems.CONDENSER);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(content -> {

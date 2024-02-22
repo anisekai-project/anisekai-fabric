@@ -4,7 +4,7 @@
 		"model_format": "java_block",
 		"box_uv": false
 	},
-	"name": "Condenser",
+	"name": "condenser",
 	"parent": "",
 	"ambientocclusion": true,
 	"front_gui_light": false,
@@ -18,24 +18,24 @@
 	},
 	"elements": [
 		{
-			"name": "cube",
+			"name": "body",
 			"box_uv": false,
 			"rescale": false,
 			"locked": false,
 			"render_order": "default",
 			"allow_mirror_modeling": true,
-			"from": [0, 0, 0],
+			"from": [0, 0, 2],
 			"to": [16, 16, 16],
-			"autouv": 1,
+			"autouv": 0,
 			"color": 0,
 			"origin": [0, 0, 0],
 			"faces": {
 				"north": {
-					"uv": [0, 0, 16, 16],
-					"texture": 1
+					"uv": [0, 0, 0, 0],
+					"texture": null
 				},
 				"east": {
-					"uv": [0, 0, 16, 16],
+					"uv": [0, 0, 14, 16],
 					"texture": 0
 				},
 				"south": {
@@ -43,23 +43,207 @@
 					"texture": 0
 				},
 				"west": {
-					"uv": [0, 0, 16, 16],
+					"uv": [2, 0, 16, 16],
 					"texture": 0
 				},
 				"up": {
-					"uv": [0, 0, 16, 16],
+					"uv": [0, 2, 16, 16],
 					"texture": 0
 				},
 				"down": {
-					"uv": [0, 0, 16, 16],
+					"uv": [0, 0, 16, 14],
 					"texture": 0
 				}
 			},
 			"type": "cube",
 			"uuid": "527e1f9f-2227-610d-82b5-2edf8dfa6d6c"
+		},
+		{
+			"name": "cube",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [11, 0, 0],
+			"to": [16, 16, 2],
+			"autouv": 0,
+			"color": 7,
+			"origin": [0, 0, 0],
+			"faces": {
+				"north": {
+					"uv": [0, 0, 5, 16],
+					"texture": 1
+				},
+				"east": {
+					"uv": [14, 0, 16, 16],
+					"texture": 0
+				},
+				"south": {
+					"uv": [0, 0, 5, 16],
+					"texture": null
+				},
+				"west": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"up": {
+					"uv": [11, 0, 16, 2],
+					"texture": 0
+				},
+				"down": {
+					"uv": [11, 14, 16, 16],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "85fd1de6-9602-d433-01bd-1f6e7d572cfb"
+		},
+		{
+			"name": "cube",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [5, 11, 0],
+			"to": [11, 16, 2],
+			"autouv": 0,
+			"color": 2,
+			"origin": [0, 0, 0],
+			"faces": {
+				"north": {
+					"uv": [5, 0, 11, 5],
+					"texture": 1
+				},
+				"east": {
+					"uv": [0, 0, 2, 5],
+					"texture": null
+				},
+				"south": {
+					"uv": [0, 0, 6, 5],
+					"texture": null
+				},
+				"west": {
+					"uv": [0, 0, 2, 5],
+					"texture": null
+				},
+				"up": {
+					"uv": [5, 0, 11, 2],
+					"texture": 0
+				},
+				"down": {
+					"uv": [0, 0, 6, 2],
+					"texture": null
+				}
+			},
+			"type": "cube",
+			"uuid": "8d9a831a-96b3-5fcb-6b51-5dfb43e0fb8e"
+		},
+		{
+			"name": "cube",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [0, 0, 0],
+			"to": [5, 16, 2],
+			"autouv": 0,
+			"color": 7,
+			"origin": [0, 0, 0],
+			"faces": {
+				"north": {
+					"uv": [11, 0, 16, 16],
+					"texture": 1
+				},
+				"east": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"south": {
+					"uv": [0, 0, 5, 16],
+					"texture": null
+				},
+				"west": {
+					"uv": [0, 0, 2, 16],
+					"texture": 0
+				},
+				"up": {
+					"uv": [0, 0, 5, 2],
+					"texture": 0
+				},
+				"down": {
+					"uv": [0, 14, 5, 16],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "a231c710-d941-1924-4462-db2f801978c0"
+		},
+		{
+			"name": "cube",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [5, 0, 0],
+			"to": [11, 5, 2],
+			"autouv": 0,
+			"color": 2,
+			"origin": [0, 0, 0],
+			"faces": {
+				"north": {
+					"uv": [5, 11, 11, 16],
+					"texture": 1
+				},
+				"east": {
+					"uv": [5, 11, 11, 16],
+					"texture": 1
+				},
+				"south": {
+					"uv": [5, 11, 11, 16],
+					"texture": 1
+				},
+				"west": {
+					"uv": [5, 11, 11, 16],
+					"texture": 1
+				},
+				"up": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"down": {
+					"uv": [5, 14, 11, 16],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "bfe3a8bb-bf59-0f19-7902-334efe30487d"
 		}
 	],
-	"outliner": ["527e1f9f-2227-610d-82b5-2edf8dfa6d6c"],
+	"outliner": [
+		"527e1f9f-2227-610d-82b5-2edf8dfa6d6c",
+		{
+			"name": "face frame",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"uuid": "a5a0743b-4991-ee61-2e91-d6c640252ea7",
+			"export": true,
+			"mirror_uv": false,
+			"isOpen": false,
+			"locked": false,
+			"visibility": true,
+			"autouv": 0,
+			"children": [
+				"85fd1de6-9602-d433-01bd-1f6e7d572cfb",
+				"a231c710-d941-1924-4462-db2f801978c0",
+				"8d9a831a-96b3-5fcb-6b51-5dfb43e0fb8e",
+				"bfe3a8bb-bf59-0f19-7902-334efe30487d"
+			]
+		}
+	],
 	"textures": [
 		{
 			"path": "C:\\Users\\conta\\OneDrive\\Documents\\workspaces\\minecraft\\sources\\assets\\minecraft\\textures\\block\\reinforced_deepslate_bottom.png",
@@ -112,6 +296,32 @@
 			"uuid": "7b2d9ff3-cb67-804c-1b9f-16c5662bbeaa",
 			"relative_path": "C:/Users/conta/OneDrive/Documents/workspaces/minecraft/sources/assets/minecraft/textures/block/reinforced_deepslate_top.png",
 			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAbBJREFUOE+lU7FKA0EQnbPLRW1ySRRBExvBcGgRjKSwstXKRvwDEQvBVtBCBMFCRBA7QWwEQUtLIVUKRSLYmCiIJrk0apLOkzfxLavYuc3ezb558/btjHN5dRi+BHUp17oE63TvWHesqOvq3my1TGxuaUG/04lP6ffi4hydbYZjI+NSazzLyuKuJkVcV9xorwJbzTfd298kIFvdmBfk3Nxfi7N+sBWCrVhoym2xoOBkMql7tVo1iSQFoZ/Ny8xsSgp3jQ4BZHuep0ms3NMdMbLfP9rmm6qCIBBcx/F9P4TsWLxPQU+PDz/A9IFeDA4N63mj/qreKAGqozLkgRkgWwESoAJJKERfgFUCAEgCBZlM5k/5IEil03oGQmCdyVwuZBAHlXLZXIeVoA6KcAYsPQGhEkAWJQMEx7mYjP9SqWSUghxP+8MDmmMTshoT6AGSjYl28+Be9IOqbMl8LRpunhHVIR3OghDsdiszhheiGlVgNxI7kC7/fkrGWV0bCQT50ZhcnFdMK9sdaVdDHEompqYlm4/qAJphwmBsr50owG4WtrbdfTv7y5KIDXSG6b/j/AXVih7uQ1PGEQAAAABJRU5ErkJggg=="
+		},
+		{
+			"path": "C:\\Users\\conta\\OneDrive\\Documents\\workspaces\\minecraft\\sources\\assets\\minecraft\\textures\\block\\bubble_coral_block.png",
+			"name": "bubble_coral_block.png",
+			"folder": "block",
+			"namespace": "minecraft",
+			"id": "activity_sensor",
+			"width": 16,
+			"height": 16,
+			"uv_width": 16,
+			"uv_height": 16,
+			"particle": false,
+			"layers_enabled": false,
+			"sync_to_project": "",
+			"render_mode": "default",
+			"render_sides": "auto",
+			"frame_time": 1,
+			"frame_order_type": "loop",
+			"frame_order": "",
+			"frame_interpolate": false,
+			"visible": true,
+			"internal": true,
+			"saved": true,
+			"uuid": "42e00c62-41d9-ba15-d318-ee02c73aac49",
+			"relative_path": "C:/Users/conta/OneDrive/Documents/workspaces/minecraft/sources/assets/minecraft/textures/block/bubble_coral_block.png",
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAWNJREFUOE9tk81KA0EQhGcxQRACiqsxgoJ4MIroIUgu4gP4dnmIvEIOOXpSxJtoPIjgQQyuKAgBSSTytamxM+xcduenq6urq7POemcaZitfzEOzuRnGt+PwWHkLxXdhN+2Fffvq7P1rZPvV2lLIultdA+AxALuTNbusHlbDYPBi5wCwF/BD8WzBrOyy0Z+CrMOUBed7+XYEFgveGQAMyHL38RTqlbohKyMMLl6vw8HKjrHTEkvAMjTwlypFZVGv6Opfmlz93P8DeFSVowASCDhNEEUEQEKBzJKo7L3AuidB1EAPpD4szpdb1jrACUq7wblpIKqnx0exVYh3tnFiwV55lSpfGIA6QLu8eDBQWb3PGxMzFXyuC3IejACTKwGVDkqgpKaBaPlHqSMJTDs1nAz/nFimfjoTXmQsTbLYBY+sMnytCOpdKkfOGalsoFCfpXnwA6f2mojR5DPzlI20GPkRB+QXyj07OPJ8lWQAAAAASUVORK5CYII="
 		}
 	],
 	"display": {
