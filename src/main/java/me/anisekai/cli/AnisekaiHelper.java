@@ -1,4 +1,4 @@
-package me.anisekai;
+package me.anisekai.cli;
 
 import java.io.File;
 import java.nio.file.Files;
