@@ -21,9 +21,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
-import java.util.Optional;
-
 public class FishingBasketBlockEntity extends BlockEntity implements ImplementedInventory {
 
     private final DefaultedList<ItemStack> items = DefaultedList.ofSize(27, ItemStack.EMPTY);

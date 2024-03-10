@@ -2,7 +2,6 @@ package me.anisekai.blockentities;
 
 import me.anisekai.inventories.ImplementedInventory;
 import me.anisekai.registries.ModBlockEntities;
-import me.anisekai.registries.blocks.ModBlockNightstands;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -74,7 +73,7 @@ public class NightstandBlockEntity extends BlockEntity implements ImplementedInv
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
 
-        return new GenericContainerScreenHandler(ScreenHandlerType.GENERIC_9X1, syncId, playerInventory, this,1);
+        return new GenericContainerScreenHandler(ScreenHandlerType.GENERIC_9X1, syncId, playerInventory, this, 1);
     }
 
 }

@@ -1,6 +1,5 @@
 package me.anisekai.blocks;
 
-import me.anisekai.blockentities.FishingBasketBlockEntity;
 import me.anisekai.blockentities.NightstandBlockEntity;
 import me.anisekai.interfaces.Connectable;
 import me.anisekai.interfaces.Orientable;
@@ -10,14 +9,10 @@ import me.anisekai.utils.RotatableShape;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
