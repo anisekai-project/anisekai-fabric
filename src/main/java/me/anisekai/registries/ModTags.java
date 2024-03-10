@@ -20,18 +20,19 @@ public final class ModTags {
     }
 
 
-    public static final TagKey<Item> CHAIRS     = of("chairs");
-    public static final TagKey<Item> HALF_SLABS = of("half_slabs");
-    public static final TagKey<Item> STAIRS     = of("stairs");
-    public static final TagKey<Item> TABLES     = of("tables");
-    public static final TagKey<Item> STOOLS     = of("stools");
-    public static final TagKey<Item> NIGHTSTAND = of("nightstand");
+    public static final TagKey<Item> CHAIRS            = of("chairs");
+    public static final TagKey<Item> HALF_SLABS        = of("half_slabs");
+    public static final TagKey<Item> STAIRS            = of("stairs");
+    public static final TagKey<Item> TABLES            = of("tables");
+    public static final TagKey<Item> STOOLS            = of("stools");
+    public static final TagKey<Item> NIGHTSTAND        = of("nightstand");
+    public static final TagKey<Item> ADVANCED_PICKAXES = of("advanced_pickaxes");
 
     private ModTags() {}
 
     public static List<TagKey<Item>> itemTags() {
 
-        return Arrays.asList(CHAIRS, HALF_SLABS, STAIRS, TABLES, STOOLS,NIGHTSTAND);
+        return Arrays.asList(CHAIRS, HALF_SLABS, STAIRS, TABLES, STOOLS, NIGHTSTAND, ADVANCED_PICKAXES);
     }
 
 }

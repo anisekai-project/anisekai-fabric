@@ -3,9 +3,6 @@ package me.anisekai.blocks;
 import me.anisekai.blockentities.CondenserBlockEntity;
 import me.anisekai.interfaces.Orientable;
 import me.anisekai.interfaces.StorageContainer;
-import me.anisekai.recipes.CondenserRecipe;
-import me.anisekai.recipes.ConsumingCondenserRecipe;
-import me.anisekai.recipes.GenerativeCondenserRecipe;
 import me.anisekai.registries.ModBlockEntities;
 import me.anisekai.utils.RotatableShape;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -18,13 +15,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContextParameterSet;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -35,58 +30,15 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
-import java.util.function.Predicate;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 public class CondenserBlock extends BlockWithEntity implements Orientable, StorageContainer<CondenserBlockEntity> {
-
-    public static final Map<Identifier, CondenserRecipe> RECIPES = new HashMap<>();
 
     // Because it allows passive farming, the rate should be limited.
     public static final int             CONDENSER_LIMITER_FACTOR = 200;
     public static final BooleanProperty JAMMED                   = BooleanProperty.of("jammed");
-
-    public static void registerGenerative(Identifier id, ItemStack condensedStack, Predicate<ItemStack> ingredientOne, Predicate<ItemStack> ingredientTwo, Predicate<ItemStack> booster, Predicate<ItemStack> tool, ItemStack output, float workRate, float boosterBonus, SoundEvent workingSound, SoundEvent generateSound) {
-
-        RECIPES.put(
-                id,
-                new GenerativeCondenserRecipe(
-                        id,
-                        condensedStack,
-                        ingredientOne,
-                        ingredientTwo,
-                        booster,
-                        tool,
-                        output,
-                        workRate,
-                        boosterBonus,
-                        workingSound,
-                        generateSound
-                )
-        );
-    }
-
-    public static void registerConsuming(Identifier id, ItemStack condensedStack, Predicate<ItemStack> ingredientOne, Predicate<ItemStack> ingredientTwo, Predicate<ItemStack> booster, Predicate<ItemStack> tool, ItemStack output, float workRate, float boosterBonus, SoundEvent workingSound, SoundEvent generateSound, int ingredientOneConsumption, int ingredientTwoConsumption) {
-
-        RECIPES.put(
-                id,
-                new ConsumingCondenserRecipe(
-                        id,
-                        condensedStack,
-                        ingredientOne,
-                        ingredientTwo,
-                        booster,
-                        tool,
-                        output,
-                        workRate,
-                        boosterBonus,
-                        workingSound,
-                        generateSound,
-                        ingredientOneConsumption,
-                        ingredientTwoConsumption
-                )
-        );
-    }
 
     private static final RotatableShape SHAPE = new RotatableShape(
             VoxelShapes.cuboid(0, 0, 0, 1, 1, 1)

@@ -1,8 +1,11 @@
 package me.anisekai.utils;
 
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.MiningToolItem;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Hand;
 
@@ -45,6 +48,19 @@ public class HandUtils {
         }
 
         return Optional.empty();
+    }
+
+    public static float getMiningMultiplier(ItemStack stack) {
+
+        return stack.getItem() instanceof MiningToolItem miningItem ?
+                miningItem.getMaterial().getMiningSpeedMultiplier() :
+                1.0f;
+    }
+
+    public static int getEfficiencyMiningValue(ItemStack stack) {
+
+        int efficiency = EnchantmentHelper.getLevel(Enchantments.EFFICIENCY, stack);
+        return efficiency * efficiency + 1;
     }
 
 }

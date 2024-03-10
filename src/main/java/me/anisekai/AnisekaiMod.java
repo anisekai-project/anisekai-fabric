@@ -2,7 +2,6 @@ package me.anisekai;
 
 import me.anisekai.entities.seat.InvisibleSeatEntity;
 import me.anisekai.registries.*;
-import me.anisekai.registries.custom.ModCondenserRecipes;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import org.slf4j.Logger;
@@ -28,14 +27,13 @@ public class AnisekaiMod implements ModInitializer {
         LOGGER.info("Registered {} block entities", ModBlockEntities.blockEntities().size());
         LOGGER.info("Registered {} screen handlers", ModScreenHandler.screenHandlers().size());
         LOGGER.info("Loaded {} item tags", ModTags.itemTags().size());
+        LOGGER.info("Registered {} modded recipes", ModRecipes.recipes());
+        LOGGER.info("Registered {} packet listeners", ModNetworking.packets());
 
         FabricDefaultAttributeRegistry.register(
                 ModEntities.INVISIBLE_SEAT_ENTITY,
                 InvisibleSeatEntity.createMobAttributes()
         );
-
-        ModCondenserRecipes.init();
-
     }
 
 

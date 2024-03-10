@@ -4,8 +4,8 @@ import me.anisekai.AnisekaiMod;
 import me.anisekai.blockentities.CondenserBlockEntity;
 import me.anisekai.blockentities.FishingBasketBlockEntity;
 import me.anisekai.blockentities.NightstandBlockEntity;
-import me.anisekai.registries.blocks.ModBlockNightstands;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -21,17 +21,7 @@ public class ModBlockEntities {
             new Identifier(AnisekaiMod.MOD_ID, "nightstand"),
             FabricBlockEntityTypeBuilder.create(
                     NightstandBlockEntity::new,
-                    ModBlockNightstands.ACACIA,
-                    ModBlockNightstands.BAMBOO,
-                    ModBlockNightstands.BIRCH,
-                    ModBlockNightstands.CHERRY,
-                    ModBlockNightstands.CRIMSON,
-                    ModBlockNightstands.DARK_OAK,
-                    ModBlockNightstands.JUNGLE,
-                    ModBlockNightstands.MANGROVE,
-                    ModBlockNightstands.OAK,
-                    ModBlockNightstands.SPRUCE,
-                    ModBlockNightstands.WARPED
+                    ModBlocks.NIGHTSTANDS.values().toArray(new Block[0])
             ).build()
     );
 
