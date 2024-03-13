@@ -21,14 +21,12 @@ import java.util.List;
 @Environment(value = EnvType.CLIENT)
 public class CondenserScreen extends HandledScreen<CondenserScreenHandler> {
 
-    private static final Identifier TEXTURE = new Identifier(AnisekaiMod.MOD_ID, "textures/gui/condenser2.png");
+    private static final Identifier TEXTURE = new Identifier(AnisekaiMod.MOD_ID, "textures/gui/condenser.png");
 
     private       int                selectedIndex;
     private final WidgetButtonPage[] offers = new WidgetButtonPage[7];
     private       int                indexStartOffset;
     private       boolean            scrolling;
-
-    private int lastSize;
 
     public CondenserScreen(CondenserScreenHandler handler, PlayerInventory inventory, Text title) {
 
