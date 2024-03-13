@@ -1,5 +1,6 @@
 package me.anisekai.blocks;
 
+import com.mojang.serialization.MapCodec;
 import me.anisekai.blockentities.FishingBasketBlockEntity;
 import me.anisekai.blocks.feature.SeatBlock;
 import me.anisekai.entities.seat.InvisibleSeatEntity;
@@ -8,7 +9,6 @@ import me.anisekai.interfaces.StorageContainer;
 import me.anisekai.registries.ModBlockEntities;
 import me.anisekai.utils.RotatableShape;
 import me.anisekai.utils.VoxelUtils;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.item.TooltipContext;
@@ -38,6 +38,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -45,6 +46,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class FishingBasketBlock extends SeatBlock implements Orientable, StorageContainer<FishingBasketBlockEntity>, BlockEntityProvider {
+
+    public static final MapCodec<FishingBasketBlock> CODEC = createCodec(FishingBasketBlock::new);
 
     private static RotatableShape SHAPE = new RotatableShape(VoxelUtils.make(Arrays.asList(
             VoxelShapes.cuboid(0.125, 0, 0.125, 0.875, 0.75, 0.875),
@@ -178,7 +181,7 @@ public class FishingBasketBlock extends SeatBlock implements Orientable, Storage
     }
 
     @Override
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
 
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof FishingBasketBlockEntity) {
@@ -197,7 +200,7 @@ public class FishingBasketBlock extends SeatBlock implements Orientable, Storage
                 world.spawnEntity(itemEntity);
             }
         }
-        super.onBreak(world, pos, state, player);
+        return super.onBreak(world, pos, state, player);
     }
 
     @Override
@@ -249,7 +252,7 @@ public class FishingBasketBlock extends SeatBlock implements Orientable, Storage
     }
 
     @Override
-    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
+    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
 
         ItemStack itemStack = super.getPickStack(world, pos, state);
         world.getBlockEntity(pos, ModBlockEntities.FISHING_BASKET)
@@ -257,5 +260,10 @@ public class FishingBasketBlock extends SeatBlock implements Orientable, Storage
         return itemStack;
     }
 
+    @Override
+    protected MapCodec<? extends Block> getCodec() {
+
+        return CODEC;
+    }
 
 }

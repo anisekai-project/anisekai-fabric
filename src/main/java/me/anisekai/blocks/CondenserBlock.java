@@ -1,11 +1,11 @@
 package me.anisekai.blocks;
 
+import com.mojang.serialization.MapCodec;
 import me.anisekai.blockentities.CondenserBlockEntity;
 import me.anisekai.interfaces.Orientable;
 import me.anisekai.interfaces.StorageContainer;
 import me.anisekai.registries.ModBlockEntities;
 import me.anisekai.utils.RotatableShape;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -35,6 +35,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class CondenserBlock extends BlockWithEntity implements Orientable, StorageContainer<CondenserBlockEntity> {
+
+    public static final MapCodec<CondenserBlock> CODEC = createCodec(CondenserBlock::new);
 
     // Because it allows passive farming, the rate should be limited.
     public static final int             CONDENSER_LIMITER_FACTOR = 200;
@@ -179,6 +181,12 @@ public class CondenserBlock extends BlockWithEntity implements Orientable, Stora
         Item      item  = block.asItem();
         ItemStack stack = new ItemStack(item);
         return Collections.singletonList(stack);
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+
+        return CODEC;
     }
 
 }

@@ -98,7 +98,7 @@ public class CondenserScreen extends HandledScreen<CondenserScreenHandler> {
         this.selectedIndex = this.handler.getSelectedRecipe();
 
         this.handler.tick();
-        this.renderBackground(context);
+        this.renderBackground(context, mouseX, mouseY, delta);
         super.render(context, mouseX, mouseY, delta);
 
         this.drawItemSpeed(context);
@@ -194,11 +194,11 @@ public class CondenserScreen extends HandledScreen<CondenserScreenHandler> {
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
+    public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount, double verticalAmount) {
 
         if (this.canScroll()) {
             int j = this.handler.getRecipes().size() - 7;
-            this.indexStartOffset = MathHelper.clamp((int) ((double) this.indexStartOffset - amount), 0, j);
+            this.indexStartOffset = MathHelper.clamp((int) ((double) this.indexStartOffset - verticalAmount), 0, j);
         }
         return true;
     }
