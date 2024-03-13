@@ -34,27 +34,27 @@ public final class ModItems {
 
     public static final Map<WoodType, Item> STAIRS = WoodType.generate(type -> create(
             type, "stairs",
-            ModBlocks.CHAIRS, 64
+            ModBlocks.STAIRS, 64
     ));
 
     public static final Map<WoodType, Item> STOOLS = WoodType.generate(type -> create(
             type, "stool",
-            ModBlocks.CHAIRS, 16
+            ModBlocks.STOOLS, 16
     ));
 
     public static final Map<WoodType, Item> NIGHTSTANDS = WoodType.generate(type -> create(
             type, "nightstand",
-            ModBlocks.CHAIRS, 8
+            ModBlocks.NIGHTSTANDS, 8
     ));
 
     public static final Map<WoodType, Item> HALF_SLABS = WoodType.generate(type -> create(
             type, "half_slab",
-            ModBlocks.CHAIRS, 64
+            ModBlocks.HALF_SLABS, 64
     ));
 
     public static final Map<WoodType, Item> TABLES = WoodType.generate(type -> create(
             type, "table",
-            ModBlocks.CHAIRS, 16
+            ModBlocks.TABLES, 16
     ));
 
     public static final Item FISHING_BASKET = Registry.register(

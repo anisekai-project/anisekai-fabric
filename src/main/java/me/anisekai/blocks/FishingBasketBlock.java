@@ -54,9 +54,9 @@ public class FishingBasketBlock extends SeatBlock implements Orientable, Storage
             VoxelShapes.cuboid(0.1875, 0.5625, 0.9375, 0.3125, 0.6875, 1)
     )));
 
-    public FishingBasketBlock(Block block) {
+    public FishingBasketBlock(AbstractBlock.Settings settings) {
 
-        super(FabricBlockSettings.copy(block));
+        super(settings);
 
         this.setDefaultState(
                 super.getDefaultState()

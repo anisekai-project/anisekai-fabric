@@ -44,9 +44,9 @@ public class CondenserBlock extends BlockWithEntity implements Orientable, Stora
             VoxelShapes.cuboid(0, 0, 0, 1, 1, 1)
     );
 
-    public CondenserBlock() {
+    public CondenserBlock(AbstractBlock.Settings settings) {
 
-        super(FabricBlockSettings.copyOf(Blocks.DEEPSLATE));
+        super(settings);
 
         this.setDefaultState(
                 super.getDefaultState()

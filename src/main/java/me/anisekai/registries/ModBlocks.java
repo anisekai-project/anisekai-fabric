@@ -3,6 +3,7 @@ package me.anisekai.registries;
 import me.anisekai.AnisekaiMod;
 import me.anisekai.blocks.*;
 import me.anisekai.enums.WoodType;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registries;
@@ -50,7 +51,7 @@ public final class ModBlocks {
 
     public static final Map<WoodType, Block> HALF_SLABS = WoodType.generate(type -> create(
             type,
-            "half_slabs",
+            "half_slab",
             new HalfSlabBlock(type.asSlab())
     ));
 
@@ -64,13 +65,13 @@ public final class ModBlocks {
     public static final Block FISHING_BASKET = Registry.register(
             Registries.BLOCK,
             new Identifier(AnisekaiMod.MOD_ID, "fishing_basket"),
-            new FishingBasketBlock(Blocks.BAMBOO_PLANKS)
+            new FishingBasketBlock(FabricBlockSettings.copyOf(Blocks.BAMBOO_PLANKS))
     );
 
     public static final Block CONDENSER = Registry.register(
             Registries.BLOCK,
             new Identifier(AnisekaiMod.MOD_ID, "condenser"),
-            new CondenserBlock()
+            new CondenserBlock(FabricBlockSettings.copyOf(Blocks.DEEPSLATE))
     );
 
     private ModBlocks() {}
