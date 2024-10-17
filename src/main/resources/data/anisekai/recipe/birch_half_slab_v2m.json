@@ -1,0 +1,14 @@
+{
+  "type":        "minecraft:crafting_shapeless",
+  "category":    "building",
+  "group":       "wooden_half_slab",
+  "ingredients": [
+    {
+      "item": "minecraft:birch_slab"
+    }
+  ],
+  "result":      {
+    "id":    "anisekai:birch_half_slab",
+    "count": 2
+  }
+}

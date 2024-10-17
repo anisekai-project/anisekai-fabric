@@ -43,11 +43,11 @@ public class CondenserRecipe {
             String outputNameLog    = Registries.ITEM.getId(value.asLog().asItem()).getPath();
             String outputNameLeaves = Registries.ITEM.getId(value.asLeaves().asItem()).getPath();
 
-            Identifier identifierLog = new Identifier(
+            Identifier identifierLog = Identifier.of(
                     AnisekaiMod.MOD_ID,
                     "condenser/%s_to_%s".formatted(sourceName, outputNameLog)
             );
-            Identifier identifierLeaves = new Identifier(
+            Identifier identifierLeaves = Identifier.of(
                     AnisekaiMod.MOD_ID,
                     "condenser/%s_to_%s".formatted(sourceName, outputNameLeaves)
             );
@@ -56,8 +56,8 @@ public class CondenserRecipe {
             Ingredient growsOn = switch (value) {
                 //noinspection DataFlowIssue – Yes, bamboo is not reachable, but needs to be there for the switch case to be happy about having all cases covered.
                 case ACACIA, BAMBOO, BIRCH,
-                        CHERRY, DARK_OAK, JUNGLE,
-                        MANGROVE, OAK, SPRUCE -> Ingredient.fromTag(ItemTags.DIRT);
+                     CHERRY, DARK_OAK, JUNGLE,
+                     MANGROVE, OAK, SPRUCE -> Ingredient.fromTag(ItemTags.DIRT);
                 case CRIMSON -> Ingredient.ofItems(Items.CRIMSON_NYLIUM);
                 case WARPED -> Ingredient.ofItems(Items.WARPED_NYLIUM);
             };
@@ -86,7 +86,7 @@ public class CondenserRecipe {
             );
         }
 
-        register(create(new Identifier(AnisekaiMod.MOD_ID, "condenser/cobblestone"))
+        register(create(Identifier.of(AnisekaiMod.MOD_ID, "condenser/cobblestone"))
                          .using(ItemTags.PICKAXES)
                          .on(Items.LAVA_BUCKET, Items.WATER_BUCKET)
                          .requiredTickTime(Blocks.STONE, CondenserBlock.CONDENSER_LIMITER_FACTOR)
@@ -95,7 +95,7 @@ public class CondenserRecipe {
                          .build()
         );
 
-        register(create(new Identifier(AnisekaiMod.MOD_ID, "condenser/obsidian"))
+        register(create(Identifier.of(AnisekaiMod.MOD_ID, "condenser/obsidian"))
                          .using(ModTags.ADVANCED_PICKAXES)
                          .on(Items.LAVA_BUCKET, Items.WATER_BUCKET)
                          .requiredTickTime(Blocks.OBSIDIAN, CondenserBlock.CONDENSER_LIMITER_FACTOR)

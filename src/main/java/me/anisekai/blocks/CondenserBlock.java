@@ -15,11 +15,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContextParameterSet;
+import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -58,28 +61,6 @@ public class CondenserBlock extends BlockWithEntity implements Orientable, Stora
         );
     }
 
-    @Nullable
-    protected static <T extends BlockEntity> BlockEntityTicker<T> checkType(World world, BlockEntityType<T> givenType) {
-
-        return world.isClient ? null : checkType(
-                givenType,
-                ModBlockEntities.CONDENSER,
-                (world1, pos, state, blockEntity) ->
-                        blockEntity.tick(
-                                world,
-                                pos,
-                                state,
-                                blockEntity
-                        )
-        );
-    }
-
-    @Nullable
-    protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> checkType(BlockEntityType<A> givenType, BlockEntityType<E> expectedType, BlockEntityTicker<? super E> ticker) {
-
-        return expectedType == givenType ? (BlockEntityTicker<A>) ticker : null;
-    }
-
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
 
@@ -94,20 +75,17 @@ public class CondenserBlock extends BlockWithEntity implements Orientable, Stora
     }
 
     @Override
-    public RotatableShape getOrientedShapes() {
-
-        return SHAPE;
-    }
-
-    @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
 
-        return super.getPlacementState(ctx)
-                    .with(Properties.HORIZONTAL_FACING, ctx.getHorizontalPlayerFacing().getOpposite())
-                    .with(Properties.LIT, false)
-                    .with(JAMMED, false);
-    }
+        BlockState state = super.getPlacementState(ctx);
+        if (state != null) {
+            return state.with(Properties.HORIZONTAL_FACING, ctx.getHorizontalPlayerFacing().getOpposite())
+                        .with(Properties.LIT, false)
+                        .with(JAMMED, false);
+        }
 
+        return null;
+    }
 
     @Override
     public BlockRenderType getRenderType(BlockState state) {
@@ -115,44 +93,64 @@ public class CondenserBlock extends BlockWithEntity implements Orientable, Stora
         return BlockRenderType.MODEL;
     }
 
-    @Nullable
-    @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+    // <editor-fold desc="Orientation">
 
-        return new CondenserBlockEntity(pos, state);
+    @Override
+    public RotatableShape getOrientedShapes() {
+
+        return SHAPE;
     }
 
     @Override
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+    public BlockState rotate(BlockState state, BlockRotation rotation) {
 
-        return checkType(world, type);
+        return state.with(Properties.HORIZONTAL_FACING, rotation.rotate(state.get(Properties.HORIZONTAL_FACING)));
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public BlockState mirror(BlockState state, BlockMirror mirror) {
 
-        Optional<CondenserBlockEntity> blockEntityInstance = this.getBlockEntityInstance(world.getBlockEntity(pos));
+        return state.rotate(mirror.getRotation(state.get(Properties.HORIZONTAL_FACING)));
+    }
 
-        if (blockEntityInstance.isPresent()) {
-            CondenserBlockEntity blockEntity = blockEntityInstance.get();
-            player.openHandledScreen(blockEntity);
-            return ActionResult.SUCCESS;
+    // </editor-fold>
+
+    // <editor-fold desc="Storage">
+
+    @Override
+    public boolean onSyncedBlockEvent(BlockState state, World world, BlockPos pos, int type, int data) {
+
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity == null) {
+            return false;
         }
-        return ActionResult.FAIL;
+        return blockEntity.onSyncedBlockEvent(type, data);
     }
 
     @Override
-    public Block asBlock() {
+    public boolean hasComparatorOutput(BlockState state) {
 
-        return this;
+        return true;
+    }
+
+    @Override
+    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+
+        return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
+    }
+
+    @Override
+    public NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {
+
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        return blockEntity instanceof NamedScreenHandlerFactory ? (NamedScreenHandlerFactory) blockEntity : null;
     }
 
     @Override
     public Optional<CondenserBlockEntity> getBlockEntityInstance(BlockEntity entity) {
 
-        if (entity instanceof CondenserBlockEntity fishing) {
-            return Optional.of(fishing);
+        if (entity instanceof CondenserBlockEntity condenser) {
+            return Optional.of(condenser);
         }
         return Optional.empty();
     }
@@ -187,6 +185,41 @@ public class CondenserBlock extends BlockWithEntity implements Orientable, Stora
     protected MapCodec<? extends BlockWithEntity> getCodec() {
 
         return CODEC;
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+
+        return new CondenserBlockEntity(pos, state);
+    }
+
+    @Override
+    @Nullable
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+
+        return StorageContainer.checkType(world, type, ModBlockEntities.CONDENSER);
+    }
+
+    @Override
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+
+        Optional<CondenserBlockEntity> blockEntityInstance = this.getBlockEntityInstance(world.getBlockEntity(pos));
+
+        if (blockEntityInstance.isPresent()) {
+            CondenserBlockEntity blockEntity = blockEntityInstance.get();
+            player.openHandledScreen(blockEntity);
+            return ActionResult.SUCCESS;
+        }
+        return ActionResult.FAIL;
+    }
+
+    // </editor-fold>
+
+    @Override
+    public Block asBlock() {
+
+        return this;
     }
 
 }

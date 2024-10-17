@@ -9,7 +9,7 @@ import net.minecraft.util.Identifier;
 
 public class InvisibleSeatRenderer extends MobEntityRenderer<InvisibleSeatEntity, InvisibleSeatModel> {
 
-    private static final Identifier EMPTY_TEXTURE = new Identifier("minecraft", "textures/block/stone.png");
+    private static final Identifier EMPTY_TEXTURE = Identifier.of("minecraft", "textures/block/stone.png");
 
     public InvisibleSeatRenderer(EntityRendererFactory.Context context) {
 

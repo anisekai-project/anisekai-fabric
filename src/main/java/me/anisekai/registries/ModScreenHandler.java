@@ -16,13 +16,13 @@ public final class ModScreenHandler {
 
     public static final ScreenHandlerType<ConstrainedContainerScreenHandler> CONSTRAINED_INVENTORY = Registry.register(
             Registries.SCREEN_HANDLER,
-            new Identifier(AnisekaiMod.MOD_ID, "constrained_inventory"),
+            Identifier.of(AnisekaiMod.MOD_ID, "constrained_inventory"),
             new ScreenHandlerType<>(ConstrainedContainerScreenHandler::createConstrained, FeatureFlags.VANILLA_FEATURES)
     );
 
     public static final ScreenHandlerType<CondenserScreenHandler> CONDENSER = Registry.register(
             Registries.SCREEN_HANDLER,
-            new Identifier(AnisekaiMod.MOD_ID, "condenser"),
+            Identifier.of(AnisekaiMod.MOD_ID, "condenser"),
             new ScreenHandlerType<>(CondenserScreenHandler::create, FeatureFlags.VANILLA_FEATURES)
     );
 

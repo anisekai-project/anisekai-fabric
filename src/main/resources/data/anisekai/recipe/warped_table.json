@@ -1,0 +1,25 @@
+{
+  "type":     "minecraft:crafting_shaped",
+  "category": "building",
+  "group":    "wooden_table",
+  "pattern":  [
+    "BBB",
+    " S ",
+    " C "
+  ],
+  "key":      {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "item": "minecraft:warped_slab"
+    },
+    "B": {
+      "item": "minecraft:warped_planks"
+    }
+  },
+  "result":   {
+    "id":    "anisekai:warped_table",
+    "count": 1
+  }
+}

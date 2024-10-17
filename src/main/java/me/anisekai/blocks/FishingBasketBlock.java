@@ -11,25 +11,23 @@ import me.anisekai.utils.RotatableShape;
 import me.anisekai.utils.VoxelUtils;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.item.TooltipContext;
+import net.minecraft.block.entity.ShulkerBoxBlockEntity;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ContainerComponent;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventories;
-import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
+import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
-import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
-import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -49,7 +47,7 @@ public class FishingBasketBlock extends SeatBlock implements Orientable, Storage
 
     public static final MapCodec<FishingBasketBlock> CODEC = createCodec(FishingBasketBlock::new);
 
-    private static RotatableShape SHAPE = new RotatableShape(VoxelUtils.make(Arrays.asList(
+    private static final RotatableShape SHAPE = new RotatableShape(VoxelUtils.make(Arrays.asList(
             VoxelShapes.cuboid(0.125, 0, 0.125, 0.875, 0.75, 0.875),
             VoxelShapes.cuboid(0.0625, 0.625, 0.0625, 0.9375, 0.75, 0.9375),
             VoxelShapes.cuboid(0.0625, 0, 0.0625, 0.9375, 0.625, 0.9375),
@@ -95,6 +93,8 @@ public class FishingBasketBlock extends SeatBlock implements Orientable, Storage
         return BlockRenderType.MODEL;
     }
 
+    // <editor-fold desc="Orientation">
+
     @Override
     public RotatableShape getOrientedShapes() {
 
@@ -102,16 +102,20 @@ public class FishingBasketBlock extends SeatBlock implements Orientable, Storage
     }
 
     @Override
-    public Vec3d getSitOffsetFrom(Vec3d pos) {
+    public BlockState rotate(BlockState state, BlockRotation rotation) {
 
-        return pos.add(0.5, 0.4, 0.5);
+        return state.with(Properties.HORIZONTAL_FACING, rotation.rotate(state.get(Properties.HORIZONTAL_FACING)));
     }
 
     @Override
-    public float getSitYaw(BlockState state) {
+    public BlockState mirror(BlockState state, BlockMirror mirror) {
 
-        return state.get(Properties.HORIZONTAL_FACING).asRotation();
+        return state.rotate(mirror.getRotation(state.get(Properties.HORIZONTAL_FACING)));
     }
+
+    // </editor-fold>
+
+    // <editor-fold desc="Rendering">
 
     @Override
     public boolean isTransparent(BlockState state, BlockView world, BlockPos pos) {
@@ -140,28 +144,37 @@ public class FishingBasketBlock extends SeatBlock implements Orientable, Storage
         return super.isSideInvisible(state, stateFrom, direction);
     }
 
+    // </editor-fold>
+
+    // <editor-fold desc="Storage">
+
     @Override
-    public ActionResult onRightClick(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public boolean onSyncedBlockEvent(BlockState state, World world, BlockPos pos, int type, int data) {
 
-        double y = this.getLocalHitPos(pos, hit.getPos()).y;
-
-        Vec3d vec   = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
-        Vec3d sitAt = this.getSitOffsetFrom(vec);
-
-        double distance = player.getPos().distanceTo(sitAt);
-
-        if (y < 0.625 || (player.getVehicle() instanceof InvisibleSeatEntity && distance < 0.5)) {
-            this.getBlockEntityInstance(world.getBlockEntity(pos)).ifPresent(player::openHandledScreen);
-            return ActionResult.SUCCESS;
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity == null) {
+            return false;
         }
-
-        return super.onRightClick(state, world, pos, player, hand, hit);
+        return blockEntity.onSyncedBlockEvent(type, data);
     }
 
     @Override
-    public Block asBlock() {
+    public boolean hasComparatorOutput(BlockState state) {
 
-        return this;
+        return true;
+    }
+
+    @Override
+    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+
+        return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
+    }
+
+    @Override
+    public NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {
+
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        return blockEntity instanceof NamedScreenHandlerFactory ? (NamedScreenHandlerFactory) blockEntity : null;
     }
 
     @Override
@@ -173,34 +186,16 @@ public class FishingBasketBlock extends SeatBlock implements Orientable, Storage
         return Optional.empty();
     }
 
-    @Nullable
     @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
 
-        return new FishingBasketBlockEntity(pos, state);
-    }
-
-    @Override
-    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof FishingBasketBlockEntity) {
-
-            if (!world.isClient) {
-                ItemStack itemStack = new ItemStack(this.asItem());
-                blockEntity.setStackNbt(itemStack);
-                ItemEntity itemEntity = new ItemEntity(
-                        world,
-                        (double) pos.getX() + 0.5,
-                        (double) pos.getY() + 0.5,
-                        (double) pos.getZ() + 0.5,
-                        itemStack
-                );
-                itemEntity.setToDefaultPickupDelay();
-                world.spawnEntity(itemEntity);
+        if (!state.isOf(newState.getBlock())) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            super.onStateReplaced(state, world, pos, newState, moved);
+            if (blockEntity instanceof ShulkerBoxBlockEntity) {
+                world.updateComparators(pos, state.getBlock());
             }
         }
-        return super.onBreak(world, pos, state, player);
     }
 
     @Override
@@ -218,36 +213,81 @@ public class FishingBasketBlock extends SeatBlock implements Orientable, Storage
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext options) {
+    protected MapCodec<? extends Block> getCodec() {
 
-        super.appendTooltip(stack, world, tooltip, options);
-        NbtCompound nbtCompound = BlockItem.getBlockEntityNbt(stack);
-        if (nbtCompound != null) {
-            if (nbtCompound.contains("LootTable", NbtElement.STRING_TYPE)) {
-                tooltip.add(Text.literal("???????"));
+        return CODEC;
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+
+        return new FishingBasketBlockEntity(pos, state);
+    }
+
+    // </editor-fold>
+
+    @Override
+    public Vec3d getSitOffsetFrom(Vec3d pos) {
+
+        return pos.add(0.5, 0.75, 0.5);
+    }
+
+    @Override
+    public float getSitYaw(BlockState state) {
+
+        return state.get(Properties.HORIZONTAL_FACING).asRotation();
+    }
+
+    @Override
+    public Block asBlock() {
+
+        return this;
+    }
+
+    @Override
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof FishingBasketBlockEntity) {
+
+            if (!world.isClient) {
+                ItemStack itemStack = new ItemStack(this.asItem());
+                blockEntity.setStackNbt(itemStack, world.getRegistryManager());
+                ItemEntity itemEntity = new ItemEntity(
+                        world,
+                        (double) pos.getX() + 0.5,
+                        (double) pos.getY() + 0.5,
+                        (double) pos.getZ() + 0.5,
+                        itemStack
+                );
+                itemEntity.setToDefaultPickupDelay();
+                world.spawnEntity(itemEntity);
             }
-            if (nbtCompound.contains("Items", NbtElement.LIST_TYPE)) {
-                DefaultedList<ItemStack> defaultedList = DefaultedList.ofSize(27, ItemStack.EMPTY);
-                Inventories.readNbt(nbtCompound, defaultedList);
-                int i = 0;
-                int j = 0;
-                for (ItemStack itemStack : defaultedList) {
-                    if (itemStack.isEmpty()) {
-                        continue;
-                    }
-                    ++j;
-                    if (i > 4) {
-                        continue;
-                    }
-                    ++i;
-                    MutableText mutableText = itemStack.getName().copy();
-                    mutableText.append(" x").append(String.valueOf(itemStack.getCount()));
-                    tooltip.add(mutableText);
-                }
-                if (j - i > 0) {
-                    tooltip.add(Text.translatable("container.shulkerBox.more", j - i).formatted(Formatting.ITALIC));
-                }
+        }
+        return super.onBreak(world, pos, state, player);
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
+
+        super.appendTooltip(stack, context, tooltip, options);
+
+
+        ContainerComponent container = stack.getOrDefault(DataComponentTypes.CONTAINER, ContainerComponent.DEFAULT);
+
+        int i = 0, j = 0;
+        for (ItemStack itemStack : container.iterateNonEmpty()) {
+            j++;
+            if (i > 4) {
+                break;
             }
+            i++;
+            tooltip.add(Text.translatable("container.shulkerBox.itemCount", itemStack.getName(), itemStack.getCount()));
+        }
+
+        if (j - i > 0) {
+            tooltip.add(Text.translatable("container.shulkerBox.more", j - i).formatted(Formatting.ITALIC));
         }
     }
 
@@ -256,14 +296,26 @@ public class FishingBasketBlock extends SeatBlock implements Orientable, Storage
 
         ItemStack itemStack = super.getPickStack(world, pos, state);
         world.getBlockEntity(pos, ModBlockEntities.FISHING_BASKET)
-             .ifPresent(blockEntity -> blockEntity.setStackNbt(itemStack));
+             .ifPresent(blockEntity -> blockEntity.setStackNbt(itemStack, world.getRegistryManager()));
         return itemStack;
     }
 
     @Override
-    protected MapCodec<? extends Block> getCodec() {
+    public ActionResult onRightClick(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 
-        return CODEC;
+        double y = this.getLocalHitPos(pos, hit.getPos()).y;
+
+        Vec3d vec   = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
+        Vec3d sitAt = this.getSitOffsetFrom(vec);
+
+        double distance = player.getPos().distanceTo(sitAt);
+
+        if (y < 0.625 || (player.getVehicle() instanceof InvisibleSeatEntity && distance < 1)) {
+            this.getBlockEntityInstance(world.getBlockEntity(pos)).ifPresent(player::openHandledScreen);
+            return ActionResult.SUCCESS;
+        }
+
+        return super.onRightClick(state, world, pos, player, hand, hit);
     }
 
 }

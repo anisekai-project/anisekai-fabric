@@ -1,0 +1,25 @@
+{
+  "type":     "minecraft:crafting_shaped",
+  "category": "building",
+  "group":    "wooden_table",
+  "pattern":  [
+    "BBB",
+    " S ",
+    " C "
+  ],
+  "key":      {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "item": "minecraft:dark_oak_slab"
+    },
+    "B": {
+      "item": "minecraft:dark_oak_planks"
+    }
+  },
+  "result":   {
+    "id":    "anisekai:dark_oak_table",
+    "count": 1
+  }
+}

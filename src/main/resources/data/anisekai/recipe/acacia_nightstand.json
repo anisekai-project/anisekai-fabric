@@ -1,0 +1,25 @@
+{
+  "type":     "minecraft:crafting_shaped",
+  "category": "building",
+  "group":    "wooden_nightstand",
+  "pattern":  [
+    "___",
+    "O O",
+    "/_/"
+  ],
+  "key":      {
+    "_": {
+      "item": "minecraft:acacia_slab"
+    },
+    "O": {
+      "item": "minecraft:acacia_planks"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result":   {
+    "id":    "anisekai:acacia_nightstand",
+    "count": 1
+  }
+}

@@ -23,8 +23,10 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
@@ -33,6 +35,7 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
@@ -104,10 +107,10 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt) {
+    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
 
-        super.writeNbt(nbt);
-        Inventories.writeNbt(nbt, this.items);
+        super.writeNbt(nbt, registryLookup);
+        Inventories.writeNbt(nbt, this.items, registryLookup);
 
         nbt.putBoolean("ProtectTool", this.protectTool.isTrue());
         nbt.putBoolean("SilentOverflow", this.silentOverflow.isTrue());
@@ -119,10 +122,10 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
     }
 
     @Override
-    public void readNbt(NbtCompound nbt) {
+    protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
 
-        super.readNbt(nbt);
-        Inventories.readNbt(nbt, this.items);
+        super.readNbt(nbt, registryLookup);
+        Inventories.readNbt(nbt, this.items, registryLookup);
 
         this.protectTool.set(nbt.getBoolean("ProtectTool"));
         this.silentOverflow.set(nbt.getBoolean("SilentOverflow"));
@@ -148,9 +151,9 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt() {
+    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
 
-        return this.createNbt();
+        return this.createNbt(registryLookup);
     }
 
     private void decrementSlot(int slot, int amount) {
@@ -263,7 +266,7 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
         ItemStack booster = this.getStack(INV_BOOSTER);
         ItemStack tool    = this.getStack(INV_TOOL);
 
-        float rawSpeed = HandUtils.getEfficiencyMiningValue(tool) + HandUtils.getMiningMultiplier(tool);
+        float rawSpeed = HandUtils.getEfficiencyMiningValue(this.world, tool) + HandUtils.getMiningMultiplier(tool);
 
         if (recipe.canBoost(booster)) {
             rawSpeed *= recipe.getBoosterMultiplier();
@@ -321,7 +324,7 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
             return true;
         }
 
-        return ItemStack.canCombine(currentOutput, recipe.getOutput()) && left >= recipe.getOutput().getCount();
+        return ItemStack.areItemsAndComponentsEqual(currentOutput, recipe.getOutput()) && left >= recipe.getOutput().getCount();
     }
 
     /**
@@ -341,7 +344,7 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
      * Method called each tick when there is an active recipe within this {@link CondenserBlockEntity}. This does not
      * ensure any progress will be made on this tick.
      */
-    private void tickActiveRecipe(World world, BlockPos pos) {
+    private void tickActiveRecipe(WorldAccess world, BlockPos pos) {
         // Do we have any active recipe ?
         if (this.getActiveRecipe().isEmpty()) {
             this.resetState();
@@ -385,11 +388,10 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
         if (this.currentWorkedTicks.get() >= recipe.getRequiredTickTime()) {
             this.doCrafting(recipe); // Craft it
 
-            // Damage our tool
-            if (tool.damage(recipe.getOutput().getCount(), world.random, null)) {
-                this.removeStack(INV_TOOL); // Oh no, it broke :(
+            tool.damage(recipe.getOutput().getCount(), (ServerWorld) world, null, item -> {
+                this.removeStack(INV_TOOL);
                 world.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1f, 1.0f);
-            }
+            });
 
             world.playSound(null, pos, recipe.getCondensedSound(), SoundCategory.BLOCKS, 0.1f, 1.0f);
             return;

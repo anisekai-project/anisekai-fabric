@@ -48,7 +48,7 @@ public enum WoodType {
 
     public Identifier identifierOf(String name) {
 
-        return new Identifier(AnisekaiMod.MOD_ID, this.itemNameOf(name));
+        return Identifier.of(AnisekaiMod.MOD_ID, this.itemNameOf(name));
     }
 
     public Block asLog() {

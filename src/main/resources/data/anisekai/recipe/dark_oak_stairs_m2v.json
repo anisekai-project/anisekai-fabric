@@ -1,0 +1,13 @@
+{
+  "type":        "minecraft:crafting_shapeless",
+  "category":    "building",
+  "group":       "wooden_stairs",
+  "ingredients": [
+    {
+      "item": "anisekai:dark_oak_stairs"
+    }
+  ],
+  "result":      {
+    "id": "minecraft:dark_oak_stairs"
+  }
+}

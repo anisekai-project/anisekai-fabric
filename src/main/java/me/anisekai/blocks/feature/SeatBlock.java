@@ -30,21 +30,21 @@ public abstract class SeatBlock extends Block implements Seatable {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
 
         if (world.isClient) {
             return ActionResult.CONSUME;
         }
 
-        boolean isSpectator = player.isSpectator();
-        boolean isSneaking = player.isSneaking();
-        boolean hasDebugStick = HandUtils.getHandStack(player, hand).isOf(Items.DEBUG_STICK);
+        boolean isSpectator   = player.isSpectator();
+        boolean isSneaking    = player.isSneaking();
+        boolean hasDebugStick = HandUtils.getHandStack(player, player.getActiveHand()).isOf(Items.DEBUG_STICK);
 
         if (isSpectator || isSneaking || hasDebugStick) {
             return ActionResult.FAIL;
         }
 
-        return this.onRightClick(state, world, pos, player, hand, hit);
+        return this.onRightClick(state, world, pos, player, player.getActiveHand(), hit);
     }
 
     public final Vec3d getLocalHitPos(BlockPos pos, Position hit) {

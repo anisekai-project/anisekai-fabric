@@ -12,10 +12,11 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
+@SuppressWarnings("AssignmentToSuperclassField")
 @Environment(value = EnvType.CLIENT)
 public class ConstrainedContainerScreen extends HandledScreen<ConstrainedContainerScreenHandler> implements ScreenHandlerProvider<ConstrainedContainerScreenHandler> {
 
-    private static final Identifier TEXTURE = new Identifier("minecraft", "textures/gui/container/generic_54.png");
+    private static final Identifier TEXTURE = Identifier.of("minecraft", "textures/gui/container/generic_54.png");
     private final        int        rows;
 
     public ConstrainedContainerScreen(ConstrainedContainerScreenHandler handler, PlayerInventory inventory, Text title) {

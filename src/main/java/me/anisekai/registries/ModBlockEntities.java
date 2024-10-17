@@ -4,7 +4,6 @@ import me.anisekai.AnisekaiMod;
 import me.anisekai.blockentities.CondenserBlockEntity;
 import me.anisekai.blockentities.FishingBasketBlockEntity;
 import me.anisekai.blockentities.NightstandBlockEntity;
-import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
@@ -14,12 +13,12 @@ import net.minecraft.util.Identifier;
 import java.util.Arrays;
 import java.util.List;
 
-public class ModBlockEntities {
+public final class ModBlockEntities {
 
     public static final BlockEntityType<NightstandBlockEntity> NIGHTSTAND = Registry.register(
             Registries.BLOCK_ENTITY_TYPE,
-            new Identifier(AnisekaiMod.MOD_ID, "nightstand"),
-            FabricBlockEntityTypeBuilder.create(
+            Identifier.of(AnisekaiMod.MOD_ID, "nightstand"),
+            BlockEntityType.Builder.create(
                     NightstandBlockEntity::new,
                     ModBlocks.NIGHTSTANDS.values().toArray(new Block[0])
             ).build()
@@ -27,8 +26,8 @@ public class ModBlockEntities {
 
     public static final BlockEntityType<FishingBasketBlockEntity> FISHING_BASKET = Registry.register(
             Registries.BLOCK_ENTITY_TYPE,
-            new Identifier(AnisekaiMod.MOD_ID, "fishing_basket"),
-            FabricBlockEntityTypeBuilder.create(
+            Identifier.of(AnisekaiMod.MOD_ID, "fishing_basket"),
+            BlockEntityType.Builder.create(
                     FishingBasketBlockEntity::new,
                     ModBlocks.FISHING_BASKET
             ).build()
@@ -36,12 +35,14 @@ public class ModBlockEntities {
 
     public static final BlockEntityType<CondenserBlockEntity> CONDENSER = Registry.register(
             Registries.BLOCK_ENTITY_TYPE,
-            new Identifier(AnisekaiMod.MOD_ID, "condenser"),
-            FabricBlockEntityTypeBuilder.create(
+            Identifier.of(AnisekaiMod.MOD_ID, "condenser"),
+            BlockEntityType.Builder.create(
                     CondenserBlockEntity::new,
                     ModBlocks.CONDENSER
             ).build()
     );
+
+    private ModBlockEntities() {}
 
     public static List<BlockEntityType<?>> blockEntities() {
 

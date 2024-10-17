@@ -7,9 +7,12 @@ import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
-public class AnisekaiHelper {
+@SuppressWarnings("SpellCheckingInspection")
+public final class AnisekaiHelper {
 
-    private static String map(String identifier, String wood, String content) {
+    private AnisekaiHelper() {}
+
+    private static String map(String identifier, CharSequence wood, String content) {
 
         return content.replace(String.format("##%s##", identifier), wood);
     }
@@ -38,6 +41,7 @@ public class AnisekaiHelper {
 
         return map("SLAB", String.format("%s_slab", wood), content);
     }
+
     private static String mapStairs(String wood, String content) {
 
         return map("STRS", String.format("%s_stairs", wood), content);
@@ -102,7 +106,7 @@ public class AnisekaiHelper {
     public static void main(String... str) throws Exception {
 
         File input  = new File("generator-source");
-        File output = new File("src\\main\\resources");
+        File output = new File("src/main/resources");
 
         BiFunction<File, String, File> toOuput = (file, name) -> {
             File   parent = file.getParentFile();
@@ -126,10 +130,17 @@ public class AnisekaiHelper {
                 File   apply    = toOuput.apply(file, filename);
 
                 String newContent = doMapping(wood, content);
-                Files.writeString(apply.toPath(), newContent, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+                System.out.printf("Writing file %s%n", apply.toPath());
+                Files.writeString(
+                        apply.toPath(),
+                        newContent,
+                        StandardOpenOption.CREATE,
+                        StandardOpenOption.TRUNCATE_EXISTING
+                );
             }
         }
 
         System.out.printf("Deployed %s files for %s source files.", files.size() * WOODS.size(), files.size());
     }
+
 }

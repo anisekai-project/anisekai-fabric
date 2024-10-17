@@ -1,11 +1,7 @@
 package me.anisekai.blocks;
 
 import me.anisekai.utils.BlockUtils;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.Waterloggable;
+import net.minecraft.block.*;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
@@ -37,9 +33,9 @@ public class HalfSlabBlock extends Block implements Waterloggable {
     private static final VoxelShape SHAPE_LAYER_1 = VoxelShapes.cuboid(0, 0.25, 0, 1, 0.5, 1);
     private static final VoxelShape SHAPE_LAYER_0 = VoxelShapes.cuboid(0, 0, 0, 1, 0.25, 1);
 
-    public HalfSlabBlock(Block block) {
+    public HalfSlabBlock(AbstractBlock.Settings settings) {
 
-        super(FabricBlockSettings.copy(block));
+        super(settings);
 
         this.setDefaultState(
                 this.getDefaultState()
@@ -91,6 +87,59 @@ public class HalfSlabBlock extends Block implements Waterloggable {
 
         return shape;
     }
+
+    @Override
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+
+        BlockPos        pos   = ctx.getBlockPos();
+        BlockState      state = ctx.getWorld().getBlockState(pos);
+        double          y     = ctx.getHitPos().y - ctx.getBlockPos().getY();
+        BooleanProperty layer = this.getAffectedLayerAt(state, y);
+
+        BlockState placementState;
+        if (state.isOf(this)) {
+            placementState = state.with(layer, true);
+        } else {
+            BlockState blockState = super.getPlacementState(ctx);
+            if (blockState == null) {
+                return null;
+            }
+            placementState = blockState.with(layer, true);
+        }
+
+        return placementState
+                .with(Properties.WATERLOGGED, BlockUtils.isContextWater(ctx) && !this.isFull(placementState));
+    }
+
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+
+        return BlockRenderType.MODEL;
+    }
+
+    // <editor-fold desc="Waterlogged">
+
+    @Override
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+
+        if (state.get(Properties.WATERLOGGED)) {
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+        }
+        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState state) {
+
+        if (state.get(Properties.WATERLOGGED)) {
+            return Fluids.WATER.getStill(false);
+        }
+        return super.getFluidState(state);
+    }
+
+    // </editor-fold>
+
+    // <editor-fold desc="Layers">
 
     public boolean isFull(BlockState state) {
 
@@ -152,31 +201,7 @@ public class HalfSlabBlock extends Block implements Waterloggable {
         return LAYER_0; // Default to layer 0 if y value is invalid – should not happen.
     }
 
-    @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-
-        if (state.get(Properties.WATERLOGGED)) {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
-        }
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
-    }
-
-    @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-
-        BlockPos        pos   = ctx.getBlockPos();
-        BlockState      state = ctx.getWorld().getBlockState(pos);
-        double          y     = ctx.getHitPos().y - ctx.getBlockPos().getY();
-        BooleanProperty layer = this.getAffectedLayerAt(state, y);
-
-        BlockState placementState =
-                state.isOf(this) ?
-                        state.with(layer, true)
-                        : super.getPlacementState(ctx).with(layer, true);
-
-        return placementState
-                .with(Properties.WATERLOGGED, BlockUtils.isContextWater(ctx) && !this.isFull(placementState));
-    }
+    // </editor-fold>
 
     @Override
     public boolean canReplace(BlockState state, ItemPlacementContext context) {
@@ -207,13 +232,5 @@ public class HalfSlabBlock extends Block implements Waterloggable {
         return super.getDroppedStacks(state, builder);
     }
 
-    @Override
-    public FluidState getFluidState(BlockState state) {
-
-        if (state.get(Properties.WATERLOGGED)) {
-            return Fluids.WATER.getStill(false);
-        }
-        return super.getFluidState(state);
-    }
 
 }

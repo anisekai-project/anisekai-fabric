@@ -1,0 +1,14 @@
+{
+  "type":        "minecraft:crafting_shapeless",
+  "category":    "building",
+  "group":       "wooden_half_slab",
+  "ingredients": [
+    {
+      "item": "minecraft:mangrove_slab"
+    }
+  ],
+  "result":      {
+    "id":    "anisekai:mangrove_half_slab",
+    "count": 2
+  }
+}

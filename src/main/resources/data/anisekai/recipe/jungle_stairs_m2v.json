@@ -1,0 +1,13 @@
+{
+  "type":        "minecraft:crafting_shapeless",
+  "category":    "building",
+  "group":       "wooden_stairs",
+  "ingredients": [
+    {
+      "item": "anisekai:jungle_stairs"
+    }
+  ],
+  "result":      {
+    "id": "minecraft:jungle_stairs"
+  }
+}

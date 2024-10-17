@@ -1,0 +1,13 @@
+{
+  "type":        "minecraft:crafting_shapeless",
+  "category":    "building",
+  "group":       "wooden_design_stairs",
+  "ingredients": [
+    {
+      "item": "minecraft:##STRS##"
+    }
+  ],
+  "result":      {
+    "id": "anisekai:##WOOD##_stairs"
+  }
+}

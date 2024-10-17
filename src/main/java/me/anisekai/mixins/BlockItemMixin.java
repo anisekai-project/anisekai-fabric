@@ -3,6 +3,8 @@ package me.anisekai.mixins;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.CommandBlockBlockEntity;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
@@ -41,24 +43,26 @@ public class BlockItemMixin {
     @Inject(method = "writeNbtToBlockEntity", at = {@At("HEAD")}, cancellable = true)
     private static void writeNbtToBlockEntity(World world, @Nullable PlayerEntity player, BlockPos pos, ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
 
-        NbtCompound nbtCompound = BlockItem.getBlockEntityNbt(stack);
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (nbtCompound != null && blockEntity != null) {
-            if (world.isClient) { // ← IF modified by mixin – see original method to see the changes
-                cir.setReturnValue(false);
-                return;
+        MinecraftServer minecraftServer = world.getServer();
+        if (minecraftServer == null) {
+            cir.setReturnValue(false);
+        } else {
+            NbtComponent nbtComponent = stack.getOrDefault(DataComponentTypes.BLOCK_ENTITY_DATA, NbtComponent.DEFAULT);
+            if (!nbtComponent.isEmpty()) {
+                BlockEntity blockEntity = world.getBlockEntity(pos);
+                if (blockEntity != null) {
+                    if (world.isClient || player != null) {
+                        cir.setReturnValue(nbtComponent.applyToBlockEntity(blockEntity, world.getRegistryManager()));
+                        return;
+                    }
+
+                    cir.setReturnValue(false);
+                    return;
+                }
             }
-            NbtCompound blockEntityNbt         = blockEntity.createNbt();
-            NbtCompound originalBlockEntityNbt = blockEntityNbt.copy();
-            blockEntityNbt.copyFrom(nbtCompound);
-            if (!blockEntityNbt.equals(originalBlockEntityNbt)) {
-                blockEntity.readNbt(blockEntityNbt);
-                blockEntity.markDirty();
-                cir.setReturnValue(true);
-                return;
-            }
+
+            cir.setReturnValue(false);
         }
-        cir.setReturnValue(false);
     }
 
 }

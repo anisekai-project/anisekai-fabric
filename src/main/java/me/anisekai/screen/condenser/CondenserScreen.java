@@ -18,10 +18,11 @@ import net.minecraft.util.math.MathHelper;
 
 import java.util.List;
 
+@SuppressWarnings("AssignmentToSuperclassField")
 @Environment(value = EnvType.CLIENT)
 public class CondenserScreen extends HandledScreen<CondenserScreenHandler> {
 
-    private static final Identifier TEXTURE = new Identifier(AnisekaiMod.MOD_ID, "textures/gui/condenser.png");
+    private static final Identifier TEXTURE = Identifier.of(AnisekaiMod.MOD_ID, "textures/gui/condenser.png");
 
     private       int                selectedIndex;
     private final WidgetButtonPage[] offers = new WidgetButtonPage[7];

@@ -3,53 +3,70 @@ package me.anisekai.networking;
 import me.anisekai.AnisekaiMod;
 import me.anisekai.blockentities.CondenserBlockEntity;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.network.ServerPlayNetworkHandler;
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.codec.PacketCodecs;
+import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 
-public class CondenserPackets {
+public final class CondenserPackets {
 
-    public static final Identifier SET_RECIPE = new Identifier(AnisekaiMod.MOD_ID, "condenser/set_recipe");
+    public static final Identifier SET_RECIPE = Identifier.of(AnisekaiMod.MOD_ID, "condenser/set_recipe");
+
+    public record CondenserRecipePacket(BlockPos pos, int idx) implements CustomPayload {
+
+        public static final CustomPayload.Id<CondenserRecipePacket> ID =
+                new CustomPayload.Id<>(CondenserPackets.SET_RECIPE);
+
+        public static final PacketCodec<RegistryByteBuf, CondenserRecipePacket> CODEC =
+                PacketCodec.tuple(
+                        BlockPos.PACKET_CODEC, CondenserRecipePacket::pos,
+                        PacketCodecs.INTEGER, CondenserRecipePacket::idx,
+                        CondenserRecipePacket::new
+                );
+
+
+        @Override
+        public Id<? extends CustomPayload> getId() {
+
+            return ID;
+        }
+
+    }
+
+
+    private CondenserPackets() {}
+
 
     public static int register() {
 
-        ServerPlayNetworking.registerGlobalReceiver(SET_RECIPE, CondenserPackets::receiveSetRecipe);
+        PayloadTypeRegistry.playC2S().register(CondenserRecipePacket.ID, CondenserRecipePacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(CondenserRecipePacket.ID, CondenserRecipePacket.CODEC);
+
+        ServerPlayNetworking.registerGlobalReceiver(
+                CondenserRecipePacket.ID,
+                (payload, context) -> context.server().execute(() -> {
+                    ServerWorld world       = context.player().getServerWorld();
+                    BlockEntity blockEntity = world.getBlockEntity(payload.pos);
+
+                    if (blockEntity instanceof CondenserBlockEntity condenser) {
+                        condenser.getDelegate().set(CondenserBlockEntity.DELEGATE_VALUE_SELECTED_RECIPE, payload.idx);
+                    }
+                })
+        );
 
         return 1;
     }
 
-
     public static void sendSetRecipe(BlockPos pos, int index) {
 
-        PacketByteBuf packet = PacketByteBufs.create();
-        packet.writeBlockPos(pos);
-        packet.writeInt(index);
-
-        ClientPlayNetworking.send(SET_RECIPE, packet);
-    }
-
-    private static void receiveSetRecipe(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
-
-        BlockPos pos   = buf.readBlockPos();
-        int      index = buf.readInt();
-
-        server.execute(() -> {
-            ServerWorld world       = player.getServerWorld();
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-
-            if (blockEntity instanceof CondenserBlockEntity condenser) {
-                condenser.getDelegate().set(CondenserBlockEntity.DELEGATE_VALUE_SELECTED_RECIPE, index);
-            }
-        });
-
+        CustomPayload payload = new CondenserRecipePacket(pos, index);
+        ClientPlayNetworking.send(payload);
     }
 
 }

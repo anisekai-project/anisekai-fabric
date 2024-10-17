@@ -15,7 +15,7 @@ public final class ModTags {
 
         return TagKey.of(
                 RegistryKeys.ITEM,
-                new Identifier(AnisekaiMod.MOD_ID, name)
+                Identifier.of(AnisekaiMod.MOD_ID, name)
         );
     }
 

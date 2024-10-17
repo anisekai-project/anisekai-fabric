@@ -20,7 +20,7 @@ public class RotatableShape {
 
     private static VoxelShape rotate(VoxelShape shape) {
 
-        List<VoxelShape> shapes = new ArrayList<>();
+        Collection<VoxelShape> shapes = new ArrayList<>();
 
         for (Box box : shape.getBoundingBoxes()) {
             Vec3d min = new Vec3d(1 - box.minZ, box.minY, box.minX);
@@ -44,7 +44,7 @@ public class RotatableShape {
 
     private final Map<Direction, VoxelShape> shapes = new HashMap<>();
 
-    public RotatableShape(Collection<VoxelShape> shape) {
+    public RotatableShape(Iterable<VoxelShape> shape) {
 
         this(VoxelUtils.make(shape));
     }

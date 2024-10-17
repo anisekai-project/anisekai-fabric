@@ -16,6 +16,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+@SuppressWarnings("AssignmentToSuperclassField")
 public class InvisibleSeatEntity extends MobEntity {
 
     public InvisibleSeatEntity(EntityType<? extends InvisibleSeatEntity> type, World world) {

@@ -3,13 +3,14 @@ package me.anisekai.blocks;
 import me.anisekai.interfaces.Orientable;
 import me.anisekai.utils.BlockUtils;
 import me.anisekai.utils.RotatableShape;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
@@ -36,9 +37,9 @@ public class StairsBlock extends Block implements Waterloggable, Orientable {
             VoxelShapes.cuboid(0, 0.5, 0.5, 0.0625, 0.75, 0.75)
     ));
 
-    public StairsBlock(Block block) {
+    public StairsBlock(AbstractBlock.Settings settings) {
 
-        super(FabricBlockSettings.copy(block));
+        super(settings);
 
         this.setDefaultState(
                 super.getDefaultState()
@@ -66,10 +67,22 @@ public class StairsBlock extends Block implements Waterloggable, Orientable {
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
 
-        return super.getPlacementState(ctx)
-                    .with(Properties.WATERLOGGED, BlockUtils.isContextWater(ctx))
-                    .with(Properties.HORIZONTAL_FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+        BlockState state = super.getPlacementState(ctx);
+        if (state != null) {
+            return state.with(Properties.WATERLOGGED, BlockUtils.isContextWater(ctx))
+                        .with(Properties.HORIZONTAL_FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+        }
+
+        return null;
     }
+
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+
+        return BlockRenderType.MODEL;
+    }
+
+    // <editor-fold desc="Waterlogged">
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
@@ -89,16 +102,28 @@ public class StairsBlock extends Block implements Waterloggable, Orientable {
         return super.getFluidState(state);
     }
 
-    @Override
-    public BlockRenderType getRenderType(BlockState state) {
+    // </editor-fold>
 
-        return BlockRenderType.MODEL;
-    }
+    // <editor-fold desc="Orientation">
 
     @Override
     public RotatableShape getOrientedShapes() {
 
         return SHAPE;
     }
+
+    @Override
+    public BlockState rotate(BlockState state, BlockRotation rotation) {
+
+        return state.with(Properties.HORIZONTAL_FACING, rotation.rotate(state.get(Properties.HORIZONTAL_FACING)));
+    }
+
+    @Override
+    public BlockState mirror(BlockState state, BlockMirror mirror) {
+
+        return state.rotate(mirror.getRotation(state.get(Properties.HORIZONTAL_FACING)));
+    }
+
+    // </editor-fold>
 
 }

@@ -1,13 +1,12 @@
 package me.anisekai.mixins;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import me.anisekai.blockentities.FishingBasketBlockEntity;
 import me.anisekai.entities.seat.InvisibleSeatEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.loot.LootTable;
-import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
@@ -16,7 +15,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.List;
 
@@ -32,10 +30,9 @@ public abstract class FishingBobberEntityMixin {
                             ordinal = 1,
                             shift = At.Shift.AFTER
                     )
-            },
-            locals = LocalCapture.CAPTURE_FAILHARD
+            }
     )
-    private void onFished(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, PlayerEntity playerEntity, int i, LootContextParameterSet lootContextParameterSet, LootTable lootTable, List<ItemStack> list) {
+    private void onFished(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, @Local PlayerEntity playerEntity, @Local List<ItemStack> list) {
 
         if (playerEntity.getVehicle() instanceof InvisibleSeatEntity seat) {
             BlockPos    pos         = seat.getBlockPos();

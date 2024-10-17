@@ -2,7 +2,6 @@ package me.anisekai.registries;
 
 import me.anisekai.AnisekaiMod;
 import me.anisekai.enums.WoodType;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
@@ -23,7 +22,7 @@ public final class ModItems {
         return Registry.register(
                 Registries.ITEM,
                 type.identifierOf(name),
-                new BlockItem(from.get(type), new FabricItemSettings().maxCount(stackSize))
+                new BlockItem(from.get(type), new Item.Settings().maxCount(stackSize))
         );
     }
 
@@ -59,14 +58,14 @@ public final class ModItems {
 
     public static final Item FISHING_BASKET = Registry.register(
             Registries.ITEM,
-            new Identifier(AnisekaiMod.MOD_ID, "fishing_basket"),
-            new BlockItem(ModBlocks.FISHING_BASKET, new FabricItemSettings().maxCount(64))
+            Identifier.of(AnisekaiMod.MOD_ID, "fishing_basket"),
+            new BlockItem(ModBlocks.FISHING_BASKET, new Item.Settings().maxCount(64))
     );
 
     public static final Item CONDENSER = Registry.register(
             Registries.ITEM,
-            new Identifier(AnisekaiMod.MOD_ID, "condenser"),
-            new BlockItem(ModBlocks.CONDENSER, new FabricItemSettings().maxCount(64))
+            Identifier.of(AnisekaiMod.MOD_ID, "condenser"),
+            new BlockItem(ModBlocks.CONDENSER, new Item.Settings().maxCount(64))
     );
 
     private ModItems() {}
@@ -86,31 +85,29 @@ public final class ModItems {
         return items;
     }
 
-    @SuppressWarnings("UnstableApiUsage")
     public static void addToInventory() {
 
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> {
-            content.add(() -> ModItems.FISHING_BASKET);
-        });
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL)
+                       .register(content -> content.add(() -> ModItems.FISHING_BASKET));
 
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.REDSTONE).register(content -> {
-            content.add(() -> ModItems.CONDENSER);
-        });
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.REDSTONE)
+                       .register(content -> content.add(() -> ModItems.CONDENSER));
 
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(content -> {
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).
+                       register(content -> {
 
-            for (WoodType value : WoodType.values()) {
-                content.addAfter(
-                        () -> value.asButton().asItem(),
-                        () -> CHAIRS.get(value),
-                        () -> HALF_SLABS.get(value),
-                        () -> STAIRS.get(value),
-                        () -> STOOLS.get(value),
-                        () -> TABLES.get(value),
-                        () -> NIGHTSTANDS.get(value)
-                );
-            }
-        });
+                           for (WoodType value : WoodType.values()) {
+                               content.addAfter(
+                                       () -> value.asButton().asItem(),
+                                       () -> CHAIRS.get(value),
+                                       () -> HALF_SLABS.get(value),
+                                       () -> STAIRS.get(value),
+                                       () -> STOOLS.get(value),
+                                       () -> TABLES.get(value),
+                                       () -> NIGHTSTANDS.get(value)
+                               );
+                           }
+                       });
     }
 
 }

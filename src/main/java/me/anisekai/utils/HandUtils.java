@@ -1,19 +1,30 @@
 package me.anisekai.utils;
 
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.MiningToolItem;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Hand;
+import net.minecraft.world.WorldView;
 
 import java.util.Optional;
 
-public class HandUtils {
+public final class HandUtils {
+
+    private HandUtils() {}
 
     public record HandContent(Hand hand, ItemStack stack) {
+
+        public EquipmentSlot getSlot() {
+
+            return switch (this.hand) {
+                case MAIN_HAND -> EquipmentSlot.MAINHAND;
+                case OFF_HAND -> EquipmentSlot.OFFHAND;
+            };
+        }
 
     }
 
@@ -57,9 +68,9 @@ public class HandUtils {
                 1.0f;
     }
 
-    public static int getEfficiencyMiningValue(ItemStack stack) {
+    public static int getEfficiencyMiningValue(WorldView world, ItemStack stack) {
 
-        int efficiency = EnchantmentHelper.getLevel(Enchantments.EFFICIENCY, stack);
+        int efficiency = AnisekaiEnchantmentHelper.getEnchantmentLevel(world, stack, Enchantments.EFFICIENCY);
         return efficiency * efficiency + 1;
     }
 

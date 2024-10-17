@@ -1,0 +1,13 @@
+{
+  "type":        "minecraft:crafting_shapeless",
+  "category":    "building",
+  "group":       "wooden_design_stairs",
+  "ingredients": [
+    {
+      "item": "minecraft:mangrove_stairs"
+    }
+  ],
+  "result":      {
+    "id": "anisekai:mangrove_stairs"
+  }
+}

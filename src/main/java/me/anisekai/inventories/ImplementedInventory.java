@@ -143,7 +143,7 @@ public interface ImplementedInventory extends SidedInventory, NamedScreenHandler
         for (int i = 0; i < this.size(); i++) {
             ItemStack invStack = this.getStack(i);
 
-            if (ItemStack.canCombine(invStack, stack)) {
+            if (ItemStack.areItemsAndComponentsEqual(invStack, stack)) {
 
                 if (invStack.getCount() + stack.getCount() <= invStack.getMaxCount()) {
                     invStack.setCount(invStack.getCount() + stack.getCount());
@@ -181,7 +181,7 @@ public interface ImplementedInventory extends SidedInventory, NamedScreenHandler
         for (int i = 0; i < this.size(); i++) {
             ItemStack invStack = this.getStack(i);
 
-            if (ItemStack.canCombine(invStack, copy)) {
+            if (ItemStack.areItemsAndComponentsEqual(invStack, copy)) {
 
                 if (invStack.getCount() + stack.getCount() <= invStack.getMaxCount()) {
                     return true;
@@ -199,6 +199,7 @@ public interface ImplementedInventory extends SidedInventory, NamedScreenHandler
 
     @Override
     default int[] getAvailableSlots(Direction side) {
+
         int[] arr = new int[this.size()];
         for (int i = 0; i < this.size(); i++) {
             arr[i] = i;

@@ -1,0 +1,25 @@
+{
+  "type":     "minecraft:crafting_shaped",
+  "category": "building",
+  "group":    "wooden_table",
+  "pattern":  [
+    "BBB",
+    " S ",
+    " C "
+  ],
+  "key":      {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "item": "minecraft:##SLAB##"
+    },
+    "B": {
+      "item": "minecraft:##PLKS##"
+    }
+  },
+  "result":   {
+    "id":    "anisekai:##WOOD##_table",
+    "count": 1
+  }
+}

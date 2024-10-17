@@ -1,22 +1,26 @@
 package me.anisekai.blocks;
 
+import com.mojang.serialization.MapCodec;
 import me.anisekai.blockentities.NightstandBlockEntity;
 import me.anisekai.interfaces.Connectable;
 import me.anisekai.interfaces.Orientable;
 import me.anisekai.interfaces.StorageContainer;
 import me.anisekai.utils.BlockUtils;
 import me.anisekai.utils.RotatableShape;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.loot.context.LootContextParameterSet;
+import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -29,9 +33,13 @@ import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 public class NightstandBlock extends Block implements BlockEntityProvider, StorageContainer<NightstandBlockEntity>, Connectable, Orientable, Waterloggable {
+
+    public static final MapCodec<NightstandBlock> CODEC = createCodec(NightstandBlock::new);
 
     public static final RotatableShape SHAPE = new RotatableShape(Arrays.asList(
             VoxelShapes.cuboid(0, 0.125, 0, 1, 0.1875, 1),
@@ -46,9 +54,9 @@ public class NightstandBlock extends Block implements BlockEntityProvider, Stora
             VoxelShapes.cuboid(0.3125, 0.75, 0, 0.6875, 0.8125, 0.0625)
     ));
 
-    public NightstandBlock(Block block) {
+    public NightstandBlock(AbstractBlock.Settings settings) {
 
-        super(FabricBlockSettings.copy(block));
+        super(settings);
 
         this.setDefaultState(
                 this.getDefaultState()
@@ -82,35 +90,30 @@ public class NightstandBlock extends Block implements BlockEntityProvider, Stora
     }
 
     @Override
-    public Optional<NightstandBlockEntity> getBlockEntityInstance(BlockEntity entity) {
-
-        if (entity instanceof NightstandBlockEntity nightstand) {
-            return Optional.of(nightstand);
-        }
-        return Optional.empty();
-    }
-
-    @Nullable
-    @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-
-        return new NightstandBlockEntity(pos, state);
-    }
-
-    public boolean canConnectTo(BlockState current, BlockState other) {
-
-        return other.isOf(this) && other.get(Properties.HORIZONTAL_FACING) == current.get(Properties.HORIZONTAL_FACING);
-    }
-
-    @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
 
-        BlockState state = super.getPlacementState(ctx)
-                                .with(Properties.WATERLOGGED, BlockUtils.isContextWater(ctx))
-                                .with(Properties.HORIZONTAL_FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+        BlockState state = super.getPlacementState(ctx);
+        if (state != null) {
+            return state.with(Properties.WATERLOGGED, BlockUtils.isContextWater(ctx))
+                        .with(Properties.HORIZONTAL_FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+        }
 
-        return this.applyPlacementConnection(ctx.getWorld(), ctx.getBlockPos(), state);
+        return null;
     }
+
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+
+        return BlockRenderType.MODEL;
+    }
+
+    @Override
+    public RotatableShape getOrientedShapes() {
+
+        return SHAPE;
+    }
+
+    // <editor-fold desc="Waterlogged + Connected Block">
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
@@ -132,27 +135,51 @@ public class NightstandBlock extends Block implements BlockEntityProvider, Stora
         return super.getFluidState(state);
     }
 
-    @Override
-    public Block asBlock() {
+    public boolean canConnectTo(BlockState current, BlockState other) {
 
-        return this;
+        return other.isOf(this) && other.get(Properties.HORIZONTAL_FACING) == current.get(Properties.HORIZONTAL_FACING);
     }
 
-    @Override
-    public RotatableShape getOrientedShapes() {
+    // </editor-fold>
 
-        return SHAPE;
-    }
+    // <editor-fold desc="Storage">
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public boolean onSyncedBlockEvent(BlockState state, World world, BlockPos pos, int type, int data) {
 
-        if (world.isClient) {
-            return ActionResult.SUCCESS;
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity == null) {
+            return false;
         }
+        return blockEntity.onSyncedBlockEvent(type, data);
+    }
 
-        this.getBlockEntityInstance(world.getBlockEntity(pos)).ifPresent(player::openHandledScreen);
-        return ActionResult.CONSUME;
+    @Override
+    public boolean hasComparatorOutput(BlockState state) {
+
+        return true;
+    }
+
+    @Override
+    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+
+        return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
+    }
+
+    @Override
+    public NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {
+
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        return blockEntity instanceof NamedScreenHandlerFactory ? (NamedScreenHandlerFactory) blockEntity : null;
+    }
+
+    @Override
+    public Optional<NightstandBlockEntity> getBlockEntityInstance(BlockEntity entity) {
+
+        if (entity instanceof NightstandBlockEntity nightstand) {
+            return Optional.of(nightstand);
+        }
+        return Optional.empty();
     }
 
     @Override
@@ -170,6 +197,49 @@ public class NightstandBlock extends Block implements BlockEntityProvider, Stora
         if (state.hasBlockEntity() && !state.isOf(newState.getBlock())) {
             world.removeBlockEntity(pos);
         }
+    }
+
+    @Override
+    public List<ItemStack> getDroppedStacks(BlockState state, LootContextParameterSet.Builder builder) {
+
+        Block     block = state.getBlock();
+        Item      item  = block.asItem();
+        ItemStack stack = new ItemStack(item);
+        return Collections.singletonList(stack);
+    }
+
+    @Override
+    protected MapCodec<? extends Block> getCodec() {
+
+        return CODEC;
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+
+        return new NightstandBlockEntity(pos, state);
+    }
+
+    @Override
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+
+        Optional<NightstandBlockEntity> blockEntityInstance = this.getBlockEntityInstance(world.getBlockEntity(pos));
+
+        if (blockEntityInstance.isPresent()) {
+            NightstandBlockEntity blockEntity = blockEntityInstance.get();
+            player.openHandledScreen(blockEntity);
+            return ActionResult.SUCCESS;
+        }
+        return ActionResult.FAIL;
+    }
+
+    // </editor-fold>
+
+    @Override
+    public Block asBlock() {
+
+        return this;
     }
 
 }

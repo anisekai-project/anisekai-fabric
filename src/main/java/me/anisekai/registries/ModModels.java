@@ -9,7 +9,7 @@ import java.util.List;
 
 public final class ModModels {
 
-    public static final EntityModelLayer EMPTY_MODEL = new EntityModelLayer(new Identifier(
+    public static final EntityModelLayer EMPTY_MODEL = new EntityModelLayer(Identifier.of(
             AnisekaiMod.MOD_ID,
             "null"
     ), "null");

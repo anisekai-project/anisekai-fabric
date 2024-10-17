@@ -1,0 +1,25 @@
+{
+  "type":     "minecraft:crafting_shaped",
+  "category": "building",
+  "group":    "wooden_table",
+  "pattern":  [
+    "BBB",
+    " S ",
+    " C "
+  ],
+  "key":      {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "item": "minecraft:crimson_slab"
+    },
+    "B": {
+      "item": "minecraft:crimson_planks"
+    }
+  },
+  "result":   {
+    "id":    "anisekai:crimson_table",
+    "count": 1
+  }
+}

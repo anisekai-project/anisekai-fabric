@@ -1,0 +1,21 @@
+{
+  "type":     "minecraft:crafting_shaped",
+  "category": "building",
+  "group":    "wooden_stool",
+  "pattern":  [
+    "CCC",
+    "S S"
+  ],
+  "key":      {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "item": "minecraft:crimson_slab"
+    }
+  },
+  "result":   {
+    "id":    "anisekai:crimson_stool",
+    "count": 1
+  }
+}

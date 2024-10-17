@@ -1,0 +1,21 @@
+{
+  "type":     "minecraft:crafting_shaped",
+  "category": "building",
+  "group":    "wooden_stool",
+  "pattern":  [
+    "CCC",
+    "S S"
+  ],
+  "key":      {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "item": "minecraft:oak_slab"
+    }
+  },
+  "result":   {
+    "id":    "anisekai:oak_stool",
+    "count": 1
+  }
+}

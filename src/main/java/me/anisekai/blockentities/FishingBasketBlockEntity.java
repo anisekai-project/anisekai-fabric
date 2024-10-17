@@ -13,6 +13,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
@@ -44,23 +45,23 @@ public class FishingBasketBlockEntity extends BlockEntity implements Implemented
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt() {
+    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
 
-        return this.createNbt();
+        return this.createNbt(registryLookup);
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt) {
+    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
 
-        super.writeNbt(nbt);
-        Inventories.writeNbt(nbt, this.items, false);
+        super.writeNbt(nbt, registryLookup);
+        Inventories.writeNbt(nbt, this.items, registryLookup);
     }
 
     @Override
-    public void readNbt(NbtCompound nbt) {
+    protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
 
-        super.readNbt(nbt);
-        Inventories.readNbt(nbt, this.items);
+        super.readNbt(nbt, registryLookup);
+        Inventories.readNbt(nbt, this.items, registryLookup);
     }
 
     @Override

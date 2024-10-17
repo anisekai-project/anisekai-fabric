@@ -3,7 +3,7 @@ package me.anisekai.registries;
 import me.anisekai.AnisekaiMod;
 import me.anisekai.blocks.*;
 import me.anisekai.enums.WoodType;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registries;
@@ -28,50 +28,50 @@ public final class ModBlocks {
     public static final Map<WoodType, Block> CHAIRS = WoodType.generate(type -> create(
             type,
             "chair",
-            new ChairBlock(type.asStairs())
+            new ChairBlock(AbstractBlock.Settings.copy(type.asStairs()))
     ));
 
     public static final Map<WoodType, Block> STAIRS = WoodType.generate(type -> create(
             type,
             "stairs",
-            new StairsBlock(type.asStairs())
+            new StairsBlock(AbstractBlock.Settings.copy(type.asStairs()))
     ));
 
     public static final Map<WoodType, Block> STOOLS = WoodType.generate(type -> create(
             type,
             "stool",
-            new StoolBlock(type.asStairs())
+            new StoolBlock(AbstractBlock.Settings.copy(type.asStairs()))
     ));
 
     public static final Map<WoodType, Block> NIGHTSTANDS = WoodType.generate(type -> create(
             type,
             "nightstand",
-            new NightstandBlock(type.asStairs())
+            new NightstandBlock(AbstractBlock.Settings.copy(type.asStairs()))
     ));
 
     public static final Map<WoodType, Block> HALF_SLABS = WoodType.generate(type -> create(
             type,
             "half_slab",
-            new HalfSlabBlock(type.asSlab())
+            new HalfSlabBlock(AbstractBlock.Settings.copy(type.asSlab()))
     ));
 
     public static final Map<WoodType, Block> TABLES = WoodType.generate(type -> create(
             type,
             "table",
-            new HalfSlabBlock(type.asSlab())
+            new TableBlock(AbstractBlock.Settings.copy(type.asSlab()))
     ));
 
 
     public static final Block FISHING_BASKET = Registry.register(
             Registries.BLOCK,
-            new Identifier(AnisekaiMod.MOD_ID, "fishing_basket"),
-            new FishingBasketBlock(FabricBlockSettings.copyOf(Blocks.BAMBOO_PLANKS))
+            Identifier.of(AnisekaiMod.MOD_ID, "fishing_basket"),
+            new FishingBasketBlock(AbstractBlock.Settings.copy(Blocks.BAMBOO_PLANKS))
     );
 
     public static final Block CONDENSER = Registry.register(
             Registries.BLOCK,
-            new Identifier(AnisekaiMod.MOD_ID, "condenser"),
-            new CondenserBlock(FabricBlockSettings.copyOf(Blocks.DEEPSLATE))
+            Identifier.of(AnisekaiMod.MOD_ID, "condenser"),
+            new CondenserBlock(AbstractBlock.Settings.copy(Blocks.DEEPSLATE))
     );
 
     private ModBlocks() {}

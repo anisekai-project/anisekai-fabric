@@ -1,0 +1,25 @@
+{
+  "type":     "minecraft:crafting_shaped",
+  "category": "building",
+  "group":    "wooden_table",
+  "pattern":  [
+    "BBB",
+    " S ",
+    " C "
+  ],
+  "key":      {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "item": "minecraft:bamboo_slab"
+    },
+    "B": {
+      "item": "minecraft:bamboo_planks"
+    }
+  },
+  "result":   {
+    "id":    "anisekai:bamboo_table",
+    "count": 1
+  }
+}

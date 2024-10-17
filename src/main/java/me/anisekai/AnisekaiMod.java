@@ -17,7 +17,6 @@ public class AnisekaiMod implements ModInitializer {
      * Runs the mod initializer.
      */
     @Override
-
     public void onInitialize() {
 
         LOGGER.info("Registered {} blocks", ModBlocks.blocks().size());

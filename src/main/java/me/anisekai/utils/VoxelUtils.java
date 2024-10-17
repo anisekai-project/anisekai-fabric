@@ -4,11 +4,11 @@ import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 
-import java.util.Collection;
+public final class VoxelUtils {
 
-public class VoxelUtils {
+    private VoxelUtils() {}
 
-    public static VoxelShape make(Collection<VoxelShape> voxels) {
+    public static VoxelShape make(Iterable<VoxelShape> voxels) {
 
         VoxelShape shape = VoxelShapes.empty();
 
