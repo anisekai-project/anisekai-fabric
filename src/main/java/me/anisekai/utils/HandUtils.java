@@ -9,10 +9,14 @@ import net.minecraft.item.MiningToolItem;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Hand;
 import net.minecraft.world.WorldView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
 public final class HandUtils {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(HandUtils.class);
 
     private HandUtils() {}
 
@@ -36,28 +40,36 @@ public final class HandUtils {
         };
     }
 
-    public static Optional<HandContent> getHandContent(TagKey<Item> tag, PlayerEntity player, Hand currentHand) {
+    public static Optional<HandContent> getHandContent(TagKey<Item> tag, PlayerEntity player) {
 
         ItemStack mainHandStack = player.getMainHandStack();
         ItemStack offHandStack  = player.getOffHandStack();
+
 
         if (!mainHandStack.isIn(tag) && !offHandStack.isIn(tag)) {
             return Optional.empty();
         }
 
-
-        if (mainHandStack.isIn(tag) && offHandStack.isIn(tag) && currentHand == Hand.OFF_HAND) { // Priority on main hand
-            return Optional.empty();
-        }
-
-        if (mainHandStack.isIn(tag) && currentHand == Hand.MAIN_HAND) {
+        if (mainHandStack.isIn(tag) && offHandStack.isIn(tag)) { // Priority on main hand
             return Optional.of(new HandContent(Hand.MAIN_HAND, mainHandStack));
         }
 
-        if (offHandStack.isIn(tag) && currentHand == Hand.OFF_HAND) {
+        if (mainHandStack.isIn(tag)) {
+            return Optional.of(new HandContent(Hand.MAIN_HAND, mainHandStack));
+        }
+
+        if (offHandStack.isIn(tag)) {
             return Optional.of(new HandContent(Hand.OFF_HAND, offHandStack));
         }
 
+        LOGGER.warn(
+                "Something weird happened => <{}> MainHand is '{}' ({}) and OffHand is '{}' ({}) but no matching state has been found",
+                player.getName().getString(),
+                mainHandStack.getItem().getName().getString(),
+                mainHandStack.isIn(tag),
+                offHandStack.getItem().getName().getString(),
+                offHandStack.isIn(tag)
+        );
         return Optional.empty();
     }
 

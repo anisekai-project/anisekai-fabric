@@ -27,7 +27,7 @@ public abstract class AbstractBlockMixin {
         Block block = state.getBlock();
 
         if (block instanceof CropBlock crop) {
-            HandUtils.getHandContent(ItemTags.HOES, player, player.getActiveHand())
+            HandUtils.getHandContent(ItemTags.HOES, player)
                      .ifPresent(content -> {
                          if (crop.isMature(state)) {
 
@@ -45,7 +45,7 @@ public abstract class AbstractBlockMixin {
                          }
                      });
         } else if (block instanceof FarmlandBlock) {
-            HandUtils.getHandContent(ItemTags.SHOVELS, player, player.getActiveHand())
+            HandUtils.getHandContent(ItemTags.SHOVELS, player)
                      .ifPresent(content -> {
                          content.stack().damage(1, player, content.getSlot());
                          world.setBlockState(pos, Blocks.DIRT.getDefaultState());
