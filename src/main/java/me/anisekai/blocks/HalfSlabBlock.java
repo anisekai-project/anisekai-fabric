@@ -2,6 +2,7 @@ package me.anisekai.blocks;
 
 import me.anisekai.utils.BlockUtils;
 import net.minecraft.block.*;
+import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
@@ -62,6 +63,15 @@ public class HalfSlabBlock extends Block implements Waterloggable {
     }
 
     @Override
+    protected boolean canPathfindThrough(BlockState state, NavigationType type) {
+
+        if (type == NavigationType.WATER) {
+            return state.get(Properties.WATERLOGGED);
+        }
+        return false;
+    }
+
+    @Override
     public boolean hasSidedTransparency(BlockState state) {
 
         return !this.isFull(state);
@@ -70,18 +80,27 @@ public class HalfSlabBlock extends Block implements Waterloggable {
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
 
+        boolean layer0 = state.get(LAYER_0);
+        boolean layer1 = state.get(LAYER_1);
+        boolean layer2 = state.get(LAYER_2);
+        boolean layer3 = state.get(LAYER_3);
+
+        if (layer0 && layer1 && layer2 && layer3) {
+            return VoxelShapes.fullCube();
+        }
+
         VoxelShape shape = VoxelShapes.empty();
 
-        if (state.get(LAYER_3)) {
+        if (layer3) {
             shape = VoxelShapes.combineAndSimplify(shape, SHAPE_LAYER_3, BooleanBiFunction.OR);
         }
-        if (state.get(LAYER_2)) {
+        if (layer2) {
             shape = VoxelShapes.combineAndSimplify(shape, SHAPE_LAYER_2, BooleanBiFunction.OR);
         }
-        if (state.get(LAYER_1)) {
+        if (layer1) {
             shape = VoxelShapes.combineAndSimplify(shape, SHAPE_LAYER_1, BooleanBiFunction.OR);
         }
-        if (state.get(LAYER_0)) {
+        if (layer0) {
             shape = VoxelShapes.combineAndSimplify(shape, SHAPE_LAYER_0, BooleanBiFunction.OR);
         }
 

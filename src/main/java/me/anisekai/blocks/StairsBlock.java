@@ -4,6 +4,7 @@ import me.anisekai.interfaces.Orientable;
 import me.anisekai.utils.BlockUtils;
 import me.anisekai.utils.RotatableShape;
 import net.minecraft.block.*;
+import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
@@ -56,6 +57,15 @@ public class StairsBlock extends Block implements Waterloggable, Orientable {
                 Properties.HORIZONTAL_FACING,
                 Properties.WATERLOGGED
         );
+    }
+
+    @Override
+    protected boolean canPathfindThrough(BlockState state, NavigationType type) {
+
+        if (type == NavigationType.WATER) {
+            return state.get(Properties.WATERLOGGED);
+        }
+        return false;
     }
 
     @Override
