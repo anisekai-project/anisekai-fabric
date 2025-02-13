@@ -1,9 +1,9 @@
 package me.anisekai.interfaces;
 
-import me.anisekai.utils.RotatableShape;
+import me.anisekai.utils.OrientableShape;
 
 public interface Orientable {
 
-    RotatableShape getOrientedShapes();
+    OrientableShape getOrientedShapes();
 
 }

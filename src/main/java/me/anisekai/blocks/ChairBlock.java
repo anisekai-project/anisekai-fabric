@@ -1,26 +1,17 @@
 package me.anisekai.blocks;
 
+import me.anisekai.AnisekaiMod;
 import me.anisekai.interfaces.Orientable;
 import me.anisekai.interfaces.Seatable;
-import me.anisekai.utils.RotatableShape;
+import me.anisekai.utils.OrientableShape;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Waterloggable;
-import net.minecraft.util.shape.VoxelShapes;
-
-import java.util.Arrays;
+import net.minecraft.util.Identifier;
 
 public class ChairBlock extends StoolBlock implements Waterloggable, Seatable, Orientable {
 
-    private static final RotatableShape SHAPE = new RotatableShape(Arrays.asList(
-            VoxelShapes.cuboid(0.125, 0, 0.125, 0.25, 0.5, 0.25),
-            VoxelShapes.cuboid(0.75, 0, 0.125, 0.875, 0.5, 0.25),
-            VoxelShapes.cuboid(0.125, 0, 0.75, 0.25, 0.5, 0.875),
-            VoxelShapes.cuboid(0.75, 0, 0.75, 0.875, 0.5, 0.875),
-            VoxelShapes.cuboid(0.125, 0.625, 0.75, 0.25, 1.375, 0.875),
-            VoxelShapes.cuboid(0.75, 0.625, 0.75, 0.875, 1.375, 0.875),
-            VoxelShapes.cuboid(0.25, 1.0625, 0.75, 0.75, 1.3125, 0.875),
-            VoxelShapes.cuboid(0.125, 0.5, 0.125, 0.875, 0.625, 0.875)
-    ));
+    public static final  Identifier      ID    = AnisekaiMod.id("chair");
+    private static final OrientableShape SHAPE = OrientableShape.of(ID);
 
     public ChairBlock(AbstractBlock.Settings settings) {
 
@@ -28,7 +19,7 @@ public class ChairBlock extends StoolBlock implements Waterloggable, Seatable, O
     }
 
     @Override
-    public RotatableShape getOrientedShapes() {
+    public OrientableShape getOrientedShapes() {
 
         return SHAPE;
     }

@@ -1,8 +1,7 @@
 {
-  "parent":   "anisekai:block/base/half_slab_l1",
+  "parent": "anisekai:block/base/half_slab_l1",
   "textures": {
-    "particle": "minecraft:block/cherry_planks",
-    "side":     "minecraft:block/cherry_log",
-    "step":     "minecraft:block/cherry_planks"
+    "side": "minecraft:block/cherry_log",
+    "step": "minecraft:block/cherry_planks"
   }
 }

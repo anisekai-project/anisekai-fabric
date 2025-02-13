@@ -1,0 +1,7 @@
+{
+  "parent": "anisekai:block/base/staircase",
+  "textures": {
+    "particle": "block/cherry_planks",
+    "steps": "block/cherry_planks"
+  }
+}

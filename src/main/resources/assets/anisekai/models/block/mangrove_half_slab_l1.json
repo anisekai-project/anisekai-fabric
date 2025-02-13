@@ -1,8 +1,7 @@
 {
-  "parent":   "anisekai:block/base/half_slab_l1",
+  "parent": "anisekai:block/base/half_slab_l1",
   "textures": {
-    "particle": "minecraft:block/mangrove_planks",
-    "side":     "minecraft:block/mangrove_log",
-    "step":     "minecraft:block/mangrove_planks"
+    "side": "minecraft:block/mangrove_log",
+    "step": "minecraft:block/mangrove_planks"
   }
 }

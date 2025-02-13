@@ -1,40 +1,30 @@
-{
-  "multipart": [
-    {
-      "apply": {
-        "model":  "anisekai:block/cherry_half_slab_l3",
-        "uvlock": false
-      },
-      "when":  {
-        "layer3": true
-      }
+{"multipart": [
+  {
+    "apply": {
+      "uvlock": false,
+      "model": "anisekai:block/cherry_half_slab_l3"
     },
-    {
-      "apply": {
-        "model":  "anisekai:block/cherry_half_slab_l2",
-        "uvlock": false
-      },
-      "when":  {
-        "layer2": true
-      }
+    "when": {"layer3": true}
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "model": "anisekai:block/cherry_half_slab_l2"
     },
-    {
-      "apply": {
-        "model":  "anisekai:block/cherry_half_slab_l1",
-        "uvlock": false
-      },
-      "when":  {
-        "layer1": true
-      }
+    "when": {"layer2": true}
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "model": "anisekai:block/cherry_half_slab_l1"
     },
-    {
-      "apply": {
-        "model":  "anisekai:block/cherry_half_slab_l0",
-        "uvlock": false
-      },
-      "when":  {
-        "layer0": true
-      }
-    }
-  ]
-}
+    "when": {"layer1": true}
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "model": "anisekai:block/cherry_half_slab_l0"
+    },
+    "when": {"layer0": true}
+  }
+]}

@@ -1,11 +1,11 @@
 package me.anisekai.blocks;
 
+import me.anisekai.AnisekaiMod;
 import me.anisekai.blocks.feature.SeatBlock;
 import me.anisekai.interfaces.Orientable;
 import me.anisekai.interfaces.Seatable;
 import me.anisekai.utils.BlockUtils;
-import me.anisekai.utils.RotatableShape;
-import me.anisekai.utils.VoxelUtils;
+import me.anisekai.utils.OrientableShape;
 import net.minecraft.block.*;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -14,27 +14,18 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 
-import java.util.Arrays;
-
 public class StoolBlock extends SeatBlock implements Waterloggable, Seatable, Orientable {
 
-    private static final VoxelShape VOXEL = VoxelUtils.make(Arrays.asList(
-            VoxelShapes.cuboid(0.125, 0, 0.125, 0.25, 0.5, 0.25),
-            VoxelShapes.cuboid(0.75, 0, 0.125, 0.875, 0.5, 0.25),
-            VoxelShapes.cuboid(0.125, 0, 0.75, 0.25, 0.5, 0.875),
-            VoxelShapes.cuboid(0.75, 0, 0.75, 0.875, 0.5, 0.875),
-            VoxelShapes.cuboid(0.125, 0.5, 0.125, 0.875, 0.625, 0.875)
-    ));
-
-    private static final RotatableShape SHAPE = new RotatableShape(VOXEL, VOXEL, VOXEL, VOXEL);
+    public static final  Identifier      ID    = AnisekaiMod.id("stool");
+    private static final OrientableShape SHAPE = OrientableShape.of(ID);
 
     public StoolBlock(AbstractBlock.Settings settings) {
 
@@ -106,7 +97,7 @@ public class StoolBlock extends SeatBlock implements Waterloggable, Seatable, Or
     // <editor-fold desc="Orientation">
 
     @Override
-    public RotatableShape getOrientedShapes() {
+    public OrientableShape getOrientedShapes() {
 
         return SHAPE;
     }

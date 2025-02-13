@@ -1,14 +1,14 @@
 package me.anisekai.blocks;
 
 import com.mojang.serialization.MapCodec;
+import me.anisekai.AnisekaiMod;
 import me.anisekai.blockentities.FishingBasketBlockEntity;
 import me.anisekai.blocks.feature.SeatBlock;
 import me.anisekai.entities.seat.InvisibleSeatEntity;
 import me.anisekai.interfaces.Orientable;
 import me.anisekai.interfaces.StorageContainer;
 import me.anisekai.registries.ModBlockEntities;
-import me.anisekai.utils.RotatableShape;
-import me.anisekai.utils.VoxelUtils;
+import me.anisekai.utils.OrientableShape;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ShulkerBoxBlockEntity;
@@ -39,21 +39,15 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 public class FishingBasketBlock extends SeatBlock implements Orientable, StorageContainer<FishingBasketBlockEntity>, BlockEntityProvider {
 
+    public static final Identifier                   ID    = AnisekaiMod.id("fishing_basket");
     public static final MapCodec<FishingBasketBlock> CODEC = createCodec(FishingBasketBlock::new);
 
-    private static final RotatableShape SHAPE = new RotatableShape(VoxelUtils.make(Arrays.asList(
-            VoxelShapes.cuboid(0.125, 0, 0.125, 0.875, 0.75, 0.875),
-            VoxelShapes.cuboid(0.0625, 0.625, 0.0625, 0.9375, 0.75, 0.9375),
-            VoxelShapes.cuboid(0.0625, 0, 0.0625, 0.9375, 0.625, 0.9375),
-            VoxelShapes.cuboid(0.6875, 0.5625, 0.9375, 0.8125, 0.6875, 1),
-            VoxelShapes.cuboid(0.1875, 0.5625, 0.9375, 0.3125, 0.6875, 1)
-    )));
+    private static final OrientableShape SHAPE = OrientableShape.of(ID);
 
     public FishingBasketBlock(AbstractBlock.Settings settings) {
 
@@ -96,7 +90,7 @@ public class FishingBasketBlock extends SeatBlock implements Orientable, Storage
     // <editor-fold desc="Orientation">
 
     @Override
-    public RotatableShape getOrientedShapes() {
+    public OrientableShape getOrientedShapes() {
 
         return SHAPE;
     }
@@ -203,11 +197,13 @@ public class FishingBasketBlock extends SeatBlock implements Orientable, Storage
 
         BlockEntity blockEntity = builder.getOptional(LootContextParameters.BLOCK_ENTITY);
         if (blockEntity instanceof FishingBasketBlockEntity fishingBasket) {
-            builder.addDynamicDrop(ShulkerBoxBlock.CONTENTS_DYNAMIC_DROP_ID, lootConsumer -> {
-                for (int i = 0; i < fishingBasket.size(); ++i) {
-                    lootConsumer.accept(fishingBasket.getStack(i));
-                }
-            });
+            builder.addDynamicDrop(
+                    ShulkerBoxBlock.CONTENTS_DYNAMIC_DROP_ID, lootConsumer -> {
+                        for (int i = 0; i < fishingBasket.size(); ++i) {
+                            lootConsumer.accept(fishingBasket.getStack(i));
+                        }
+                    }
+            );
         }
         return super.getDroppedStacks(state, builder);
     }

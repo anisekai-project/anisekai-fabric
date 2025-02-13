@@ -1,9 +1,0 @@
-{
-  "parent":   "anisekai:block/base/nightstand",
-  "textures": {
-    "0":        "minecraft:block/##LOG##",
-    "1":        "minecraft:block/##PLKS##",
-    "2":        "minecraft:block/##STPD##",
-    "particle": "minecraft:block/##LOG##"
-  }
-}

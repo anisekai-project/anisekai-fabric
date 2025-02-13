@@ -1,0 +1,21 @@
+{"variants": {
+  "facing=east": {
+    "uvlock": true,
+    "y": 90,
+    "model": "anisekai:block/bamboo_staircase"
+  },
+  "facing=south": {
+    "uvlock": true,
+    "y": 180,
+    "model": "anisekai:block/bamboo_staircase"
+  },
+  "facing=north": {
+    "uvlock": true,
+    "model": "anisekai:block/bamboo_staircase"
+  },
+  "facing=west": {
+    "uvlock": true,
+    "y": 270,
+    "model": "anisekai:block/bamboo_staircase"
+  }
+}}

@@ -1,11 +1,12 @@
 package me.anisekai.blocks;
 
 import com.mojang.serialization.MapCodec;
+import me.anisekai.AnisekaiMod;
 import me.anisekai.blockentities.CondenserBlockEntity;
 import me.anisekai.interfaces.Orientable;
 import me.anisekai.interfaces.StorageContainer;
 import me.anisekai.registries.ModBlockEntities;
-import me.anisekai.utils.RotatableShape;
+import me.anisekai.utils.OrientableShape;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -20,15 +21,11 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.ItemScatterer;
+import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -39,15 +36,14 @@ import java.util.Optional;
 
 public class CondenserBlock extends BlockWithEntity implements Orientable, StorageContainer<CondenserBlockEntity> {
 
+    public static final Identifier               ID    = AnisekaiMod.id("condenser");
     public static final MapCodec<CondenserBlock> CODEC = createCodec(CondenserBlock::new);
 
     // Because it allows passive farming, the rate should be limited.
     public static final int             CONDENSER_LIMITER_FACTOR = 200;
     public static final BooleanProperty JAMMED                   = BooleanProperty.of("jammed");
 
-    private static final RotatableShape SHAPE = new RotatableShape(
-            VoxelShapes.cuboid(0, 0, 0, 1, 1, 1)
-    );
+    private static final OrientableShape SHAPE = OrientableShape.of(ID);
 
     public CondenserBlock(AbstractBlock.Settings settings) {
 
@@ -96,7 +92,7 @@ public class CondenserBlock extends BlockWithEntity implements Orientable, Stora
     // <editor-fold desc="Orientation">
 
     @Override
-    public RotatableShape getOrientedShapes() {
+    public OrientableShape getOrientedShapes() {
 
         return SHAPE;
     }

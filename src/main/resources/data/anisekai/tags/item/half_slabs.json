@@ -1,16 +1,16 @@
 {
-  "replace": false,
-  "values":  [
-    "anisekai:acacia_half_slab",
+  "values": [
     "anisekai:bamboo_half_slab",
-    "anisekai:birch_half_slab",
     "anisekai:cherry_half_slab",
     "anisekai:crimson_half_slab",
-    "anisekai:dark_oak_half_slab",
-    "anisekai:jungle_half_slab",
-    "anisekai:mangrove_half_slab",
+    "anisekai:birch_half_slab",
     "anisekai:oak_half_slab",
-    "anisekai:spruce_half_slab",
-    "anisekai:warped_half_slab"
-  ]
+    "anisekai:warped_half_slab",
+    "anisekai:acacia_half_slab",
+    "anisekai:dark_oak_half_slab",
+    "anisekai:mangrove_half_slab",
+    "anisekai:jungle_half_slab",
+    "anisekai:spruce_half_slab"
+  ],
+  "replace": false
 }

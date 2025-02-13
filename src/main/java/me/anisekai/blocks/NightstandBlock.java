@@ -1,12 +1,13 @@
 package me.anisekai.blocks;
 
 import com.mojang.serialization.MapCodec;
+import me.anisekai.AnisekaiMod;
 import me.anisekai.blockentities.NightstandBlockEntity;
 import me.anisekai.interfaces.Connectable;
 import me.anisekai.interfaces.Orientable;
 import me.anisekai.interfaces.StorageContainer;
 import me.anisekai.utils.BlockUtils;
-import me.anisekai.utils.RotatableShape;
+import me.anisekai.utils.OrientableShape;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,38 +22,27 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 public class NightstandBlock extends Block implements BlockEntityProvider, StorageContainer<NightstandBlockEntity>, Connectable, Orientable, Waterloggable {
 
+    public static final Identifier                ID    = AnisekaiMod.id("nightstand");
     public static final MapCodec<NightstandBlock> CODEC = createCodec(NightstandBlock::new);
 
-    public static final RotatableShape SHAPE = new RotatableShape(Arrays.asList(
-            VoxelShapes.cuboid(0, 0.125, 0, 1, 0.1875, 1),
-            VoxelShapes.cuboid(0, 0.1875, 0, 0.0625, 1, 1),
-            VoxelShapes.cuboid(0.9375, 0.1875, 0, 1, 1, 1),
-            VoxelShapes.cuboid(0.0625, 0.1875, 0.875, 0.9375, 0.9375, 0.9375),
-            VoxelShapes.cuboid(0.0625, 0.9375, 0, 0.9375, 1, 1),
-            VoxelShapes.cuboid(0.0625, 0.5, 0, 0.9375, 0.625, 0.875),
-            VoxelShapes.cuboid(0.0625, 0.1875, 0.0625, 0.9375, 0.5, 0.1875),
-            VoxelShapes.cuboid(0.0625, 0.625, 0.0625, 0.9375, 0.9375, 0.1875),
-            VoxelShapes.cuboid(0.3125, 0.3125, 0, 0.6875, 0.375, 0.0625),
-            VoxelShapes.cuboid(0.3125, 0.75, 0, 0.6875, 0.8125, 0.0625)
-    ));
+    public static final OrientableShape SHAPE = OrientableShape.of(ID);
 
     public NightstandBlock(AbstractBlock.Settings settings) {
 
@@ -108,7 +98,7 @@ public class NightstandBlock extends Block implements BlockEntityProvider, Stora
     }
 
     @Override
-    public RotatableShape getOrientedShapes() {
+    public OrientableShape getOrientedShapes() {
 
         return SHAPE;
     }

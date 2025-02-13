@@ -1,8 +1,9 @@
 package me.anisekai.blocks;
 
+import me.anisekai.AnisekaiMod;
 import me.anisekai.interfaces.Orientable;
 import me.anisekai.utils.BlockUtils;
-import me.anisekai.utils.RotatableShape;
+import me.anisekai.utils.OrientableShape;
 import net.minecraft.block.*;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.fluid.FluidState;
@@ -12,31 +13,17 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 
-import java.util.Arrays;
-
 public class StairsBlock extends Block implements Waterloggable, Orientable {
 
-    private static final RotatableShape SHAPE = new RotatableShape(Arrays.asList(
-            VoxelShapes.cuboid(0.0625, 0.0625, 0, 0.9375, 0.125, 0.25),
-            VoxelShapes.cuboid(0.0625, 0.5625, 0.5, 0.9375, 0.625, 0.75),
-            VoxelShapes.cuboid(0.0625, 0.3125, 0.25, 0.9375, 0.375, 0.5),
-            VoxelShapes.cuboid(0.0625, 0.8125, 0.75, 0.9375, 0.875, 1),
-            VoxelShapes.cuboid(0.9375, 0, 0, 1, 0.25, 0.25),
-            VoxelShapes.cuboid(0.9375, 0.25, 0.25, 1, 0.5, 0.5),
-            VoxelShapes.cuboid(0.9375, 0.75, 0.75, 1, 1, 1),
-            VoxelShapes.cuboid(0.9375, 0.5, 0.5, 1, 0.75, 0.75),
-            VoxelShapes.cuboid(0, 0, 0, 0.0625, 0.25, 0.25),
-            VoxelShapes.cuboid(0, 0.25, 0.25, 0.0625, 0.5, 0.5),
-            VoxelShapes.cuboid(0, 0.75, 0.75, 0.0625, 1, 1),
-            VoxelShapes.cuboid(0, 0.5, 0.5, 0.0625, 0.75, 0.75)
-    ));
+    public static final  Identifier      ID    = AnisekaiMod.id("staircase");
+    private static final OrientableShape SHAPE = OrientableShape.of(ID);
 
     public StairsBlock(AbstractBlock.Settings settings) {
 
@@ -117,7 +104,7 @@ public class StairsBlock extends Block implements Waterloggable, Orientable {
     // <editor-fold desc="Orientation">
 
     @Override
-    public RotatableShape getOrientedShapes() {
+    public OrientableShape getOrientedShapes() {
 
         return SHAPE;
     }

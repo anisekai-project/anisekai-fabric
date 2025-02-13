@@ -1,8 +1,7 @@
 {
-  "parent":   "anisekai:block/base/half_slab_l2",
+  "parent": "anisekai:block/base/half_slab_l2",
   "textures": {
-    "particle": "minecraft:block/dark_oak_planks",
-    "side":     "minecraft:block/dark_oak_log",
-    "step":     "minecraft:block/dark_oak_planks"
+    "side": "minecraft:block/dark_oak_log",
+    "step": "minecraft:block/dark_oak_planks"
   }
 }

@@ -1,6 +1,8 @@
 package me.anisekai.blocks;
 
+import me.anisekai.AnisekaiMod;
 import me.anisekai.utils.BlockUtils;
+import me.anisekai.utils.OrientableShape;
 import net.minecraft.block.*;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.fluid.FluidState;
@@ -12,27 +14,30 @@ import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.function.BooleanBiFunction;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class HalfSlabBlock extends Block implements Waterloggable {
+
+    public static final Identifier ID = AnisekaiMod.id("half_slab");
+
+    public static final Identifier L0_ID = AnisekaiMod.id("half_slab_l0");
+    public static final Identifier L1_ID = AnisekaiMod.id("half_slab_l1");
+    public static final Identifier L2_ID = AnisekaiMod.id("half_slab_l2");
+    public static final Identifier L3_ID = AnisekaiMod.id("half_slab_l3");
 
     public static final BooleanProperty LAYER_3 = BooleanProperty.of("layer3");
     public static final BooleanProperty LAYER_2 = BooleanProperty.of("layer2");
     public static final BooleanProperty LAYER_1 = BooleanProperty.of("layer1");
     public static final BooleanProperty LAYER_0 = BooleanProperty.of("layer0");
-
-    private static final VoxelShape SHAPE_LAYER_3 = VoxelShapes.cuboid(0, 0.75, 0, 1, 1, 1);
-    private static final VoxelShape SHAPE_LAYER_2 = VoxelShapes.cuboid(0, 0.5, 0, 1, 0.75, 1);
-    private static final VoxelShape SHAPE_LAYER_1 = VoxelShapes.cuboid(0, 0.25, 0, 1, 0.5, 1);
-    private static final VoxelShape SHAPE_LAYER_0 = VoxelShapes.cuboid(0, 0, 0, 1, 0.25, 1);
 
     public HalfSlabBlock(AbstractBlock.Settings settings) {
 
@@ -85,26 +90,12 @@ public class HalfSlabBlock extends Block implements Waterloggable {
         boolean layer2 = state.get(LAYER_2);
         boolean layer3 = state.get(LAYER_3);
 
-        if (layer0 && layer1 && layer2 && layer3) {
-            return VoxelShapes.fullCube();
-        }
-
-        VoxelShape shape = VoxelShapes.empty();
-
-        if (layer3) {
-            shape = VoxelShapes.combineAndSimplify(shape, SHAPE_LAYER_3, BooleanBiFunction.OR);
-        }
-        if (layer2) {
-            shape = VoxelShapes.combineAndSimplify(shape, SHAPE_LAYER_2, BooleanBiFunction.OR);
-        }
-        if (layer1) {
-            shape = VoxelShapes.combineAndSimplify(shape, SHAPE_LAYER_1, BooleanBiFunction.OR);
-        }
-        if (layer0) {
-            shape = VoxelShapes.combineAndSimplify(shape, SHAPE_LAYER_0, BooleanBiFunction.OR);
-        }
-
-        return shape;
+        Collection<Identifier> layerIds = new ArrayList<>();
+        if (layer0) layerIds.add(L0_ID);
+        if (layer1) layerIds.add(L1_ID);
+        if (layer2) layerIds.add(L2_ID);
+        if (layer3) layerIds.add(L3_ID);
+        return OrientableShape.of(layerIds).getShape(Direction.NORTH);
     }
 
     @Override

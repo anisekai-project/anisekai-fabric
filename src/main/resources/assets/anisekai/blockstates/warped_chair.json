@@ -1,23 +1,21 @@
-{
-  "variants": {
-    "facing=north": {
-      "model":  "anisekai:block/warped_chair",
-      "uvlock": false
-    },
-    "facing=east":  {
-      "model":  "anisekai:block/warped_chair",
-      "uvlock": false,
-      "y":      90
-    },
-    "facing=south": {
-      "model":  "anisekai:block/warped_chair",
-      "uvlock": false,
-      "y":      180
-    },
-    "facing=west":  {
-      "model":  "anisekai:block/warped_chair",
-      "uvlock": false,
-      "y":      270
-    }
+{"variants": {
+  "facing=east": {
+    "uvlock": false,
+    "y": 90,
+    "model": "anisekai:block/warped_chair"
+  },
+  "facing=south": {
+    "uvlock": false,
+    "y": 180,
+    "model": "anisekai:block/warped_chair"
+  },
+  "facing=north": {
+    "uvlock": false,
+    "model": "anisekai:block/warped_chair"
+  },
+  "facing=west": {
+    "uvlock": false,
+    "y": 270,
+    "model": "anisekai:block/warped_chair"
   }
-}
+}}

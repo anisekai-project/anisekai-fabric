@@ -1,0 +1,8 @@
+{
+  "parent": "anisekai:block/base/staircase",
+  "textures": {
+    "side": "block/jungle_log",
+    "particle": "block/jungle_planks",
+    "steps": "block/jungle_planks"
+  }
+}

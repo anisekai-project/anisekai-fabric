@@ -1,16 +1,16 @@
 {
-  "replace": false,
-  "values":  [
-    "anisekai:acacia_stool",
+  "values": [
     "anisekai:bamboo_stool",
-    "anisekai:birch_stool",
     "anisekai:cherry_stool",
     "anisekai:crimson_stool",
-    "anisekai:dark_oak_stool",
-    "anisekai:jungle_stool",
-    "anisekai:mangrove_stool",
+    "anisekai:birch_stool",
     "anisekai:oak_stool",
-    "anisekai:spruce_stool",
-    "anisekai:warped_stool"
-  ]
+    "anisekai:warped_stool",
+    "anisekai:acacia_stool",
+    "anisekai:dark_oak_stool",
+    "anisekai:mangrove_stool",
+    "anisekai:jungle_stool",
+    "anisekai:spruce_stool"
+  ],
+  "replace": false
 }

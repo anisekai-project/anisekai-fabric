@@ -1,9 +1,9 @@
 {
-  "parent":   "anisekai:block/base/nightstand",
+  "parent": "anisekai:block/base/nightstand",
   "textures": {
-    "0":        "minecraft:block/acacia_log",
-    "1":        "minecraft:block/acacia_planks",
-    "2":        "minecraft:block/stripped_acacia_log",
+    "0": "minecraft:block/acacia_log",
+    "1": "minecraft:block/acacia_planks",
+    "2": "minecraft:block/stripped_acacia_log",
     "particle": "minecraft:block/acacia_log"
   }
 }

@@ -18,6 +18,17 @@ loom {
     }
 }
 
+sourceSets {
+    main {
+        java { srcDirs = ['src/main/java'] }
+        resources { srcDirs = ['src/main/resources'] }
+    }
+    devtools {
+        java { srcDirs = ['src/devtools/java'] }
+        resources { srcDirs = ['src/devtools/resources'] }
+    }
+}
+
 repositories {
     // Add repositories to retrieve artifacts from in here.
     // You should only use this when depending on other mods because
@@ -33,6 +44,9 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    devtoolsImplementation group: 'org.json', name: 'json', version: '20240303'
+    devtoolsImplementation group: 'org.jetbrains', name: 'annotations', version: '26.0.1'
 }
 
 processResources {
@@ -72,6 +86,12 @@ java {
 }
 
 jar {
+    from {
+        sourceSets.main.output
+    }
+    exclude {
+        sourceSets.devtools.allSource.files
+    }
     from("LICENSE") {
         rename { "${it}_${project.archivesBaseName}" }
     }
@@ -94,3 +114,20 @@ publishing {
         // retrieving dependencies.
     }
 }
+
+tasks.register('generateBlocks', JavaExec) {
+    group = 'devtools'
+    description = 'Generate all blocks'
+    classpath = sourceSets.devtools.runtimeClasspath
+    mainClass = 'me.anisekai.devtools.DevTools'
+    args 'blocks'
+}
+
+tasks.register('generateVoxels', JavaExec) {
+    group = 'devtools'
+    description = 'Generate all voxel hitboxes for furniture'
+    classpath = sourceSets.devtools.runtimeClasspath
+    mainClass = 'me.anisekai.devtools.DevTools'
+    args 'hitboxes'
+}
+

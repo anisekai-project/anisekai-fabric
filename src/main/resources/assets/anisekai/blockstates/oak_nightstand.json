@@ -1,106 +1,96 @@
-{
-  "multipart": [
-    {
-      "apply": {
-        "model":  "anisekai:block/oak_nightstand",
-        "uvlock": false
-      },
-      "when":  {
-        "facing": "north"
-      }
+{"multipart": [
+  {
+    "apply": {
+      "uvlock": false,
+      "model": "anisekai:block/oak_nightstand"
     },
-    {
-      "apply": {
-        "model":  "anisekai:block/oak_nightstand",
-        "uvlock": false,
-        "y":      90
-      },
-      "when":  {
-        "facing": "east"
-      }
+    "when": {"facing": "north"}
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 90,
+      "model": "anisekai:block/oak_nightstand"
     },
-    {
-      "apply": {
-        "model":  "anisekai:block/oak_nightstand",
-        "uvlock": false,
-        "y":      180
-      },
-      "when":  {
-        "facing": "south"
-      }
+    "when": {"facing": "east"}
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 180,
+      "model": "anisekai:block/oak_nightstand"
     },
-    {
-      "apply": {
-        "model":  "anisekai:block/oak_nightstand",
-        "uvlock": false,
-        "y":      270
-      },
-      "when":  {
-        "facing": "west"
-      }
+    "when": {"facing": "south"}
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 270,
+      "model": "anisekai:block/oak_nightstand"
     },
-    {
-      "apply": {
-        "model":  "anisekai:block/oak_nightstand_feet_full",
-        "uvlock": false
-      },
-      "when":  {
-        "north": false,
-        "east":  false,
-        "south": false,
-        "west":  false
-      }
+    "when": {"facing": "west"}
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "model": "anisekai:block/oak_nightstand_feet_full"
     },
-    {
-      "apply": {
-        "model":  "anisekai:block/oak_nightstand_feet_side",
-        "uvlock": false
-      },
-      "when":  {
-        "north": false,
-        "east":  false,
-        "south": true,
-        "west":  false
-      }
-    },
-    {
-      "apply": {
-        "model":  "anisekai:block/oak_nightstand_feet_side",
-        "uvlock": false,
-        "y":      180
-      },
-      "when":  {
-        "north": true,
-        "east":  false,
-        "south": false,
-        "west":  false
-      }
-    },
-    {
-      "apply": {
-        "model":  "anisekai:block/oak_nightstand_feet_side",
-        "uvlock": false,
-        "y":      270
-      },
-      "when":  {
-        "north": false,
-        "east":  true,
-        "south": false,
-        "west":  false
-      }
-    },
-    {
-      "apply": {
-        "model":  "anisekai:block/oak_nightstand_feet_side",
-        "uvlock": false,
-        "y":      90
-      },
-      "when":  {
-        "north": false,
-        "east":  false,
-        "south": false,
-        "west":  true
-      }
+    "when": {
+      "east": false,
+      "south": false,
+      "north": false,
+      "west": false
     }
-  ]
-}
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "model": "anisekai:block/oak_nightstand_feet_side"
+    },
+    "when": {
+      "east": false,
+      "south": true,
+      "north": false,
+      "west": false
+    }
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 180,
+      "model": "anisekai:block/oak_nightstand_feet_side"
+    },
+    "when": {
+      "east": false,
+      "south": false,
+      "north": true,
+      "west": false
+    }
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 270,
+      "model": "anisekai:block/oak_nightstand_feet_side"
+    },
+    "when": {
+      "east": true,
+      "south": false,
+      "north": false,
+      "west": false
+    }
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 90,
+      "model": "anisekai:block/oak_nightstand_feet_side"
+    },
+    "when": {
+      "east": false,
+      "south": false,
+      "north": false,
+      "west": true
+    }
+  }
+]}

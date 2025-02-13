@@ -1,16 +1,16 @@
 {
-  "replace": false,
-  "values":  [
-    "anisekai:acacia_table",
+  "values": [
     "anisekai:bamboo_table",
-    "anisekai:birch_table",
     "anisekai:cherry_table",
     "anisekai:crimson_table",
-    "anisekai:dark_oak_table",
-    "anisekai:jungle_table",
-    "anisekai:mangrove_table",
+    "anisekai:birch_table",
     "anisekai:oak_table",
-    "anisekai:spruce_table",
-    "anisekai:warped_table"
-  ]
+    "anisekai:warped_table",
+    "anisekai:acacia_table",
+    "anisekai:dark_oak_table",
+    "anisekai:mangrove_table",
+    "anisekai:jungle_table",
+    "anisekai:spruce_table"
+  ],
+  "replace": false
 }

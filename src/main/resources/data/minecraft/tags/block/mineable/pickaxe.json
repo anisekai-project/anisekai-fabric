@@ -1,6 +1,4 @@
 {
-  "replace": false,
-  "values":  [
-    "anisekai:condenser"
-  ]
+  "values": ["anisekai:condenser"],
+  "replace": false
 }

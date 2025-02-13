@@ -1,8 +1,7 @@
 {
-  "parent":   "anisekai:block/base/half_slab_l2",
+  "parent": "anisekai:block/base/half_slab_l2",
   "textures": {
-    "particle": "minecraft:block/jungle_planks",
-    "side":     "minecraft:block/jungle_log",
-    "step":     "minecraft:block/jungle_planks"
+    "side": "minecraft:block/jungle_log",
+    "step": "minecraft:block/jungle_planks"
   }
 }

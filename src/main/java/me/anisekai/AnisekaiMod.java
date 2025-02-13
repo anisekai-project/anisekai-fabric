@@ -4,6 +4,7 @@ import me.anisekai.entities.seat.InvisibleSeatEntity;
 import me.anisekai.registries.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +12,11 @@ public class AnisekaiMod implements ModInitializer {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(AnisekaiMod.class);
     public static final String MOD_ID = "anisekai";
+
+    public static Identifier id(String path) {
+
+        return Identifier.of(MOD_ID, path);
+    }
 
 
     /**

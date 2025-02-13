@@ -1,9 +1,9 @@
 package me.anisekai.blocks;
 
+import me.anisekai.AnisekaiMod;
 import me.anisekai.interfaces.Orientable;
 import me.anisekai.utils.BlockUtils;
-import me.anisekai.utils.RotatableShape;
-import me.anisekai.utils.VoxelUtils;
+import me.anisekai.utils.OrientableShape;
 import net.minecraft.block.*;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -12,24 +12,17 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 
-import java.util.Arrays;
-
 public class TableBlock extends Block implements Waterloggable, Orientable {
 
-    private static final VoxelShape VOXEL = VoxelUtils.make(Arrays.asList(
-            VoxelShapes.cuboid(0.3125, 0, 0.3125, 0.6875, 0.0625, 0.6875),
-            VoxelShapes.cuboid(0.4375, 0.0625, 0.4375, 0.5625, 0.875, 0.5625),
-            VoxelShapes.cuboid(0, 0.875, 0, 1, 1, 1)
-    ));
-
-    private static final RotatableShape SHAPE = new RotatableShape(VOXEL, VOXEL, VOXEL, VOXEL);
+    public static final  Identifier      ID    = AnisekaiMod.id("table");
+    private static final OrientableShape SHAPE = OrientableShape.of(ID);
 
     public TableBlock(AbstractBlock.Settings settings) {
 
@@ -101,7 +94,7 @@ public class TableBlock extends Block implements Waterloggable, Orientable {
     // <editor-fold desc="Orientation">
 
     @Override
-    public RotatableShape getOrientedShapes() {
+    public OrientableShape getOrientedShapes() {
 
         return SHAPE;
     }

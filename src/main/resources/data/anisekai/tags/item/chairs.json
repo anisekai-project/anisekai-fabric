@@ -1,16 +1,16 @@
 {
-  "replace": false,
-  "values":  [
-    "anisekai:acacia_chair",
+  "values": [
     "anisekai:bamboo_chair",
-    "anisekai:birch_chair",
     "anisekai:cherry_chair",
     "anisekai:crimson_chair",
-    "anisekai:dark_oak_chair",
-    "anisekai:jungle_chair",
-    "anisekai:mangrove_chair",
+    "anisekai:birch_chair",
     "anisekai:oak_chair",
-    "anisekai:spruce_chair",
-    "anisekai:warped_chair"
-  ]
+    "anisekai:warped_chair",
+    "anisekai:acacia_chair",
+    "anisekai:dark_oak_chair",
+    "anisekai:mangrove_chair",
+    "anisekai:jungle_chair",
+    "anisekai:spruce_chair"
+  ],
+  "replace": false
 }
