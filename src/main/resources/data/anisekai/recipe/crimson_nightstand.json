@@ -12,7 +12,7 @@
   "category": "building",
   "key": {
     "|": {"item": "minecraft:crimson_fence"},
-    "-": {"item": "minecraft:crimson_half_slab"}
+    "-": {"item": "anisekai:crimson_half_slab"}
   },
   "group": "nightstands"
 }

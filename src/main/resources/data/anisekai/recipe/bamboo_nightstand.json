@@ -12,7 +12,7 @@
   "category": "building",
   "key": {
     "|": {"item": "minecraft:bamboo_fence"},
-    "-": {"item": "minecraft:bamboo_half_slab"}
+    "-": {"item": "anisekai:bamboo_half_slab"}
   },
   "group": "nightstands"
 }

@@ -71,7 +71,7 @@
       ],
       "key":      {
         "-": {
-          "item": "minecraft:{{type}}_half_slab"
+          "item": "{{mod}}:{{type}}_half_slab"
         },
         "|": {
           "item": "minecraft:{{fence}}"

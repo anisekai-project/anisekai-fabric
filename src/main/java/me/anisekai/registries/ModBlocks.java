@@ -31,9 +31,9 @@ public final class ModBlocks {
             new ChairBlock(AbstractBlock.Settings.copy(type.asStairs()))
     ));
 
-    public static final Map<WoodType, Block> STAIRS = WoodType.generate(type -> create(
+    public static final Map<WoodType, Block> STAIRCASE = WoodType.generate(type -> create(
             type,
-            "stairs",
+            "staircase",
             new StaircaseBlock(AbstractBlock.Settings.copy(type.asStairs()))
     ));
 
@@ -81,7 +81,7 @@ public final class ModBlocks {
         List<Block> blocks = new ArrayList<>();
         blocks.addAll(CHAIRS.values());
         blocks.addAll(HALF_SLABS.values());
-        blocks.addAll(STAIRS.values());
+        blocks.addAll(STAIRCASE.values());
         blocks.addAll(TABLES.values());
         blocks.addAll(STOOLS.values());
         blocks.addAll(NIGHTSTANDS.values());

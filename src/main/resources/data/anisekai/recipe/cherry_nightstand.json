@@ -12,7 +12,7 @@
   "category": "building",
   "key": {
     "|": {"item": "minecraft:cherry_fence"},
-    "-": {"item": "minecraft:cherry_half_slab"}
+    "-": {"item": "anisekai:cherry_half_slab"}
   },
   "group": "nightstands"
 }

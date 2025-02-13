@@ -31,9 +31,9 @@ public final class ModItems {
             ModBlocks.CHAIRS, 16
     ));
 
-    public static final Map<WoodType, Item> STAIRS = WoodType.generate(type -> create(
-            type, "stairs",
-            ModBlocks.STAIRS, 64
+    public static final Map<WoodType, Item> STAIRCASE = WoodType.generate(type -> create(
+            type, "staircase",
+            ModBlocks.STAIRCASE, 64
     ));
 
     public static final Map<WoodType, Item> STOOLS = WoodType.generate(type -> create(
@@ -75,7 +75,7 @@ public final class ModItems {
         List<Item> items = new ArrayList<>();
         items.addAll(CHAIRS.values());
         items.addAll(HALF_SLABS.values());
-        items.addAll(STAIRS.values());
+        items.addAll(STAIRCASE.values());
         items.addAll(STOOLS.values());
         items.addAll(TABLES.values());
         items.addAll(NIGHTSTANDS.values());
@@ -101,7 +101,7 @@ public final class ModItems {
                                        () -> value.asButton().asItem(),
                                        () -> CHAIRS.get(value),
                                        () -> HALF_SLABS.get(value),
-                                       () -> STAIRS.get(value),
+                                       () -> STAIRCASE.get(value),
                                        () -> STOOLS.get(value),
                                        () -> TABLES.get(value),
                                        () -> NIGHTSTANDS.get(value)

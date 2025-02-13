@@ -12,7 +12,7 @@
   "category": "building",
   "key": {
     "|": {"item": "minecraft:warped_fence"},
-    "-": {"item": "minecraft:warped_half_slab"}
+    "-": {"item": "anisekai:warped_half_slab"}
   },
   "group": "nightstands"
 }

@@ -12,7 +12,7 @@
   "category": "building",
   "key": {
     "|": {"item": "minecraft:mangrove_fence"},
-    "-": {"item": "minecraft:mangrove_half_slab"}
+    "-": {"item": "anisekai:mangrove_half_slab"}
   },
   "group": "nightstands"
 }

@@ -12,7 +12,7 @@
   "category": "building",
   "key": {
     "|": {"item": "minecraft:spruce_fence"},
-    "-": {"item": "minecraft:spruce_half_slab"}
+    "-": {"item": "anisekai:spruce_half_slab"}
   },
   "group": "nightstands"
 }

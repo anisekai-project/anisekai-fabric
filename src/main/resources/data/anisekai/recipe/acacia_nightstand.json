@@ -12,7 +12,7 @@
   "category": "building",
   "key": {
     "|": {"item": "minecraft:acacia_fence"},
-    "-": {"item": "minecraft:acacia_half_slab"}
+    "-": {"item": "anisekai:acacia_half_slab"}
   },
   "group": "nightstands"
 }

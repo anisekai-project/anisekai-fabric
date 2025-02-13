@@ -12,7 +12,7 @@
   "category": "building",
   "key": {
     "|": {"item": "minecraft:birch_fence"},
-    "-": {"item": "minecraft:birch_half_slab"}
+    "-": {"item": "anisekai:birch_half_slab"}
   },
   "group": "nightstands"
 }
