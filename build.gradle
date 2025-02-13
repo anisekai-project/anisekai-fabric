@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.8-SNAPSHOT'
+    id 'fabric-loom' version '1.9-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -10,14 +10,6 @@ base {
     archivesName = project.archives_base_name
 }
 
-loom {
-    mods {
-        "anisekai" {
-            sourceSet sourceSets.main
-        }
-    }
-}
-
 sourceSets {
     main {
         java { srcDirs = ['src/main/java'] }
@@ -26,6 +18,14 @@ sourceSets {
     devtools {
         java { srcDirs = ['src/devtools/java'] }
         resources { srcDirs = ['src/devtools/resources'] }
+    }
+}
+
+loom {
+    mods {
+        "anisekai" {
+            sourceSet sourceSets.main
+        }
     }
 }
 
@@ -75,23 +75,13 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 java {
-    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
-    if (JavaVersion.current() < javaVersion) {
-        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
-    }
-    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-    // if it is present.
-    // If you remove this line, sources will not be generated.
     withSourcesJar()
+
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 jar {
-    from {
-        sourceSets.main.output
-    }
-    exclude {
-        sourceSets.devtools.allSource.files
-    }
     from("LICENSE") {
         rename { "${it}_${project.archivesBaseName}" }
     }
@@ -130,4 +120,3 @@ tasks.register('generateVoxels', JavaExec) {
     mainClass = 'me.anisekai.devtools.DevTools'
     args 'hitboxes'
 }
-
