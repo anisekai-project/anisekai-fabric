@@ -34,7 +34,7 @@ public final class ModBlocks {
     public static final Map<WoodType, Block> STAIRS = WoodType.generate(type -> create(
             type,
             "stairs",
-            new StairsBlock(AbstractBlock.Settings.copy(type.asStairs()))
+            new StaircaseBlock(AbstractBlock.Settings.copy(type.asStairs()))
     ));
 
     public static final Map<WoodType, Block> STOOLS = WoodType.generate(type -> create(

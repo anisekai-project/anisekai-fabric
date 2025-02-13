@@ -20,12 +20,12 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 
-public class StairsBlock extends Block implements Waterloggable, Orientable {
+public class StaircaseBlock extends Block implements Waterloggable, Orientable {
 
     public static final  Identifier      ID    = AnisekaiMod.id("staircase");
     private static final OrientableShape SHAPE = OrientableShape.of(ID);
 
-    public StairsBlock(AbstractBlock.Settings settings) {
+    public StaircaseBlock(AbstractBlock.Settings settings) {
 
         super(settings);
 

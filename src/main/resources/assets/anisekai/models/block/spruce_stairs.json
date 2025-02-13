@@ -1,8 +1,0 @@
-{
-  "parent":   "anisekai:block/base/stairs",
-  "textures": {
-    "side":     "block/spruce_log",
-    "steps":    "block/spruce_planks",
-    "particle": "block/spruce_planks"
-  }
-}
