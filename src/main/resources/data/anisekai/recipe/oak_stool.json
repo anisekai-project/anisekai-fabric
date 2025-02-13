@@ -1,21 +1,17 @@
 {
-  "type":     "minecraft:crafting_shaped",
-  "category": "building",
-  "group":    "wooden_stool",
-  "pattern":  [
-    "CCC",
-    "S S"
-  ],
-  "key":      {
-    "S": {
-      "item": "minecraft:stick"
-    },
-    "C": {
-      "item": "minecraft:oak_slab"
-    }
+  "result": {
+    "count": 1,
+    "id": "anisekai:oak_stool"
   },
-  "result":   {
-    "id":    "anisekai:oak_stool",
-    "count": 1
-  }
+  "pattern": [
+    "CCC",
+    "F F"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "C": {"item": "anisekai:oak_half_slab"},
+    "F": {"item": "minecraft:oak_fence"}
+  },
+  "group": "stools"
 }

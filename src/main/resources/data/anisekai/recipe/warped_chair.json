@@ -1,22 +1,18 @@
 {
-  "type":     "minecraft:crafting_shaped",
-  "category": "building",
-  "group":    "wooden_chairs",
-  "pattern":  [
-    "S  ",
-    "CCC",
-    "S S"
-  ],
-  "key":      {
-    "S": {
-      "item": "minecraft:stick"
-    },
-    "C": {
-      "item": "minecraft:warped_slab"
-    }
+  "result": {
+    "count": 1,
+    "id": "anisekai:warped_chair"
   },
-  "result":   {
-    "id":    "anisekai:warped_chair",
-    "count": 1
-  }
+  "pattern": [
+    "F  ",
+    "CCC",
+    "F F"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "C": {"item": "anisekai:warped_half_slab"},
+    "F": {"item": "minecraft:warped_fence"}
+  },
+  "group": "chairs"
 }

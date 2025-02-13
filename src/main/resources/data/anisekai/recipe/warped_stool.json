@@ -1,21 +1,17 @@
 {
-  "type":     "minecraft:crafting_shaped",
-  "category": "building",
-  "group":    "wooden_stool",
-  "pattern":  [
-    "CCC",
-    "S S"
-  ],
-  "key":      {
-    "S": {
-      "item": "minecraft:stick"
-    },
-    "C": {
-      "item": "minecraft:warped_slab"
-    }
+  "result": {
+    "count": 1,
+    "id": "anisekai:warped_stool"
   },
-  "result":   {
-    "id":    "anisekai:warped_stool",
-    "count": 1
-  }
+  "pattern": [
+    "CCC",
+    "F F"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "C": {"item": "anisekai:warped_half_slab"},
+    "F": {"item": "minecraft:warped_fence"}
+  },
+  "group": "stools"
 }

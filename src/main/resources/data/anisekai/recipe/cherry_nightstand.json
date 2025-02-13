@@ -1,25 +1,18 @@
 {
-  "type":     "minecraft:crafting_shaped",
-  "category": "building",
-  "group":    "wooden_nightstand",
-  "pattern":  [
-    "___",
-    "O O",
-    "/_/"
-  ],
-  "key":      {
-    "_": {
-      "item": "minecraft:cherry_slab"
-    },
-    "O": {
-      "item": "minecraft:cherry_planks"
-    },
-    "/": {
-      "item": "minecraft:stick"
-    }
+  "result": {
+    "count": 1,
+    "id": "anisekai:cherry_nightstand"
   },
-  "result":   {
-    "id":    "anisekai:cherry_nightstand",
-    "count": 1
-  }
+  "pattern": [
+    "---",
+    "- -",
+    "|-|"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "|": {"item": "minecraft:cherry_fence"},
+    "-": {"item": "minecraft:cherry_half_slab"}
+  },
+  "group": "nightstands"
 }

@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 
-public class DevIO {
+public final class DevIO {
+
+    private DevIO() {}
 
     private static boolean ensureParentExists(File file) {
 
@@ -18,29 +20,14 @@ public class DevIO {
         return parent.mkdirs();
     }
 
-    public static String getFileContent(String path) throws IOException {
-
-        return getFileContent(new File(path));
-    }
-
     public static String getFileContent(File file) throws IOException {
 
         return Files.readString(file.toPath());
     }
 
-    public static JSONObject getFileJson(String path) throws IOException {
-
-        return getFileJson(new File(path));
-    }
-
     public static JSONObject getFileJson(File file) throws IOException {
 
         return new JSONObject(getFileContent(file));
-    }
-
-    public static void setFileContent(String path, CharSequence content) throws IOException {
-
-        setFileContent(new File(path), content);
     }
 
     public static void setFileContent(File file, CharSequence content) throws IOException {

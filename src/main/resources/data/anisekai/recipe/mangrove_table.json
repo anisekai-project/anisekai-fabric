@@ -1,25 +1,19 @@
 {
-  "type":     "minecraft:crafting_shaped",
-  "category": "building",
-  "group":    "wooden_table",
-  "pattern":  [
+  "result": {
+    "count": 1,
+    "id": "anisekai:mangrove_table"
+  },
+  "pattern": [
     "BBB",
-    " S ",
+    " F ",
     " C "
   ],
-  "key":      {
-    "S": {
-      "item": "minecraft:stick"
-    },
-    "C": {
-      "item": "minecraft:mangrove_slab"
-    },
-    "B": {
-      "item": "minecraft:mangrove_planks"
-    }
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": {"item": "anisekai:mangrove_half_slab"},
+    "C": {"item": "minecraft:mangrove_slab"},
+    "F": {"item": "minecraft:mangrove_fence"}
   },
-  "result":   {
-    "id":    "anisekai:mangrove_table",
-    "count": 1
-  }
+  "group": "tables"
 }

@@ -1,25 +1,18 @@
 {
-  "type":     "minecraft:crafting_shaped",
-  "category": "building",
-  "group":    "wooden_nightstand",
-  "pattern":  [
-    "___",
-    "O O",
-    "/_/"
-  ],
-  "key":      {
-    "_": {
-      "item": "minecraft:bamboo_slab"
-    },
-    "O": {
-      "item": "minecraft:bamboo_planks"
-    },
-    "/": {
-      "item": "minecraft:stick"
-    }
+  "result": {
+    "count": 1,
+    "id": "anisekai:bamboo_nightstand"
   },
-  "result":   {
-    "id":    "anisekai:bamboo_nightstand",
-    "count": 1
-  }
+  "pattern": [
+    "---",
+    "- -",
+    "|-|"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "|": {"item": "minecraft:bamboo_fence"},
+    "-": {"item": "minecraft:bamboo_half_slab"}
+  },
+  "group": "nightstands"
 }

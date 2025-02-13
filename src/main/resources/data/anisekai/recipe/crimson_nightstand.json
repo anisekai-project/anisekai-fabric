@@ -1,25 +1,18 @@
 {
-  "type":     "minecraft:crafting_shaped",
-  "category": "building",
-  "group":    "wooden_nightstand",
-  "pattern":  [
-    "___",
-    "O O",
-    "/_/"
-  ],
-  "key":      {
-    "_": {
-      "item": "minecraft:crimson_slab"
-    },
-    "O": {
-      "item": "minecraft:crimson_planks"
-    },
-    "/": {
-      "item": "minecraft:stick"
-    }
+  "result": {
+    "count": 1,
+    "id": "anisekai:crimson_nightstand"
   },
-  "result":   {
-    "id":    "anisekai:crimson_nightstand",
-    "count": 1
-  }
+  "pattern": [
+    "---",
+    "- -",
+    "|-|"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "|": {"item": "minecraft:crimson_fence"},
+    "-": {"item": "minecraft:crimson_half_slab"}
+  },
+  "group": "nightstands"
 }

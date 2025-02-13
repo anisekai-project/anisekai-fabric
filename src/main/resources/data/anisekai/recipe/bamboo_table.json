@@ -1,25 +1,19 @@
 {
-  "type":     "minecraft:crafting_shaped",
-  "category": "building",
-  "group":    "wooden_table",
-  "pattern":  [
+  "result": {
+    "count": 1,
+    "id": "anisekai:bamboo_table"
+  },
+  "pattern": [
     "BBB",
-    " S ",
+    " F ",
     " C "
   ],
-  "key":      {
-    "S": {
-      "item": "minecraft:stick"
-    },
-    "C": {
-      "item": "minecraft:bamboo_slab"
-    },
-    "B": {
-      "item": "minecraft:bamboo_planks"
-    }
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": {"item": "anisekai:bamboo_half_slab"},
+    "C": {"item": "minecraft:bamboo_slab"},
+    "F": {"item": "minecraft:bamboo_fence"}
   },
-  "result":   {
-    "id":    "anisekai:bamboo_table",
-    "count": 1
-  }
+  "group": "tables"
 }

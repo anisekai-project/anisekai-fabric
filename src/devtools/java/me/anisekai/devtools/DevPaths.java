@@ -1,6 +1,8 @@
 package me.anisekai.devtools;
 
-public class DevPaths {
+public final class DevPaths {
+
+    private DevPaths() {}
 
     public static String baseBlock(String namespace, String name) {
 

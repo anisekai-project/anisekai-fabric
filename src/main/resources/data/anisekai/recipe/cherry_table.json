@@ -1,25 +1,19 @@
 {
-  "type":     "minecraft:crafting_shaped",
-  "category": "building",
-  "group":    "wooden_table",
-  "pattern":  [
+  "result": {
+    "count": 1,
+    "id": "anisekai:cherry_table"
+  },
+  "pattern": [
     "BBB",
-    " S ",
+    " F ",
     " C "
   ],
-  "key":      {
-    "S": {
-      "item": "minecraft:stick"
-    },
-    "C": {
-      "item": "minecraft:cherry_slab"
-    },
-    "B": {
-      "item": "minecraft:cherry_planks"
-    }
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": {"item": "anisekai:cherry_half_slab"},
+    "C": {"item": "minecraft:cherry_slab"},
+    "F": {"item": "minecraft:cherry_fence"}
   },
-  "result":   {
-    "id":    "anisekai:cherry_table",
-    "count": 1
-  }
+  "group": "tables"
 }

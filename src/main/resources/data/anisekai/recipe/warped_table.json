@@ -1,25 +1,19 @@
 {
-  "type":     "minecraft:crafting_shaped",
-  "category": "building",
-  "group":    "wooden_table",
-  "pattern":  [
+  "result": {
+    "count": 1,
+    "id": "anisekai:warped_table"
+  },
+  "pattern": [
     "BBB",
-    " S ",
+    " F ",
     " C "
   ],
-  "key":      {
-    "S": {
-      "item": "minecraft:stick"
-    },
-    "C": {
-      "item": "minecraft:warped_slab"
-    },
-    "B": {
-      "item": "minecraft:warped_planks"
-    }
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": {"item": "anisekai:warped_half_slab"},
+    "C": {"item": "minecraft:warped_slab"},
+    "F": {"item": "minecraft:warped_fence"}
   },
-  "result":   {
-    "id":    "anisekai:warped_table",
-    "count": 1
-  }
+  "group": "tables"
 }

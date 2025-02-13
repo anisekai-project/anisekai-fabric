@@ -14,7 +14,6 @@ public final class DevTools {
     public static final File DEVTOOLS = new File(SRC, "devtools");
 
     public static final File MAIN_JAVA     = new File(MAIN, "java");
-    public static final File DEVTOOLS_JAVA = new File(DEVTOOLS, "java");
 
     public static final File MAIN_RESOURCES     = new File(MAIN, "resources");
     public static final File DEVTOOLS_RESOURCES = new File(DEVTOOLS, "resources");

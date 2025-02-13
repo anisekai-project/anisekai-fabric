@@ -1,21 +1,17 @@
 {
-  "type":     "minecraft:crafting_shaped",
-  "category": "building",
-  "group":    "wooden_stool",
-  "pattern":  [
-    "CCC",
-    "S S"
-  ],
-  "key":      {
-    "S": {
-      "item": "minecraft:stick"
-    },
-    "C": {
-      "item": "minecraft:cherry_slab"
-    }
+  "result": {
+    "count": 1,
+    "id": "anisekai:cherry_stool"
   },
-  "result":   {
-    "id":    "anisekai:cherry_stool",
-    "count": 1
-  }
+  "pattern": [
+    "CCC",
+    "F F"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "C": {"item": "anisekai:cherry_half_slab"},
+    "F": {"item": "minecraft:cherry_fence"}
+  },
+  "group": "stools"
 }

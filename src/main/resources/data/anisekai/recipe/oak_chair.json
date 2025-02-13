@@ -1,22 +1,18 @@
 {
-  "type":     "minecraft:crafting_shaped",
-  "category": "building",
-  "group":    "wooden_chairs",
-  "pattern":  [
-    "S  ",
-    "CCC",
-    "S S"
-  ],
-  "key":      {
-    "S": {
-      "item": "minecraft:stick"
-    },
-    "C": {
-      "item": "minecraft:oak_slab"
-    }
+  "result": {
+    "count": 1,
+    "id": "anisekai:oak_chair"
   },
-  "result":   {
-    "id":    "anisekai:oak_chair",
-    "count": 1
-  }
+  "pattern": [
+    "F  ",
+    "CCC",
+    "F F"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "C": {"item": "anisekai:oak_half_slab"},
+    "F": {"item": "minecraft:oak_fence"}
+  },
+  "group": "chairs"
 }

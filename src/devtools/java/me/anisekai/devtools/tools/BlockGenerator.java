@@ -59,14 +59,11 @@ public final class BlockGenerator {
             if (useWoodVariant) {
                 for (String wood : this.mapping.keySet()) {
                     System.out.printf(" > Creating %s variant...%n", wood);
-
-                    String              variantName  = String.format("%s_%s", wood, block);
-                    String              variantId    = String.format("%s:%s", this.modId, variantName);
                     Map<String, String> replacements = this.getWoodTemplateReplacement(wood, block);
-
                     this.writeBlock(replacements, settings, parts);
                 }
             } else {
+                System.out.printf(" > Creating %s ...%n", block);
                 this.writeBlock(this.getTemplateReplacement(block), settings, parts);
             }
         }
@@ -76,7 +73,6 @@ public final class BlockGenerator {
             setFileContent(path, this.tagging.get(path));
         }
     }
-
 
     private void writeBlock(Map<String, String> replacements, JSONObject settings, JSONObject parts) throws IOException {
 

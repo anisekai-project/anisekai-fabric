@@ -27,8 +27,6 @@ import java.util.List;
 
 public class HalfSlabBlock extends Block implements Waterloggable {
 
-    public static final Identifier ID = AnisekaiMod.id("half_slab");
-
     public static final Identifier L0_ID = AnisekaiMod.id("half_slab_l0");
     public static final Identifier L1_ID = AnisekaiMod.id("half_slab_l1");
     public static final Identifier L2_ID = AnisekaiMod.id("half_slab_l2");

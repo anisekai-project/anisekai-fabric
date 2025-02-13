@@ -1,25 +1,18 @@
 {
-  "type":     "minecraft:crafting_shaped",
-  "category": "building",
-  "group":    "wooden_nightstand",
-  "pattern":  [
-    "___",
-    "O O",
-    "/_/"
-  ],
-  "key":      {
-    "_": {
-      "item": "minecraft:spruce_slab"
-    },
-    "O": {
-      "item": "minecraft:spruce_planks"
-    },
-    "/": {
-      "item": "minecraft:stick"
-    }
+  "result": {
+    "count": 1,
+    "id": "anisekai:spruce_nightstand"
   },
-  "result":   {
-    "id":    "anisekai:spruce_nightstand",
-    "count": 1
-  }
+  "pattern": [
+    "---",
+    "- -",
+    "|-|"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "|": {"item": "minecraft:spruce_fence"},
+    "-": {"item": "minecraft:spruce_half_slab"}
+  },
+  "group": "nightstands"
 }

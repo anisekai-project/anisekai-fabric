@@ -1,0 +1,15 @@
+{
+  "result": {
+    "count": 6,
+    "id": "anisekai:birch_staircase"
+  },
+  "pattern": [
+    "S  ",
+    "SS ",
+    "SSS"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {"S": {"item": "anisekai:birch_half_slab"}},
+  "group": "staircases"
+}
