@@ -68,6 +68,37 @@ public final class ModItems {
             new BlockItem(ModBlocks.CONDENSER, new Item.Settings().maxCount(64))
     );
 
+    public static final Item COPPER_COIN = Registry.register(
+            Registries.ITEM,
+            AnisekaiMod.id("copper_coin"),
+            new Item(new Item.Settings().maxCount(64))
+    );
+
+    public static final Item IRON_COIN = Registry.register(
+            Registries.ITEM,
+            AnisekaiMod.id("iron_coin"),
+            new Item(new Item.Settings().maxCount(64))
+    );
+
+    public static final Item GOLD_COIN = Registry.register(
+            Registries.ITEM,
+            AnisekaiMod.id("gold_coin"),
+            new Item(new Item.Settings().maxCount(64))
+    );
+
+    public static final Item DIAMOND_COIN = Registry.register(
+            Registries.ITEM,
+            AnisekaiMod.id("diamond_coin"),
+            new Item(new Item.Settings().maxCount(64))
+    );
+
+    public static final Item EMERALD_COIN = Registry.register(
+            Registries.ITEM,
+            AnisekaiMod.id("emerald_coin"),
+            new Item(new Item.Settings().maxCount(64))
+    );
+
+
     private ModItems() {}
 
     public static List<Item> items() {
@@ -82,6 +113,12 @@ public final class ModItems {
 
         items.add(FISHING_BASKET);
         items.add(CONDENSER);
+        items.add(COPPER_COIN);
+        items.add(IRON_COIN);
+        items.add(GOLD_COIN);
+        items.add(DIAMOND_COIN);
+        items.add(EMERALD_COIN);
+
         return items;
     }
 
