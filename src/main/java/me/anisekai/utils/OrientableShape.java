@@ -208,17 +208,13 @@ public class OrientableShape {
      */
     public static OrientableShape of(Identifier... ids) {
 
-        VoxelShape shape = Arrays
+        List<VoxelShape> shapes = Arrays
                 .stream(ids)
                 .map(SHAPES::get)
                 .filter(Objects::nonNull)
-                .collect(
-                        VoxelShapes::empty,
-                        (a, b) -> VoxelShapes.combine(a, b, BooleanBiFunction.OR),
-                        (a, b) -> VoxelShapes.combine(a, b, BooleanBiFunction.OR)
-                );
+                .collect(Collectors.toList());
 
-        return new OrientableShape(shape);
+        return new OrientableShape(shapes);
     }
 
     /**

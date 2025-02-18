@@ -29,9 +29,9 @@ public final class DevPaths {
         return "data/%s/loot_table/blocks/%s.json".formatted(namespace, name);
     }
 
-    public static String recipe(String namespace, String name) {
+    public static String recipe(String namespace, String category, String name) {
 
-        return "data/%s/recipe/%s.json".formatted(namespace, name);
+        return "data/%s/recipe/%s/%s.json".formatted(namespace, category, name);
     }
 
     public static String tag(String namespace, String name) {

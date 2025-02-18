@@ -1,0 +1,23 @@
+{
+  "using": "#minecraft:item/axes",
+  "consumables": [
+    {
+      "count": 1,
+      "id": "minecraft:dark_oak_sapling"
+    },
+    {
+      "count": 0,
+      "id": "#minecraft:dirt"
+    }
+  ],
+  "produces": {
+    "count": 6,
+    "id": "minecraft:dark_oak_log"
+  },
+  "time": 400,
+  "type": "anisekai:condenser",
+  "booster": {
+    "multiplier": 1.2,
+    "id": "minecraft:bone_meal"
+  }
+}

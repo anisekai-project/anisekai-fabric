@@ -105,18 +105,9 @@ publishing {
     }
 }
 
-tasks.register('generateBlocks', JavaExec) {
+tasks.register('generate', JavaExec) {
     group = 'devtools'
-    description = 'Generate all blocks'
+    description = 'Generate all data needed by the mod'
     classpath = sourceSets.devtools.runtimeClasspath
     mainClass = 'me.anisekai.devtools.DevTools'
-    args 'blocks'
-}
-
-tasks.register('generateVoxels', JavaExec) {
-    group = 'devtools'
-    description = 'Generate all voxel hitboxes for furniture'
-    classpath = sourceSets.devtools.runtimeClasspath
-    mainClass = 'me.anisekai.devtools.DevTools'
-    args 'hitboxes'
 }

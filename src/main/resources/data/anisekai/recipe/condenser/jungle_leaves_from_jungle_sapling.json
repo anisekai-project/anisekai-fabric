@@ -1,0 +1,23 @@
+{
+  "using": "minecraft:shears",
+  "consumables": [
+    {
+      "count": 1,
+      "id": "minecraft:jungle_sapling"
+    },
+    {
+      "count": 0,
+      "id": "#minecraft:dirt"
+    }
+  ],
+  "produces": {
+    "count": 12,
+    "id": "minecraft:jungle_leaves"
+  },
+  "time": 200,
+  "type": "anisekai:condenser",
+  "booster": {
+    "multiplier": 1.2,
+    "id": "minecraft:bone_meal"
+  }
+}

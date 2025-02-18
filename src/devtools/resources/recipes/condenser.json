@@ -1,0 +1,84 @@
+[
+  {
+    "generator": {
+      "useVariant": "wood",
+      "exclude":    [ "bamboo", "crimson", "warped" ]
+    },
+    "elements":  {
+      "name":        "{{log}}_from_{{sapling}}",
+      "type":        "{{mod}}:condenser",
+      "consumables": [
+        { "id": "minecraft:{{sapling}}", "count": 1 },
+        { "id": "{{grows_on}}", "count": 0 }
+      ],
+      "using":       "#minecraft:item/axes",
+      "booster":     {
+        "id":         "minecraft:bone_meal",
+        "multiplier": 1.2
+      },
+      "time":        400,
+      "produces":    {
+        "count": 6,
+        "id":    "minecraft:{{log}}"
+      }
+    }
+  },
+  {
+    "generator": {
+      "useVariant": "wood",
+      "exclude":    [ "bamboo", "crimson", "warped" ]
+    },
+    "elements":  {
+      "name":        "{{leaves}}_from_{{sapling}}",
+      "type":        "{{mod}}:condenser",
+      "consumables": [
+        { "id": "minecraft:{{sapling}}", "count": 1 },
+        { "id": "{{grows_on}}", "count": 0 }
+      ],
+      "using":       "minecraft:shears",
+      "booster":     {
+        "id":         "minecraft:bone_meal",
+        "multiplier": 1.2
+      },
+      "time":        200,
+      "produces":    {
+        "count": 12,
+        "id":    "minecraft:{{leaves}}"
+      }
+    }
+  },
+  {
+    "generator": { },
+    "elements":  {
+      "name":        "cobblestone",
+      "type":        "{{mod}}:condenser",
+      "consumables": [
+        { "id": "minecraft:water_bucket", "count": 0 },
+        { "id": "minecraft:lava_bucket", "count": 0 }
+      ],
+      "using":       "#minecraft:pickaxes",
+      "time":        400,
+      "produces":    {
+        "count": 1,
+        "id":    "minecraft:cobblestone"
+      }
+    }
+  },
+  {
+    "generator": { },
+    "elements":  {
+      "name":        "obsidian",
+      "type":        "{{mod}}:condenser",
+      "consumables": [
+        { "id": "minecraft:water_bucket", "count": 0 },
+        { "id": "minecraft:lava_bucket", "count": 0 }
+      ],
+      "using":       "#{{mod}}:advanced_pickaxes",
+      "time":        10000,
+      "produces":    {
+        "count": 1,
+        "id":    "minecraft:obsidian"
+      }
+    }
+  }
+]

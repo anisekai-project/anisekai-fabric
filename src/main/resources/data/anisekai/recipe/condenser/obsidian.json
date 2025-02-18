@@ -1,0 +1,19 @@
+{
+  "using": "#anisekai:advanced_pickaxes",
+  "consumables": [
+    {
+      "count": 0,
+      "id": "minecraft:water_bucket"
+    },
+    {
+      "count": 0,
+      "id": "minecraft:lava_bucket"
+    }
+  ],
+  "produces": {
+    "count": 1,
+    "id": "minecraft:obsidian"
+  },
+  "time": 10000,
+  "type": "anisekai:condenser"
+}

@@ -1,0 +1,10 @@
+{
+  "values": [
+    "anisekai:gold_coin",
+    "anisekai:diamond_coin",
+    "anisekai:copper_coin",
+    "anisekai:iron_coin",
+    "anisekai:emerald_coin"
+  ],
+  "replace": false
+}

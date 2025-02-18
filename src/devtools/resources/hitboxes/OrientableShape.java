@@ -9,6 +9,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static {{main}}.MOD_ID;
 
@@ -23,8 +24,7 @@ public class OrientableShape {
     }};
 
     /**
-     * Retrieve an {@link OrientableShape} created using a {@link VoxelShape} identified by the provided
-     * {@link Identifier}.
+     * Retrieve an {@link OrientableShape} created using a {@link VoxelShape} identified by the provided {@link Identifier}.
      *
      * @param id
      *         {@link Identifier} of the {@link OrientableShape}
@@ -47,17 +47,13 @@ public class OrientableShape {
      */
     public static OrientableShape of(Identifier... ids) {
 
-        VoxelShape shape = Arrays
+        List<VoxelShape> shapes = Arrays
                 .stream(ids)
                 .map(SHAPES::get)
                 .filter(Objects::nonNull)
-                .collect(
-                        VoxelShapes::empty,
-                        (a, b) -> VoxelShapes.combine(a, b, BooleanBiFunction.OR),
-                        (a, b) -> VoxelShapes.combine(a, b, BooleanBiFunction.OR)
-                );
+                .collect(Collectors.toList());
 
-        return new OrientableShape(shape);
+        return new OrientableShape(shapes);
     }
 
     /**
@@ -71,17 +67,13 @@ public class OrientableShape {
      */
     public static OrientableShape of(Collection<Identifier> ids) {
 
-        VoxelShape shape = ids
+        List<VoxelShape> shapes = ids
                 .stream()
                 .map(SHAPES::get)
                 .filter(Objects::nonNull)
-                .collect(
-                        VoxelShapes::empty,
-                        (a, b) -> VoxelShapes.combine(a, b, BooleanBiFunction.OR),
-                        (a, b) -> VoxelShapes.combine(a, b, BooleanBiFunction.OR)
-                );
+                .collect(Collectors.toList());
 
-        return new OrientableShape(shape);
+        return new OrientableShape(shapes);
     }
 
     /**
@@ -205,8 +197,7 @@ public class OrientableShape {
     }
 
     /**
-     * Create a {@link OrientableShape} using the provided {@link VoxelShape} that will be rotated to generate all
-     * directions.
+     * Create a {@link OrientableShape} using the provided {@link VoxelShape} that will be rotated to generate all directions.
      *
      * @param shape
      *         A {@link VoxelShape} to create the {@link OrientableShape} from.
