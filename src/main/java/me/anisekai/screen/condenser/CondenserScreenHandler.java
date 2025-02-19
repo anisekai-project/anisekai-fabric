@@ -9,54 +9,71 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.RecipeEntry;
+import net.minecraft.recipe.RecipeManager;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 import static me.anisekai.blockentities.CondenserBlockEntity.*;
 
 public class CondenserScreenHandler extends ScreenHandler {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CondenserScreenHandler.class);
+
     public static CondenserScreenHandler create(int syncId, PlayerInventory playerInventory) {
+
+        PlayerEntity player = playerInventory.player;
+        World        world  = player.getWorld();
+        if (world == null) {
+            throw new IllegalStateException("Tried to open a condenser screen handler but world is null");
+        }
+
+        RecipeManager manager = world.getRecipeManager();
 
         return create(
                 syncId,
                 playerInventory,
                 new SimpleInventory(INVENTORY_SIZE),
-                new ArrayPropertyDelegate(DELEGATE_SIZE)
+                new ArrayPropertyDelegate(DELEGATE_SIZE),
+                () -> manager.listAllOfType(CondenserRecipe.Type.INSTANCE)
         );
     }
 
-    public static CondenserScreenHandler create(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate) {
+    public static CondenserScreenHandler create(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate, Supplier<List<RecipeEntry<CondenserRecipe>>> recipeSupplier) {
 
         return new CondenserScreenHandler(
                 syncId,
                 playerInventory,
                 inventory,
-                propertyDelegate
+                propertyDelegate,
+                recipeSupplier
         );
     }
 
-    private final PropertyDelegate propertyDelegate;
-    private final Inventory        inventory;
+    private final PropertyDelegate                   propertyDelegate;
+    private final Inventory                          inventory;
+    private final List<RecipeEntry<CondenserRecipe>> recipes;
+    private final List<CondenserRecipeRenderer>      renderers;
 
-    private final List<CondenserRecipeRenderer> recipes = CondenserRecipe.RECIPES.values()
-                                                                                 .stream()
-                                                                                 .map(CondenserRecipeRenderer::new)
-                                                                                 .toList();
-
-    public CondenserScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate) {
+    public CondenserScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate, Supplier<List<RecipeEntry<CondenserRecipe>>> recipeSupplier) {
 
         super(ModScreenHandler.CONDENSER, syncId);
         this.inventory        = inventory;
         this.propertyDelegate = propertyDelegate;
+        this.recipes          = recipeSupplier.get();
+        this.renderers        = this.recipes.stream().map(CondenserRecipeRenderer::new).toList();
 
-        this.addSlot(new ConstrainedSlot(this.inventory, INV_INGREDIENT_A, 125, 21));
-        this.addSlot(new ConstrainedSlot(this.inventory, INV_INGREDIENT_B, 155, 21));
+        this.addSlot(new ConstrainedSlot(this.inventory, INV_APPLY, 125, 21));
+        this.addSlot(new ConstrainedSlot(this.inventory, INV_ONTO, 155, 21));
         this.addSlot(new ConstrainedSlot(this.inventory, INV_BOOSTER, 140, 42));
         this.addSlot(new ConstrainedSlot(this.inventory, INV_TOOL, 179, 37));
         this.addSlot(new OutputSlot(this.inventory, INV_OUTPUT, 234, 38));
@@ -88,12 +105,12 @@ public class CondenserScreenHandler extends ScreenHandler {
                 return ItemStack.EMPTY;
             }
             clickedSlot.onQuickTransfer(clickedStack, stack);
-        } else if (slot >= INV_INGREDIENT_A && slot <= INV_TOOL) {
+        } else if (slot >= INV_APPLY && slot <= INV_TOOL) {
             if (!this.insertItem(clickedStack, 6, 40, false)) {
                 return ItemStack.EMPTY;
             }
         } else {
-            if (!this.insertItem(clickedStack, INV_INGREDIENT_A, INV_OUTPUT, true)) {
+            if (!this.insertItem(clickedStack, INV_APPLY, INV_OUTPUT, true)) {
                 return ItemStack.EMPTY;
             }
         }
@@ -142,12 +159,7 @@ public class CondenserScreenHandler extends ScreenHandler {
 
     public boolean isWorking() {
 
-        return this.propertyDelegate.get(DELEGATE_VALUE_ACTIVE_RECIPE) > -1;
-    }
-
-    public int getSelectedRecipe() {
-
-        return this.propertyDelegate.get(DELEGATE_VALUE_SELECTED_RECIPE);
+        return this.getWorkingSpeed() > 0;
     }
 
     public BlockPos getBlockPos() {
@@ -159,14 +171,19 @@ public class CondenserScreenHandler extends ScreenHandler {
         return new BlockPos(x, y, z);
     }
 
-    public List<CondenserRecipeRenderer> getRecipes() {
-
-        return this.recipes;
-    }
-
     public void tick() {
 
-        this.recipes.forEach(CondenserRecipeRenderer::tick);
+        this.renderers.forEach(CondenserRecipeRenderer::tick);
+    }
+
+    public List<CondenserRecipeRenderer> getRenderers() {
+
+        return this.renderers;
+    }
+
+    public List<RecipeEntry<CondenserRecipe>> getRecipes() {
+
+        return this.recipes;
     }
 
     // </editor-fold>

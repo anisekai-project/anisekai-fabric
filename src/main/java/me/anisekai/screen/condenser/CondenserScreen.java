@@ -2,7 +2,6 @@ package me.anisekai.screen.condenser;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.anisekai.AnisekaiMod;
-import me.anisekai.networking.CondenserPackets;
 import me.anisekai.recipes.CondenserRecipe;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -11,6 +10,7 @@ import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -24,7 +24,6 @@ public class CondenserScreen extends HandledScreen<CondenserScreenHandler> {
 
     private static final Identifier TEXTURE = Identifier.of(AnisekaiMod.MOD_ID, "textures/gui/condenser.png");
 
-    private       int                selectedIndex;
     private final WidgetButtonPage[] offers = new WidgetButtonPage[7];
     private       int                indexStartOffset;
     private       boolean            scrolling;
@@ -47,12 +46,7 @@ public class CondenserScreen extends HandledScreen<CondenserScreenHandler> {
 
         int k = this.y + 16 + 2;
         for (int l = 0; l < 7; ++l) {
-            this.offers[l] = this.addDrawableChild(new WidgetButtonPage(this.x + 5, k, l, button -> {
-                if (button instanceof WidgetButtonPage wbp) {
-                    this.selectedIndex = wbp.getIndex() + this.indexStartOffset;
-                    CondenserPackets.sendSetRecipe(this.handler.getBlockPos(), this.selectedIndex);
-                }
-            }));
+            this.offers[l] = this.addDrawableChild(new WidgetButtonPage(this.x + 5, k, l));
             k += 20;
         }
     }
@@ -94,8 +88,6 @@ public class CondenserScreen extends HandledScreen<CondenserScreenHandler> {
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
 
-        this.selectedIndex = this.handler.getSelectedRecipe();
-
         this.handler.tick();
         this.renderBackground(context, mouseX, mouseY, delta);
         super.render(context, mouseX, mouseY, delta);
@@ -103,7 +95,7 @@ public class CondenserScreen extends HandledScreen<CondenserScreenHandler> {
         this.drawItemSpeed(context);
         this.drawArrow(context);
 
-        List<CondenserRecipeRenderer> recipes = this.handler.getRecipes();
+        List<CondenserRecipeRenderer> recipes = this.handler.getRenderers();
 
         if (!recipes.isEmpty()) {
             int l = this.x + 8;
@@ -112,7 +104,7 @@ public class CondenserScreen extends HandledScreen<CondenserScreenHandler> {
             int m = 0;
 
             for (CondenserRecipeRenderer recipeRenderer : recipes) {
-                CondenserRecipe recipe = recipeRenderer.getRecipe();
+                RecipeEntry<CondenserRecipe> recipe = recipeRenderer.getRecipe();
 
                 if (this.canScroll() && (m < this.indexStartOffset || m >= 7 + this.indexStartOffset)) {
                     ++m;
@@ -122,10 +114,10 @@ public class CondenserScreen extends HandledScreen<CondenserScreenHandler> {
                 context.getMatrices().push();
                 context.getMatrices().translate(0.0f, 0.0f, 100.0f);
 
-                this.renderItem(context, recipeRenderer.getIngredientA(), l, k);
-                this.renderItem(context, recipeRenderer.getIngredientB(), l + 18, k);
+                this.renderItem(context, recipeRenderer.getApply(), l, k);
+                this.renderItem(context, recipeRenderer.getOnto(), l + 18, k);
                 this.renderItem(context, recipeRenderer.getTool(), l + 36, k);
-                this.renderItem(context, recipe.getOutput(), l + 64, k);
+                this.renderItem(context, recipe.value().result(), l + 64, k);
 
                 context.getMatrices().pop();
                 k += 20;
@@ -133,8 +125,6 @@ public class CondenserScreen extends HandledScreen<CondenserScreenHandler> {
             }
 
             for (WidgetButtonPage wbp : this.offers) {
-                wbp.setFocused(wbp.index + this.indexStartOffset == this.selectedIndex);
-
                 if (wbp.isSelected()) {
                     wbp.renderTooltip(context, mouseX, mouseY);
                 }
@@ -235,9 +225,9 @@ public class CondenserScreen extends HandledScreen<CondenserScreenHandler> {
 
         final int index;
 
-        public WidgetButtonPage(int x, int y, int index, ButtonWidget.PressAction onPress) {
+        public WidgetButtonPage(int x, int y, int index) {
 
-            super(x, y, 88, 20, ScreenTexts.EMPTY, onPress, DEFAULT_NARRATION_SUPPLIER);
+            super(x, y, 88, 20, ScreenTexts.EMPTY, button -> {}, DEFAULT_NARRATION_SUPPLIER);
             this.index   = index;
             this.visible = false;
         }
@@ -250,17 +240,16 @@ public class CondenserScreen extends HandledScreen<CondenserScreenHandler> {
         public void renderTooltip(DrawContext context, int x, int y) {
 
             CondenserScreen               screen  = CondenserScreen.this;
-            List<CondenserRecipeRenderer> recipes = screen.handler.getRecipes();
+            List<CondenserRecipeRenderer> recipes = screen.handler.getRenderers();
 
             if (this.hovered && recipes.size() > this.index + screen.indexStartOffset) {
-                CondenserRecipeRenderer renderer = recipes.get(this.index + screen.indexStartOffset);
-                CondenserRecipe         recipe   = renderer.getRecipe();
-
+                CondenserRecipeRenderer      renderer = recipes.get(this.index + screen.indexStartOffset);
+                RecipeEntry<CondenserRecipe> recipe   = renderer.getRecipe();
                 if (x > 8 && x < this.getX() + 20) {
-                    ItemStack itemStack = renderer.getIngredientA();
+                    ItemStack itemStack = renderer.getApply();
                     context.drawItemTooltip(screen.textRenderer, itemStack, x, y);
                 } else if (x < this.getX() + 38 && x > this.getX() + 22) {
-                    ItemStack itemStack = renderer.getIngredientB();
+                    ItemStack itemStack = renderer.getOnto();
                     if (!itemStack.isEmpty()) {
                         context.drawItemTooltip(screen.textRenderer, itemStack, x, y);
                     }
@@ -270,7 +259,7 @@ public class CondenserScreen extends HandledScreen<CondenserScreenHandler> {
                         context.drawItemTooltip(screen.textRenderer, itemStack, x, y);
                     }
                 } else if (x > this.getX() + 65) {
-                    ItemStack itemStack = recipe.getOutput();
+                    ItemStack itemStack = recipe.value().result();
                     context.drawItemTooltip(screen.textRenderer, itemStack, x, y);
                 }
             }

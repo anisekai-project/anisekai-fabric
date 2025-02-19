@@ -5,19 +5,14 @@
       "exclude":    [ "bamboo", "crimson", "warped" ]
     },
     "elements":  {
-      "name":        "{{log}}_from_{{sapling}}",
-      "type":        "{{mod}}:condenser",
-      "consumables": [
-        { "id": "minecraft:{{sapling}}", "count": 1 },
-        { "id": "{{grows_on}}", "count": 0 }
-      ],
-      "using":       "#minecraft:item/axes",
-      "booster":     {
-        "id":         "minecraft:bone_meal",
-        "multiplier": 1.2
-      },
-      "time":        400,
-      "produces":    {
+      "name":    "{{log}}_from_{{sapling}}",
+      "type":    "{{mod}}:condenser",
+      "apply":   { "use": { "item": "minecraft:{{sapling}}" }, "consume": true },
+      "onto":    { "use": { "tag": "{{grows_on}}" }, "consume": false },
+      "tool":    { "tag": "minecraft:axes" },
+      "booster": { "item": "minecraft:bone_meal" },
+      "time":    400,
+      "result":  {
         "count": 6,
         "id":    "minecraft:{{log}}"
       }
@@ -29,19 +24,14 @@
       "exclude":    [ "bamboo", "crimson", "warped" ]
     },
     "elements":  {
-      "name":        "{{leaves}}_from_{{sapling}}",
-      "type":        "{{mod}}:condenser",
-      "consumables": [
-        { "id": "minecraft:{{sapling}}", "count": 1 },
-        { "id": "{{grows_on}}", "count": 0 }
-      ],
-      "using":       "minecraft:shears",
-      "booster":     {
-        "id":         "minecraft:bone_meal",
-        "multiplier": 1.2
-      },
-      "time":        200,
-      "produces":    {
+      "name":    "{{leaves}}_from_{{sapling}}",
+      "type":    "{{mod}}:condenser",
+      "apply":   { "use": { "item": "minecraft:{{sapling}}" }, "consume": true },
+      "onto":    { "use": { "tag": "{{grows_on}}" }, "consume": false },
+      "tool":    { "item": "minecraft:shears" },
+      "booster": { "item": "minecraft:bone_meal" },
+      "time":    200,
+      "result":  {
         "count": 12,
         "id":    "minecraft:{{leaves}}"
       }
@@ -50,32 +40,28 @@
   {
     "generator": { },
     "elements":  {
-      "name":        "cobblestone",
-      "type":        "{{mod}}:condenser",
-      "consumables": [
-        { "id": "minecraft:water_bucket", "count": 0 },
-        { "id": "minecraft:lava_bucket", "count": 0 }
-      ],
-      "using":       "#minecraft:pickaxes",
-      "time":        400,
-      "produces":    {
+      "name":    "stone",
+      "type":    "{{mod}}:condenser",
+      "apply":   { "use": { "item": "minecraft:lava_bucket" }, "consume": true },
+      "onto":    { "use": { "item": "minecraft:water_bucket" }, "consume": false },
+      "tool":    { "tag": "minecraft:pickaxes" },
+      "time":    400,
+      "result":  {
         "count": 1,
-        "id":    "minecraft:cobblestone"
+        "id":    "minecraft:stone"
       }
     }
   },
   {
     "generator": { },
     "elements":  {
-      "name":        "obsidian",
-      "type":        "{{mod}}:condenser",
-      "consumables": [
-        { "id": "minecraft:water_bucket", "count": 0 },
-        { "id": "minecraft:lava_bucket", "count": 0 }
-      ],
-      "using":       "#{{mod}}:advanced_pickaxes",
-      "time":        10000,
-      "produces":    {
+      "name":    "obsidian",
+      "type":    "{{mod}}:condenser",
+      "apply":   { "use": { "item": "minecraft:water_bucket" }, "consume": false },
+      "onto":    { "use": { "item": "minecraft:lava_bucket" }, "consume": true },
+      "tool":    { "tag": "{{mod}}:advanced_pickaxes" },
+      "time":    10000,
+      "result":  {
         "count": 1,
         "id":    "minecraft:obsidian"
       }

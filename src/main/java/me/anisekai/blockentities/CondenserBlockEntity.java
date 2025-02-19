@@ -8,7 +8,6 @@ import me.anisekai.screen.condenser.CondenserScreenHandler;
 import me.anisekai.utils.HandUtils;
 import me.anisekai.utils.ReadWritePropertyDelegate;
 import me.anisekai.utils.delegates.DelegatedBoolean;
-import me.anisekai.utils.delegates.DelegatedIdentifier;
 import me.anisekai.utils.delegates.DelegatedInteger;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -18,11 +17,13 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
@@ -37,38 +38,38 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.Objects;
+import java.util.List;
 import java.util.Optional;
 
 public class CondenserBlockEntity extends BlockEntity implements BlockEntityTicker<CondenserBlockEntity>, ImplementedInventory {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CondenserBlockEntity.class);
+
     public static final int INVENTORY_SIZE = 5;
     public static final int DELEGATE_SIZE  = 9;
 
-    public static final int INV_INGREDIENT_A = 0;
-    public static final int INV_INGREDIENT_B = 1;
-    public static final int INV_BOOSTER      = 2;
-    public static final int INV_TOOL         = 3;
-    public static final int INV_OUTPUT       = 4;
+    public static final int INV_APPLY   = 0;
+    public static final int INV_ONTO    = 1;
+    public static final int INV_BOOSTER = 2;
+    public static final int INV_TOOL    = 3;
+    public static final int INV_OUTPUT  = 4;
 
     public static final int DELEGATE_OPTIONS_PROTECT_TOOL    = 0;
     public static final int DELEGATE_OPTIONS_SILENT_OVERFLOW = 1;
-    public static final int DELEGATE_VALUE_ACTIVE_RECIPE     = 2;
-    public static final int DELEGATE_VALUE_SELECTED_RECIPE   = 3;
-    public static final int DELEGATE_VALUE_IPS               = 4;
-    public static final int DELEGATE_VALUE_PROGRESS_PERCENT  = 5;
-    public static final int DELEGATE_POS_X                   = 6;
-    public static final int DELEGATE_POS_Y                   = 7;
-    public static final int DELEGATE_POS_Z                   = 8;
+    public static final int DELEGATE_VALUE_IPS               = 2;
+    public static final int DELEGATE_VALUE_PROGRESS_PERCENT  = 3;
+    public static final int DELEGATE_POS_X                   = 4;
+    public static final int DELEGATE_POS_Y                   = 5;
+    public static final int DELEGATE_POS_Z                   = 6;
 
     private final DefaultedList<ItemStack> items = DefaultedList.ofSize(INVENTORY_SIZE, ItemStack.EMPTY);
 
-    private final DelegatedBoolean    protectTool    = new DelegatedBoolean(false);
-    private final DelegatedBoolean    silentOverflow = new DelegatedBoolean(false);
-    private final DelegatedBoolean    jammed         = new DelegatedBoolean(false);
-    private final DelegatedIdentifier activeRecipe   = DelegatedIdentifier.of(CondenserRecipe.RECIPES);
-    private final DelegatedIdentifier selectedRecipe = DelegatedIdentifier.of(CondenserRecipe.RECIPES);
+    private final DelegatedBoolean protectTool    = new DelegatedBoolean(false);
+    private final DelegatedBoolean silentOverflow = new DelegatedBoolean(false);
+    private final DelegatedBoolean jammed         = new DelegatedBoolean(false);
 
     private final DelegatedInteger progressPerTick    = new DelegatedInteger(0);
     private final DelegatedInteger currentWorkedTicks = new DelegatedInteger(0);
@@ -79,13 +80,12 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
     private final DelegatedInteger posY = new DelegatedInteger(0);
     private final DelegatedInteger posZ = new DelegatedInteger(0);
 
-    private int internalTick = 0;
+    private int                          internalTick = 0;
+    private RecipeEntry<CondenserRecipe> activeRecipe = null;
 
     private final PropertyDelegate delegate = new ReadWritePropertyDelegate(
             this.protectTool,
             this.silentOverflow,
-            this.activeRecipe,
-            this.selectedRecipe,
             this.itemPerSeconds,
             this.progressPercent,
             this.posX,
@@ -106,6 +106,15 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
         return this.delegate;
     }
 
+    public List<RecipeEntry<CondenserRecipe>> getAvailableRecipes() {
+
+        if (this.world == null) {
+            return List.of(); // Avoid crashes if world is not loaded
+        }
+
+        return this.world.getRecipeManager().listAllOfType(CondenserRecipe.Type.INSTANCE);
+    }
+
     @Override
     protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
 
@@ -115,8 +124,6 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
         nbt.putBoolean("ProtectTool", this.protectTool.isTrue());
         nbt.putBoolean("SilentOverflow", this.silentOverflow.isTrue());
         nbt.putBoolean("Jammed", this.jammed.isTrue());
-        nbt.putString("ActiveRecipe", this.activeRecipe.toString());
-        nbt.putString("SelectedRecipe", this.selectedRecipe.toString());
         nbt.putInt("ProgressPerTick", this.progressPerTick.get());
         nbt.putInt("CurrentWorkedTick", this.currentWorkedTicks.get());
     }
@@ -130,8 +137,6 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
         this.protectTool.set(nbt.getBoolean("ProtectTool"));
         this.silentOverflow.set(nbt.getBoolean("SilentOverflow"));
         this.jammed.set(nbt.getBoolean("Jammed"));
-        this.activeRecipe.setFrom(nbt, "ActiveRecipe");
-        this.selectedRecipe.setFrom(nbt, "SelectedRecipe");
         this.progressPerTick.set(nbt.getInt("ProgressPerTick"));
         this.currentWorkedTicks.set(nbt.getInt("CurrentWorkedTick"));
     }
@@ -156,10 +161,10 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
         return this.createNbt(registryLookup);
     }
 
-    private void decrementSlot(int slot, int amount) {
+    private void decrementSlot(int slot) {
 
         ItemStack stack = this.getStack(slot);
-        stack.decrement(amount);
+        stack.decrement(1);
         if (stack.getCount() <= 0) {
             this.removeStack(slot);
         }
@@ -179,120 +184,99 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
     // <editor-fold desc="Condenser Specific Private Methods">
 
     /**
-     * Retrieve the active {@link CondenserRecipe} of this {@link CondenserBlockEntity}. An active recipe is a recipe
-     * that is currently being used to create an {@link ItemStack}.
+     * Retrieve the first recipe that match this {@link CondenserBlockEntity}'s {@link Inventory}.
      *
-     * @return An optional {@link CondenserRecipe}. The value will be empty if no task is being worked on by this
-     *         {@link CondenserBlockEntity}.
+     * @return An optional {@link RecipeEntry}.
      */
-    private Optional<CondenserRecipe> getActiveRecipe() {
+    private Optional<RecipeEntry<CondenserRecipe>> getMatchingRecipeFromInventory() {
 
-        if (!this.activeRecipe.isSet()) {
-            return Optional.empty();
-        }
-        return Optional.ofNullable(CondenserRecipe.RECIPES.get(this.activeRecipe.getIdentifier()));
+        return this.getAvailableRecipes()
+                   .stream()
+                   .filter(this::canProcessRecipe)
+                   .findFirst();
     }
 
     /**
-     * Retrieve the selected {@link CondenserRecipe} of this {@link CondenserBlockEntity}. A selected recipe is a recipe
-     * that has been chosen by a player
+     * Check if the provided {@link RecipeEntry} can be processed with the current {@link CondenserBlockEntity}'s
+     * {@link Inventory}. The booster {@link ItemStack} will not be checked against.
      *
-     * @return An optional {@link CondenserRecipe}. While usually not empty, this will be empty if the block has just
-     *         been placed in the world and the user did not select any recipe yet. Once the player selected a recipe,
-     *         it is impossible to unselect it.
+     * @param recipe
+     *         The {@link RecipeEntry} to check
+     *
+     * @return True if the {@link Inventory} is compatible with the {@link RecipeEntry}, false otherwise.
      */
-    private Optional<CondenserRecipe> getSelectedRecipe() {
+    private boolean canProcessRecipe(RecipeEntry<CondenserRecipe> recipe) {
 
-        if (this.selectedRecipe.isSet()) {
-            return Optional.of(CondenserRecipe.RECIPES.get(this.selectedRecipe.getIdentifier()));
-        }
-        return Optional.empty();
+        if (recipe == null) return false;
+        ItemStack apply = this.getStack(INV_APPLY);
+        ItemStack onto  = this.getStack(INV_ONTO);
+        ItemStack tool  = this.getStack(INV_TOOL);
+        return recipe.value().test(apply, onto, tool);
     }
 
     /**
-     * Reset this {@link CondenserRecipe} state. This will cause to cancel any recipe that was currently being worked
-     * on. Any used item as booster will not be refunded (same as when you break a {@link FurnaceBlock} with fuel time
-     * left)
+     * Reset this {@link CondenserBlockEntity} state. This will cause to cancel any recipe that was currently being worked on. Any
+     * used item as booster will not be refunded (same as when you break a {@link FurnaceBlock} with fuel time left)
      */
     private void resetState() {
 
-        this.activeRecipe.set(null);
+        LOGGER.info("Reset state at {}", this.pos);
+        this.activeRecipe = null;
         this.progressPerTick.set(0);
         this.currentWorkedTicks.set(0);
-    }
-
-    /**
-     * Check if the provided {@link CondenserRecipe} can be processed by this {@link CondenserBlockEntity} depending on
-     * its inventory content. This will not check the booster neither if anything can be generated if using this
-     * recipe.
-     *
-     * @param recipe
-     *         The {@link CondenserRecipe} to check
-     *
-     * @return True if both ingredients and tool matched the provided {@link CondenserRecipe}, false otherwise.
-     */
-    private boolean canProcessRecipe(CondenserRecipe recipe) {
-
-        ItemStack ingredientA = this.getStack(INV_INGREDIENT_A);
-        ItemStack ingredientB = this.getStack(INV_INGREDIENT_B);
-        ItemStack tool        = this.getStack(INV_TOOL);
-
-        int consumesA = recipe.getConsumes()[0];
-        int consumesB = recipe.getConsumes()[1];
-
-        boolean isRightTool        = recipe.canUseWith(tool);
-        boolean isRightIngredients = recipe.canUseOn(ingredientA, ingredientB);
-        boolean hasRightAmountOfA  = ingredientA.getCount() >= consumesA;
-        boolean hasRightAmountOfB  = ingredientB.getCount() >= consumesB;
-
-        return isRightTool && isRightIngredients && hasRightAmountOfA && hasRightAmountOfB;
     }
 
     /**
      * Start processing the provided recipe.
      *
      * @param recipe
-     *         The {@link CondenserRecipe} to condense.
+     *         The {@link RecipeEntry} to condense.
      */
-    private void startProcessing(CondenserRecipe recipe) {
+    private void startProcessing(RecipeEntry<CondenserRecipe> recipe) {
 
-        this.processSpeed(recipe);
+        LOGGER.info("Starting condenser at {} using {}", this.pos, recipe.id());
+        this.internalTick = 0;
+        this.activeRecipe = recipe;
         this.currentWorkedTicks.set(0);
-        this.activeRecipe.set(recipe.getId());
+        this.processSpeed();
     }
 
-    private void processSpeed(CondenserRecipe recipe) {
+    private void processSpeed() {
 
         ItemStack booster = this.getStack(INV_BOOSTER);
         ItemStack tool    = this.getStack(INV_TOOL);
 
-        float rawSpeed = HandUtils.getEfficiencyMiningValue(this.world, tool) + HandUtils.getMiningMultiplier(tool);
+        float progressPerTick = HandUtils.getEfficiencyMiningValue(this.world, tool) + HandUtils.getMiningMultiplier(tool);
 
-        if (recipe.canBoost(booster)) {
-            rawSpeed *= recipe.getBoosterMultiplier();
+        if (this.activeRecipe.value().booster().test(booster)) {
+            progressPerTick *= 1.2f;
         }
 
-        int progressPerTick = Math.round(rawSpeed);
-        int itemSecond100 = (int) (((double) progressPerTick / recipe.getRequiredTickTime()) * 2000 * recipe.getOutput()
-                                                                                                            .getCount());
-        this.itemPerSeconds.set(itemSecond100);
-        this.progressPerTick.set(progressPerTick);
+        int outputCount  = this.activeRecipe.value().result().getCount();
+        int timeRequired = this.activeRecipe.value().time();
+
+        float itemPerTick   = (progressPerTick / timeRequired) * outputCount;
+        float itemPerSecond = itemPerTick * 20;
+
+        // Used for 2 digits precision on player screen.
+        int itemPerSecond100 = (int) (itemPerSecond * 100);
+
+        this.itemPerSeconds.set(itemPerSecond100);
+        this.progressPerTick.set((int) progressPerTick);
     }
 
     /**
      * Add the {@link CondenserRecipe} output to this {@link CondenserBlockEntity} output.
-     *
-     * @param recipe
-     *         The {@link CondenserRecipe} to condense.
      */
-    private void doCrafting(CondenserRecipe recipe) {
+    private int doCrafting() {
 
+        LOGGER.info("Condensing output at {}", this.pos);
         ItemStack blockOutput  = this.getStack(INV_OUTPUT);
-        ItemStack recipeOutput = recipe.getOutput();
+        ItemStack recipeOutput = this.activeRecipe.value().result();
 
-        this.decrementSlot(INV_INGREDIENT_A, recipe.getConsumes()[0]);
-        this.decrementSlot(INV_INGREDIENT_B, recipe.getConsumes()[1]);
-        this.decrementSlot(INV_BOOSTER, 1);
+        if (this.activeRecipe.value().apply().consume()) this.decrementSlot(INV_APPLY);
+        if (this.activeRecipe.value().onto().consume()) this.decrementSlot(INV_ONTO);
+        this.decrementSlot(INV_BOOSTER);
 
         if (blockOutput.isEmpty()) {
             this.setStack(INV_OUTPUT, recipeOutput.copy());
@@ -300,107 +284,79 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
             blockOutput.increment(recipeOutput.getCount());
         }
 
-        if (this.canProcessRecipe(recipe) && Objects.equals(this.selectedRecipe.getIdentifier(), recipe.getId())) {
-            this.startProcessing(recipe); // Immediate restart if we can
-        } else {
-            this.resetState();
+        this.resetState();
+
+        if (this.canProcessRecipe(this.activeRecipe)) {
+            this.startProcessing(this.activeRecipe); // Immediate restart if we can
         }
+
+        return recipeOutput.getCount();
     }
 
     /**
      * Check if the provided {@link CondenserRecipe} can put its output in this {@link CondenserBlockEntity} output.
      *
-     * @param recipe
-     *         The {@link CondenserRecipe} to check
-     *
      * @return True if the output can fit, both with the item type and item amount
      */
-    private boolean canOutput(CondenserRecipe recipe) {
+    private boolean canOutput() {
 
-        ItemStack currentOutput = this.getStack(INV_OUTPUT);
-        int       left          = currentOutput.getMaxCount() - currentOutput.getCount();
+        ItemStack output = this.getStack(INV_OUTPUT);
 
-        if (currentOutput.isEmpty()) {
+        if (output.isEmpty()) {
             return true;
         }
 
-        return ItemStack.areItemsAndComponentsEqual(currentOutput, recipe.getOutput()) && left >= recipe.getOutput().getCount();
+        boolean areItemsCompatible = ItemStack.areItemsAndComponentsEqual(output, this.activeRecipe.value().result());
+        boolean canOutputCount     = output.getMaxCount() - output.getCount() >= this.activeRecipe.value().result().getCount();
+
+        return areItemsCompatible && canOutputCount;
     }
 
     /**
-     * Method called each tick when there is no active recipe within this {@link CondenserBlockEntity}. Depending on the
-     * inventory content, this method may or may not set an active recipe.
+     * Method called each tick when there is an active recipe within this {@link CondenserBlockEntity}. This does not ensure any
+     * progress will be made on this tick.
      */
-    private void tickNoActiveRecipe() {
+    private void doRecipeTick(WorldAccess world, BlockPos pos) {
 
-        this.getSelectedRecipe().ifPresent(recipe -> {
-            if (this.canProcessRecipe(recipe)) {
-                this.startProcessing(recipe);
-            }
-        });
-    }
+        this.processSpeed();
+        this.internalTick = (this.internalTick + 1) % 5;
 
-    /**
-     * Method called each tick when there is an active recipe within this {@link CondenserBlockEntity}. This does not
-     * ensure any progress will be made on this tick.
-     */
-    private void tickActiveRecipe(WorldAccess world, BlockPos pos) {
-        // Do we have any active recipe ?
-        if (this.getActiveRecipe().isEmpty()) {
-            this.resetState();
-            return; // No, so we can exit early.
-        }
+        ItemStack tool         = this.getStack(INV_TOOL);
+        boolean   toolMayBreak = tool.getDamage() + this.activeRecipe.value().result().getCount() >= tool.getMaxDamage();
 
-        CondenserRecipe recipe = this.getActiveRecipe().get();
-        this.processSpeed(recipe);
-
-        if (!this.canProcessRecipe(recipe)) {
-            this.resetState();
-            return;
-        }
-
-        // Tool checks
-        ItemStack tool = this.getStack(INV_TOOL);
-
-        boolean shouldWait = this.protectTool.isTrue() &&
-                tool.getDamage() + recipe.getOutput().getCount() >= tool.getMaxDamage();
-
-        // If we can output or the tool could potentially break on next condensing...
-        if (!this.canOutput(recipe) || shouldWait) {
+        if ((toolMayBreak && this.protectTool.isTrue()) || !this.canOutput()) {
             this.currentWorkedTicks.set(0);
             this.progressPercent.set(0);
-            this.jammed.set(true); // Jam the block...
+            this.jammed.set(true);
 
-            if (!this.silentOverflow.isTrue() && this.internalTick == 0) {
-                // ...and play a sound, if the block's settings allow it
+            if (this.internalTick == 0) {
                 world.playSound(null, pos, SoundEvents.BLOCK_NOTE_BLOCK_BASS.value(), SoundCategory.BLOCKS, 0.1f, 1.0f);
             }
-            return;
         }
 
-        // Increment progress
+        float workedTick   = (float) this.currentWorkedTicks.get();
+        float timeRequired = (float) this.activeRecipe.value().time();
+
         this.jammed.set(false);
         this.currentWorkedTicks.increment(this.progressPerTick.get());
-        int progress = Math.round((this.currentWorkedTicks.get() / (float) recipe.getRequiredTickTime()) * 100);
-        this.progressPercent.set(progress);
+        this.progressPercent.set(Math.round((workedTick / timeRequired) * 100));
 
-        // If the progress is over what is required to condense our block
-        if (this.currentWorkedTicks.get() >= recipe.getRequiredTickTime()) {
-            this.doCrafting(recipe); // Craft it
+        if (workedTick >= timeRequired) {
+            int damage = this.doCrafting();
 
-            tool.damage(recipe.getOutput().getCount(), (ServerWorld) world, null, item -> {
-                this.removeStack(INV_TOOL);
-                world.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1f, 1.0f);
-            });
+            tool.damage(
+                    damage,
+                    (ServerWorld) world, null, item -> {
+                        this.removeStack(INV_TOOL);
+                        world.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1f, 1.0f);
+                    }
+            );
 
-            world.playSound(null, pos, recipe.getCondensedSound(), SoundCategory.BLOCKS, 0.1f, 1.0f);
+            world.playSound(null, pos, SoundEvents.BLOCK_STONE_BREAK, SoundCategory.BLOCKS, 0.1f, 1.0f);
             return;
         }
 
-        if (this.internalTick == 0 && recipe.getWorkingSound() != null) {
-            // Play the working sound if we have one
-            world.playSound(null, pos, recipe.getWorkingSound(), SoundCategory.BLOCKS, 0.1f, 1.0f);
-        }
+        world.playSound(null, pos, SoundEvents.BLOCK_STONE_HIT, SoundCategory.BLOCKS, 0.1f, 1.0f);
     }
 
     // </editor-fold>
@@ -408,22 +364,27 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
     @Override
     public void tick(World world, BlockPos pos, BlockState state, CondenserBlockEntity blockEntity) {
 
-        if (!this.selectedRecipe.isSet()) {
-            return;
-        }
+        if (this.activeRecipe == null) {
+            Optional<RecipeEntry<CondenserRecipe>> optionalRecipe = this.getMatchingRecipeFromInventory();
 
-        this.internalTick = (this.internalTick + 1) % 5;
-
-        if (this.activeRecipe.isSet()) {
-            this.tickActiveRecipe(world, pos);
+            if (optionalRecipe.isPresent()) {
+                this.startProcessing(optionalRecipe.get());
+                this.doRecipeTick(world, pos);
+            }
         } else {
-            this.tickNoActiveRecipe();
+            if (this.canProcessRecipe(this.activeRecipe)) {
+                this.doRecipeTick(world, pos);
+                return;
+            } else {
+                this.resetState();
+            }
+
         }
 
         // Synchronize state with the world
         BlockState updatedState = state
-                .with(Properties.LIT, this.activeRecipe.isSet() && !this.jammed.isTrue())
-                .with(CondenserBlock.JAMMED, this.activeRecipe.isSet() && this.jammed.isTrue());
+                .with(Properties.LIT, this.activeRecipe != null && !this.jammed.isTrue())
+                .with(CondenserBlock.JAMMED, this.activeRecipe != null && this.jammed.isTrue());
 
         world.setBlockState(pos, updatedState, Block.NOTIFY_ALL);
 
@@ -434,7 +395,7 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
 
-        return new CondenserScreenHandler(syncId, playerInventory, this, this.delegate);
+        return new CondenserScreenHandler(syncId, playerInventory, this, this.delegate, this::getAvailableRecipes);
     }
 
     @Override
@@ -451,13 +412,23 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
         if (side == Direction.DOWN) {
             return new int[]{INV_OUTPUT};
         }
-        return new int[]{INV_INGREDIENT_A, INV_INGREDIENT_B, INV_BOOSTER, INV_TOOL};
+        return new int[]{INV_APPLY, INV_ONTO, INV_BOOSTER, INV_TOOL};
     }
 
     @Override
     public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
 
-        return slot != INV_OUTPUT && this.isValid(slot, stack);
+        if (this.activeRecipe == null) {
+            return false;
+        }
+
+        return switch (slot) {
+            case INV_APPLY -> this.activeRecipe.value().apply().test(stack);
+            case INV_ONTO -> this.activeRecipe.value().onto().test(stack);
+            case INV_BOOSTER -> this.activeRecipe.value().booster().test(stack);
+            case INV_TOOL -> this.activeRecipe.value().tool().test(stack);
+            default -> false;
+        };
     }
 
     @Override
@@ -467,18 +438,5 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
     }
 
     // </editor-fold>
-
-
-    @Override
-    public boolean isValid(int slot, ItemStack stack) {
-
-        return switch (slot) {
-            case INV_INGREDIENT_A -> this.getSelectedRecipe().map(recipe -> recipe.canUseOnA(stack)).orElse(false);
-            case INV_INGREDIENT_B -> this.getSelectedRecipe().map(recipe -> recipe.canUseOnB(stack)).orElse(false);
-            case INV_TOOL -> this.getSelectedRecipe().map(recipe -> recipe.canUseWith(stack)).orElse(false);
-            case INV_BOOSTER -> this.getSelectedRecipe().map(recipe -> recipe.canBoost(stack)).orElse(false);
-            default -> true;
-        };
-    }
 
 }

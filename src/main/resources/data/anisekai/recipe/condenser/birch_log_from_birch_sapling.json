@@ -1,23 +1,18 @@
 {
-  "using": "#minecraft:item/axes",
-  "consumables": [
-    {
-      "count": 1,
-      "id": "minecraft:birch_sapling"
-    },
-    {
-      "count": 0,
-      "id": "#minecraft:dirt"
-    }
-  ],
-  "produces": {
+  "result": {
     "count": 6,
     "id": "minecraft:birch_log"
   },
+  "apply": {
+    "use": {"item": "minecraft:birch_sapling"},
+    "consume": true
+  },
   "time": 400,
   "type": "anisekai:condenser",
-  "booster": {
-    "multiplier": 1.2,
-    "id": "minecraft:bone_meal"
-  }
+  "onto": {
+    "use": {"tag": "minecraft:dirt"},
+    "consume": false
+  },
+  "tool": {"tag": "minecraft:axes"},
+  "booster": {"item": "minecraft:bone_meal"}
 }

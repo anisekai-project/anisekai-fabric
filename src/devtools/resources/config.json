@@ -29,7 +29,7 @@
         "planks":        "cherry_planks",
         "leaves":        "cherry_leaves",
         "sapling":       "cherry_sapling",
-        "grows_on":      "#minecraft:dirt"
+        "grows_on":      "minecraft:dirt"
       },
       "crimson":  {
         "log":           "crimson_stem",
@@ -52,7 +52,7 @@
         "planks":        "birch_planks",
         "leaves":        "birch_leaves",
         "sapling":       "birch_sapling",
-        "grows_on":      "#minecraft:dirt"
+        "grows_on":      "minecraft:dirt"
       },
       "oak":      {
         "log":           "oak_log",
@@ -65,7 +65,7 @@
         "planks":        "oak_planks",
         "leaves":        "oak_leaves",
         "sapling":       "oak_sapling",
-        "grows_on":      "#minecraft:dirt"
+        "grows_on":      "minecraft:dirt"
       },
       "warped":   {
         "log":           "warped_stem",
@@ -88,7 +88,7 @@
         "planks":        "acacia_planks",
         "leaves":        "acacia_leaves",
         "sapling":       "acacia_sapling",
-        "grows_on":      "#minecraft:dirt"
+        "grows_on":      "minecraft:dirt"
       },
       "dark_oak": {
         "log":           "dark_oak_log",
@@ -101,7 +101,7 @@
         "planks":        "dark_oak_planks",
         "leaves":        "dark_oak_leaves",
         "sapling":       "dark_oak_sapling",
-        "grows_on":      "#minecraft:dirt"
+        "grows_on":      "minecraft:dirt"
       },
       "mangrove": {
         "log":           "mangrove_log",
@@ -114,7 +114,7 @@
         "planks":        "mangrove_planks",
         "leaves":        "mangrove_leaves",
         "sapling":       "mangrove_propagule",
-        "grows_on":      "#minecraft:dirt"
+        "grows_on":      "minecraft:dirt"
       },
       "jungle":   {
         "log":           "jungle_log",
@@ -127,7 +127,7 @@
         "planks":        "jungle_planks",
         "leaves":        "jungle_leaves",
         "sapling":       "jungle_sapling",
-        "grows_on":      "#minecraft:dirt"
+        "grows_on":      "minecraft:dirt"
       },
       "spruce":   {
         "log":           "spruce_log",
@@ -140,7 +140,7 @@
         "planks":        "spruce_planks",
         "leaves":        "spruce_leaves",
         "sapling":       "spruce_sapling",
-        "grows_on":      "#minecraft:dirt"
+        "grows_on":      "minecraft:dirt"
       }
     }
   }

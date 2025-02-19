@@ -33,7 +33,6 @@ public class AnisekaiMod implements ModInitializer {
         LOGGER.info("Registered {} screen handlers", ModScreenHandler.screenHandlers().size());
         LOGGER.info("Loaded {} item tags", ModTags.itemTags().size());
         LOGGER.info("Registered {} modded recipes", ModRecipes.recipes());
-        LOGGER.info("Registered {} packet listeners", ModNetworking.packets());
 
         FabricDefaultAttributeRegistry.register(
                 ModEntities.INVISIBLE_SEAT_ENTITY,

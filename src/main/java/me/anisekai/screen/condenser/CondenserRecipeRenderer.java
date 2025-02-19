@@ -2,24 +2,26 @@ package me.anisekai.screen.condenser;
 
 import me.anisekai.recipes.CondenserRecipe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.recipe.RecipeEntry;
 
 import java.util.function.Consumer;
 
 public class CondenserRecipeRenderer {
 
-    private final CondenserRecipe recipe;
-    private       int             ingredientOneIdx = 0;
-    private       int             ingredientTwoIdx = 0;
-    private       int             toolIdx          = 0;
+    private final RecipeEntry<CondenserRecipe> recipe;
+    private       int                          applyIdx = 0;
+    private       int                          ontoIdx  = 0;
+    private       int                          toolIdx  = 0;
 
     private long tick = System.currentTimeMillis();
 
-    public CondenserRecipeRenderer(CondenserRecipe recipe) {
+    public CondenserRecipeRenderer(RecipeEntry<CondenserRecipe> recipe) {
 
         this.recipe = recipe;
     }
 
-    public CondenserRecipe getRecipe() {
+    public RecipeEntry<CondenserRecipe> getRecipe() {
 
         return this.recipe;
     }
@@ -31,12 +33,13 @@ public class CondenserRecipeRenderer {
         }
         this.tick = System.currentTimeMillis();
 
-        ItemStack[] ingredientA = this.recipe.getOn()[0].getMatchingStacks();
-        ItemStack[] ingredientB = this.recipe.getOn()[1].getMatchingStacks();
-        ItemStack[] tool        = this.recipe.getUsing().getMatchingStacks();
 
-        this.inc(this.ingredientOneIdx, ingredientA.length, v -> this.ingredientOneIdx = v);
-        this.inc(this.ingredientTwoIdx, ingredientB.length, v -> this.ingredientTwoIdx = v);
+        ItemStack[] apply = this.recipe.value().apply().use().getMatchingStacks();
+        ItemStack[] onto  = this.recipe.value().onto().use().getMatchingStacks();
+        ItemStack[] tool  = this.recipe.value().tool().getMatchingStacks();
+
+        this.inc(this.applyIdx, apply.length, v -> this.applyIdx = v);
+        this.inc(this.ontoIdx, onto.length, v -> this.ontoIdx = v);
         this.inc(this.toolIdx, tool.length, v -> this.toolIdx = v);
     }
 
@@ -45,19 +48,25 @@ public class CondenserRecipeRenderer {
         applier.accept(current == max - 1 ? 0 : current + 1);
     }
 
-    public ItemStack getIngredientA() {
+    public ItemStack getApply() {
 
-        return this.recipe.getOn()[0].getMatchingStacks()[this.ingredientOneIdx];
+        ItemStack[] stacks = this.recipe.value().apply().use().getMatchingStacks();
+        if (stacks.length == 0) return new ItemStack(Items.LIGHT);
+        return stacks[this.applyIdx];
     }
 
-    public ItemStack getIngredientB() {
+    public ItemStack getOnto() {
 
-        return this.recipe.getOn()[1].getMatchingStacks()[this.ingredientTwoIdx];
+        ItemStack[] stacks = this.recipe.value().onto().use().getMatchingStacks();
+        if (stacks.length == 0) return new ItemStack(Items.LIGHT);
+        return stacks[this.ontoIdx];
     }
 
     public ItemStack getTool() {
 
-        return this.recipe.getUsing().getMatchingStacks()[this.toolIdx];
+        ItemStack[] stacks = this.recipe.value().tool().getMatchingStacks();
+        if (stacks.length == 0) return new ItemStack(Items.LIGHT);
+        return stacks[this.toolIdx];
     }
 
 
