@@ -38,15 +38,11 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Optional;
 
 public class CondenserBlockEntity extends BlockEntity implements BlockEntityTicker<CondenserBlockEntity>, ImplementedInventory {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(CondenserBlockEntity.class);
 
     public static final int INVENTORY_SIZE = 5;
     public static final int DELEGATE_SIZE  = 9;
@@ -220,10 +216,10 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
      */
     private void resetState() {
 
-        LOGGER.info("Reset state at {}", this.pos);
         this.activeRecipe = null;
-        this.progressPerTick.set(0);
         this.currentWorkedTicks.set(0);
+        this.itemPerSeconds.set(0);
+        this.progressPercent.set(0);
     }
 
     /**
@@ -234,7 +230,6 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
      */
     private void startProcessing(RecipeEntry<CondenserRecipe> recipe) {
 
-        LOGGER.info("Starting condenser at {} using {}", this.pos, recipe.id());
         this.internalTick = 0;
         this.activeRecipe = recipe;
         this.currentWorkedTicks.set(0);
@@ -270,7 +265,6 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
      */
     private int doCrafting() {
 
-        LOGGER.info("Condensing output at {}", this.pos);
         ItemStack blockOutput  = this.getStack(INV_OUTPUT);
         ItemStack recipeOutput = this.activeRecipe.value().result();
 
@@ -374,11 +368,9 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
         } else {
             if (this.canProcessRecipe(this.activeRecipe)) {
                 this.doRecipeTick(world, pos);
-                return;
             } else {
                 this.resetState();
             }
-
         }
 
         // Synchronize state with the world
