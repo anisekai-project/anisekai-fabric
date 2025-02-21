@@ -3,7 +3,9 @@ package me.anisekai.client;
 import me.anisekai.AnisekaiMod;
 import me.anisekai.entities.model.InvisibleSeatModel;
 import me.anisekai.entities.renderer.InvisibleSeatRenderer;
+import me.anisekai.interfaces.packets.ClientPacket;
 import me.anisekai.inventories.constrained.ConstrainedContainerScreen;
+import me.anisekai.packets.CondenserRecipePacket;
 import me.anisekai.registries.ModEntities;
 import me.anisekai.registries.ModModels;
 import me.anisekai.registries.ModScreenHandler;
@@ -28,6 +30,8 @@ public class AnisekaiModClient implements ClientModInitializer {
 
         HandledScreens.register(ModScreenHandler.CONSTRAINED_INVENTORY, ConstrainedContainerScreen::new);
         HandledScreens.register(ModScreenHandler.CONDENSER, CondenserScreen::new);
+
+        ClientPacket.registerPacket(CondenserRecipePacket.PACKET_ID, CondenserRecipePacket.CODEC);
     }
 
 }

@@ -38,8 +38,6 @@ public class AnisekaiMod implements ModInitializer {
         LOGGER.info("Loaded {} item tags", ModTags.itemTags().size());
         LOGGER.info("Registered {} modded recipes", ModRecipes.recipes());
 
-        ClientPacket.registerPacket(CondenserRecipePacket.PACKET_ID, CondenserRecipePacket.CODEC);
-
         ServerPacket.registerPacket(CondenserQueryPacket.PACKET_ID, CondenserQueryPacket.CODEC);
         ServerPacket.registerPacket(CondenserRecipePacket.PACKET_ID, CondenserRecipePacket.CODEC);
 
