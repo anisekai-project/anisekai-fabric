@@ -1,6 +1,7 @@
 package me.anisekai.screen.condenser;
 
 import me.anisekai.inventories.slots.OutputSlot;
+import me.anisekai.packets.CondenserRecipePacket;
 import me.anisekai.recipes.CondenserRecipe;
 import me.anisekai.registries.ModScreenHandler;
 import me.anisekai.screen.common.ConstrainedSlot;
@@ -15,6 +16,7 @@ import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.slf4j.Logger;
@@ -63,6 +65,7 @@ public class CondenserScreenHandler extends ScreenHandler {
     private final Inventory                          inventory;
     private final List<RecipeEntry<CondenserRecipe>> recipes;
     private final List<CondenserRecipeRenderer>      renderers;
+    private       Identifier                         selectedRecipe;
 
     public CondenserScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate, Supplier<List<RecipeEntry<CondenserRecipe>>> recipeSupplier) {
 
@@ -141,9 +144,27 @@ public class CondenserScreenHandler extends ScreenHandler {
         super.onClosed(player);
     }
 
+
+    @Override
+    public void updateToClient() {
+
+        super.updateToClient();
+    }
+
     public Inventory getInventory() {
 
         return this.inventory;
+    }
+
+    public Identifier getSelectedRecipe() {
+
+        return this.selectedRecipe;
+    }
+
+    public void setSelectedRecipe(Identifier selectedRecipe) {
+
+        this.selectedRecipe = selectedRecipe;
+        this.renderers.forEach(renderer -> renderer.setSelected(renderer.getRecipe().id().equals(selectedRecipe)));
     }
 
     // <editor-fold desc="Delegated Data">
@@ -184,6 +205,11 @@ public class CondenserScreenHandler extends ScreenHandler {
     public List<RecipeEntry<CondenserRecipe>> getRecipes() {
 
         return this.recipes;
+    }
+
+    public void sendRecipeSelection(Identifier recipeId) {
+
+        CondenserRecipePacket.clientSend(this.getBlockPos(), recipeId);
     }
 
     // </editor-fold>

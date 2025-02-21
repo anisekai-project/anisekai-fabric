@@ -2,6 +2,7 @@ package me.anisekai.screen.condenser;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.anisekai.AnisekaiMod;
+import me.anisekai.packets.CondenserQueryPacket;
 import me.anisekai.recipes.CondenserRecipe;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -24,9 +25,10 @@ public class CondenserScreen extends HandledScreen<CondenserScreenHandler> {
 
     private static final Identifier TEXTURE = Identifier.of(AnisekaiMod.MOD_ID, "textures/gui/condenser.png");
 
-    private final WidgetButtonPage[] offers = new WidgetButtonPage[7];
+    private final WidgetButtonPage[] offers     = new WidgetButtonPage[7];
     private       int                indexStartOffset;
     private       boolean            scrolling;
+    private       boolean            hasQueried = false;
 
     public CondenserScreen(CondenserScreenHandler handler, PlayerInventory inventory, Text title) {
 
@@ -46,9 +48,22 @@ public class CondenserScreen extends HandledScreen<CondenserScreenHandler> {
 
         int k = this.y + 16 + 2;
         for (int l = 0; l < 7; ++l) {
-            this.offers[l] = this.addDrawableChild(new WidgetButtonPage(this.x + 5, k, l));
+            int finalL = l;
+
+            Runnable         action = () -> this.sendRecipeClick(finalL);
+            WidgetButtonPage wdp    = new WidgetButtonPage(this.x + 5, k, l, action);
+
+            this.offers[l] = this.addDrawableChild(wdp);
             k += 20;
         }
+    }
+
+    private void sendRecipeClick(int index) {
+
+        List<CondenserRecipeRenderer> recipes     = this.handler.getRenderers();
+        int                           recipeIndex = index + this.indexStartOffset;
+        Identifier                    id          = recipes.get(recipeIndex).getRecipe().id();
+        this.handler.sendRecipeSelection(id);
     }
 
     @Override
@@ -88,6 +103,11 @@ public class CondenserScreen extends HandledScreen<CondenserScreenHandler> {
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
 
+        if (!this.hasQueried) {
+            CondenserQueryPacket.clientSend(this.handler.getBlockPos());
+            this.hasQueried = true;
+        }
+
         this.handler.tick();
         this.renderBackground(context, mouseX, mouseY, delta);
         super.render(context, mouseX, mouseY, delta);
@@ -101,35 +121,43 @@ public class CondenserScreen extends HandledScreen<CondenserScreenHandler> {
             int l = this.x + 8;
             int k = this.y + 19;
             this.renderScrollbar(context, this.x, this.y, recipes.size());
-            int m = 0;
+            int selectedIndex = -1;
 
-            for (CondenserRecipeRenderer recipeRenderer : recipes) {
-                RecipeEntry<CondenserRecipe> recipe = recipeRenderer.getRecipe();
 
-                if (this.canScroll() && (m < this.indexStartOffset || m >= 7 + this.indexStartOffset)) {
-                    ++m;
+            for (int m = 0; m < recipes.size(); m++) {
+                if (this.canScroll() && m < this.indexStartOffset || m >= this.indexStartOffset + 7) {
                     continue;
+                }
+                CondenserRecipeRenderer      renderer = recipes.get(m);
+                RecipeEntry<CondenserRecipe> recipe   = renderer.getRecipe();
+
+                if (renderer.isSelected()) {
+                    selectedIndex = m;
                 }
 
                 context.getMatrices().push();
                 context.getMatrices().translate(0.0f, 0.0f, 100.0f);
 
-                this.renderItem(context, recipeRenderer.getApply(), l, k);
-                this.renderItem(context, recipeRenderer.getOnto(), l + 18, k);
-                this.renderItem(context, recipeRenderer.getTool(), l + 36, k);
+                this.renderItem(context, renderer.getApply(), l, k);
+                this.renderItem(context, renderer.getOnto(), l + 18, k);
+                this.renderItem(context, renderer.getTool(), l + 36, k);
                 this.renderItem(context, recipe.value().result(), l + 64, k);
 
                 context.getMatrices().pop();
                 k += 20;
-                ++m;
             }
 
-            for (WidgetButtonPage wbp : this.offers) {
+            for (int i = 0; i < this.offers.length; i++) {
+                WidgetButtonPage wbp         = this.offers[i];
+                int              offsetIndex = this.indexStartOffset + i;
+                wbp.setFocused(offsetIndex == selectedIndex);
+
                 if (wbp.isSelected()) {
                     wbp.renderTooltip(context, mouseX, mouseY);
                 }
                 wbp.visible = wbp.index < recipes.size();
             }
+
             RenderSystem.enableDepthTest();
         }
 
@@ -225,16 +253,11 @@ public class CondenserScreen extends HandledScreen<CondenserScreenHandler> {
 
         final int index;
 
-        public WidgetButtonPage(int x, int y, int index) {
+        public WidgetButtonPage(int x, int y, int index, Runnable action) {
 
-            super(x, y, 88, 20, ScreenTexts.EMPTY, button -> {}, DEFAULT_NARRATION_SUPPLIER);
+            super(x, y, 88, 20, ScreenTexts.EMPTY, button -> action.run(), DEFAULT_NARRATION_SUPPLIER);
             this.index   = index;
             this.visible = false;
-        }
-
-        public int getIndex() {
-
-            return this.index;
         }
 
         public void renderTooltip(DrawContext context, int x, int y) {

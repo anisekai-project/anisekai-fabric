@@ -1,6 +1,10 @@
 package me.anisekai;
 
 import me.anisekai.entities.seat.InvisibleSeatEntity;
+import me.anisekai.interfaces.packets.ClientPacket;
+import me.anisekai.interfaces.packets.ServerPacket;
+import me.anisekai.packets.CondenserQueryPacket;
+import me.anisekai.packets.CondenserRecipePacket;
 import me.anisekai.registries.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -33,6 +37,11 @@ public class AnisekaiMod implements ModInitializer {
         LOGGER.info("Registered {} screen handlers", ModScreenHandler.screenHandlers().size());
         LOGGER.info("Loaded {} item tags", ModTags.itemTags().size());
         LOGGER.info("Registered {} modded recipes", ModRecipes.recipes());
+
+        ClientPacket.registerPacket(CondenserRecipePacket.PACKET_ID, CondenserRecipePacket.CODEC);
+
+        ServerPacket.registerPacket(CondenserQueryPacket.PACKET_ID, CondenserQueryPacket.CODEC);
+        ServerPacket.registerPacket(CondenserRecipePacket.PACKET_ID, CondenserRecipePacket.CODEC);
 
         FabricDefaultAttributeRegistry.register(
                 ModEntities.INVISIBLE_SEAT_ENTITY,

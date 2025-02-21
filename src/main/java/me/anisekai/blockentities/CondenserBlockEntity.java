@@ -32,6 +32,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -76,8 +77,9 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
     private final DelegatedInteger posY = new DelegatedInteger(0);
     private final DelegatedInteger posZ = new DelegatedInteger(0);
 
-    private int                          internalTick = 0;
-    private RecipeEntry<CondenserRecipe> activeRecipe = null;
+    private int                          internalTick   = 0;
+    private RecipeEntry<CondenserRecipe> activeRecipe   = null;
+    private Identifier                   selectedRecipe = null;
 
     private final PropertyDelegate delegate = new ReadWritePropertyDelegate(
             this.protectTool,
@@ -122,6 +124,10 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
         nbt.putBoolean("Jammed", this.jammed.isTrue());
         nbt.putInt("ProgressPerTick", this.progressPerTick.get());
         nbt.putInt("CurrentWorkedTick", this.currentWorkedTicks.get());
+
+        if (this.selectedRecipe != null) {
+            nbt.putString("SelectedRecipe", this.selectedRecipe.toString());
+        }
     }
 
     @Override
@@ -135,6 +141,10 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
         this.jammed.set(nbt.getBoolean("Jammed"));
         this.progressPerTick.set(nbt.getInt("ProgressPerTick"));
         this.currentWorkedTicks.set(nbt.getInt("CurrentWorkedTick"));
+
+        if (nbt.contains("SelectedRecipe")) {
+            this.selectedRecipe = Identifier.of(nbt.getString("SelectedRecipe"));
+        }
     }
 
     // <editor-fold desc="Inventory Implementation">
@@ -180,15 +190,16 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
     // <editor-fold desc="Condenser Specific Private Methods">
 
     /**
-     * Retrieve the first recipe that match this {@link CondenserBlockEntity}'s {@link Inventory}.
+     * Find the {@link RecipeEntry} matching the player-selected {@link Identifier}.
      *
-     * @return An optional {@link RecipeEntry}.
+     * @return An optional {@link RecipeEntry}
      */
-    private Optional<RecipeEntry<CondenserRecipe>> getMatchingRecipeFromInventory() {
+    public Optional<RecipeEntry<CondenserRecipe>> findSelectedRecipe() {
 
+        if (this.selectedRecipe == null) return Optional.empty();
         return this.getAvailableRecipes()
                    .stream()
-                   .filter(this::canProcessRecipe)
+                   .filter(recipe -> recipe.id().equals(this.selectedRecipe))
                    .findFirst();
     }
 
@@ -270,7 +281,10 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
 
         if (this.activeRecipe.value().apply().consume()) this.decrementSlot(INV_APPLY);
         if (this.activeRecipe.value().onto().consume()) this.decrementSlot(INV_ONTO);
-        this.decrementSlot(INV_BOOSTER);
+
+        if (this.activeRecipe.value().booster().test(this.getStack(INV_BOOSTER))) {
+            this.decrementSlot(INV_BOOSTER);
+        }
 
         if (blockOutput.isEmpty()) {
             this.setStack(INV_OUTPUT, recipeOutput.copy());
@@ -278,10 +292,10 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
             blockOutput.increment(recipeOutput.getCount());
         }
 
-        this.resetState();
-
-        if (this.canProcessRecipe(this.activeRecipe)) {
+        if (this.activeRecipe.id().equals(this.selectedRecipe) && this.canProcessRecipe(this.activeRecipe)) {
             this.startProcessing(this.activeRecipe); // Immediate restart if we can
+        } else {
+            this.resetState();
         }
 
         return recipeOutput.getCount();
@@ -326,31 +340,35 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
             if (this.internalTick == 0) {
                 world.playSound(null, pos, SoundEvents.BLOCK_NOTE_BLOCK_BASS.value(), SoundCategory.BLOCKS, 0.1f, 1.0f);
             }
+        } else {
+            float workedTick   = (float) this.currentWorkedTicks.get();
+            float timeRequired = (float) this.activeRecipe.value().time();
+
+            this.jammed.set(false);
+            this.currentWorkedTicks.increment(this.progressPerTick.get());
+            this.progressPercent.set(Math.round((workedTick / timeRequired) * 100));
+
+            if (workedTick >= timeRequired) {
+                int damage = this.doCrafting();
+
+                tool.damage(
+                        damage,
+                        (ServerWorld) world, null, item -> {
+                            this.removeStack(INV_TOOL);
+                            world.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1f, 1.0f);
+                        }
+                );
+
+                world.playSound(null, pos, SoundEvents.BLOCK_STONE_BREAK, SoundCategory.BLOCKS, 0.1f, 1.0f);
+                return;
+            }
+
+            if (this.internalTick == 0) {
+                world.playSound(null, pos, SoundEvents.BLOCK_STONE_HIT, SoundCategory.BLOCKS, 0.1f, 1.0f);
+            }
+
         }
 
-        float workedTick   = (float) this.currentWorkedTicks.get();
-        float timeRequired = (float) this.activeRecipe.value().time();
-
-        this.jammed.set(false);
-        this.currentWorkedTicks.increment(this.progressPerTick.get());
-        this.progressPercent.set(Math.round((workedTick / timeRequired) * 100));
-
-        if (workedTick >= timeRequired) {
-            int damage = this.doCrafting();
-
-            tool.damage(
-                    damage,
-                    (ServerWorld) world, null, item -> {
-                        this.removeStack(INV_TOOL);
-                        world.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1f, 1.0f);
-                    }
-            );
-
-            world.playSound(null, pos, SoundEvents.BLOCK_STONE_BREAK, SoundCategory.BLOCKS, 0.1f, 1.0f);
-            return;
-        }
-
-        world.playSound(null, pos, SoundEvents.BLOCK_STONE_HIT, SoundCategory.BLOCKS, 0.1f, 1.0f);
     }
 
     // </editor-fold>
@@ -359,11 +377,18 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
     public void tick(World world, BlockPos pos, BlockState state, CondenserBlockEntity blockEntity) {
 
         if (this.activeRecipe == null) {
-            Optional<RecipeEntry<CondenserRecipe>> optionalRecipe = this.getMatchingRecipeFromInventory();
+            Optional<RecipeEntry<CondenserRecipe>> optionalRecipe = this.findSelectedRecipe();
 
             if (optionalRecipe.isPresent()) {
-                this.startProcessing(optionalRecipe.get());
-                this.doRecipeTick(world, pos);
+                RecipeEntry<CondenserRecipe> recipe = optionalRecipe.get();
+                if (this.canProcessRecipe(recipe)) {
+                    this.startProcessing(optionalRecipe.get());
+                    this.doRecipeTick(world, pos);
+                }
+            } else {
+                this.currentWorkedTicks.set(0);
+                this.progressPercent.set(0);
+                this.jammed.set(false);
             }
         } else {
             if (this.canProcessRecipe(this.activeRecipe)) {
@@ -410,15 +435,18 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
     @Override
     public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
 
-        if (this.activeRecipe == null) {
-            return false;
-        }
+        Optional<RecipeEntry<CondenserRecipe>> optionalRecipe = this.findSelectedRecipe();
+        if (optionalRecipe.isEmpty()) return false;
+        RecipeEntry<CondenserRecipe> recipe = optionalRecipe.get();
+
+        boolean isApplyEmpty = this.getStack(INV_APPLY).isEmpty();
+        boolean isOntoEmpty  = this.getStack(INV_ONTO).isEmpty();
 
         return switch (slot) {
-            case INV_APPLY -> this.activeRecipe.value().apply().test(stack);
-            case INV_ONTO -> this.activeRecipe.value().onto().test(stack);
-            case INV_BOOSTER -> this.activeRecipe.value().booster().test(stack);
-            case INV_TOOL -> this.activeRecipe.value().tool().test(stack);
+            case INV_APPLY -> recipe.value().apply().test(stack) && (isApplyEmpty || !isOntoEmpty);
+            case INV_ONTO -> recipe.value().onto().test(stack) && (isOntoEmpty || !isApplyEmpty);
+            case INV_BOOSTER -> recipe.value().booster().test(stack);
+            case INV_TOOL -> recipe.value().tool().test(stack);
             default -> false;
         };
     }
@@ -429,6 +457,18 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
         return slot == INV_OUTPUT;
     }
 
+    // </editor-fold>
+
+    // <editor-fold desc="Packet Bound">
+    public Identifier getSelectedRecipe() {
+
+        return this.selectedRecipe;
+    }
+
+    public void setSelectedRecipe(Identifier selectedRecipe) {
+
+        this.selectedRecipe = selectedRecipe;
+    }
     // </editor-fold>
 
 }

@@ -21,6 +21,7 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.text.Text;
 import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -200,10 +201,20 @@ public class CondenserBlock extends BlockWithEntity implements Orientable, Stora
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
 
+        if (!world.isClient) {
+            return ActionResult.PASS;
+        }
+
         Optional<CondenserBlockEntity> blockEntityInstance = this.getBlockEntityInstance(world.getBlockEntity(pos));
 
         if (blockEntityInstance.isPresent()) {
             CondenserBlockEntity blockEntity = blockEntityInstance.get();
+
+            if (blockEntity.getAvailableRecipes().isEmpty()) {
+                player.sendMessage(Text.translatable("anisekai.message.condenser.no_recipe"), false);
+                return ActionResult.FAIL;
+            }
+
             player.openHandledScreen(blockEntity);
             return ActionResult.SUCCESS;
         }

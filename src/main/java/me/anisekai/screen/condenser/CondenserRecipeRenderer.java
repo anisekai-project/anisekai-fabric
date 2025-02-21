@@ -13,6 +13,7 @@ public class CondenserRecipeRenderer {
     private       int                          applyIdx = 0;
     private       int                          ontoIdx  = 0;
     private       int                          toolIdx  = 0;
+    private       boolean                      selected = false;
 
     private long tick = System.currentTimeMillis();
 
@@ -24,6 +25,16 @@ public class CondenserRecipeRenderer {
     public RecipeEntry<CondenserRecipe> getRecipe() {
 
         return this.recipe;
+    }
+
+    public boolean isSelected() {
+
+        return this.selected;
+    }
+
+    public void setSelected(boolean selected) {
+
+        this.selected = selected;
     }
 
     public void tick() {
