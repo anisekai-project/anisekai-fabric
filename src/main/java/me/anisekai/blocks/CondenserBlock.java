@@ -199,6 +199,8 @@ public class CondenserBlock extends BlockWithEntity implements Orientable, Stora
 
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        // Verify we are processing the use action on the logical server
+        if (world.isClient()) return super.onUse(state, world, pos, player, hit);
 
         Optional<CondenserBlockEntity> blockEntityInstance = this.getBlockEntityInstance(world.getBlockEntity(pos));
 

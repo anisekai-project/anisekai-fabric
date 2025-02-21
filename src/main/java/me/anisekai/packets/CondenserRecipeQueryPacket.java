@@ -15,32 +15,34 @@ import net.minecraft.util.math.BlockPos;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public record CondenserQueryPacket(BlockPos position) implements ServerPacket {
+public record CondenserRecipeQueryPacket(BlockPos position) implements ServerPacket {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CondenserQueryPacket.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CondenserRecipeQueryPacket.class);
 
-    public static final Identifier               ID        = AnisekaiMod.id("packets/condenser/query_recipe");
-    public static final Id<CondenserQueryPacket> PACKET_ID = new Id<>(ID);
+    public static final Identifier                     ID        = AnisekaiMod.id("packets/condenser/query_recipe");
+    public static final Id<CondenserRecipeQueryPacket> PACKET_ID = new Id<>(ID);
 
-    public static final PacketCodec<RegistryByteBuf, CondenserQueryPacket> CODEC = createPacketCodec();
+    public static final PacketCodec<RegistryByteBuf, CondenserRecipeQueryPacket> CODEC = createPacketCodec();
 
     public static void clientSend(BlockPos pos) {
 
-        LOGGER.info("[Client] Sending condenser query packet for position {}", pos);
-        CustomPayload payload = new CondenserQueryPacket(pos);
+        LOGGER.info("[CondenserRecipeQuery] Sending request for block at {}", pos);
+        CustomPayload payload = new CondenserRecipeQueryPacket(pos);
         ClientPlayNetworking.send(payload);
     }
 
     @Override
     public void handle(ServerPlayNetworking.Context context) {
 
-        LOGGER.info("[Server] Received condenser query packet for position {}", this.position);
+        LOGGER.info("[CondenserRecipeQuery] Received request for block at {}", this.position);
         context.server().execute(() -> {
             ServerWorld world       = context.player().getServerWorld();
             BlockEntity blockEntity = world.getBlockEntity(this.position);
 
             if (blockEntity instanceof CondenserBlockEntity condenser) {
-                CondenserRecipePacket.serverSend(world, this.position, condenser.getSelectedRecipe());
+                LOGGER.info("[CondenserRecipeQuery] Sending query result for block at {}", this.position);
+                CustomPayload payload = new CondenserRecipeUpdatedPacket(this.position, condenser.getSelectedRecipe());
+                ServerPlayNetworking.send(context.player(), payload);
             }
         });
     }
@@ -51,11 +53,11 @@ public record CondenserQueryPacket(BlockPos position) implements ServerPacket {
         return PACKET_ID;
     }
 
-    public static PacketCodec<RegistryByteBuf, CondenserQueryPacket> createPacketCodec() {
+    public static PacketCodec<RegistryByteBuf, CondenserRecipeQueryPacket> createPacketCodec() {
 
         return PacketCodec.tuple(
-                BlockPos.PACKET_CODEC, CondenserQueryPacket::position,
-                CondenserQueryPacket::new
+                BlockPos.PACKET_CODEC, CondenserRecipeQueryPacket::position,
+                CondenserRecipeQueryPacket::new
         );
     }
 

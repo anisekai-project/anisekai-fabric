@@ -2,7 +2,7 @@ package me.anisekai.screen.condenser;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.anisekai.AnisekaiMod;
-import me.anisekai.packets.CondenserQueryPacket;
+import me.anisekai.packets.CondenserRecipeQueryPacket;
 import me.anisekai.recipes.CondenserRecipe;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -104,7 +104,7 @@ public class CondenserScreen extends HandledScreen<CondenserScreenHandler> {
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
 
         if (!this.hasQueried) {
-            CondenserQueryPacket.clientSend(this.handler.getBlockPos());
+            CondenserRecipeQueryPacket.clientSend(this.handler.getBlockPos());
             this.hasQueried = true;
         }
 

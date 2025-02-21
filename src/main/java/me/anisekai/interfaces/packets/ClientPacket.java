@@ -10,9 +10,4 @@ public interface ClientPacket extends CustomPayload {
 
     void handle(ClientPlayNetworking.Context context);
 
-    static <T extends ClientPacket> void registerPacket(CustomPayload.Id<T> id, PacketCodec<RegistryByteBuf, T> packetCodec) {
-
-        PayloadTypeRegistry.playS2C().register(id, packetCodec);
-        ClientPlayNetworking.registerGlobalReceiver(id, ClientPacket::handle);
-    }
 }

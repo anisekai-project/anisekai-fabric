@@ -1,12 +1,14 @@
 package me.anisekai;
 
 import me.anisekai.entities.seat.InvisibleSeatEntity;
-import me.anisekai.interfaces.packets.ClientPacket;
 import me.anisekai.interfaces.packets.ServerPacket;
-import me.anisekai.packets.CondenserQueryPacket;
-import me.anisekai.packets.CondenserRecipePacket;
+import me.anisekai.packets.CondenserRecipeQueryPacket;
+import me.anisekai.packets.CondenserRecipeSelectedPacket;
+import me.anisekai.packets.CondenserRecipeUpdatedPacket;
 import me.anisekai.registries.*;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
@@ -38,8 +40,12 @@ public class AnisekaiMod implements ModInitializer {
         LOGGER.info("Loaded {} item tags", ModTags.itemTags().size());
         LOGGER.info("Registered {} modded recipes", ModRecipes.recipes());
 
-        ServerPacket.registerPacket(CondenserQueryPacket.PACKET_ID, CondenserQueryPacket.CODEC);
-        ServerPacket.registerPacket(CondenserRecipePacket.PACKET_ID, CondenserRecipePacket.CODEC);
+        PayloadTypeRegistry.playC2S().register(CondenserRecipeQueryPacket.PACKET_ID, CondenserRecipeQueryPacket.CODEC);
+        PayloadTypeRegistry.playC2S().register(CondenserRecipeSelectedPacket.PACKET_ID, CondenserRecipeSelectedPacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(CondenserRecipeUpdatedPacket.PACKET_ID, CondenserRecipeUpdatedPacket.CODEC);
+
+        ServerPlayNetworking.registerGlobalReceiver(CondenserRecipeQueryPacket.PACKET_ID, ServerPacket::handle);
+        ServerPlayNetworking.registerGlobalReceiver(CondenserRecipeSelectedPacket.PACKET_ID, ServerPacket::handle);
 
         FabricDefaultAttributeRegistry.register(
                 ModEntities.INVISIBLE_SEAT_ENTITY,

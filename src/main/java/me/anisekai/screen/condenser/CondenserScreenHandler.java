@@ -1,15 +1,17 @@
 package me.anisekai.screen.condenser;
 
 import me.anisekai.inventories.slots.OutputSlot;
-import me.anisekai.packets.CondenserRecipePacket;
+import me.anisekai.packets.CondenserRecipeSelectedPacket;
 import me.anisekai.recipes.CondenserRecipe;
 import me.anisekai.registries.ModScreenHandler;
 import me.anisekai.screen.common.ConstrainedSlot;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.screen.ArrayPropertyDelegate;
@@ -209,7 +211,8 @@ public class CondenserScreenHandler extends ScreenHandler {
 
     public void sendRecipeSelection(Identifier recipeId) {
 
-        CondenserRecipePacket.clientSend(this.getBlockPos(), recipeId);
+        CustomPayload payload = new CondenserRecipeSelectedPacket(this.getBlockPos(), recipeId);
+        ClientPlayNetworking.send(payload);
     }
 
     // </editor-fold>
