@@ -45,6 +45,10 @@ of your crops to replant right after.
 
 Right-clicking a farmland with a shovel convert it back to dirt. No more jumping or breaking/placing block !
 
+### Spawner
+
+Retrieve spawners with Silk Touch !
+
 ### Condenser
 
 The mod provides a block called `condenser` which allows you to create resources in a less "cheating" or "non-vanilla"
