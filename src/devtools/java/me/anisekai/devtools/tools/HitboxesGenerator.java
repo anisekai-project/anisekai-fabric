@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 public class HitboxesGenerator {
 
+
     private static final File TOOL_DIR  = new File(DevTools.DEVTOOLS_RESOURCES, "hitboxes");
     private static final File ITEMS_DIR = new File(DevTools.DEVTOOLS_RESOURCES, "minecraft");
 

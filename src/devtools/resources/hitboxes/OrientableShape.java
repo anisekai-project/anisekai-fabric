@@ -20,7 +20,8 @@ public class OrientableShape {
 
     private static final Map<Identifier, VoxelShape> SHAPES = new HashMap<>() {{
 
-        {{shapes}}
+{{shapes}}
+
     }};
 
     /**

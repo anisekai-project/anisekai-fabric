@@ -1,10 +1,10 @@
 package me.anisekai.devtools.tools.helpers;
 
+import me.anisekai.devtools.DevUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Shape implements Comparable<Shape> {
 
@@ -36,32 +36,23 @@ public class Shape implements Comparable<Shape> {
     @Override
     public String toString() {
 
+
         if (this.voxels.isEmpty()) {
-            return String.format(
-                    "this.put(Identifier.of(MOD_ID, \"%s\"), OrientableShape.makeShape(Collections.emptyList())",
-                    this.name
+            return DevUtils.Java.put(
+                    DevUtils.Java.id(this.name),
+                    DevUtils.Java.makeShape(DevUtils.Java.emptyList())
+            );
+        } else if (this.voxels.size() == 1) {
+            return DevUtils.Java.put(
+                    DevUtils.Java.id(this.name),
+                    DevUtils.Java.makeShape(DevUtils.Java.singletonList(this.voxels.getFirst()))
+            );
+        } else {
+            return DevUtils.Java.put(
+                    DevUtils.Java.id(this.name),
+                    DevUtils.Java.makeShape(DevUtils.Java.listOf(this.voxels))
             );
         }
-
-        if (this.voxels.size() == 1) {
-            return String.format(
-                    "this.put(Identifier.of(MOD_ID, \"%s\"), OrientableShape.makeShape(Collections.singletonList(\n%s\n)))",
-                    this.name,
-                    this.voxels
-                            .stream()
-                            .map(Voxel::toString)
-                            .collect(Collectors.joining(",\n"))
-            );
-        }
-
-        return String.format(
-                "this.put(Identifier.of(MOD_ID, \"%s\"), OrientableShape.makeShape(Arrays.asList(\n%s\n)))",
-                this.name,
-                this.voxels
-                        .stream()
-                        .map(Voxel::toString)
-                        .collect(Collectors.joining(",\n"))
-        );
     }
 
 }

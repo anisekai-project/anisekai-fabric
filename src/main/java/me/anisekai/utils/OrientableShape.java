@@ -182,6 +182,7 @@ public class OrientableShape {
                         VoxelShapes.cuboid(0.0, 0.875, 0.0, 1.0, 1.0, 1.0)
                 ))
         );
+
     }};
 
     /**
