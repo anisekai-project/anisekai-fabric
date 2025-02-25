@@ -48,7 +48,8 @@ public class CondenserScreenHandler extends ScreenHandler {
                 playerInventory,
                 new SimpleInventory(INVENTORY_SIZE),
                 new ArrayPropertyDelegate(DELEGATE_SIZE),
-                () -> manager.listAllOfType(CondenserRecipe.Type.INSTANCE)
+                () -> manager.listAllOfType(CondenserRecipe.Type.INSTANCE).stream()
+                             .sorted((a, b) -> a.id().compareTo(b.id())).toList()
         );
     }
 
