@@ -1,7 +1,7 @@
 {
   "parent": "anisekai:block/base/nightstand_feet_side",
   "textures": {
-    "0": "minecraft:block/spruce_log",
-    "particle": "minecraft:block/spruce_log"
+    "particle": "minecraft:block/spruce_log",
+    "structure": "minecraft:block/spruce_log"
   }
 }

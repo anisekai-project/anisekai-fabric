@@ -4,16 +4,16 @@
     "id": "anisekai:acacia_table"
   },
   "pattern": [
-    "BBB",
-    " F ",
-    " C "
+    "TTT",
+    " S ",
+    " F "
   ],
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": {"item": "anisekai:acacia_half_slab"},
-    "C": {"item": "minecraft:acacia_slab"},
-    "F": {"item": "minecraft:acacia_fence"}
+    "S": {"item": "minecraft:acacia_fence"},
+    "T": {"item": "anisekai:acacia_half_slab"},
+    "F": {"item": "minecraft:acacia_slab"}
   },
   "group": "tables"
 }

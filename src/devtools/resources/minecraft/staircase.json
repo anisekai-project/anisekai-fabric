@@ -1,6 +1,15 @@
 {
   "settings": {
-    "useVariant": "wood"
+    "usingVariants": [
+      {
+        "name": "woods",
+        "maps": {
+          "texture:side":  "{{log}}",
+          "texture:steps": "{{planks}}",
+          "craft":         "{{mod}}:{{type}}_half_slab"
+        }
+      }
+    ]
   },
   "elements": {
     "item":        {
@@ -52,7 +61,7 @@
         "SS ",
         "SSS"
       ],
-      "key":      { "S": { "item": "{{mod}}:{{type}}_half_slab" } },
+      "key":      { "S": { "item": "{{craft}}" } },
       "result":   { "id": "{{id}}", "count": 6 }
     },
     "models":      {
@@ -259,9 +268,9 @@
         "block": {
           "parent":   "{{mod}}:block/base/{{name}}",
           "textures": {
-            "side":     "block/{{log}}",
-            "steps":    "block/{{planks}}",
-            "particle": "block/{{planks}}"
+            "side":     "block/{{texture:side}}",
+            "steps":    "block/{{texture:steps}}",
+            "particle": "block/{{texture:steps}}"
           }
         }
       },
@@ -416,9 +425,9 @@
         "block": {
           "parent":   "{{mod}}:block/base/{{name}}",
           "textures": {
-            "side":     "block/{{log}}",
-            "steps":    "block/{{planks}}",
-            "particle": "block/{{planks}}"
+            "side":     "block/{{texture:side}}",
+            "steps":    "block/{{texture:steps}}",
+            "particle": "block/{{texture:steps}}"
           }
         }
       },
@@ -573,9 +582,9 @@
         "block": {
           "parent":   "{{mod}}:block/base/{{name}}",
           "textures": {
-            "side":     "block/{{log}}",
-            "steps":    "block/{{planks}}",
-            "particle": "block/{{planks}}"
+            "side":     "block/{{texture:side}}",
+            "steps":    "block/{{texture:steps}}",
+            "particle": "block/{{texture:steps}}"
           }
         }
       },
@@ -676,8 +685,8 @@
         "block": {
           "parent":   "{{mod}}:block/base/{{name}}",
           "textures": {
-            "steps":    "block/{{planks}}",
-            "particle": "block/{{planks}}"
+            "steps":    "block/{{texture:steps}}",
+            "particle": "block/{{texture:steps}}"
           }
         }
       }

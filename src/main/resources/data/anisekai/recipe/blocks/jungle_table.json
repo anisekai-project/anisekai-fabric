@@ -4,16 +4,16 @@
     "id": "anisekai:jungle_table"
   },
   "pattern": [
-    "BBB",
-    " F ",
-    " C "
+    "TTT",
+    " S ",
+    " F "
   ],
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": {"item": "anisekai:jungle_half_slab"},
-    "C": {"item": "minecraft:jungle_slab"},
-    "F": {"item": "minecraft:jungle_fence"}
+    "S": {"item": "minecraft:jungle_fence"},
+    "T": {"item": "anisekai:jungle_half_slab"},
+    "F": {"item": "minecraft:jungle_slab"}
   },
   "group": "tables"
 }

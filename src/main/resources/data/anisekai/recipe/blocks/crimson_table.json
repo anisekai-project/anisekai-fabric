@@ -4,16 +4,16 @@
     "id": "anisekai:crimson_table"
   },
   "pattern": [
-    "BBB",
-    " F ",
-    " C "
+    "TTT",
+    " S ",
+    " F "
   ],
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": {"item": "anisekai:crimson_half_slab"},
-    "C": {"item": "minecraft:crimson_slab"},
-    "F": {"item": "minecraft:crimson_fence"}
+    "S": {"item": "minecraft:crimson_fence"},
+    "T": {"item": "anisekai:crimson_half_slab"},
+    "F": {"item": "minecraft:crimson_slab"}
   },
   "group": "tables"
 }

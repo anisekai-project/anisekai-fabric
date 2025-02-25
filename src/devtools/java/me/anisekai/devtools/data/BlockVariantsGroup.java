@@ -1,5 +1,6 @@
 package me.anisekai.devtools.data;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -10,11 +11,23 @@ public class BlockVariantsGroup {
     private final String             name;
     private final List<BlockVariant> variants;
 
-    public BlockVariantsGroup(String name, JSONObject source) {
+    public BlockVariantsGroup(String name, JSONArray source) {
 
         this.name     = name;
         this.variants = new ArrayList<>();
-        source.keySet().forEach(key -> this.variants.add(new BlockVariant(key, source.getJSONObject(key))));
+
+        for (int j = 0; j < source.length(); j++) {
+            JSONObject value = source.getJSONObject(j);
+
+            String variantName = value.getString("name");
+
+            if (value.has("mappings")) {
+                JSONObject mappings = value.getJSONObject("mappings");
+                this.variants.add(new BlockVariant(variantName, mappings));
+            } else {
+                this.variants.add(new BlockVariant(variantName));
+            }
+        }
     }
 
     public String getName() {

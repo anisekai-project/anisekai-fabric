@@ -1,8 +1,17 @@
 {
   "settings": {
-    "useVariant": "wood"
+    "usingVariants": [
+      {
+        "name": "woods",
+        "maps": {
+          "texture:sides": "{{log}}",
+          "texture:faces": "{{planks}}",
+          "craft":         "minecraft:{{slab}}"
+        }
+      }
+    ]
   },
-  "elements":  {
+  "elements": {
     "item":        {
       "parent": "{{mod}}:block/{{item}}"
     },
@@ -45,7 +54,7 @@
       "category": "building",
       "group":    "{{name}}s",
       "pattern":  [ "CCC" ],
-      "key":      { "C": { "item": "minecraft:{{slab}}" } },
+      "key":      { "C": { "item": "{{craft}}" } },
       "result":   { "id": "{{id}}", "count": 6 }
     },
     "models":      {
@@ -53,8 +62,8 @@
         "block": {
           "parent":   "{{mod}}:block/base/{{name}}_l3",
           "textures": {
-            "step": "minecraft:block/{{planks}}",
-            "side": "minecraft:block/{{log}}"
+            "step": "minecraft:block/{{texture:faces}}",
+            "side": "minecraft:block/{{texture:sides}}"
           }
         }
       },
@@ -111,8 +120,8 @@
         "block": {
           "parent":   "{{mod}}:block/base/{{name}}_l0",
           "textures": {
-            "step": "minecraft:block/{{planks}}",
-            "side": "minecraft:block/{{log}}"
+            "step": "minecraft:block/{{texture:faces}}",
+            "side": "minecraft:block/{{texture:sides}}"
           }
         }
       },
@@ -169,8 +178,8 @@
         "block": {
           "parent":   "{{mod}}:block/base/{{name}}_l1",
           "textures": {
-            "step": "minecraft:block/{{planks}}",
-            "side": "minecraft:block/{{log}}"
+            "step": "minecraft:block/{{texture:faces}}",
+            "side": "minecraft:block/{{texture:sides}}"
           }
         }
       },
@@ -227,8 +236,8 @@
         "block": {
           "parent":   "{{mod}}:block/base/{{name}}_l2",
           "textures": {
-            "step": "minecraft:block/{{planks}}",
-            "side": "minecraft:block/{{log}}"
+            "step": "minecraft:block/{{texture:faces}}",
+            "side": "minecraft:block/{{texture:sides}}"
           }
         }
       },
@@ -285,9 +294,9 @@
         "block": {
           "parent":   "{{mod}}:block/base/{{name}}_l3",
           "textures": {
-            "step":     "minecraft:block/{{planks}}",
-            "side":     "minecraft:block/{{log}}",
-            "particle": "minecraft:block/{{planks}}"
+            "step":     "minecraft:block/{{texture:faces}}",
+            "side":     "minecraft:block/{{texture:sides}}",
+            "particle": "minecraft:block/{{texture:faces}}"
           }
         }
       }

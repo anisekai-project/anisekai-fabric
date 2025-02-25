@@ -1,7 +1,7 @@
 {
   "parent": "anisekai:block/base/nightstand_feet_side",
   "textures": {
-    "0": "minecraft:block/bamboo_block",
-    "particle": "minecraft:block/bamboo_block"
+    "particle": "minecraft:block/bamboo_block",
+    "structure": "minecraft:block/bamboo_block"
   }
 }

@@ -4,16 +4,16 @@
     "id": "anisekai:birch_table"
   },
   "pattern": [
-    "BBB",
-    " F ",
-    " C "
+    "TTT",
+    " S ",
+    " F "
   ],
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": {"item": "anisekai:birch_half_slab"},
-    "C": {"item": "minecraft:birch_slab"},
-    "F": {"item": "minecraft:birch_fence"}
+    "S": {"item": "minecraft:birch_fence"},
+    "T": {"item": "anisekai:birch_half_slab"},
+    "F": {"item": "minecraft:birch_slab"}
   },
   "group": "tables"
 }

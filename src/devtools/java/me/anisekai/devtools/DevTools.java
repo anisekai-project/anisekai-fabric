@@ -4,7 +4,6 @@ import me.anisekai.devtools.data.BlockVariant;
 import me.anisekai.devtools.data.Configuration;
 import me.anisekai.devtools.tools.DataGenerator;
 import me.anisekai.devtools.tools.HitboxesGenerator;
-import me.anisekai.devtools.tools.RecipeGenerator;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -57,10 +56,6 @@ public final class DevTools {
             File file = new File(DevTools.MAIN_RESOURCES, path);
             DevIO.setFileContent(file, TAGS.get(path).toString(2));
         }
-        Logger.unnest();
-
-        Logger.logn("Writing recipes...");
-        new RecipeGenerator(configuration);
         Logger.unnest();
 
         Logger.logn("Generating hitboxes...");

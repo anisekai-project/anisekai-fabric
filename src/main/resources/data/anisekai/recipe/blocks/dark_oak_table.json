@@ -4,16 +4,16 @@
     "id": "anisekai:dark_oak_table"
   },
   "pattern": [
-    "BBB",
-    " F ",
-    " C "
+    "TTT",
+    " S ",
+    " F "
   ],
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": {"item": "anisekai:dark_oak_half_slab"},
-    "C": {"item": "minecraft:dark_oak_slab"},
-    "F": {"item": "minecraft:dark_oak_fence"}
+    "S": {"item": "minecraft:dark_oak_fence"},
+    "T": {"item": "anisekai:dark_oak_half_slab"},
+    "F": {"item": "minecraft:dark_oak_slab"}
   },
   "group": "tables"
 }

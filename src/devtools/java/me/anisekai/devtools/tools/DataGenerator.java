@@ -5,8 +5,8 @@ import me.anisekai.devtools.DevPaths;
 import me.anisekai.devtools.DevTools;
 import me.anisekai.devtools.Logger;
 import me.anisekai.devtools.data.BlockVariant;
-import me.anisekai.devtools.data.BlockVariantsGroup;
 import me.anisekai.devtools.data.Configuration;
+import me.anisekai.devtools.data.GeneratorSettings;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.BiFunction;
 
 public final class DataGenerator {
@@ -33,8 +34,8 @@ public final class DataGenerator {
             String     content     = sourceFile.getName().replace(".json", "");
             JSONObject contentData = DevIO.getFileJson(sourceFile);
 
-            JSONObject settings = contentData.getJSONObject("settings");
-            JSONObject elements = contentData.getJSONObject("elements");
+            GeneratorSettings settings = new GeneratorSettings(configuration, contentData.getJSONObject("settings"));
+            JSONObject        elements = contentData.getJSONObject("elements");
 
             if (elements.has("models")) {
                 Logger.logn("Generating base block");
@@ -53,29 +54,36 @@ public final class DataGenerator {
                 Logger.unnest();
             }
 
-            if (!settings.has("useVariant")) {
+            if (!settings.isUsingVariants()) {
                 Logger.logn("Generating content");
                 Map<String, String> replacements  = DevTools.getTemplateReplacement(content);
                 String              id            = replacements.get("id");
                 String              item          = replacements.get("item");
-                JSONObject          outputElement = this.doTemplating(elements, replacements);
+                JSONObject          outputElement = doTemplating(elements, replacements);
 
                 this.writeBlock(id, item, outputElement);
                 Logger.unnest();
             } else {
                 Logger.logn("Generating variants");
-                String             useVariantGroup = settings.getString("useVariant");
-                BlockVariantsGroup variantGroup    = configuration.getVariantsGroup(useVariantGroup);
+                Set<BlockVariant> variants = settings.getVariants().keySet();
 
-                for (BlockVariant variant : variantGroup.getVariants()) {
+                for (BlockVariant variant : variants) {
                     Logger.logn("Generating content for variant %s", variant.getName());
-                    Map<String, String> replacements    = DevTools.getVariantTemplateReplacement(variant, content);
-                    String              id              = replacements.get("id");
-                    String              item            = replacements.get("item");
-                    JSONObject          variantElements = this.doTemplating(elements, replacements);
+                    Map<String, String> replacements = DevTools.getVariantTemplateReplacement(variant, content);
+                    String              id           = replacements.get("id");
+                    String              item         = replacements.get("item");
+
+                    // Inject references
+                    JSONObject mapping = doTemplating(settings.getVariants().get(variant), replacements);
+                    for (String key : mapping.keySet()) {
+                        replacements.put(key, mapping.getString(key));
+                    }
+
+                    JSONObject variantElements = doTemplating(elements, replacements);
                     this.writeBlock(id, item, variantElements);
                     Logger.unnest();
                 }
+
                 Logger.unnest();
             }
 
@@ -124,7 +132,7 @@ public final class DataGenerator {
         }
     }
 
-    private JSONObject doTemplating(JSONObject json, Map<String, String> templating) {
+    private static JSONObject doTemplating(JSONObject json, Map<String, String> templating) {
 
         String content = json.toString();
 

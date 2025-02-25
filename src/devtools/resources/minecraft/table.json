@@ -1,6 +1,17 @@
 {
   "settings": {
-    "useVariant": "wood"
+    "usingVariants": [
+      {
+        "name": "woods",
+        "maps": {
+          "texture:support": "{{log}}",
+          "texture:face":    "{{planks}}",
+          "craft:support":   "minecraft:{{fence}}",
+          "craft:foot":      "minecraft:{{slab}}",
+          "craft:face":      "{{mod}}:{{type}}_half_slab"
+        }
+      }
+    ]
   },
   "elements": {
     "item":        {
@@ -33,19 +44,19 @@
       "category": "building",
       "group":    "{{name}}s",
       "pattern":  [
-        "BBB",
-        " F ",
-        " C "
+        "TTT",
+        " S ",
+        " F "
       ],
       "key":      {
+        "S": {
+          "item": "{{craft:support}}"
+        },
         "F": {
-          "item": "minecraft:{{fence}}"
+          "item": "{{craft:foot}}"
         },
-        "C": {
-          "item": "minecraft:{{slab}}"
-        },
-        "B": {
-          "item": "{{mod}}:{{type}}_half_slab"
+        "T": {
+          "item": "{{craft:face}}"
         }
       },
       "result":   { "id": "{{id}}", "count": 1 }
@@ -58,22 +69,22 @@
               "from":  [ 5, 0, 5 ],
               "to":    [ 11, 1, 11 ],
               "faces": {
-                "north": { "uv": [ 0, 0, 6, 1 ], "texture": "#1" },
-                "east":  { "uv": [ 0, 0, 6, 1 ], "texture": "#1" },
-                "south": { "uv": [ 0, 0, 6, 1 ], "texture": "#1" },
-                "west":  { "uv": [ 0, 0, 6, 1 ], "texture": "#1" },
-                "up":    { "uv": [ 0, 0, 6, 6 ], "texture": "#1" },
-                "down":  { "uv": [ 0, 0, 6, 6 ], "texture": "#1" }
+                "north": { "uv": [ 0, 0, 6, 1 ], "texture": "#support" },
+                "east":  { "uv": [ 0, 0, 6, 1 ], "texture": "#support" },
+                "south": { "uv": [ 0, 0, 6, 1 ], "texture": "#support" },
+                "west":  { "uv": [ 0, 0, 6, 1 ], "texture": "#support" },
+                "up":    { "uv": [ 0, 0, 6, 6 ], "texture": "#support" },
+                "down":  { "uv": [ 0, 0, 6, 6 ], "texture": "#support" }
               }
             },
             {
               "from":  [ 7, 1, 7 ],
               "to":    [ 9, 14, 9 ],
               "faces": {
-                "north": { "uv": [ 0, 0, 2, 13 ], "texture": "#1" },
-                "east":  { "uv": [ 0, 0, 2, 13 ], "texture": "#1" },
-                "south": { "uv": [ 0, 0, 2, 13 ], "texture": "#1" },
-                "west":  { "uv": [ 0, 0, 2, 13 ], "texture": "#1" },
+                "north": { "uv": [ 0, 0, 2, 13 ], "texture": "#support" },
+                "east":  { "uv": [ 0, 0, 2, 13 ], "texture": "#support" },
+                "south": { "uv": [ 0, 0, 2, 13 ], "texture": "#support" },
+                "west":  { "uv": [ 0, 0, 2, 13 ], "texture": "#support" },
                 "up":    { "uv": [ 0, 0, 2, 2 ], "texture": "#missing" },
                 "down":  { "uv": [ 0, 0, 2, 2 ], "texture": "#missing" }
               }
@@ -82,12 +93,12 @@
               "from":  [ 0, 14, 0 ],
               "to":    [ 16, 16, 16 ],
               "faces": {
-                "north": { "uv": [ 0, 0, 16, 2 ], "texture": "#0" },
-                "east":  { "uv": [ 0, 0, 16, 2 ], "texture": "#0" },
-                "south": { "uv": [ 0, 0, 16, 2 ], "texture": "#0" },
-                "west":  { "uv": [ 0, 0, 16, 2 ], "texture": "#0" },
-                "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#0" },
-                "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#0" }
+                "north": { "uv": [ 0, 0, 16, 2 ], "texture": "#face" },
+                "east":  { "uv": [ 0, 0, 16, 2 ], "texture": "#face" },
+                "south": { "uv": [ 0, 0, 16, 2 ], "texture": "#face" },
+                "west":  { "uv": [ 0, 0, 16, 2 ], "texture": "#face" },
+                "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#face" },
+                "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#face" }
               }
             }
           ],
@@ -135,9 +146,9 @@
         "block": {
           "parent":   "{{mod}}:block/base/{{name}}",
           "textures": {
-            "0":        "minecraft:block/{{planks}}",
-            "1":        "minecraft:block/{{log}}",
-            "particle": "minecraft:block/{{planks}}"
+            "face":     "minecraft:block/{{texture:face}}",
+            "support":  "minecraft:block/{{texture:support}}",
+            "particle": "minecraft:block/{{texture:face}}"
           }
         }
       }

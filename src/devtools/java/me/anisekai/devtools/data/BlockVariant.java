@@ -18,12 +18,19 @@ public class BlockVariant {
         source.keySet().forEach(key -> this.aliases.put(key, source.getString(key)));
     }
 
+    public BlockVariant(String name) {
+
+        this.name    = name;
+        this.aliases = new HashMap<>();
+    }
+
     public String getName() {
 
         return this.name;
     }
 
     public String getAlias(String key) {
+
         if (!this.aliases.containsKey(key)) {
             throw new IllegalArgumentException("Unknown alias " + key + " in variant " + this.name);
         }
@@ -31,6 +38,8 @@ public class BlockVariant {
     }
 
     public Set<String> getAliases() {
+
         return this.aliases.keySet();
     }
+
 }

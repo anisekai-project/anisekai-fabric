@@ -1,16 +1,16 @@
 {
   "values": [
+    "anisekai:acacia_staircase",
     "anisekai:bamboo_staircase",
+    "anisekai:birch_staircase",
     "anisekai:cherry_staircase",
     "anisekai:crimson_staircase",
-    "anisekai:birch_staircase",
-    "anisekai:oak_staircase",
-    "anisekai:warped_staircase",
-    "anisekai:acacia_staircase",
     "anisekai:dark_oak_staircase",
-    "anisekai:mangrove_staircase",
     "anisekai:jungle_staircase",
-    "anisekai:spruce_staircase"
+    "anisekai:mangrove_staircase",
+    "anisekai:oak_staircase",
+    "anisekai:spruce_staircase",
+    "anisekai:warped_staircase"
   ],
   "replace": false
 }

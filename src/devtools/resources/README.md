@@ -26,18 +26,19 @@ The keys available are the following (using `chair.json` in the `oak` variant as
 Also, more elements (called aliases) are dynamically added to this table depending on your variant declaration in
 `config.json`
 
-For instance, something like this will add `log` and `stairs` for the `oak` variant:
+For instance, something like this will add `log` and `planks` for the `oak` variant:
 
 ```json
 {
-  "variants": {
-    "wood": {
-      "oak": {
+  "name":   "woods",
+  "values": [
+    {
+      "name":     "oak",
+      "mappings": {
         "log":    "oak_log",
-        "stairs": "oak_stairs"
+        "planks": "oak_planks"
       }
     }
-  }
+  ]
 }
 ```
-

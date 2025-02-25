@@ -1,30 +1,47 @@
 package me.anisekai.devtools.data;
 
 import me.anisekai.devtools.DevIO;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Configuration {
 
-    private final Map<String, BlockVariantsGroup> groups = new HashMap<>();
+    private final JSONObject config;
 
-    public Configuration(File config) throws IOException {
+    private final List<BlockVariantsGroup> variantsGroups = new ArrayList<>();
 
-        JSONObject data = DevIO.getFileJson(config);
+    public Configuration(File file) throws IOException {
 
-        JSONObject groups = data.getJSONObject("variants");
-        groups.keySet().forEach(variant -> this.groups.put(variant, new BlockVariantsGroup(variant, groups.getJSONObject(variant))));
+        this.config = DevIO.getFileJson(file);
+
+        JSONArray variantGroups = this.config.getJSONArray("variants");
+
+        for (int i = 0; i < variantGroups.length(); i++) {
+            JSONObject group = variantGroups.getJSONObject(i);
+
+            String    groupName = group.getString("name");
+            JSONArray values    = group.getJSONArray("values");
+
+            this.variantsGroups.add(new BlockVariantsGroup(group.getString("name"), values));
+        }
     }
 
-    public BlockVariantsGroup getVariantsGroup(String variant) {
-        if (!this.groups.containsKey(variant)) {
-            throw new IllegalArgumentException("Unknown variant " + variant);
-        }
-        return this.groups.get(variant);
+    public List<BlockVariantsGroup> getVariantsGroups() {
+
+        return this.variantsGroups;
+    }
+
+    public BlockVariantsGroup getVariantsGroup(String name) {
+
+        return this.variantsGroups.stream()
+                                  .filter(g -> g.getName().equals(name))
+                                  .findFirst()
+                                  .orElseThrow(() -> new IllegalArgumentException("No such variant: " + name));
     }
 
 }

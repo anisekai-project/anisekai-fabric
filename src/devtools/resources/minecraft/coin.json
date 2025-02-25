@@ -1,15 +1,17 @@
 {
   "settings": {
-    "useVariant": "coins"
+    "usingVariants": [
+      { "name": "coins" }
+    ]
   },
-  "elements":  {
-    "item":   {
+  "elements": {
+    "item": {
       "parent":   "item/generated",
       "textures": {
         "layer0": "{{mod}}:item/{{type}}_{{name}}"
       }
     },
-    "tags":        [
+    "tags": [
       { "namespace": "{{mod}}", "value": "item/{{name}}s" }
     ]
   }

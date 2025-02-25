@@ -4,16 +4,16 @@
     "id": "anisekai:spruce_table"
   },
   "pattern": [
-    "BBB",
-    " F ",
-    " C "
+    "TTT",
+    " S ",
+    " F "
   ],
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": {"item": "anisekai:spruce_half_slab"},
-    "C": {"item": "minecraft:spruce_slab"},
-    "F": {"item": "minecraft:spruce_fence"}
+    "S": {"item": "minecraft:spruce_fence"},
+    "T": {"item": "anisekai:spruce_half_slab"},
+    "F": {"item": "minecraft:spruce_slab"}
   },
   "group": "tables"
 }

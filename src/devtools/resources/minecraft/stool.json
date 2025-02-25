@@ -1,8 +1,18 @@
 {
   "settings": {
-    "useVariant": "wood"
+    "usingVariants": [
+      {
+        "name": "woods",
+        "maps": {
+          "texture:legs": "{{log}}",
+          "texture:seat": "{{planks}}",
+          "craft:legs":   "minecraft:{{fence}}",
+          "craft:seat":   "{{mod}}:{{type}}_half_slab"
+        }
+      }
+    ]
   },
-  "elements":  {
+  "elements": {
     "item":        {
       "parent": "{{mod}}:block/{{item}}"
     },
@@ -37,8 +47,8 @@
         "F F"
       ],
       "key":      {
-        "F": { "item": "minecraft:{{fence}}" },
-        "C": { "item": "{{mod}}:{{type}}_half_slab" }
+        "F": { "item": "{{craft:legs}}" },
+        "C": { "item": "{{craft:seat}}" }
       },
       "result":   { "id": "{{id}}", "count": 1 }
     },
@@ -147,9 +157,9 @@
         "block": {
           "parent":   "{{mod}}:block/base/{{name}}",
           "textures": {
-            "seat_backrest": "minecraft:block/{{planks}}",
-            "chair_legs":    "minecraft:block/{{log}}",
-            "particle":      "minecraft:block/{{planks}}"
+            "seat_backrest": "minecraft:block/{{texture:seat}}",
+            "chair_legs":    "minecraft:block/{{texture:legs}}",
+            "particle":      "minecraft:block/{{texture:seat}}"
           }
         }
       }

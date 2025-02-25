@@ -4,16 +4,16 @@
     "id": "anisekai:bamboo_table"
   },
   "pattern": [
-    "BBB",
-    " F ",
-    " C "
+    "TTT",
+    " S ",
+    " F "
   ],
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": {"item": "anisekai:bamboo_half_slab"},
-    "C": {"item": "minecraft:bamboo_slab"},
-    "F": {"item": "minecraft:bamboo_fence"}
+    "S": {"item": "minecraft:bamboo_fence"},
+    "T": {"item": "anisekai:bamboo_half_slab"},
+    "F": {"item": "minecraft:bamboo_slab"}
   },
   "group": "tables"
 }

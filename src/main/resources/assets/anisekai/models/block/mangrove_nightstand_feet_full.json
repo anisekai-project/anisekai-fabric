@@ -1,7 +1,7 @@
 {
   "parent": "anisekai:block/base/nightstand_feet_full",
   "textures": {
-    "0": "minecraft:block/mangrove_log",
-    "particle": "minecraft:block/mangrove_log"
+    "particle": "minecraft:block/mangrove_log",
+    "structure": "minecraft:block/mangrove_log"
   }
 }
