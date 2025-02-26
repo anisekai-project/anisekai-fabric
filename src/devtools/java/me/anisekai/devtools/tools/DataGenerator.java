@@ -31,60 +31,64 @@ public final class DataGenerator {
         for (File sourceFile : contentFile) {
             Logger.logn("Reading %s", sourceFile.getName());
 
-            String     content     = sourceFile.getName().replace(".json", "");
-            JSONObject contentData = DevIO.getFileJson(sourceFile);
+            String    content      = sourceFile.getName().replace(".json", "");
+            JSONArray contentArray = DevIO.getFileArray(sourceFile);
 
-            GeneratorSettings settings = new GeneratorSettings(configuration, contentData.getJSONObject("settings"));
-            JSONObject        elements = contentData.getJSONObject("elements");
+            for (int i = 0; i < contentArray.length(); i++) {
 
-            if (elements.has("models")) {
-                Logger.logn("Generating base block");
-                JSONObject models = elements.getJSONObject("models");
+                JSONObject        contentData = contentArray.getJSONObject(i);
+                GeneratorSettings settings    = new GeneratorSettings(configuration, contentData.getJSONObject("settings"));
+                JSONObject        elements    = contentData.getJSONObject("elements");
 
-                for (String modelName : models.keySet()) {
-                    JSONObject part = models.getJSONObject(modelName);
+                if (elements.has("models")) {
+                    Logger.logn("Generating base block");
+                    JSONObject models = elements.getJSONObject("models");
 
-                    if (part.has("base")) {
-                        String     name = this.getBlockPartName(content, modelName);
-                        String     path = DevPaths.baseBlock(DevTools.MOD_ID, name);
-                        JSONObject json = part.getJSONObject("base");
-                        setFileContent(path, json);
+                    for (String modelName : models.keySet()) {
+                        JSONObject part = models.getJSONObject(modelName);
+
+                        if (part.has("base")) {
+                            String     name = this.getBlockPartName(content, modelName);
+                            String     path = DevPaths.baseBlock(DevTools.MOD_ID, name);
+                            JSONObject json = part.getJSONObject("base");
+                            setFileContent(path, json);
+                        }
                     }
-                }
-                Logger.unnest();
-            }
-
-            if (!settings.isUsingVariants()) {
-                Logger.logn("Generating content");
-                Map<String, String> replacements  = DevTools.getTemplateReplacement(content);
-                String              id            = replacements.get("id");
-                String              item          = replacements.get("item");
-                JSONObject          outputElement = doTemplating(elements, replacements);
-
-                this.writeBlock(id, item, outputElement);
-                Logger.unnest();
-            } else {
-                Logger.logn("Generating variants");
-                Set<BlockVariant> variants = settings.getVariants().keySet();
-
-                for (BlockVariant variant : variants) {
-                    Logger.logn("Generating content for variant %s", variant.getName());
-                    Map<String, String> replacements = DevTools.getVariantTemplateReplacement(variant, content);
-                    String              id           = replacements.get("id");
-                    String              item         = replacements.get("item");
-
-                    // Inject references
-                    JSONObject mapping = doTemplating(settings.getVariants().get(variant), replacements);
-                    for (String key : mapping.keySet()) {
-                        replacements.put(key, mapping.getString(key));
-                    }
-
-                    JSONObject variantElements = doTemplating(elements, replacements);
-                    this.writeBlock(id, item, variantElements);
                     Logger.unnest();
                 }
 
-                Logger.unnest();
+                if (!settings.isUsingVariants()) {
+                    Logger.logn("Generating content");
+                    Map<String, String> replacements  = DevTools.getTemplateReplacement(content);
+                    String              id            = replacements.get("id");
+                    String              item          = replacements.get("item");
+                    JSONObject          outputElement = doTemplating(elements, replacements);
+
+                    this.writeBlock(id, item, outputElement);
+                    Logger.unnest();
+                } else {
+                    Logger.logn("Generating variants");
+                    Set<BlockVariant> variants = settings.getVariants().keySet();
+
+                    for (BlockVariant variant : variants) {
+                        Logger.logn("Generating content for variant %s", variant.getName());
+                        Map<String, String> replacements = DevTools.getVariantTemplateReplacement(variant, content);
+                        String              id           = replacements.get("id");
+                        String              item         = replacements.get("item");
+
+                        // Inject references
+                        JSONObject mapping = doTemplating(settings.getVariants().get(variant), replacements);
+                        for (String key : mapping.keySet()) {
+                            replacements.put(key, mapping.getString(key));
+                        }
+
+                        JSONObject variantElements = doTemplating(elements, replacements);
+                        this.writeBlock(id, item, variantElements);
+                        Logger.unnest();
+                    }
+
+                    Logger.unnest();
+                }
             }
 
             Logger.unnest();

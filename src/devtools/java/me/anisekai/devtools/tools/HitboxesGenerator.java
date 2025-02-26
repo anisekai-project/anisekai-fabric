@@ -66,8 +66,9 @@ public class HitboxesGenerator {
         for (File sourceFile : contentFile) {
             Logger.logn("Reading %s", sourceFile.getName());
 
-            String     contentName = sourceFile.getName().replace(".json", "");
-            JSONObject contentData = DevIO.getFileJson(sourceFile);
+            String     contentName  = sourceFile.getName().replace(".json", "");
+            JSONArray  contentArray = DevIO.getFileArray(sourceFile);
+            JSONObject contentData  = contentArray.getJSONObject(0);
 
             JSONObject contentElements = contentData.getJSONObject("elements");
 

@@ -11,6 +11,130 @@
       ]
     },
     {
+      "name":   "glasses",
+      "values": [
+        {
+          "name":    "glass",
+          "mapping": {
+            "glass": "glass",
+            "pane":  "glass_pane"
+          }
+        },
+        {
+          "name":    "white_stained_glass",
+          "mapping": {
+            "glass": "white_stained_glass",
+            "pane":  "white_stained_glass_pane"
+          }
+        },
+        {
+          "name":    "light_gray_stained_glass",
+          "mapping": {
+            "glass": "light_gray_stained_glass",
+            "pane":  "light_gray_stained_glass_pane"
+          }
+        },
+        {
+          "name":    "gray_stained_glass",
+          "mapping": {
+            "glass": "gray_stained_glass",
+            "pane":  "gray_stained_glass_pane"
+          }
+        },
+        {
+          "name":    "black_stained_glass",
+          "mapping": {
+            "glass": "black_stained_glass",
+            "pane":  "black_stained_glass_pane"
+          }
+        },
+        {
+          "name":    "brown_stained_glass",
+          "mapping": {
+            "glass": "brown_stained_glass",
+            "pane":  "brown_stained_glass_pane"
+          }
+        },
+        {
+          "name":    "red_stained_glass",
+          "mapping": {
+            "glass": "red_stained_glass",
+            "pane":  "red_stained_glass_pane"
+          }
+        },
+        {
+          "name":    "orange_stained_glass",
+          "mapping": {
+            "glass": "orange_stained_glass",
+            "pane":  "orange_stained_glass_pane"
+          }
+        },
+        {
+          "name":    "yellow_stained_glass",
+          "mapping": {
+            "glass": "yellow_stained_glass",
+            "pane":  "yellow_stained_glass_pane"
+          }
+        },
+        {
+          "name":    "lime_stained_glass",
+          "mapping": {
+            "glass": "lime_stained_glass",
+            "pane":  "lime_stained_glass_pane"
+          }
+        },
+        {
+          "name":    "green_stained_glass",
+          "mapping": {
+            "glass": "green_stained_glass",
+            "pane":  "green_stained_glass_pane"
+          }
+        },
+        {
+          "name":    "cyan_stained_glass",
+          "mapping": {
+            "glass": "cyan_stained_glass",
+            "pane":  "cyan_stained_glass_pane"
+          }
+        },
+        {
+          "name":    "light_blue_stained_glass",
+          "mapping": {
+            "glass": "light_blue_stained_glass",
+            "pane":  "light_blue_stained_glass_pane"
+          }
+        },
+        {
+          "name":    "blue_stained_glass",
+          "mapping": {
+            "glass": "blue_stained_glass",
+            "pane":  "blue_stained_glass_pane"
+          }
+        },
+        {
+          "name":    "purple_stained_glass",
+          "mapping": {
+            "glass": "purple_stained_glass",
+            "pane":  "purple_stained_glass_pane"
+          }
+        },
+        {
+          "name":    "magenta_stained_glass",
+          "mapping": {
+            "glass": "magenta_stained_glass",
+            "pane":  "magenta_stained_glass_pane"
+          }
+        },
+        {
+          "name":    "pink_stained_glass",
+          "mapping": {
+            "glass": "pink_stained_glass",
+            "pane":  "pink_stained_glass_pane"
+          }
+        }
+      ]
+    },
+    {
       "name":   "woods",
       "values": [
         {

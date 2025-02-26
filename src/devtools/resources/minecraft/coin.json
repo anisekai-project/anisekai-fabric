@@ -1,18 +1,20 @@
-{
-  "settings": {
-    "usingVariants": [
-      { "name": "coins" }
-    ]
-  },
-  "elements": {
-    "item": {
-      "parent":   "item/generated",
-      "textures": {
-        "layer0": "{{mod}}:item/{{type}}_{{name}}"
-      }
+[
+  {
+    "settings": {
+      "usingVariants": [
+        { "name": "coins" }
+      ]
     },
-    "tags": [
-      { "namespace": "{{mod}}", "value": "item/{{name}}s" }
-    ]
+    "elements": {
+      "item": {
+        "parent":   "item/generated",
+        "textures": {
+          "layer0": "{{mod}}:item/{{type}}_{{name}}"
+        }
+      },
+      "tags": [
+        { "namespace": "{{mod}}", "value": "item/{{name}}s" }
+      ]
+    }
   }
-}
+]
