@@ -439,6 +439,13 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
     @Override
     public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
 
+        if (dir == Direction.DOWN) return false;
+        return this.isValid(slot, stack);
+    }
+
+    @Override
+    public boolean isValid(int slot, ItemStack stack) {
+
         Optional<RecipeEntry<CondenserRecipe>> optionalRecipe = this.findSelectedRecipe();
         if (optionalRecipe.isEmpty()) return false;
         RecipeEntry<CondenserRecipe> recipe = optionalRecipe.get();
