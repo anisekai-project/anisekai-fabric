@@ -23,23 +23,6 @@ public enum WoodEnum implements Nameable {
         return this.name().toLowerCase();
     }
 
-    public Block asLog() {
-
-        return switch (this) {
-            case ACACIA -> Blocks.ACACIA_LOG;
-            case BAMBOO -> Blocks.BAMBOO_BLOCK;
-            case BIRCH -> Blocks.BIRCH_LOG;
-            case CHERRY -> Blocks.CHERRY_LOG;
-            case CRIMSON -> Blocks.CRIMSON_STEM;
-            case DARK_OAK -> Blocks.DARK_OAK_LOG;
-            case JUNGLE -> Blocks.JUNGLE_LOG;
-            case MANGROVE -> Blocks.MANGROVE_LOG;
-            case OAK -> Blocks.OAK_LOG;
-            case SPRUCE -> Blocks.SPRUCE_LOG;
-            case WARPED -> Blocks.WARPED_STEM;
-        };
-    }
-
     public Block asStairs() {
 
         return switch (this) {

@@ -12,14 +12,10 @@ import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class CondenserRecipeSelectedPacket extends CondenserRecipePacket implements ServerPacket {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CondenserRecipeSelectedPacket.class);
-
-    public static final Identifier                     ID        = AnisekaiMod.id("packets/condenser/recipe_selected");
+    public static final Identifier                        ID        = AnisekaiMod.id("packets/condenser/recipe_selected");
     public static final Id<CondenserRecipeSelectedPacket> PACKET_ID = new Id<>(ID);
 
     public static final PacketCodec<RegistryByteBuf, CondenserRecipeSelectedPacket> CODEC = createPacketCodec(
@@ -39,24 +35,12 @@ public class CondenserRecipeSelectedPacket extends CondenserRecipePacket impleme
     @Override
     public void handle(ServerPlayNetworking.Context context) {
 
-        LOGGER.info(
-                "[CondenserRecipeSelected] Received recipe selection request (pos={}, identifier={})",
-                this.getPosition(),
-                this.getIdentifier()
-        );
-
         context.server().execute(() -> {
             ServerWorld world       = context.player().getServerWorld();
             BlockEntity blockEntity = world.getBlockEntity(this.getPosition());
 
             if (blockEntity instanceof CondenserBlockEntity condenser) {
                 condenser.setSelectedRecipe(this.getIdentifier());
-
-                LOGGER.info(
-                        "[CondenserRecipeSelected] Sending recipe update notification (pos={}, identifier={})",
-                        this.getPosition(),
-                        this.getIdentifier()
-                );
 
                 CustomPayload payload = new CondenserRecipeUpdatedPacket(this.getPosition(), this.getIdentifier());
                 world.getPlayers().forEach(player -> {

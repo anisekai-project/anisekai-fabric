@@ -17,8 +17,6 @@ import org.slf4j.LoggerFactory;
 
 public record CondenserRecipeQueryPacket(BlockPos position) implements ServerPacket {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CondenserRecipeQueryPacket.class);
-
     public static final Identifier                     ID        = AnisekaiMod.id("packets/condenser/query_recipe");
     public static final Id<CondenserRecipeQueryPacket> PACKET_ID = new Id<>(ID);
 
@@ -26,7 +24,6 @@ public record CondenserRecipeQueryPacket(BlockPos position) implements ServerPac
 
     public static void clientSend(BlockPos pos) {
 
-        LOGGER.info("[CondenserRecipeQuery] Sending request for block at {}", pos);
         CustomPayload payload = new CondenserRecipeQueryPacket(pos);
         ClientPlayNetworking.send(payload);
     }
@@ -34,13 +31,11 @@ public record CondenserRecipeQueryPacket(BlockPos position) implements ServerPac
     @Override
     public void handle(ServerPlayNetworking.Context context) {
 
-        LOGGER.info("[CondenserRecipeQuery] Received request for block at {}", this.position);
         context.server().execute(() -> {
             ServerWorld world       = context.player().getServerWorld();
             BlockEntity blockEntity = world.getBlockEntity(this.position);
 
             if (blockEntity instanceof CondenserBlockEntity condenser) {
-                LOGGER.info("[CondenserRecipeQuery] Sending query result for block at {}", this.position);
                 CustomPayload payload = new CondenserRecipeUpdatedPacket(this.position, condenser.getSelectedRecipe());
                 ServerPlayNetworking.send(context.player(), payload);
             }
