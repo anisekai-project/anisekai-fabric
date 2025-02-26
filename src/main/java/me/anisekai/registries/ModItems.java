@@ -1,7 +1,9 @@
 package me.anisekai.registries;
 
 import me.anisekai.AnisekaiMod;
-import me.anisekai.enums.WoodType;
+import me.anisekai.enums.CoinEnum;
+import me.anisekai.enums.WoodEnum;
+import me.anisekai.registries.variants.BlockVariant;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
@@ -9,7 +11,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,86 +18,26 @@ import java.util.Map;
 
 public final class ModItems {
 
-    private static BlockItem create(WoodType type, String name, Map<WoodType, Block> from, int stackSize) {
+    private static BlockItem createBlockItem(String name, Block block) {
 
         return Registry.register(
                 Registries.ITEM,
-                type.identifierOf(name),
-                new BlockItem(from.get(type), new Item.Settings().maxCount(stackSize))
+                AnisekaiMod.id(name),
+                new BlockItem(block, new Item.Settings().maxCount(64))
         );
     }
 
-    public static final Map<WoodType, Item> CHAIRS = WoodType.generate(type -> create(
-            type, "chair",
-            ModBlocks.CHAIRS, 16
-    ));
 
-    public static final Map<WoodType, Item> STAIRCASE = WoodType.generate(type -> create(
-            type, "staircase",
-            ModBlocks.STAIRCASE, 64
-    ));
+    public static final Map<WoodEnum, BlockItem> CHAIRS      = BlockVariant.WOODS.createBlockItems(ModBlocks.CHAIRS, "%s_chair", 16);
+    public static final Map<WoodEnum, BlockItem> HALF_SLABS  = BlockVariant.WOODS.createBlockItems(ModBlocks.HALF_SLABS, "%s_half_slab", 64);
+    public static final Map<WoodEnum, BlockItem> NIGHTSTANDS = BlockVariant.WOODS.createBlockItems(ModBlocks.NIGHTSTANDS, "%s_nightstand", 8);
+    public static final Map<WoodEnum, BlockItem> STAIRCASES  = BlockVariant.WOODS.createBlockItems(ModBlocks.STAIRCASES, "%s_staircase", 64);
+    public static final Map<WoodEnum, BlockItem> STOOL       = BlockVariant.WOODS.createBlockItems(ModBlocks.STOOLS, "%s_stool", 16);
+    public static final Map<WoodEnum, BlockItem> TABLES      = BlockVariant.WOODS.createBlockItems(ModBlocks.TABLES, "%s_table", 8);
+    public static final Map<CoinEnum, Item>      COINS       = BlockVariant.COINS.createItems("%s_coin", variant -> new Item(new Item.Settings().maxCount(64)));
 
-    public static final Map<WoodType, Item> STOOLS = WoodType.generate(type -> create(
-            type, "stool",
-            ModBlocks.STOOLS, 16
-    ));
-
-    public static final Map<WoodType, Item> NIGHTSTANDS = WoodType.generate(type -> create(
-            type, "nightstand",
-            ModBlocks.NIGHTSTANDS, 8
-    ));
-
-    public static final Map<WoodType, Item> HALF_SLABS = WoodType.generate(type -> create(
-            type, "half_slab",
-            ModBlocks.HALF_SLABS, 64
-    ));
-
-    public static final Map<WoodType, Item> TABLES = WoodType.generate(type -> create(
-            type, "table",
-            ModBlocks.TABLES, 16
-    ));
-
-    public static final Item FISHING_BASKET = Registry.register(
-            Registries.ITEM,
-            Identifier.of(AnisekaiMod.MOD_ID, "fishing_basket"),
-            new BlockItem(ModBlocks.FISHING_BASKET, new Item.Settings().maxCount(64))
-    );
-
-    public static final Item CONDENSER = Registry.register(
-            Registries.ITEM,
-            Identifier.of(AnisekaiMod.MOD_ID, "condenser"),
-            new BlockItem(ModBlocks.CONDENSER, new Item.Settings().maxCount(64))
-    );
-
-    public static final Item COPPER_COIN = Registry.register(
-            Registries.ITEM,
-            AnisekaiMod.id("copper_coin"),
-            new Item(new Item.Settings().maxCount(64))
-    );
-
-    public static final Item IRON_COIN = Registry.register(
-            Registries.ITEM,
-            AnisekaiMod.id("iron_coin"),
-            new Item(new Item.Settings().maxCount(64))
-    );
-
-    public static final Item GOLD_COIN = Registry.register(
-            Registries.ITEM,
-            AnisekaiMod.id("gold_coin"),
-            new Item(new Item.Settings().maxCount(64))
-    );
-
-    public static final Item DIAMOND_COIN = Registry.register(
-            Registries.ITEM,
-            AnisekaiMod.id("diamond_coin"),
-            new Item(new Item.Settings().maxCount(64))
-    );
-
-    public static final Item EMERALD_COIN = Registry.register(
-            Registries.ITEM,
-            AnisekaiMod.id("emerald_coin"),
-            new Item(new Item.Settings().maxCount(64))
-    );
+    public static final Item FISHING_BASKET = createBlockItem("fishing_basket", ModBlocks.FISHING_BASKET);
+    public static final Item CONDENSER      = createBlockItem("condenser", ModBlocks.CONDENSER);
 
 
     private ModItems() {}
@@ -106,18 +47,15 @@ public final class ModItems {
         List<Item> items = new ArrayList<>();
         items.addAll(CHAIRS.values());
         items.addAll(HALF_SLABS.values());
-        items.addAll(STAIRCASE.values());
-        items.addAll(STOOLS.values());
-        items.addAll(TABLES.values());
         items.addAll(NIGHTSTANDS.values());
+        items.addAll(STAIRCASES.values());
+        items.addAll(STOOL.values());
+        items.addAll(TABLES.values());
+
+        items.addAll(COINS.values());
 
         items.add(FISHING_BASKET);
         items.add(CONDENSER);
-        items.add(COPPER_COIN);
-        items.add(IRON_COIN);
-        items.add(GOLD_COIN);
-        items.add(DIAMOND_COIN);
-        items.add(EMERALD_COIN);
 
         return items;
     }
@@ -133,15 +71,15 @@ public final class ModItems {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).
                        register(content -> {
 
-                           for (WoodType value : WoodType.values()) {
+                           for (WoodEnum value : WoodEnum.values()) {
                                content.addAfter(
                                        () -> value.asButton().asItem(),
                                        () -> CHAIRS.get(value),
                                        () -> HALF_SLABS.get(value),
-                                       () -> STAIRCASE.get(value),
-                                       () -> STOOLS.get(value),
-                                       () -> TABLES.get(value),
-                                       () -> NIGHTSTANDS.get(value)
+                                       () -> NIGHTSTANDS.get(value),
+                                       () -> STAIRCASES.get(value),
+                                       () -> STOOL.get(value),
+                                       () -> TABLES.get(value)
                                );
                            }
                        });
