@@ -99,10 +99,49 @@ public class HalfSlabBlock extends Block implements Waterloggable {
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
 
-        BlockPos        pos   = ctx.getBlockPos();
-        BlockState      state = ctx.getWorld().getBlockState(pos);
-        double          y     = ctx.getHitPos().y - ctx.getBlockPos().getY();
-        BooleanProperty layer = this.getAffectedLayerAt(state, y);
+        BlockPos   position = ctx.getBlockPos();
+        BlockState state    = ctx.getWorld().getBlockState(position);
+        double     y        = ctx.getHitPos().y - ctx.getBlockPos().getY();
+        double     x        = ctx.getHitPos().x - ctx.getBlockPos().getX();
+
+        BooleanProperty layer;
+
+        if (!state.isOf(this)) {
+            if (x == 0.5 && y == 0.5) {
+                // We are most probably dealing with the bridging mod here
+                // Let's find the nearest block from the hitpos in the player direction
+                BlockPos playerPosition = ctx.getPlayer().getBlockPos();
+                BlockPos positionDiff   = playerPosition.subtract(position);
+
+                int dx = Integer.compare(positionDiff.getX(), 0);
+                int dz = Integer.compare(positionDiff.getZ(), 0);
+
+                BlockPos neighborDirection = new BlockPos(dx, 0, dz);
+                BlockPos neighborPosition  = position.add(neighborDirection);
+
+                BlockState neighborState = ctx.getWorld().getBlockState(neighborPosition);
+
+                if (neighborState.isOf(this)) {
+                    // The neighbor is a half-slab, let's just use its highest layer.
+                    layer = this.getHighestLayer(neighborState);
+                } else {
+                    // It's not a half-slab, let's use the highest Y value from the block collision shape instead
+                    VoxelShape shape = neighborState.getCollisionShape(ctx.getWorld(), neighborPosition);
+                    if (shape.isEmpty()) {
+                        // Why are we still here, just to suffer... what fucking value I'm supposed to use there ??
+                        layer = this.getAffectedLayerAt(1);
+                    } else {
+                        layer = this.getAffectedLayerAt(shape.getBoundingBox().maxY);
+                    }
+                }
+            } else {
+                // Just use the hit position to detect which layer should be set.
+                layer = this.getAffectedLayerAt(position.getY());
+            }
+        } else {
+            // We already are in a half-slab context, let's use that to "complete" our block.
+            layer = this.getAffectedLayerAt(state, position.getY());
+        }
 
         BlockState placementState;
         if (state.isOf(this)) {
@@ -149,6 +188,15 @@ public class HalfSlabBlock extends Block implements Waterloggable {
 
     // <editor-fold desc="Layers">
 
+    public BooleanProperty getHighestLayer(BlockState state) {
+        if (!state.isOf(this)) throw new IllegalArgumentException("State must be half-slab");
+        if (state.get(LAYER_3)) return LAYER_3;
+        if (state.get(LAYER_2)) return LAYER_2;
+        if (state.get(LAYER_1)) return LAYER_1;
+        if (state.get(LAYER_0)) return LAYER_0;
+        throw new IllegalStateException("Half-Slab state without any layers (??)");
+    }
+
     public boolean isFull(BlockState state) {
 
         boolean layer0 = state.get(LAYER_0);
@@ -171,22 +219,36 @@ public class HalfSlabBlock extends Block implements Waterloggable {
 
     public boolean isAffectingLayer0(double y) {
 
-        return y < 0.25;
+        return y <= 0.25;
     }
 
     public boolean isAffectingLayer1(double y) {
 
-        return y > 0.25 && y < 0.5;
+        return y >= 0.25 && y <= 0.5;
     }
 
     public boolean isAffectingLayer2(double y) {
 
-        return y > 0.5 && y < 0.75;
+        return y >= 0.5 && y <= 0.75;
     }
 
     public boolean isAffectingLayer3(double y) {
 
-        return y > 0.75;
+        return y >= 0.75;
+    }
+
+    public BooleanProperty getAffectedLayerAt(double y) {
+
+        if (this.isAffectingLayer0(y)) {
+            return LAYER_0;
+        } else if (this.isAffectingLayer1(y)) {
+            return LAYER_1;
+        } else if (this.isAffectingLayer2(y)) {
+            return LAYER_2;
+        } else if (this.isAffectingLayer3(y)) {
+            return LAYER_3;
+        }
+        return LAYER_0; // Default to layer 0 if y value is invalid – should not happen under normal circumstances.
     }
 
     public BooleanProperty getAffectedLayerAt(BlockState state, double y) {
@@ -197,16 +259,9 @@ public class HalfSlabBlock extends Block implements Waterloggable {
             return state.get(LAYER_1) ? LAYER_2 : LAYER_1;
         } else if (y == 0.25) {
             return state.get(LAYER_0) ? LAYER_1 : LAYER_0;
-        } else if (this.isAffectingLayer0(y)) {
-            return LAYER_0;
-        } else if (this.isAffectingLayer1(y)) {
-            return LAYER_1;
-        } else if (this.isAffectingLayer2(y)) {
-            return LAYER_2;
-        } else if (this.isAffectingLayer3(y)) {
-            return LAYER_3;
+        } else {
+            return this.getAffectedLayerAt(y);
         }
-        return LAYER_0; // Default to layer 0 if y value is invalid – should not happen.
     }
 
     // </editor-fold>
