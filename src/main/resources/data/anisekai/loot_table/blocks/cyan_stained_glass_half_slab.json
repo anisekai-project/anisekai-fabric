@@ -1,0 +1,18 @@
+{
+  "pools": [{
+    "entries": [{
+      "name": "anisekai:cyan_stained_glass_half_slab",
+      "type": "minecraft:item"
+    }],
+    "conditions": [{
+      "predicate": {"predicates": {"minecraft:enchantments": [{
+        "enchantments": "minecraft:silk_touch",
+        "levels": {"min": 1}
+      }]}},
+      "condition": "minecraft:match_tool"
+    }],
+    "rolls": 1,
+    "bonus_rolls": 0
+  }],
+  "type": "minecraft:block"
+}

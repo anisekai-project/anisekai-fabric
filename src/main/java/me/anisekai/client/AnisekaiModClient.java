@@ -6,15 +6,18 @@ import me.anisekai.entities.renderer.InvisibleSeatRenderer;
 import me.anisekai.interfaces.packets.ClientPacket;
 import me.anisekai.inventories.constrained.ConstrainedContainerScreen;
 import me.anisekai.packets.CondenserRecipeUpdatedPacket;
+import me.anisekai.registries.ModBlocks;
 import me.anisekai.registries.ModEntities;
 import me.anisekai.registries.ModModels;
 import me.anisekai.registries.ModScreenHandler;
 import me.anisekai.screen.condenser.CondenserScreen;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
+import net.minecraft.client.render.RenderLayer;
 
 public class AnisekaiModClient implements ClientModInitializer {
 
@@ -34,6 +37,7 @@ public class AnisekaiModClient implements ClientModInitializer {
 
         ClientPlayNetworking.registerGlobalReceiver(CondenserRecipeUpdatedPacket.PACKET_ID, ClientPacket::handle);
 
+        ModBlocks.GLASS_HALF_SLABS.values().forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getTranslucent()));
     }
 
 }

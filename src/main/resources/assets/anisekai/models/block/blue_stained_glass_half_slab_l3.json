@@ -1,0 +1,8 @@
+{
+  "parent": "anisekai:block/base/half_slab_l3",
+  "textures": {
+    "side": "minecraft:block/blue_stained_glass",
+    "step": "minecraft:block/blue_stained_glass",
+    "particle": "minecraft:block/blue_stained_glass"
+  }
+}

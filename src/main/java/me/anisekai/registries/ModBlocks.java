@@ -2,6 +2,7 @@ package me.anisekai.registries;
 
 import me.anisekai.AnisekaiMod;
 import me.anisekai.blocks.*;
+import me.anisekai.enums.GlassEnum;
 import me.anisekai.enums.WoodEnum;
 import me.anisekai.registries.variants.BlockVariant;
 import net.minecraft.block.AbstractBlock;
@@ -46,6 +47,11 @@ public final class ModBlocks {
             variant -> new TableBlock(AbstractBlock.Settings.copy(variant.asStairs()))
     );
 
+    public static final Map<GlassEnum, Block> GLASS_HALF_SLABS = BlockVariant.GLASSES.createBlocks(
+            "%s_half_slab",
+            variant -> new HalfSlabBlock(AbstractBlock.Settings.copy(Blocks.GLASS_PANE))
+    );
+
     public static final Block FISHING_BASKET = Registry.register(
             Registries.BLOCK,
             AnisekaiMod.id("fishing_basket"),
@@ -65,6 +71,7 @@ public final class ModBlocks {
         List<Block> blocks = new ArrayList<>();
         blocks.addAll(CHAIRS.values());
         blocks.addAll(HALF_SLABS.values());
+        blocks.addAll(GLASS_HALF_SLABS.values());
         blocks.addAll(STAIRCASES.values());
         blocks.addAll(TABLES.values());
         blocks.addAll(STOOLS.values());

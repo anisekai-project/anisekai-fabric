@@ -303,5 +303,321 @@
         }
       }
     }
+  },
+  {
+    "settings": {
+      "usingVariants": [
+        {
+          "name": "glasses",
+          "maps": {
+            "texture:sides": "{{glass}}",
+            "texture:faces": "{{glass}}",
+            "craft":         "minecraft:{{pane}}"
+          }
+        }
+      ]
+    },
+    "elements": {
+      "item":        {
+        "parent": "{{mod}}:block/{{item}}"
+      },
+      "tags":        [
+        { "namespace": "{{mod}}", "value": "item/{{name}}s" }
+      ],
+      "loot_table":  {
+        "type":  "minecraft:block",
+        "pools": [
+          {
+            "bonus_rolls": 0.0,
+            "conditions":  [
+              {
+                "condition": "minecraft:match_tool",
+                "predicate": {
+                  "predicates": {
+                    "minecraft:enchantments": [ { "enchantments": "minecraft:silk_touch", "levels": { "min": 1 } } ]
+                  }
+                }
+              }
+            ],
+            "entries":     [
+              { "type": "minecraft:item", "name": "{{id}}" }
+            ],
+            "rolls":       1
+          }
+        ]
+      },
+      "blockstates": {
+        "multipart": [
+          {
+            "apply": { "model": "{{mod}}:block/{{item}}_l3", "uvlock": false },
+            "when":  { "layer3": true }
+          },
+          {
+            "apply": { "model": "{{mod}}:block/{{item}}_l2", "uvlock": false },
+            "when":  { "layer2": true }
+          },
+          {
+            "apply": { "model": "{{mod}}:block/{{item}}_l1", "uvlock": false },
+            "when":  { "layer1": true }
+          },
+          {
+            "apply": { "model": "{{mod}}:block/{{item}}_l0", "uvlock": false },
+            "when":  { "layer0": true }
+          }
+        ]
+      },
+      "recipe":      {
+        "type":     "minecraft:crafting_shaped",
+        "category": "building",
+        "group":    "{{name}}s",
+        "pattern":  [ "CCC" ],
+        "key":      { "C": { "item": "{{craft}}" } },
+        "result":   { "id": "{{id}}", "count": 3 }
+      },
+      "models":      {
+        "":   {
+          "block": {
+            "parent":   "{{mod}}:block/base/{{name}}_l3",
+            "textures": {
+              "step": "minecraft:block/{{texture:faces}}",
+              "side": "minecraft:block/{{texture:sides}}"
+            }
+          }
+        },
+        "l0": {
+          "base":  {
+            "elements": [
+              {
+                "from":  [ 0, 0, 0 ],
+                "to":    [ 16, 4, 16 ],
+                "faces": {
+                  "north": { "uv": [ 0, 12, 16, 16 ], "texture": "#side" },
+                  "east":  { "uv": [ 0, 12, 16, 16 ], "texture": "#side" },
+                  "south": { "uv": [ 0, 12, 16, 16 ], "texture": "#side" },
+                  "west":  { "uv": [ 0, 12, 16, 16 ], "texture": "#side" },
+                  "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#step" },
+                  "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#step" }
+                }
+              }
+            ],
+            "display":  {
+              "thirdperson_righthand": {
+                "rotation": [ 0, 90, 0 ],
+                "scale":    [ 0.5, 0.5, 0.5 ]
+              },
+              "thirdperson_lefthand":  {
+                "rotation": [ 0, 90, 0 ],
+                "scale":    [ 0.5, 0.5, 0.5 ]
+              },
+              "firstperson_righthand": {
+                "rotation": [ 0, 90, 0 ],
+                "scale":    [ 0.5, 0.5, 0.5 ]
+              },
+              "firstperson_lefthand":  {
+                "rotation": [ 0, 90, 0 ],
+                "scale":    [ 0.5, 0.5, 0.5 ]
+              },
+              "ground":                {
+                "translation": [ 0, 3, 0 ],
+                "scale":       [ 0.25, 0.25, 0.25 ]
+              },
+              "gui":                   {
+                "rotation": [ 15, 140, 0 ],
+                "scale":    [ 0.5, 0.5, 0.5 ]
+              },
+              "head":                  {
+                "rotation": [ 0, 90, 0 ]
+              },
+              "fixed":                 {
+                "translation": [ 0, -1.25, -2.5 ],
+                "scale":       [ 0.5, 0.5, 0.5 ]
+              }
+            }
+          },
+          "block": {
+            "parent":   "{{mod}}:block/base/{{name}}_l0",
+            "textures": {
+              "step": "minecraft:block/{{texture:faces}}",
+              "side": "minecraft:block/{{texture:sides}}"
+            }
+          }
+        },
+        "l1": {
+          "base":  {
+            "elements": [
+              {
+                "from":  [ 0, 4, 0 ],
+                "to":    [ 16, 8, 16 ],
+                "faces": {
+                  "north": { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
+                  "east":  { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
+                  "south": { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
+                  "west":  { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
+                  "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#step" },
+                  "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#step" }
+                }
+              }
+            ],
+            "display":  {
+              "thirdperson_righthand": {
+                "rotation": [ 0, 90, 0 ],
+                "scale":    [ 0.5, 0.5, 0.5 ]
+              },
+              "thirdperson_lefthand":  {
+                "rotation": [ 0, 90, 0 ],
+                "scale":    [ 0.5, 0.5, 0.5 ]
+              },
+              "firstperson_righthand": {
+                "rotation": [ 0, 90, 0 ],
+                "scale":    [ 0.5, 0.5, 0.5 ]
+              },
+              "firstperson_lefthand":  {
+                "rotation": [ 0, 90, 0 ],
+                "scale":    [ 0.5, 0.5, 0.5 ]
+              },
+              "ground":                {
+                "translation": [ 0, 3, 0 ],
+                "scale":       [ 0.25, 0.25, 0.25 ]
+              },
+              "gui":                   {
+                "rotation": [ 15, 140, 0 ],
+                "scale":    [ 0.5, 0.5, 0.5 ]
+              },
+              "head":                  {
+                "rotation": [ 0, 90, 0 ]
+              },
+              "fixed":                 {
+                "translation": [ 0, -1.25, -2.5 ],
+                "scale":       [ 0.5, 0.5, 0.5 ]
+              }
+            }
+          },
+          "block": {
+            "parent":   "{{mod}}:block/base/{{name}}_l1",
+            "textures": {
+              "step": "minecraft:block/{{texture:faces}}",
+              "side": "minecraft:block/{{texture:sides}}"
+            }
+          }
+        },
+        "l2": {
+          "base":  {
+            "elements": [
+              {
+                "from":  [ 0, 8, 0 ],
+                "to":    [ 16, 12, 16 ],
+                "faces": {
+                  "north": { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
+                  "east":  { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
+                  "south": { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
+                  "west":  { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
+                  "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#step" },
+                  "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#step" }
+                }
+              }
+            ],
+            "display":  {
+              "thirdperson_righthand": {
+                "rotation": [ 0, 90, 0 ],
+                "scale":    [ 0.5, 0.5, 0.5 ]
+              },
+              "thirdperson_lefthand":  {
+                "rotation": [ 0, 90, 0 ],
+                "scale":    [ 0.5, 0.5, 0.5 ]
+              },
+              "firstperson_righthand": {
+                "rotation": [ 0, 90, 0 ],
+                "scale":    [ 0.5, 0.5, 0.5 ]
+              },
+              "firstperson_lefthand":  {
+                "rotation": [ 0, 90, 0 ],
+                "scale":    [ 0.5, 0.5, 0.5 ]
+              },
+              "ground":                {
+                "translation": [ 0, 3, 0 ],
+                "scale":       [ 0.25, 0.25, 0.25 ]
+              },
+              "gui":                   {
+                "rotation": [ 15, 140, 0 ],
+                "scale":    [ 0.5, 0.5, 0.5 ]
+              },
+              "head":                  {
+                "rotation": [ 0, 90, 0 ]
+              },
+              "fixed":                 {
+                "translation": [ 0, -1.25, -2.5 ],
+                "scale":       [ 0.5, 0.5, 0.5 ]
+              }
+            }
+          },
+          "block": {
+            "parent":   "{{mod}}:block/base/{{name}}_l2",
+            "textures": {
+              "step": "minecraft:block/{{texture:faces}}",
+              "side": "minecraft:block/{{texture:sides}}"
+            }
+          }
+        },
+        "l3": {
+          "base":  {
+            "elements": [
+              {
+                "from":  [ 0, 12, 0 ],
+                "to":    [ 16, 16, 16 ],
+                "faces": {
+                  "north": { "uv": [ 0, 0, 16, 4 ], "texture": "#side" },
+                  "east":  { "uv": [ 0, 0, 16, 4 ], "texture": "#side" },
+                  "south": { "uv": [ 0, 0, 16, 4 ], "texture": "#side" },
+                  "west":  { "uv": [ 0, 0, 16, 4 ], "texture": "#side" },
+                  "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#step" },
+                  "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#step" }
+                }
+              }
+            ],
+            "display":  {
+              "thirdperson_righthand": {
+                "rotation": [ 0, 90, 0 ],
+                "scale":    [ 0.5, 0.5, 0.5 ]
+              },
+              "thirdperson_lefthand":  {
+                "rotation": [ 0, 90, 0 ],
+                "scale":    [ 0.5, 0.5, 0.5 ]
+              },
+              "firstperson_righthand": {
+                "rotation": [ 0, 90, 0 ],
+                "scale":    [ 0.5, 0.5, 0.5 ]
+              },
+              "firstperson_lefthand":  {
+                "rotation": [ 0, 90, 0 ],
+                "scale":    [ 0.5, 0.5, 0.5 ]
+              },
+              "ground":                {
+                "translation": [ 0, 3, 0 ],
+                "scale":       [ 0.25, 0.25, 0.25 ]
+              },
+              "gui":                   {
+                "rotation": [ 15, 140, 0 ],
+                "scale":    [ 0.5, 0.5, 0.5 ]
+              },
+              "head":                  {
+                "rotation": [ 0, 90, 0 ]
+              },
+              "fixed":                 {
+                "translation": [ 0, -1.25, -2.5 ],
+                "scale":       [ 0.5, 0.5, 0.5 ]
+              }
+            }
+          },
+          "block": {
+            "parent":   "{{mod}}:block/base/{{name}}_l3",
+            "textures": {
+              "step":     "minecraft:block/{{texture:faces}}",
+              "side":     "minecraft:block/{{texture:sides}}",
+              "particle": "minecraft:block/{{texture:faces}}"
+            }
+          }
+        }
+      }
+    }
   }
 ]

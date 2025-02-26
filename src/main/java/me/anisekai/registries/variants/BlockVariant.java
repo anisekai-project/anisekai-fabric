@@ -2,6 +2,7 @@ package me.anisekai.registries.variants;
 
 import me.anisekai.AnisekaiMod;
 import me.anisekai.enums.CoinEnum;
+import me.anisekai.enums.GlassEnum;
 import me.anisekai.enums.WoodEnum;
 import me.anisekai.interfaces.Nameable;
 import net.minecraft.block.Block;
@@ -13,12 +14,12 @@ import net.minecraft.registry.Registry;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class BlockVariant<T extends Nameable> implements Nameable {
 
-    public static final BlockVariant<WoodEnum> WOODS = new BlockVariant<>("woods", WoodEnum.values());
-    public static final BlockVariant<CoinEnum> COINS = new BlockVariant<>("coins", CoinEnum.values());
+    public static final BlockVariant<WoodEnum>  WOODS   = new BlockVariant<>("woods", WoodEnum.values());
+    public static final BlockVariant<CoinEnum>  COINS   = new BlockVariant<>("coins", CoinEnum.values());
+    public static final BlockVariant<GlassEnum> GLASSES = new BlockVariant<>("glasses", GlassEnum.values());
 
     private final String name;
     private final T[]    variants;

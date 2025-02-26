@@ -2,6 +2,7 @@ package me.anisekai.registries;
 
 import me.anisekai.AnisekaiMod;
 import me.anisekai.enums.CoinEnum;
+import me.anisekai.enums.GlassEnum;
 import me.anisekai.enums.WoodEnum;
 import me.anisekai.registries.variants.BlockVariant;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -28,13 +29,17 @@ public final class ModItems {
     }
 
 
-    public static final Map<WoodEnum, BlockItem> CHAIRS      = BlockVariant.WOODS.createBlockItems(ModBlocks.CHAIRS, "%s_chair", 16);
-    public static final Map<WoodEnum, BlockItem> HALF_SLABS  = BlockVariant.WOODS.createBlockItems(ModBlocks.HALF_SLABS, "%s_half_slab", 64);
-    public static final Map<WoodEnum, BlockItem> NIGHTSTANDS = BlockVariant.WOODS.createBlockItems(ModBlocks.NIGHTSTANDS, "%s_nightstand", 8);
-    public static final Map<WoodEnum, BlockItem> STAIRCASES  = BlockVariant.WOODS.createBlockItems(ModBlocks.STAIRCASES, "%s_staircase", 64);
-    public static final Map<WoodEnum, BlockItem> STOOL       = BlockVariant.WOODS.createBlockItems(ModBlocks.STOOLS, "%s_stool", 16);
-    public static final Map<WoodEnum, BlockItem> TABLES      = BlockVariant.WOODS.createBlockItems(ModBlocks.TABLES, "%s_table", 8);
-    public static final Map<CoinEnum, Item>      COINS       = BlockVariant.COINS.createItems("%s_coin", variant -> new Item(new Item.Settings().maxCount(64)));
+    public static final Map<WoodEnum, BlockItem>  CHAIRS           = BlockVariant.WOODS.createBlockItems(ModBlocks.CHAIRS, "%s_chair", 16);
+    public static final Map<WoodEnum, BlockItem>  HALF_SLABS       = BlockVariant.WOODS.createBlockItems(ModBlocks.HALF_SLABS, "%s_half_slab", 64);
+    public static final Map<GlassEnum, BlockItem> GLASS_HALF_SLABS = BlockVariant.GLASSES.createBlockItems(ModBlocks.GLASS_HALF_SLABS, "%s_half_slab", 64);
+    public static final Map<WoodEnum, BlockItem>  NIGHTSTANDS      = BlockVariant.WOODS.createBlockItems(ModBlocks.NIGHTSTANDS, "%s_nightstand", 8);
+    public static final Map<WoodEnum, BlockItem>  STAIRCASES       = BlockVariant.WOODS.createBlockItems(ModBlocks.STAIRCASES, "%s_staircase", 64);
+    public static final Map<WoodEnum, BlockItem>  STOOL            = BlockVariant.WOODS.createBlockItems(ModBlocks.STOOLS, "%s_stool", 16);
+    public static final Map<WoodEnum, BlockItem>  TABLES           = BlockVariant.WOODS.createBlockItems(ModBlocks.TABLES, "%s_table", 8);
+    public static final Map<CoinEnum, Item>       COINS            = BlockVariant.COINS.createItems(
+            "%s_coin",
+            variant -> new Item(new Item.Settings().maxCount(64))
+    );
 
     public static final Item FISHING_BASKET = createBlockItem("fishing_basket", ModBlocks.FISHING_BASKET);
     public static final Item CONDENSER      = createBlockItem("condenser", ModBlocks.CONDENSER);
@@ -47,6 +52,7 @@ public final class ModItems {
         List<Item> items = new ArrayList<>();
         items.addAll(CHAIRS.values());
         items.addAll(HALF_SLABS.values());
+        items.addAll(GLASS_HALF_SLABS.values());
         items.addAll(NIGHTSTANDS.values());
         items.addAll(STAIRCASES.values());
         items.addAll(STOOL.values());
@@ -81,6 +87,10 @@ public final class ModItems {
                                        () -> STOOL.get(value),
                                        () -> TABLES.get(value)
                                );
+                           }
+
+                           for (GlassEnum value : GlassEnum.values()) {
+                               content.addAfter(value::asPane, () -> GLASS_HALF_SLABS.get(value));
                            }
                        });
     }
