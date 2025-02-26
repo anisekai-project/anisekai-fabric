@@ -5,6 +5,7 @@ import me.anisekai.inventories.ImplementedInventory;
 import me.anisekai.recipes.CondenserRecipe;
 import me.anisekai.registries.ModBlockEntities;
 import me.anisekai.screen.condenser.CondenserScreenHandler;
+import me.anisekai.utils.AnisekaiEnchantmentHelper;
 import me.anisekai.utils.HandUtils;
 import me.anisekai.utils.ReadWritePropertyDelegate;
 import me.anisekai.utils.delegates.DelegatedBoolean;
@@ -14,6 +15,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.FurnaceBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
@@ -329,10 +331,12 @@ public class CondenserBlockEntity extends BlockEntity implements BlockEntityTick
         this.processSpeed();
         this.internalTick = (this.internalTick + 1) % 5;
 
-        ItemStack tool         = this.getStack(INV_TOOL);
-        boolean   toolMayBreak = tool.getDamage() + this.activeRecipe.value().result().getCount() >= tool.getMaxDamage();
+        ItemStack tool          = this.getStack(INV_TOOL);
+        boolean   toolMayBreak  = tool.getDamage() + this.activeRecipe.value().result().getCount() >= tool.getMaxDamage();
+        boolean   isMending     = AnisekaiEnchantmentHelper.hasEnchant(this.world, tool, Enchantments.MENDING);
+        boolean   shouldProtect = this.protectTool.isTrue() || isMending;
 
-        if ((toolMayBreak && this.protectTool.isTrue()) || !this.canOutput()) {
+        if ((toolMayBreak && shouldProtect) || !this.canOutput()) {
             this.currentWorkedTicks.set(0);
             this.progressPercent.set(0);
             this.jammed.set(true);
