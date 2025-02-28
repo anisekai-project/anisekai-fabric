@@ -136,11 +136,11 @@ public class HalfSlabBlock extends Block implements Waterloggable {
                 }
             } else {
                 // Just use the hit position to detect which layer should be set.
-                layer = this.getAffectedLayerAt(position.getY());
+                layer = this.getAffectedLayerAt(y);
             }
         } else {
             // We already are in a half-slab context, let's use that to "complete" our block.
-            layer = this.getAffectedLayerAt(state, position.getY());
+            layer = this.getAffectedLayerAt(state, y);
         }
 
         BlockState placementState;
