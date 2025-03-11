@@ -36,14 +36,15 @@ import java.util.Optional;
 
 public class CondenserBlock extends BlockWithEntity implements Orientable, StorageContainer<CondenserBlockEntity> {
 
-    public static final Identifier               ID    = AnisekaiMod.id("condenser");
-    public static final MapCodec<CondenserBlock> CODEC = createCodec(CondenserBlock::new);
+    public static final Identifier               ID        = AnisekaiMod.id("condenser");
+    public static final Identifier               SENSOR_ID = AnisekaiMod.id("condenser_activity_sensor");
+    public static final MapCodec<CondenserBlock> CODEC     = createCodec(CondenserBlock::new);
 
     // Because it allows passive farming, the rate should be limited.
     public static final int             CONDENSER_LIMITER_FACTOR = 200;
     public static final BooleanProperty JAMMED                   = BooleanProperty.of("jammed");
 
-    private static final OrientableShape SHAPE = OrientableShape.of(ID);
+    private static final OrientableShape SHAPE = OrientableShape.of(ID, SENSOR_ID);
 
     public CondenserBlock(AbstractBlock.Settings settings) {
 
