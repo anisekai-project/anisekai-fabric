@@ -49,7 +49,20 @@ public final class ModBlocks {
 
     public static final Map<GlassEnum, Block> GLASS_HALF_SLABS = BlockVariant.GLASSES.createBlocks(
             "%s_half_slab",
-            variant -> new HalfSlabBlock(AbstractBlock.Settings.copy(Blocks.GLASS_PANE))
+            variant -> {
+                AbstractBlock.Settings settings = AbstractBlock.Settings.create()
+                                                                        .nonOpaque()
+                                                                        .allowsSpawning(Blocks::never)
+                                                                        .suffocates(Blocks::never)
+                                                                        .blockVision(Blocks::never)
+                                                                        .solidBlock(Blocks::never);
+
+                if (variant.isStained()) {
+                    return new StainedGlassHalfBlock(variant.getColor(), settings);
+                } else {
+                    return new GlassHalfBlock(settings);
+                }
+            }
     );
 
     public static final Block FISHING_BASKET = Registry.register(

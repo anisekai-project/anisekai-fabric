@@ -1,5 +1,6 @@
 package me.anisekai.utils;
 
+import me.anisekai.AnisekaiMod;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.Box;
@@ -7,183 +8,66 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import static me.anisekai.AnisekaiMod.MOD_ID;
 
 /**
  * Class allowing to easily rotate a {@link VoxelShape} around the X axis for hitboxes.
  */
 public class OrientableShape {
 
-    private static final Map<Identifier, VoxelShape> SHAPES = new HashMap<>() {{
+    private static final Map<Identifier, VoxelShape> SHAPES = new HashMap<>();
 
-        this.put(
-                Identifier.of(MOD_ID, "chair"), OrientableShape.makeShape(Arrays.asList(
-                        VoxelShapes.cuboid(0.125, 0.625, 0.75, 0.25, 1.375, 0.875),
-                        VoxelShapes.cuboid(0.75, 0.625, 0.75, 0.875, 1.375, 0.875),
-                        VoxelShapes.cuboid(0.125, 0.0, 0.75, 0.25, 0.5, 0.875),
-                        VoxelShapes.cuboid(0.75, 0.0, 0.75, 0.875, 0.5, 0.875),
-                        VoxelShapes.cuboid(0.125, 0.0, 0.125, 0.25, 0.5, 0.25),
-                        VoxelShapes.cuboid(0.75, 0.0, 0.125, 0.875, 0.5, 0.25),
-                        VoxelShapes.cuboid(0.25, 1.0625, 0.75, 0.75, 1.3125, 0.875),
-                        VoxelShapes.cuboid(0.125, 0.5, 0.125, 0.875, 0.625, 0.875)
-                ))
-        );
+    public static void init() throws IOException {
 
-        this.put(
-                Identifier.of(MOD_ID, "condenser"), OrientableShape.makeShape(Arrays.asList(
-                        VoxelShapes.cuboid(0.0, 0.0, 0.125, 1.0, 1.0, 1.0),
-                        VoxelShapes.cuboid(0.6875, 0.0, 0.0, 1.0, 1.0, 0.125),
-                        VoxelShapes.cuboid(0.0, 0.0, 0.0, 0.3125, 1.0, 0.125),
-                        VoxelShapes.cuboid(0.3125, 0.6875, 0.0, 0.6875, 1.0, 0.125),
-                        VoxelShapes.cuboid(0.3125, 0.0, 0.0, 0.6875, 0.3125, 0.125)
-                ))
-        );
+        SHAPES.clear();
 
-        this.put(
-                Identifier.of(MOD_ID, "condenser_activity_sensor"), OrientableShape.makeShape(Collections.singletonList(
-                        VoxelShapes.cuboid(0.3125, 0.3125, -0.0625, 0.6875, 0.6875, 0.0625)
-                ))
-        );
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        if (loader == null) {
+            throw new IllegalStateException("No class loader found");
+        }
 
-        this.put(
-                Identifier.of(MOD_ID, "fishing_basket"), OrientableShape.makeShape(Arrays.asList(
-                        VoxelShapes.cuboid(0.0625, 0.0, 0.0625, 0.9375, 0.625, 0.9375),
-                        VoxelShapes.cuboid(0.0625, 0.625, 0.0625, 0.9375, 0.75, 0.9375),
-                        VoxelShapes.cuboid(0.6875, 0.5625, 0.9375, 0.8125, 0.6875, 1.0),
-                        VoxelShapes.cuboid(0.1875, 0.5625, 0.9375, 0.3125, 0.6875, 1.0)
-                ))
-        );
+        InputStream in = loader.getResourceAsStream("hitboxes.json");
+        if (in == null) {
+            throw new IllegalStateException("Could not load hitboxes data.");
+        }
 
-        this.put(
-                Identifier.of(MOD_ID, "half_slab_l0"), OrientableShape.makeShape(Collections.singletonList(
-                        VoxelShapes.cuboid(0.0, 0.0, 0.0, 1.0, 0.25, 1.0)
-                ))
-        );
+        String     data     = new BufferedReader(new InputStreamReader(in)).lines().collect(Collectors.joining("\n"));
+        JSONObject hitboxes = new JSONObject(data);
+        for (String id : hitboxes.keySet()) {
+            Identifier identifier = AnisekaiMod.id(id);
+            JSONArray  voxels     = hitboxes.getJSONArray(id);
 
-        this.put(
-                Identifier.of(MOD_ID, "half_slab_l1"), OrientableShape.makeShape(Collections.singletonList(
-                        VoxelShapes.cuboid(0.0, 0.25, 0.0, 1.0, 0.5, 1.0)
-                ))
-        );
+            Collection<VoxelShape> voxelList = new ArrayList<>();
 
-        this.put(
-                Identifier.of(MOD_ID, "half_slab_l2"), OrientableShape.makeShape(Collections.singletonList(
-                        VoxelShapes.cuboid(0.0, 0.5, 0.0, 1.0, 0.75, 1.0)
-                ))
-        );
+            for (int i = 0; i < voxels.length(); i++) {
+                JSONObject voxel = voxels.getJSONObject(i);
 
-        this.put(
-                Identifier.of(MOD_ID, "half_slab_l3"), OrientableShape.makeShape(Collections.singletonList(
-                        VoxelShapes.cuboid(0.0, 0.75, 0.0, 1.0, 1.0, 1.0)
-                ))
-        );
+                voxelList.add(VoxelShapes.cuboid(
+                        voxel.getDouble("minX"),
+                        voxel.getDouble("minY"),
+                        voxel.getDouble("minZ"),
+                        voxel.getDouble("maxX"),
+                        voxel.getDouble("maxY"),
+                        voxel.getDouble("maxZ")
+                ));
+            }
 
-        this.put(
-                Identifier.of(MOD_ID, "nightstand"), OrientableShape.makeShape(Arrays.asList(
-                        VoxelShapes.cuboid(0.0, 0.125, 0.0, 1.0, 0.1875, 1.0),
-                        VoxelShapes.cuboid(0.0, 0.1875, 0.0, 0.0625, 1.0, 1.0),
-                        VoxelShapes.cuboid(0.9375, 0.1875, 0.0, 1.0, 1.0, 1.0),
-                        VoxelShapes.cuboid(0.0625, 0.1875, 0.875, 0.9375, 0.9375, 0.9375),
-                        VoxelShapes.cuboid(0.0625, 0.9375, 0.0, 0.9375, 1.0, 1.0),
-                        VoxelShapes.cuboid(0.0625, 0.5, 0.0, 0.9375, 0.625, 0.875),
-                        VoxelShapes.cuboid(0.3125, 0.3125, 0.0, 0.6875, 0.375, 0.0625),
-                        VoxelShapes.cuboid(0.0625, 0.1875, 0.0625, 0.9375, 0.5, 0.1875),
-                        VoxelShapes.cuboid(0.3125, 0.75, 0.0, 0.6875, 0.8125, 0.0625),
-                        VoxelShapes.cuboid(0.0625, 0.625, 0.0625, 0.9375, 0.9375, 0.1875)
-                ))
-        );
+            SHAPES.put(identifier, OrientableShape.makeShape(voxelList));
+        }
+    }
 
-        this.put(
-                Identifier.of(MOD_ID, "nightstand_feet_full"), OrientableShape.makeShape(Arrays.asList(
-                        VoxelShapes.cuboid(0.0625, 0.0, 0.0625, 0.1875, 0.125, 0.1875),
-                        VoxelShapes.cuboid(0.8125, 0.0, 0.0625, 0.9375, 0.125, 0.1875),
-                        VoxelShapes.cuboid(0.0625, 0.0, 0.8125, 0.1875, 0.125, 0.9375),
-                        VoxelShapes.cuboid(0.8125, 0.0, 0.8125, 0.9375, 0.125, 0.9375)
-                ))
-        );
+    public static int count() {
 
-        this.put(
-                Identifier.of(MOD_ID, "nightstand_feet_side"), OrientableShape.makeShape(Arrays.asList(
-                        VoxelShapes.cuboid(0.0625, 0.0, 0.0625, 0.1875, 0.125, 0.1875),
-                        VoxelShapes.cuboid(0.8125, 0.0, 0.0625, 0.9375, 0.125, 0.1875)
-                ))
-        );
-
-        this.put(
-                Identifier.of(MOD_ID, "staircase"), OrientableShape.makeShape(Arrays.asList(
-                        VoxelShapes.cuboid(0.0625, 0.0625, 0.0, 0.9375, 0.125, 0.25),
-                        VoxelShapes.cuboid(0.0625, 0.5625, 0.5, 0.9375, 0.625, 0.75),
-                        VoxelShapes.cuboid(0.0625, 0.3125, 0.25, 0.9375, 0.375, 0.5),
-                        VoxelShapes.cuboid(0.0625, 0.8125, 0.75, 0.9375, 0.875, 1.0),
-                        VoxelShapes.cuboid(0.9375, 0.0, 0.0, 1.0, 0.25, 0.25),
-                        VoxelShapes.cuboid(0.9375, 0.25, 0.25, 1.0, 0.5, 0.5),
-                        VoxelShapes.cuboid(0.9375, 0.75, 0.75, 1.0, 1.0, 1.0),
-                        VoxelShapes.cuboid(0.9375, 0.5, 0.5, 1.0, 0.75, 0.75),
-                        VoxelShapes.cuboid(0.0, 0.0, 0.0, 0.0625, 0.25, 0.25),
-                        VoxelShapes.cuboid(0.0, 0.25, 0.25, 0.0625, 0.5, 0.5),
-                        VoxelShapes.cuboid(0.0, 0.75, 0.75, 0.0625, 1.0, 1.0),
-                        VoxelShapes.cuboid(0.0, 0.5, 0.5, 0.0625, 0.75, 0.75)
-                ))
-        );
-
-        this.put(
-                Identifier.of(MOD_ID, "staircase_connect_all"), OrientableShape.makeShape(Arrays.asList(
-                        VoxelShapes.cuboid(0.0, 0.0625, 0.0, 1.0, 0.125, 0.25),
-                        VoxelShapes.cuboid(0.0, 0.5625, 0.5, 1.0, 0.625, 0.75),
-                        VoxelShapes.cuboid(0.0, 0.3125, 0.25, 1.0, 0.375, 0.5),
-                        VoxelShapes.cuboid(0.0, 0.8125, 0.75, 1.0, 0.875, 1.0)
-                ))
-        );
-
-        this.put(
-                Identifier.of(MOD_ID, "staircase_connect_left"), OrientableShape.makeShape(Arrays.asList(
-                        VoxelShapes.cuboid(0.0625, 0.0625, 0.0, 1.0, 0.125, 0.25),
-                        VoxelShapes.cuboid(0.0625, 0.5625, 0.5, 1.0, 0.625, 0.75),
-                        VoxelShapes.cuboid(0.0625, 0.3125, 0.25, 1.0, 0.375, 0.5),
-                        VoxelShapes.cuboid(0.0625, 0.8125, 0.75, 1.0, 0.875, 1.0),
-                        VoxelShapes.cuboid(0.0, 0.0, 0.0, 0.0625, 0.25, 0.25),
-                        VoxelShapes.cuboid(0.0, 0.25, 0.25, 0.0625, 0.5, 0.5),
-                        VoxelShapes.cuboid(0.0, 0.75, 0.75, 0.0625, 1.0, 1.0),
-                        VoxelShapes.cuboid(0.0, 0.5, 0.5, 0.0625, 0.75, 0.75)
-                ))
-        );
-
-        this.put(
-                Identifier.of(MOD_ID, "staircase_connect_right"), OrientableShape.makeShape(Arrays.asList(
-                        VoxelShapes.cuboid(0.0, 0.0625, 0.0, 0.9375, 0.125, 0.25),
-                        VoxelShapes.cuboid(0.0, 0.5625, 0.5, 0.9375, 0.625, 0.75),
-                        VoxelShapes.cuboid(0.0, 0.3125, 0.25, 0.9375, 0.375, 0.5),
-                        VoxelShapes.cuboid(0.0, 0.8125, 0.75, 0.9375, 0.875, 1.0),
-                        VoxelShapes.cuboid(0.9375, 0.0, 0.0, 1.0, 0.25, 0.25),
-                        VoxelShapes.cuboid(0.9375, 0.25, 0.25, 1.0, 0.5, 0.5),
-                        VoxelShapes.cuboid(0.9375, 0.75, 0.75, 1.0, 1.0, 1.0),
-                        VoxelShapes.cuboid(0.9375, 0.5, 0.5, 1.0, 0.75, 0.75)
-                ))
-        );
-
-        this.put(
-                Identifier.of(MOD_ID, "stool"), OrientableShape.makeShape(Arrays.asList(
-                        VoxelShapes.cuboid(0.125, 0.0, 0.75, 0.25, 0.5, 0.875),
-                        VoxelShapes.cuboid(0.75, 0.0, 0.75, 0.875, 0.5, 0.875),
-                        VoxelShapes.cuboid(0.125, 0.0, 0.125, 0.25, 0.5, 0.25),
-                        VoxelShapes.cuboid(0.75, 0.0, 0.125, 0.875, 0.5, 0.25),
-                        VoxelShapes.cuboid(0.125, 0.5, 0.125, 0.875, 0.625, 0.875)
-                ))
-        );
-
-        this.put(
-                Identifier.of(MOD_ID, "table"), OrientableShape.makeShape(Arrays.asList(
-                        VoxelShapes.cuboid(0.3125, 0.0, 0.3125, 0.6875, 0.0625, 0.6875),
-                        VoxelShapes.cuboid(0.4375, 0.0625, 0.4375, 0.5625, 0.875, 0.5625),
-                        VoxelShapes.cuboid(0.0, 0.875, 0.0, 1.0, 1.0, 1.0)
-                ))
-        );
-
-    }};
+        return SHAPES.size();
+    }
 
     /**
      * Retrieve an {@link OrientableShape} created using a {@link VoxelShape} identified by the provided {@link Identifier}.

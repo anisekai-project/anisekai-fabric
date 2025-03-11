@@ -6,6 +6,7 @@ import me.anisekai.packets.CondenserRecipeQueryPacket;
 import me.anisekai.packets.CondenserRecipeSelectedPacket;
 import me.anisekai.packets.CondenserRecipeUpdatedPacket;
 import me.anisekai.registries.*;
+import me.anisekai.utils.OrientableShape;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -13,6 +14,8 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
 
 public class AnisekaiMod implements ModInitializer {
 
@@ -31,6 +34,13 @@ public class AnisekaiMod implements ModInitializer {
     @Override
     public void onInitialize() {
 
+        try {
+            OrientableShape.init();
+        } catch (IOException e) {
+            LOGGER.error("Failed to read hitboxes data.", e);
+        }
+
+        LOGGER.info("Registered {} hitboxes", OrientableShape.count());
         LOGGER.info("Registered {} blocks", ModBlocks.blocks().size());
         LOGGER.info("Registered {} items", ModItems.items().size());
         ModItems.addToInventory();
