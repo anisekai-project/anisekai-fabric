@@ -1,0 +1,159 @@
+{
+  "hitboxes": {
+    "assets/{{namespace}}/models/block/base/{{name}}.json": "{{name}}"
+  },
+  "files":    {
+    "assets/{{namespace}}/models/block/base/{{name}}.json": {
+      "elements": [
+        {
+          "from":  [ 5, 0, 5 ],
+          "to":    [ 11, 1, 11 ],
+          "faces": {
+            "north": { "uv": [ 0, 0, 6, 1 ], "texture": "#support" },
+            "east":  { "uv": [ 0, 0, 6, 1 ], "texture": "#support" },
+            "south": { "uv": [ 0, 0, 6, 1 ], "texture": "#support" },
+            "west":  { "uv": [ 0, 0, 6, 1 ], "texture": "#support" },
+            "up":    { "uv": [ 0, 0, 6, 6 ], "texture": "#support" },
+            "down":  { "uv": [ 0, 0, 6, 6 ], "texture": "#support" }
+          }
+        },
+        {
+          "from":  [ 7, 1, 7 ],
+          "to":    [ 9, 14, 9 ],
+          "faces": {
+            "north": { "uv": [ 0, 0, 2, 13 ], "texture": "#support" },
+            "east":  { "uv": [ 0, 0, 2, 13 ], "texture": "#support" },
+            "south": { "uv": [ 0, 0, 2, 13 ], "texture": "#support" },
+            "west":  { "uv": [ 0, 0, 2, 13 ], "texture": "#support" }
+          }
+        },
+        {
+          "from":  [ 0, 14, 0 ],
+          "to":    [ 16, 16, 16 ],
+          "faces": {
+            "north": { "uv": [ 0, 0, 16, 2 ], "texture": "#face" },
+            "east":  { "uv": [ 0, 0, 16, 2 ], "texture": "#face" },
+            "south": { "uv": [ 0, 0, 16, 2 ], "texture": "#face" },
+            "west":  { "uv": [ 0, 0, 16, 2 ], "texture": "#face" },
+            "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#face" },
+            "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#face" }
+          }
+        }
+      ],
+      "display":  {
+        "thirdperson_righthand": {
+          "rotation":    [ 75, 45, 0 ],
+          "translation": [ 0, 2.5, 0 ],
+          "scale":       [ 0.375, 0.375, 0.375 ]
+        },
+        "thirdperson_lefthand":  {
+          "rotation":    [ 75, 45, 0 ],
+          "translation": [ 0, 2.5, 0 ],
+          "scale":       [ 0.375, 0.375, 0.375 ]
+        },
+        "firstperson_righthand": {
+          "rotation": [ 0, 135, 0 ],
+          "scale":    [ 0.4, 0.4, 0.4 ]
+        },
+        "firstperson_lefthand":  {
+          "rotation": [ 0, 135, 0 ],
+          "scale":    [ 0.4, 0.4, 0.4 ]
+        },
+        "ground":                {
+          "translation": [ 0, 3, 0 ],
+          "scale":       [ 0.25, 0.25, 0.25 ]
+        },
+        "gui":                   {
+          "rotation": [ 30, 225, 0 ],
+          "scale":    [ 0.625, 0.625, 0.625 ]
+        },
+        "fixed":                 {
+          "scale": [ 0.5, 0.5, 0.5 ]
+        }
+      },
+      "groups":   [
+        {
+          "name":     "table_leg",
+          "origin":   [ 0, 0, 0 ],
+          "color":    0,
+          "children": [ 0, 1 ]
+        },
+        2
+      ]
+    }
+  },
+  "dynamic":  {
+    "wood": {
+      "settings": {
+        "usingVariant": {
+          "name": "woods",
+          "maps": {
+            "texture:support": "{{log}}",
+            "texture:face":    "{{planks}}",
+            "craft:support":   "minecraft:{{fence}}",
+            "craft:foot":      "minecraft:{{slab}}",
+            "craft:face":      "{{namespace}}:{{type}}_half_slab"
+          }
+        }
+      },
+      "files":    {
+        "assets/{{namespace}}/blockstates/{{item}}.json":     {
+          "variants": {
+            "facing=north": { "model": "{{namespace}}:block/{{item}}", "uvlock": false },
+            "facing=east":  { "model": "{{namespace}}:block/{{item}}", "uvlock": false, "y": 90 },
+            "facing=south": { "model": "{{namespace}}:block/{{item}}", "uvlock": false, "y": 180 },
+            "facing=west":  { "model": "{{namespace}}:block/{{item}}", "uvlock": false, "y": 270 }
+          }
+        },
+        "assets/{{namespace}}/models/block/{{item}}.json":    {
+          "parent":   "{{namespace}}:block/base/{{name}}",
+          "textures": {
+            "face":     "minecraft:block/{{texture:face}}",
+            "support":  "minecraft:block/{{texture:support}}",
+            "particle": "minecraft:block/{{texture:face}}"
+          }
+        },
+        "assets/{{namespace}}/models/item/{{item}}.json":     {
+          "parent": "{{namespace}}:block/{{item}}"
+        },
+        "data/{{namespace}}/loot_table/blocks/{{item}}.json": {
+          "type":  "minecraft:block",
+          "pools": [
+            {
+              "rolls":      1,
+              "entries":    [ { "type": "minecraft:item", "name": "{{id}}" } ],
+              "conditions": [ { "condition": "minecraft:survives_explosion" } ]
+            }
+          ]
+        },
+        "data/{{namespace}}/recipe/blocks/{{item}}.json":     {
+          "type":     "minecraft:crafting_shaped",
+          "category": "building",
+          "group":    "{{name}}s",
+          "pattern":  [
+            "TTT",
+            " S ",
+            " F "
+          ],
+          "key":      {
+            "S": {
+              "item": "{{craft:support}}"
+            },
+            "F": {
+              "item": "{{craft:foot}}"
+            },
+            "T": {
+              "item": "{{craft:face}}"
+            }
+          },
+          "result":   { "id": "{{id}}", "count": 1 }
+        }
+      },
+      "tags":     [
+        { "namespace": "{{namespace}}", "value": "item/wooden_{{name}}s" },
+        { "namespace": "{{namespace}}", "value": "block/wooden_{{name}}s" },
+        { "namespace": "minecraft", "value": "block/mineable/axe" }
+      ]
+    }
+  }
+}

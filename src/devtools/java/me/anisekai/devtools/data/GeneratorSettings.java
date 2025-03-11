@@ -11,29 +11,46 @@ import java.util.Map;
 
 public class GeneratorSettings {
 
+    private final String                        extendName;
+    private final boolean                       skipGeneration;
     private final Map<BlockVariant, JSONObject> variants = new LinkedHashMap<>();
 
     public GeneratorSettings(Configuration configuration, JSONObject settings) {
 
+        this.extendName     = settings.has("extends") ? settings.getString("extends") : null;
+        this.skipGeneration = settings.has("skipGeneration") && settings.getBoolean("skipGeneration");
 
-        if (settings.has("usingVariants")) {
-            List<JSONObject> groups = DevUtils.readArray(settings.getJSONArray("usingVariants"), JSONArray::getJSONObject);
+        if (settings.has("usingVariant")) {
+            JSONObject variantData = settings.getJSONObject("usingVariant");
 
-            for (JSONObject group : groups) {
-                String             name        = group.getString("name");
-                BlockVariantsGroup bvg         = configuration.getVariantsGroup(name);
-                List<String>       excludeList = DevUtils.optReadArray(group, "exclude", JSONArray::getString);
+            String             name        = variantData.getString("name");
+            BlockVariantsGroup bvg         = configuration.getVariantsGroup(name);
+            List<String>       excludeList = DevUtils.optReadArray(variantData, "exclude", JSONArray::getString);
 
-                List<BlockVariant> blockVariants = bvg.getVariants()
-                                                      .stream()
-                                                      .filter(variant -> !excludeList.contains(variant.getName()))
-                                                      .sorted(Comparator.comparing(BlockVariant::getName))
-                                                      .toList();
+            List<BlockVariant> blockVariants = bvg.getVariants()
+                                                  .stream()
+                                                  .filter(variant -> !excludeList.contains(variant.getName()))
+                                                  .sorted(Comparator.comparing(BlockVariant::getName))
+                                                  .toList();
 
-                JSONObject maps = group.has("maps") ? group.getJSONObject("maps") : new JSONObject();
-                blockVariants.forEach(blockVariant -> this.variants.put(blockVariant, new JSONObject(maps.toMap())));
-            }
+            JSONObject maps = variantData.has("maps") ? variantData.getJSONObject("maps") : new JSONObject();
+            blockVariants.forEach(blockVariant -> this.variants.put(blockVariant, new JSONObject(maps.toMap())));
         }
+    }
+
+    public boolean shouldSkipGeneration() {
+
+        return this.skipGeneration;
+    }
+
+    public boolean hasExtendName() {
+
+        return this.extendName != null;
+    }
+
+    public String getExtendName() {
+
+        return this.extendName;
     }
 
     public boolean isUsingVariants() {
@@ -45,6 +62,5 @@ public class GeneratorSettings {
 
         return this.variants;
     }
-
 
 }

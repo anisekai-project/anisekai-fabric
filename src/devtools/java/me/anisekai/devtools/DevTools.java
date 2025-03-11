@@ -1,11 +1,7 @@
 package me.anisekai.devtools;
 
-import me.anisekai.devtools.data.BlockVariant;
 import me.anisekai.devtools.data.Configuration;
-import me.anisekai.devtools.tools.DataGenerator;
-import me.anisekai.devtools.tools.HitboxesGenerator;
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -45,21 +41,15 @@ public final class DevTools {
         }
 
         Configuration configuration = new Configuration(configFile);
+        GeneratorV2   generator     = new GeneratorV2(configuration);
+
 
         Logger.logn("Generating block and items...");
-        new DataGenerator(configuration);
+        generator.generate();
         Logger.unnest();
 
-        Logger.logn("Writing tags...");
-        for (String path : TAGS.keySet()) {
-            Logger.log(path);
-            File file = new File(DevTools.MAIN_RESOURCES, path);
-            DevIO.setFileContent(file, TAGS.get(path).toString(2));
-        }
-        Logger.unnest();
-
-        Logger.logn("Generating hitboxes...");
-        new HitboxesGenerator();
+        Logger.logn("Writing files...");
+        generator.save(MAIN_RESOURCES);
         Logger.unnest();
 
         Logger.logn("Copying static files...");
@@ -70,7 +60,6 @@ public final class DevTools {
     }
 
     private static void copyFolder(Path source, Path target, CopyOption... options) throws IOException {
-
         Files.walkFileTree(
                 source,
                 new SimpleFileVisitor<>() {
@@ -91,42 +80,6 @@ public final class DevTools {
                     }
                 }
         );
-    }
-
-    public static void tag(String namespace, String tag, String id) {
-
-        String tagPath = DevPaths.tag(namespace, tag);
-
-        if (!TAGS.containsKey(tagPath)) {
-            JSONObject data = new JSONObject();
-            data.put("replace", false);
-            data.put("values", new JSONArray());
-            TAGS.put(tagPath, data);
-        }
-
-        TAGS.get(tagPath).getJSONArray("values").put(id);
-    }
-
-    public static Map<String, String> getTemplateReplacement(String block) {
-
-        Map<String, String> replacements = new HashMap<>();
-        replacements.put("mod", MOD_ID);
-        replacements.put("name", block);
-        replacements.put("item", block);
-        replacements.put("id", String.format("%s:%s", MOD_ID, block));
-        return replacements;
-    }
-
-    public static Map<String, String> getVariantTemplateReplacement(BlockVariant variant, String block) {
-
-        String blockVariant = String.format("%s_%s", variant.getName(), block);
-
-        Map<String, String> replacements = getTemplateReplacement(block);
-        replacements.put("item", blockVariant);
-        replacements.put("type", variant.getName());
-        replacements.put("id", String.format("%s:%s", MOD_ID, blockVariant));
-        variant.getAliases().forEach(key -> replacements.put(key, variant.getAlias(key)));
-        return replacements;
     }
 
 }

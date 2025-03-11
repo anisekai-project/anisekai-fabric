@@ -1,0 +1,20 @@
+{
+  "dynamic": {
+    "coin": {
+      "settings": {
+        "usingVariant": { "name": "coins" }
+      },
+      "files":    {
+        "assets/{{namespace}}/models/item/{{item}}.json": {
+          "parent":   "item/generated",
+          "textures": {
+            "layer0": "{{namespace}}:item/{{type}}_{{name}}"
+          }
+        }
+      },
+      "tags":     [
+        { "namespace": "{{namespace}}", "value": "item/{{name}}s" }
+      ]
+    }
+  }
+}

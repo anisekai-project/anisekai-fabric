@@ -1,4 +1,4 @@
-package me.anisekai.devtools.tools.helpers;
+package me.anisekai.devtools.tools;
 
 import me.anisekai.devtools.DevUtils;
 import org.jetbrains.annotations.NotNull;
@@ -27,6 +27,11 @@ public class Shape implements Comparable<Shape> {
         this.voxels.add(voxel);
     }
 
+    public List<Voxel> getVoxels() {
+
+        return this.voxels;
+    }
+
     @Override
     public int compareTo(@NotNull Shape o) {
 
@@ -35,7 +40,6 @@ public class Shape implements Comparable<Shape> {
 
     @Override
     public String toString() {
-
 
         if (this.voxels.isEmpty()) {
             return DevUtils.Java.put(

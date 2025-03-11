@@ -1,6 +1,6 @@
 package me.anisekai.devtools;
 
-import me.anisekai.devtools.tools.helpers.Voxel;
+import me.anisekai.devtools.tools.Voxel;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

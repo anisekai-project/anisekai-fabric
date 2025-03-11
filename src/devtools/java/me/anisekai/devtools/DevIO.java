@@ -32,6 +32,7 @@ public final class DevIO {
     }
 
     public static JSONArray getFileArray(File file) throws IOException {
+
         return new JSONArray(getFileContent(file));
     }
 
@@ -48,6 +49,11 @@ public final class DevIO {
                 StandardOpenOption.CREATE,
                 StandardOpenOption.TRUNCATE_EXISTING
         );
+    }
+
+    public static void setFileJson(File file, JSONObject json) throws IOException {
+
+        setFileContent(file, json.toString());
     }
 
 }

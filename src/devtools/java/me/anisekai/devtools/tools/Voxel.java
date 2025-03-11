@@ -1,6 +1,7 @@
-package me.anisekai.devtools.tools.helpers;
+package me.anisekai.devtools.tools;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class Voxel {
 
@@ -21,6 +22,18 @@ public class Voxel {
         this.maxX = to.getDouble(0) / RESOLUTION;
         this.maxY = to.getDouble(1) / RESOLUTION;
         this.maxZ = to.getDouble(2) / RESOLUTION;
+    }
+
+    public JSONObject toJSON() {
+
+        JSONObject json = new JSONObject();
+        json.put("minX", this.minX);
+        json.put("minY", this.minY);
+        json.put("minZ", this.minZ);
+        json.put("maxX", this.maxX);
+        json.put("maxY", this.maxY);
+        json.put("maxZ", this.maxZ);
+        return json;
     }
 
 }

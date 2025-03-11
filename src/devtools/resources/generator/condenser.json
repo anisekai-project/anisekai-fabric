@@ -1,0 +1,267 @@
+{
+  "hitboxes": {
+    "assets/{{namespace}}/models/block/base/{{name}}.json":                 "{{name}}",
+    "assets/{{namespace}}/models/block/base/{{name}}_activity_sensor.json": "{{name}}_activity_sensor"
+  },
+  "files":    {
+    "assets/{{namespace}}/blockstates/{{name}}.json":                       {
+      "multipart": [
+        {
+          "apply": { "model": "anisekai:block/{{name}}", "uvlock": false },
+          "when":  { "facing": "north" }
+        },
+        {
+          "apply": { "model": "anisekai:block/{{name}}", "uvlock": false, "y": 90 },
+          "when":  { "facing": "east" }
+        },
+        {
+          "apply": { "model": "anisekai:block/{{name}}", "uvlock": false, "y": 180 },
+          "when":  { "facing": "south" }
+        },
+        {
+          "apply": { "model": "anisekai:block/{{name}}", "uvlock": false, "y": 270 },
+          "when":  { "facing": "west" }
+        },
+        {
+          "apply": { "model": "anisekai:block/{{name}}_lit", "uvlock": false },
+          "when":  { "facing": "north", "lit": true }
+        },
+        {
+          "apply": { "model": "anisekai:block/{{name}}_lit", "uvlock": false, "y": 90 },
+          "when":  { "facing": "east", "lit": true }
+        },
+        {
+          "apply": { "model": "anisekai:block/{{name}}_lit", "uvlock": false, "y": 180 },
+          "when":  { "facing": "south", "lit": true }
+        },
+        {
+          "apply": { "model": "anisekai:block/{{name}}_lit", "uvlock": false, "y": 270 },
+          "when":  { "facing": "west", "lit": true }
+        },
+        {
+          "apply": { "model": "anisekai:block/{{name}}_unlit", "uvlock": false },
+          "when":  { "facing": "north", "lit": false, "jammed": false }
+        },
+        {
+          "apply": { "model": "anisekai:block/{{name}}_unlit", "uvlock": false, "y": 90 },
+          "when":  { "facing": "east", "lit": false, "jammed": false }
+        },
+        {
+          "apply": { "model": "anisekai:block/{{name}}_unlit", "uvlock": false, "y": 180 },
+          "when":  { "facing": "south", "lit": false, "jammed": false }
+        },
+        {
+          "apply": { "model": "anisekai:block/{{name}}_unlit", "uvlock": false, "y": 270 },
+          "when":  { "facing": "west", "lit": false, "jammed": false }
+        },
+        {
+          "apply": { "model": "anisekai:block/{{name}}_jammed", "uvlock": false },
+          "when":  { "facing": "north", "lit": false, "jammed": true }
+        },
+        {
+          "apply": { "model": "anisekai:block/{{name}}_jammed", "uvlock": false, "y": 90 },
+          "when":  { "facing": "east", "lit": false, "jammed": true }
+        },
+        {
+          "apply": { "model": "anisekai:block/{{name}}_jammed", "uvlock": false, "y": 180 },
+          "when":  { "facing": "south", "lit": false, "jammed": true }
+        },
+        {
+          "apply": { "model": "anisekai:block/{{name}}_jammed", "uvlock": false, "y": 270 },
+          "when":  { "facing": "west", "lit": false, "jammed": true }
+        }
+      ]
+    },
+    "assets/{{namespace}}/models/block/base/{{name}}.json":                 {
+      "elements": [
+        {
+          "name":  "body",
+          "from":  [ 0, 0, 2 ],
+          "to":    [ 16, 16, 16 ],
+          "faces": {
+            "east":  { "uv": [ 0, 0, 14, 16 ], "texture": "#sides" },
+            "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#sides" },
+            "west":  { "uv": [ 2, 0, 16, 16 ], "texture": "#sides" },
+            "up":    { "uv": [ 0, 2, 16, 16 ], "texture": "#sides" },
+            "down":  { "uv": [ 0, 0, 16, 14 ], "texture": "#sides" }
+          }
+        },
+        {
+          "from":  [ 11, 0, 0 ],
+          "to":    [ 16, 16, 2 ],
+          "faces": {
+            "north": { "uv": [ 0, 0, 5, 16 ], "texture": "#face" },
+            "east":  { "uv": [ 14, 0, 16, 16 ], "texture": "#sides" },
+            "up":    { "uv": [ 11, 0, 16, 2 ], "texture": "#sides" },
+            "down":  { "uv": [ 11, 14, 16, 16 ], "texture": "#sides" }
+          }
+        },
+        {
+          "from":  [ 0, 0, 0 ],
+          "to":    [ 5, 16, 2 ],
+          "faces": {
+            "north": { "uv": [ 11, 0, 16, 16 ], "texture": "#face" },
+            "west":  { "uv": [ 0, 0, 2, 16 ], "texture": "#sides" },
+            "up":    { "uv": [ 0, 0, 5, 2 ], "texture": "#sides" },
+            "down":  { "uv": [ 0, 14, 5, 16 ], "texture": "#sides" }
+          }
+        },
+        {
+          "from":  [ 5, 11, 0 ],
+          "to":    [ 11, 16, 2 ],
+          "faces": {
+            "north": { "uv": [ 5, 0, 11, 5 ], "texture": "#face" },
+            "up":    { "uv": [ 5, 0, 11, 2 ], "texture": "#sides" }
+          }
+        },
+        {
+          "from":  [ 5, 0, 0 ],
+          "to":    [ 11, 5, 2 ],
+          "faces": {
+            "north": { "uv": [ 5, 11, 11, 16 ], "texture": "#face" },
+            "east":  { "uv": [ 5, 11, 11, 16 ], "texture": "#face" },
+            "south": { "uv": [ 5, 11, 11, 16 ], "texture": "#face" },
+            "west":  { "uv": [ 5, 11, 11, 16 ], "texture": "#face" },
+            "down":  { "uv": [ 5, 14, 11, 16 ], "texture": "#sides" }
+          }
+        }
+      ],
+      "display":  {
+        "thirdperson_righthand": {
+          "rotation":    [ 75, 45, 0 ],
+          "translation": [ 0, 2.5, 0 ],
+          "scale":       [ 0.375, 0.375, 0.375 ]
+        },
+        "thirdperson_lefthand":  {
+          "rotation":    [ 75, 45, 0 ],
+          "translation": [ 0, 2.5, 0 ],
+          "scale":       [ 0.375, 0.375, 0.375 ]
+        },
+        "firstperson_righthand": {
+          "rotation": [ 0, 45, 0 ],
+          "scale":    [ 0.4, 0.4, 0.4 ]
+        },
+        "firstperson_lefthand":  {
+          "rotation": [ 0, 225, 0 ],
+          "scale":    [ 0.4, 0.4, 0.4 ]
+        },
+        "ground":                {
+          "translation": [ 0, 3, 0 ],
+          "scale":       [ 0.25, 0.25, 0.25 ]
+        },
+        "gui":                   {
+          "rotation": [ 30, 225, 0 ],
+          "scale":    [ 0.625, 0.625, 0.625 ]
+        },
+        "fixed":                 {
+          "scale": [ 0.5, 0.5, 0.5 ]
+        }
+      },
+      "groups":   [
+        0,
+        {
+          "name":     "face frame",
+          "origin":   [ 0, 0, 0 ],
+          "color":    0,
+          "children": [ 1, 2, 3, 4 ]
+        }
+      ]
+    },
+    "assets/{{namespace}}/models/block/base/{{name}}_activity_sensor.json": {
+      "elements": [
+        {
+          "name":  "activity",
+          "from":  [ 5, 5, -1 ],
+          "to":    [ 11, 11, 1 ],
+          "faces": {
+            "north": { "uv": [ 0, 0, 6, 6 ], "texture": "#activity_sensor" },
+            "east":  { "uv": [ 0, 0, 2, 6 ], "texture": "#activity_sensor" },
+            "south": { "uv": [ 0, 0, 6, 6 ], "texture": "#activity_sensor" },
+            "west":  { "uv": [ 0, 0, 2, 6 ], "texture": "#activity_sensor" },
+            "up":    { "uv": [ 0, 0, 6, 2 ], "texture": "#activity_sensor" },
+            "down":  { "uv": [ 0, 0, 6, 2 ], "texture": "#activity_sensor" }
+          }
+        }
+      ],
+      "display":  {
+        "thirdperson_righthand": {
+          "rotation":    [ 75, 45, 0 ],
+          "translation": [ 0, 2.5, 0 ],
+          "scale":       [ 0.375, 0.375, 0.375 ]
+        },
+        "thirdperson_lefthand":  {
+          "rotation":    [ 75, 45, 0 ],
+          "translation": [ 0, 2.5, 0 ],
+          "scale":       [ 0.375, 0.375, 0.375 ]
+        },
+        "firstperson_righthand": {
+          "rotation": [ 0, 45, 0 ],
+          "scale":    [ 0.4, 0.4, 0.4 ]
+        },
+        "firstperson_lefthand":  {
+          "rotation": [ 0, 225, 0 ],
+          "scale":    [ 0.4, 0.4, 0.4 ]
+        },
+        "ground":                {
+          "translation": [ 0, 3, 0 ],
+          "scale":       [ 0.25, 0.25, 0.25 ]
+        },
+        "gui":                   {
+          "rotation": [ 30, 225, 0 ],
+          "scale":    [ 0.625, 0.625, 0.625 ]
+        },
+        "fixed":                 {
+          "scale": [ 0.5, 0.5, 0.5 ]
+        }
+      }
+    },
+    "assets/{{namespace}}/models/block/{{name}}.json":                      {
+      "parent":   "{{namespace}}:block/base/{{name}}",
+      "textures": {
+        "particle": "minecraft:block/reinforced_deepslate_bottom",
+        "sides":    "minecraft:block/reinforced_deepslate_bottom",
+        "face":     "minecraft:block/reinforced_deepslate_top"
+      }
+    },
+    "assets/{{namespace}}/models/block/{{name}}_jammed.json":               {
+      "parent":   "anisekai:block/base/{{name}}_activity_sensor",
+      "textures": {
+        "particle":        "minecraft:block/reinforced_deepslate_bottom",
+        "activity_sensor": "minecraft:block/fire_coral_block"
+      }
+    },
+    "assets/{{namespace}}/models/block/{{name}}_lit.json":                  {
+      "parent":   "anisekai:block/base/{{name}}_activity_sensor",
+      "textures": {
+        "particle":        "minecraft:block/reinforced_deepslate_bottom",
+        "activity_sensor": "minecraft:block/bubble_coral_block"
+      }
+    },
+    "assets/{{namespace}}/models/block/{{name}}_unlit.json":                {
+      "parent":   "anisekai:block/base/{{name}}_activity_sensor",
+      "textures": {
+        "particle":        "minecraft:block/reinforced_deepslate_bottom",
+        "activity_sensor": "minecraft:block/dead_bubble_coral_block"
+      }
+    },
+    "assets/{{namespace}}/models/item/{{name}}.json":                       {
+      "parent": "{{namespace}}:block/{{name}}"
+    },
+    "data/{{namespace}}/recipe/blocks/{{name}}.json":                       {
+      "type":    "minecraft:crafting_shaped",
+      "pattern": [
+        "SSS",
+        "SDS",
+        "SSS"
+      ],
+      "key":     {
+        "S": { "item": "minecraft:deepslate" },
+        "D": { "item": "minecraft:diamond" }
+      },
+      "result":  { "id": "{{id}}", "count": 1 }
+    }
+  },
+  "tags":     [
+    { "namespace": "minecraft", "value": "block/mineable/pickaxe" }
+  ]
+}
