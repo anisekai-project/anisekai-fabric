@@ -6,7 +6,7 @@
     "assets/{{namespace}}/models/block/base/{{name}}_l3.json": "{{name}}_l3"
   },
   "files":    {
-    "assets/{{namespace}}/models/block/base/{{name}}.json":    {
+    "assets/{{namespace}}/models/block/base/{{name}}.json":               {
       "elements": [
         {
           "from":  [ 0, 8, 0 ], "to": [ 16, 12, 16 ],
@@ -54,7 +54,7 @@
         }
       }
     },
-    "assets/{{namespace}}/models/block/base/{{name}}_l0.json": {
+    "assets/{{namespace}}/models/block/base/{{name}}_l0.json":            {
       "elements": [
         {
           "from":  [ 0, 0, 0 ], "to": [ 16, 4, 16 ],
@@ -69,7 +69,21 @@
         }
       ]
     },
-    "assets/{{namespace}}/models/block/base/{{name}}_l1.json": {
+    "assets/{{namespace}}/models/block/base/{{name}}_l0_topless.json":    {
+      "elements": [
+        {
+          "from":  [ 0, 0, 0 ], "to": [ 16, 4, 16 ],
+          "faces": {
+            "north": { "uv": [ 0, 12, 16, 16 ], "texture": "#side" },
+            "east":  { "uv": [ 0, 12, 16, 16 ], "texture": "#side" },
+            "south": { "uv": [ 0, 12, 16, 16 ], "texture": "#side" },
+            "west":  { "uv": [ 0, 12, 16, 16 ], "texture": "#side" },
+            "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#face" }
+          }
+        }
+      ]
+    },
+    "assets/{{namespace}}/models/block/base/{{name}}_l1.json":            {
       "elements": [
         {
           "from":  [ 0, 4, 0 ], "to": [ 16, 8, 16 ],
@@ -84,7 +98,48 @@
         }
       ]
     },
-    "assets/{{namespace}}/models/block/base/{{name}}_l2.json": {
+    "assets/{{namespace}}/models/block/base/{{name}}_l1_bottomless.json": {
+      "elements": [
+        {
+          "from":  [ 0, 4, 0 ], "to": [ 16, 8, 16 ],
+          "faces": {
+            "north": { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
+            "east":  { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
+            "south": { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
+            "west":  { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
+            "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#face" }
+          }
+        }
+      ]
+    },
+    "assets/{{namespace}}/models/block/base/{{name}}_l1_topless.json":    {
+      "elements": [
+        {
+          "from":  [ 0, 4, 0 ], "to": [ 16, 8, 16 ],
+          "faces": {
+            "north": { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
+            "east":  { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
+            "south": { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
+            "west":  { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
+            "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#face" }
+          }
+        }
+      ]
+    },
+    "assets/{{namespace}}/models/block/base/{{name}}_l1_sides.json":      {
+      "elements": [
+        {
+          "from":  [ 0, 4, 0 ], "to": [ 16, 8, 16 ],
+          "faces": {
+            "north": { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
+            "east":  { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
+            "south": { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
+            "west":  { "uv": [ 0, 8, 16, 12 ], "texture": "#side" }
+          }
+        }
+      ]
+    },
+    "assets/{{namespace}}/models/block/base/{{name}}_l2.json":            {
       "elements": [
         {
           "from":  [ 0, 8, 0 ], "to": [ 16, 12, 16 ],
@@ -99,7 +154,48 @@
         }
       ]
     },
-    "assets/{{namespace}}/models/block/base/{{name}}_l3.json": {
+    "assets/{{namespace}}/models/block/base/{{name}}_l2_topless.json":    {
+      "elements": [
+        {
+          "from":  [ 0, 8, 0 ], "to": [ 16, 12, 16 ],
+          "faces": {
+            "north": { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
+            "east":  { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
+            "south": { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
+            "west":  { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
+            "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#face" }
+          }
+        }
+      ]
+    },
+    "assets/{{namespace}}/models/block/base/{{name}}_l2_bottomless.json": {
+      "elements": [
+        {
+          "from":  [ 0, 8, 0 ], "to": [ 16, 12, 16 ],
+          "faces": {
+            "north": { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
+            "east":  { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
+            "south": { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
+            "west":  { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
+            "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#face" }
+          }
+        }
+      ]
+    },
+    "assets/{{namespace}}/models/block/base/{{name}}_l2_sides.json":      {
+      "elements": [
+        {
+          "from":  [ 0, 8, 0 ], "to": [ 16, 12, 16 ],
+          "faces": {
+            "north": { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
+            "east":  { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
+            "south": { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
+            "west":  { "uv": [ 0, 4, 16, 8 ], "texture": "#side" }
+          }
+        }
+      ]
+    },
+    "assets/{{namespace}}/models/block/base/{{name}}_l3.json":            {
       "elements": [
         {
           "from":  [ 0, 12, 0 ],
@@ -114,6 +210,21 @@
           }
         }
       ]
+    },
+    "assets/{{namespace}}/models/block/base/{{name}}_l3_bottomless.json": {
+      "elements": [
+        {
+          "from":  [ 0, 12, 0 ],
+          "to":    [ 16, 16, 16 ],
+          "faces": {
+            "north": { "uv": [ 0, 0, 16, 4 ], "texture": "#side" },
+            "east":  { "uv": [ 0, 0, 16, 4 ], "texture": "#side" },
+            "south": { "uv": [ 0, 0, 16, 4 ], "texture": "#side" },
+            "west":  { "uv": [ 0, 0, 16, 4 ], "texture": "#side" },
+            "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#face" }
+          }
+        }
+      ]
     }
   },
   "dynamic":  {
@@ -122,70 +233,164 @@
         "skipGeneration": true
       },
       "files":    {
-        "assets/{{namespace}}/blockstates/{{item}}.json":     {
+        "assets/{{namespace}}/blockstates/{{item}}.json":                {
           "multipart": [
             {
               "apply": { "model": "{{namespace}}:block/{{item}}_l3", "uvlock": false },
-              "when":  { "layer3": true }
+              "when":  { "layer3": true, "layer2": false }
+            },
+            {
+              "apply": { "model": "{{namespace}}:block/{{item}}_l3_bottomless", "uvlock": false },
+              "when":  { "layer3": true, "layer2": true }
             },
             {
               "apply": { "model": "{{namespace}}:block/{{item}}_l2", "uvlock": false },
-              "when":  { "layer2": true }
+              "when":  { "layer2": true, "layer1": false, "layer3": false }
+            },
+            {
+              "apply": { "model": "{{namespace}}:block/{{item}}_l2_topless", "uvlock": false },
+              "when":  { "layer2": true, "layer1": false, "layer3": true }
+            },
+            {
+              "apply": { "model": "{{namespace}}:block/{{item}}_l2_bottomless", "uvlock": false },
+              "when":  { "layer2": true, "layer1": true, "layer3": false }
+            },
+            {
+              "apply": { "model": "{{namespace}}:block/{{item}}_l2_sides", "uvlock": false },
+              "when":  { "layer2": true, "layer1": true, "layer3": true }
             },
             {
               "apply": { "model": "{{namespace}}:block/{{item}}_l1", "uvlock": false },
-              "when":  { "layer1": true }
+              "when":  { "layer1": true, "layer0": false, "layer2": false }
+            },
+            {
+              "apply": { "model": "{{namespace}}:block/{{item}}_l1_topless", "uvlock": false },
+              "when":  { "layer1": true, "layer0": false, "layer2": true }
+            },
+            {
+              "apply": { "model": "{{namespace}}:block/{{item}}_l1_bottomless", "uvlock": false },
+              "when":  { "layer1": true, "layer0": true, "layer2": false }
+            },
+            {
+              "apply": { "model": "{{namespace}}:block/{{item}}_l1_sides", "uvlock": false },
+              "when":  { "layer1": true, "layer0": true, "layer2": true }
             },
             {
               "apply": { "model": "{{namespace}}:block/{{item}}_l0", "uvlock": false },
-              "when":  { "layer0": true }
+              "when":  { "layer0": true, "layer1": false }
+            },
+            {
+              "apply": { "model": "{{namespace}}:block/{{item}}_l0_topless", "uvlock": false },
+              "when":  { "layer0": true, "layer1": true }
             }
           ]
         },
-        "assets/{{namespace}}/models/item/{{item}}.json":     {
+        "assets/{{namespace}}/models/item/{{item}}.json":                {
           "parent": "{{namespace}}:block/{{item}}"
         },
-        "assets/{{namespace}}/models/block/{{item}}.json":    {
+        "assets/{{namespace}}/models/block/{{item}}.json":               {
           "parent":   "anisekai:block/base/{{name}}",
           "textures": {
             "particle": "minecraft:block/{{texture:sides}}",
-            "side": "minecraft:block/{{texture:sides}}",
-            "face": "minecraft:block/{{texture:faces}}"
+            "side":     "minecraft:block/{{texture:sides}}",
+            "face":     "minecraft:block/{{texture:faces}}"
           }
         },
-        "assets/{{namespace}}/models/block/{{item}}_l0.json": {
+        "assets/{{namespace}}/models/block/{{item}}_l0.json":            {
           "parent":   "anisekai:block/base/{{name}}_l0",
           "textures": {
             "particle": "minecraft:block/{{texture:sides}}",
-            "side": "minecraft:block/{{texture:sides}}",
-            "face": "minecraft:block/{{texture:faces}}"
+            "side":     "minecraft:block/{{texture:sides}}",
+            "face":     "minecraft:block/{{texture:faces}}"
           }
         },
-        "assets/{{namespace}}/models/block/{{item}}_l1.json": {
+        "assets/{{namespace}}/models/block/{{item}}_l0_topless.json":    {
+          "parent":   "anisekai:block/base/{{name}}_l0_topless",
+          "textures": {
+            "particle": "minecraft:block/{{texture:sides}}",
+            "side":     "minecraft:block/{{texture:sides}}",
+            "face":     "minecraft:block/{{texture:faces}}"
+          }
+        },
+        "assets/{{namespace}}/models/block/{{item}}_l1.json":            {
           "parent":   "anisekai:block/base/{{name}}_l1",
           "textures": {
             "particle": "minecraft:block/{{texture:sides}}",
-            "side": "minecraft:block/{{texture:sides}}",
-            "face": "minecraft:block/{{texture:faces}}"
+            "side":     "minecraft:block/{{texture:sides}}",
+            "face":     "minecraft:block/{{texture:faces}}"
           }
         },
-        "assets/{{namespace}}/models/block/{{item}}_l2.json": {
+        "assets/{{namespace}}/models/block/{{item}}_l1_bottomless.json": {
+          "parent":   "anisekai:block/base/{{name}}_l1_bottomless",
+          "textures": {
+            "particle": "minecraft:block/{{texture:sides}}",
+            "side":     "minecraft:block/{{texture:sides}}",
+            "face":     "minecraft:block/{{texture:faces}}"
+          }
+        },
+        "assets/{{namespace}}/models/block/{{item}}_l1_topless.json":    {
+          "parent":   "anisekai:block/base/{{name}}_l1_topless",
+          "textures": {
+            "particle": "minecraft:block/{{texture:sides}}",
+            "side":     "minecraft:block/{{texture:sides}}",
+            "face":     "minecraft:block/{{texture:faces}}"
+          }
+        },
+        "assets/{{namespace}}/models/block/{{item}}_l1_sides.json":      {
+          "parent":   "anisekai:block/base/{{name}}_l1_sides",
+          "textures": {
+            "particle": "minecraft:block/{{texture:sides}}",
+            "side":     "minecraft:block/{{texture:sides}}"
+          }
+        },
+        "assets/{{namespace}}/models/block/{{item}}_l2.json":            {
           "parent":   "anisekai:block/base/{{name}}_l2",
           "textures": {
             "particle": "minecraft:block/{{texture:sides}}",
-            "side": "minecraft:block/{{texture:sides}}",
-            "face": "minecraft:block/{{texture:faces}}"
+            "side":     "minecraft:block/{{texture:sides}}",
+            "face":     "minecraft:block/{{texture:faces}}"
           }
         },
-        "assets/{{namespace}}/models/block/{{item}}_l3.json": {
+        "assets/{{namespace}}/models/block/{{item}}_l2_bottomless.json": {
+          "parent":   "anisekai:block/base/{{name}}_l2_bottomless",
+          "textures": {
+            "particle": "minecraft:block/{{texture:sides}}",
+            "side":     "minecraft:block/{{texture:sides}}",
+            "face":     "minecraft:block/{{texture:faces}}"
+          }
+        },
+        "assets/{{namespace}}/models/block/{{item}}_l2_topless.json":    {
+          "parent":   "anisekai:block/base/{{name}}_l2_topless",
+          "textures": {
+            "particle": "minecraft:block/{{texture:sides}}",
+            "side":     "minecraft:block/{{texture:sides}}",
+            "face":     "minecraft:block/{{texture:faces}}"
+          }
+        },
+        "assets/{{namespace}}/models/block/{{item}}_l2_sides.json":      {
+          "parent":   "anisekai:block/base/{{name}}_l2_sides",
+          "textures": {
+            "particle": "minecraft:block/{{texture:sides}}",
+            "side":     "minecraft:block/{{texture:sides}}"
+          }
+        },
+        "assets/{{namespace}}/models/block/{{item}}_l3.json":            {
           "parent":   "anisekai:block/base/{{name}}_l3",
           "textures": {
             "particle": "minecraft:block/{{texture:sides}}",
-            "side": "minecraft:block/{{texture:sides}}",
-            "face": "minecraft:block/{{texture:faces}}"
+            "side":     "minecraft:block/{{texture:sides}}",
+            "face":     "minecraft:block/{{texture:faces}}"
           }
         },
-        "data/{{namespace}}/recipe/blocks/{{item}}.json":     {
+        "assets/{{namespace}}/models/block/{{item}}_l3_bottomless.json": {
+          "parent":   "anisekai:block/base/{{name}}_l3_bottomless",
+          "textures": {
+            "particle": "minecraft:block/{{texture:sides}}",
+            "side":     "minecraft:block/{{texture:sides}}",
+            "face":     "minecraft:block/{{texture:faces}}"
+          }
+        },
+        "data/{{namespace}}/recipe/blocks/{{item}}.json":                {
           "type":     "minecraft:crafting_shaped",
           "category": "building",
           "group":    "{{name}}s",
