@@ -1,5 +1,9 @@
 package me.anisekai.utils;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import me.anisekai.AnisekaiMod;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.function.BooleanBiFunction;
@@ -8,8 +12,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -40,24 +42,24 @@ public class OrientableShape {
         }
 
         String     data     = new BufferedReader(new InputStreamReader(in)).lines().collect(Collectors.joining("\n"));
-        JSONObject hitboxes = new JSONObject(data);
+        JsonObject hitboxes = JsonParser.parseString(data).getAsJsonObject();
         for (String id : hitboxes.keySet()) {
             Identifier identifier = AnisekaiMod.id(id);
-            JSONArray  voxels     = hitboxes.getJSONArray(id);
+            JsonArray  voxels     = hitboxes.getAsJsonArray(id);
 
             Collection<VoxelShape> voxelList = new ArrayList<>();
 
-            for (int i = 0; i < voxels.length(); i++) {
-                JSONObject voxel = voxels.getJSONObject(i);
-
-                voxelList.add(VoxelShapes.cuboid(
-                        voxel.getDouble("minX"),
-                        voxel.getDouble("minY"),
-                        voxel.getDouble("minZ"),
-                        voxel.getDouble("maxX"),
-                        voxel.getDouble("maxY"),
-                        voxel.getDouble("maxZ")
-                ));
+            for (JsonElement element : voxels) {
+                if (element instanceof JsonObject voxel) {
+                    voxelList.add(VoxelShapes.cuboid(
+                            voxel.get("minX").getAsDouble(),
+                            voxel.get("minY").getAsDouble(),
+                            voxel.get("minZ").getAsDouble(),
+                            voxel.get("maxX").getAsDouble(),
+                            voxel.get("maxY").getAsDouble(),
+                            voxel.get("maxZ").getAsDouble()
+                    ));
+                }
             }
 
             SHAPES.put(identifier, OrientableShape.makeShape(voxelList));
