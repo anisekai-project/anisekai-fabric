@@ -1,15 +1,1 @@
-{
-  "result": {
-    "count": 6,
-    "id": "anisekai:jungle_staircase"
-  },
-  "pattern": [
-    "S  ",
-    "SS ",
-    "SSS"
-  ],
-  "type": "minecraft:crafting_shaped",
-  "category": "building",
-  "key": {"S": {"item": "anisekai:jungle_half_slab"}},
-  "group": "staircases"
-}
+{"result":{"count":6,"id":"anisekai:jungle_staircase"},"pattern":["S  ","SS ","SSS"],"type":"minecraft:crafting_shaped","category":"building","key":{"S":{"item":"anisekai:jungle_half_slab"}},"group":"staircases"}

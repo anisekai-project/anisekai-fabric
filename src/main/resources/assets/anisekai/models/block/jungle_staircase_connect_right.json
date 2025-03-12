@@ -1,8 +1,1 @@
-{
-  "parent": "anisekai:block/base/staircase",
-  "textures": {
-    "side": "block/jungle_log",
-    "particle": "block/jungle_planks",
-    "steps": "block/jungle_planks"
-  }
-}
+{"parent":"anisekai:block/base/staircase_connect_right","textures":{"side":"minecraft:block/jungle_log","particle":"minecraft:block/jungle_planks","steps":"minecraft:block/jungle_planks"}}

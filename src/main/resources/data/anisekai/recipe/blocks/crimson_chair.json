@@ -1,18 +1,1 @@
-{
-  "result": {
-    "count": 1,
-    "id": "anisekai:crimson_chair"
-  },
-  "pattern": [
-    "F  ",
-    "CCC",
-    "F F"
-  ],
-  "type": "minecraft:crafting_shaped",
-  "category": "building",
-  "key": {
-    "C": {"item": "anisekai:crimson_half_slab"},
-    "F": {"item": "minecraft:crimson_fence"}
-  },
-  "group": "chairs"
-}
+{"result":{"count":1,"id":"anisekai:crimson_chair"},"pattern":["F  ","CCC","F F"],"type":"minecraft:crafting_shaped","category":"building","key":{"C":{"item":"anisekai:crimson_half_slab"},"F":{"item":"minecraft:crimson_fence"}},"group":"chairs"}

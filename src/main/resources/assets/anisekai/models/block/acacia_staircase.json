@@ -1,8 +1,1 @@
-{
-  "parent": "anisekai:block/base/staircase",
-  "textures": {
-    "side": "block/acacia_log",
-    "particle": "block/acacia_planks",
-    "steps": "block/acacia_planks"
-  }
-}
+{"parent":"anisekai:block/base/staircase","textures":{"side":"minecraft:block/acacia_log","particle":"minecraft:block/acacia_planks","steps":"minecraft:block/acacia_planks"}}

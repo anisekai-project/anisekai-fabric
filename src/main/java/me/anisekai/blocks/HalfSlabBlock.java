@@ -1,8 +1,7 @@
 package me.anisekai.blocks;
 
-import me.anisekai.AnisekaiMod;
+import me.anisekai.blocks.feature.QuarterBlock;
 import me.anisekai.utils.BlockUtils;
-import me.anisekai.utils.OrientableShape;
 import net.minecraft.block.*;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.fluid.FluidState;
@@ -14,28 +13,15 @@ import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-public class HalfSlabBlock extends Block implements Waterloggable {
-
-    public static final Identifier L0_ID = AnisekaiMod.id("half_slab_l0");
-    public static final Identifier L1_ID = AnisekaiMod.id("half_slab_l1");
-    public static final Identifier L2_ID = AnisekaiMod.id("half_slab_l2");
-    public static final Identifier L3_ID = AnisekaiMod.id("half_slab_l3");
-
-    public static final BooleanProperty LAYER_3 = BooleanProperty.of("layer3");
-    public static final BooleanProperty LAYER_2 = BooleanProperty.of("layer2");
-    public static final BooleanProperty LAYER_1 = BooleanProperty.of("layer1");
-    public static final BooleanProperty LAYER_0 = BooleanProperty.of("layer0");
+public class HalfSlabBlock extends Block implements Waterloggable, QuarterBlock {
 
     public HalfSlabBlock(AbstractBlock.Settings settings) {
 
@@ -83,17 +69,7 @@ public class HalfSlabBlock extends Block implements Waterloggable {
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
 
-        boolean layer0 = state.get(LAYER_0);
-        boolean layer1 = state.get(LAYER_1);
-        boolean layer2 = state.get(LAYER_2);
-        boolean layer3 = state.get(LAYER_3);
-
-        Collection<Identifier> layerIds = new ArrayList<>();
-        if (layer0) layerIds.add(L0_ID);
-        if (layer1) layerIds.add(L1_ID);
-        if (layer2) layerIds.add(L2_ID);
-        if (layer3) layerIds.add(L3_ID);
-        return OrientableShape.of(layerIds).getShape(Direction.NORTH);
+        return this.getOrientableShape(state).getShape(Direction.NORTH);
     }
 
     @Override
@@ -101,47 +77,15 @@ public class HalfSlabBlock extends Block implements Waterloggable {
 
         BlockPos   position = ctx.getBlockPos();
         BlockState state    = ctx.getWorld().getBlockState(position);
-        double     y        = ctx.getHitPos().y - ctx.getBlockPos().getY();
-        double     x        = ctx.getHitPos().x - ctx.getBlockPos().getX();
 
-        BooleanProperty layer;
-
-        if (!state.isOf(this)) {
-            if (x == 0.5 && y == 0.5) {
-                // We are most probably dealing with the bridging mod here
-                // Let's find the nearest block from the hitpos in the player direction
-                BlockPos playerPosition = ctx.getPlayer().getBlockPos();
-                BlockPos positionDiff   = playerPosition.subtract(position);
-
-                int dx = Integer.compare(positionDiff.getX(), 0);
-                int dz = Integer.compare(positionDiff.getZ(), 0);
-
-                BlockPos neighborDirection = new BlockPos(dx, 0, dz);
-                BlockPos neighborPosition  = position.add(neighborDirection);
-
-                BlockState neighborState = ctx.getWorld().getBlockState(neighborPosition);
-
-                if (neighborState.isOf(this)) {
-                    // The neighbor is a half-slab, let's just use its highest layer.
-                    layer = this.getHighestLayer(neighborState);
-                } else {
-                    // It's not a half-slab, let's use the highest Y value from the block collision shape instead
-                    VoxelShape shape = neighborState.getCollisionShape(ctx.getWorld(), neighborPosition);
-                    if (shape.isEmpty()) {
-                        // Why are we still here, just to suffer... what fucking value I'm supposed to use there ??
-                        layer = this.getAffectedLayerAt(1);
-                    } else {
-                        layer = this.getAffectedLayerAt(shape.getBoundingBox().maxY);
-                    }
-                }
-            } else {
-                // Just use the hit position to detect which layer should be set.
-                layer = this.getAffectedLayerAt(y);
-            }
-        } else {
-            // We already are in a half-slab context, let's use that to "complete" our block.
-            layer = this.getAffectedLayerAt(state, y);
-        }
+        BooleanProperty layer = this.getPlacementLayer(
+                this,
+                ctx.getWorld(),
+                state,
+                position,
+                ctx.getHitPos(),
+                ctx.getPlayer().getBlockPos()
+        );
 
         BlockState placementState;
         if (state.isOf(this)) {
@@ -156,12 +100,6 @@ public class HalfSlabBlock extends Block implements Waterloggable {
 
         return placementState
                 .with(Properties.WATERLOGGED, BlockUtils.isContextWater(ctx) && !this.isFull(placementState));
-    }
-
-    @Override
-    public BlockRenderType getRenderType(BlockState state) {
-
-        return BlockRenderType.MODEL;
     }
 
     // <editor-fold desc="Waterlogged">
@@ -186,85 +124,6 @@ public class HalfSlabBlock extends Block implements Waterloggable {
 
     // </editor-fold>
 
-    // <editor-fold desc="Layers">
-
-    public BooleanProperty getHighestLayer(BlockState state) {
-        if (!state.isOf(this)) throw new IllegalArgumentException("State must be half-slab");
-        if (state.get(LAYER_3)) return LAYER_3;
-        if (state.get(LAYER_2)) return LAYER_2;
-        if (state.get(LAYER_1)) return LAYER_1;
-        if (state.get(LAYER_0)) return LAYER_0;
-        throw new IllegalStateException("Half-Slab state without any layers (??)");
-    }
-
-    public boolean isFull(BlockState state) {
-
-        boolean layer0 = state.get(LAYER_0);
-        boolean layer1 = state.get(LAYER_1);
-        boolean layer2 = state.get(LAYER_2);
-        boolean layer3 = state.get(LAYER_3);
-
-        return layer0 && layer1 && layer2 && layer3;
-    }
-
-    public int getLayerCount(BlockState state) {
-
-        int layer0 = state.get(LAYER_0) ? 1 : 0;
-        int layer1 = state.get(LAYER_1) ? 1 : 0;
-        int layer2 = state.get(LAYER_2) ? 1 : 0;
-        int layer3 = state.get(LAYER_3) ? 1 : 0;
-
-        return layer0 + layer1 + layer2 + layer3;
-    }
-
-    public boolean isAffectingLayer0(double y) {
-
-        return y <= 0.25;
-    }
-
-    public boolean isAffectingLayer1(double y) {
-
-        return y >= 0.25 && y <= 0.5;
-    }
-
-    public boolean isAffectingLayer2(double y) {
-
-        return y >= 0.5 && y <= 0.75;
-    }
-
-    public boolean isAffectingLayer3(double y) {
-
-        return y >= 0.75;
-    }
-
-    public BooleanProperty getAffectedLayerAt(double y) {
-
-        if (this.isAffectingLayer0(y)) {
-            return LAYER_0;
-        } else if (this.isAffectingLayer1(y)) {
-            return LAYER_1;
-        } else if (this.isAffectingLayer2(y)) {
-            return LAYER_2;
-        } else if (this.isAffectingLayer3(y)) {
-            return LAYER_3;
-        }
-        return LAYER_0; // Default to layer 0 if y value is invalid – should not happen under normal circumstances.
-    }
-
-    public BooleanProperty getAffectedLayerAt(BlockState state, double y) {
-
-        if (y == 0.75) {
-            return state.get(LAYER_2) ? LAYER_3 : LAYER_2;
-        } else if (y == 0.5) {
-            return state.get(LAYER_1) ? LAYER_2 : LAYER_1;
-        } else if (y == 0.25) {
-            return state.get(LAYER_0) ? LAYER_1 : LAYER_0;
-        } else {
-            return this.getAffectedLayerAt(y);
-        }
-    }
-
-    // </editor-fold>
 
     @Override
     public boolean canReplace(BlockState state, ItemPlacementContext context) {

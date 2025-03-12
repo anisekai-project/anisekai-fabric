@@ -1,8 +1,1 @@
-{
-  "parent": "anisekai:block/base/table",
-  "textures": {
-    "face": "minecraft:block/warped_planks",
-    "particle": "minecraft:block/warped_planks",
-    "support": "minecraft:block/warped_stem"
-  }
-}
+{"parent":"anisekai:block/base/table","textures":{"face":"minecraft:block/warped_planks","particle":"minecraft:block/warped_planks","support":"minecraft:block/warped_stem"}}

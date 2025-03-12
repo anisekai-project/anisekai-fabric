@@ -1,7 +1,1 @@
-{
-  "parent": "anisekai:block/base/half_slab_l2",
-  "textures": {
-    "side": "minecraft:block/lime_stained_glass",
-    "step": "minecraft:block/lime_stained_glass"
-  }
-}
+{"parent":"anisekai:block/base/half_slab_l2","textures":{"side":"minecraft:block/lime_stained_glass","face":"minecraft:block/lime_stained_glass","particle":"minecraft:block/lime_stained_glass"}}

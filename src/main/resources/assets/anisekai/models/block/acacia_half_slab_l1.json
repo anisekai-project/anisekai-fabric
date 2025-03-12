@@ -1,7 +1,1 @@
-{
-  "parent": "anisekai:block/base/half_slab_l1",
-  "textures": {
-    "side": "minecraft:block/acacia_log",
-    "step": "minecraft:block/acacia_planks"
-  }
-}
+{"parent":"anisekai:block/base/half_slab_l1","textures":{"side":"minecraft:block/acacia_log","face":"minecraft:block/acacia_planks","particle":"minecraft:block/acacia_log"}}

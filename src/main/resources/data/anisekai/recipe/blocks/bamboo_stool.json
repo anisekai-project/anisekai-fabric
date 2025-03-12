@@ -1,17 +1,1 @@
-{
-  "result": {
-    "count": 1,
-    "id": "anisekai:bamboo_stool"
-  },
-  "pattern": [
-    "CCC",
-    "F F"
-  ],
-  "type": "minecraft:crafting_shaped",
-  "category": "building",
-  "key": {
-    "C": {"item": "anisekai:bamboo_half_slab"},
-    "F": {"item": "minecraft:bamboo_fence"}
-  },
-  "group": "stools"
-}
+{"result":{"count":1,"id":"anisekai:bamboo_stool"},"pattern":["CCC","F F"],"type":"minecraft:crafting_shaped","category":"building","key":{"C":{"item":"anisekai:bamboo_half_slab"},"F":{"item":"minecraft:bamboo_fence"}},"group":"stools"}

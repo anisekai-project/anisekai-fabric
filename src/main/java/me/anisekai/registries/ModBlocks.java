@@ -58,9 +58,9 @@ public final class ModBlocks {
                                                                         .solidBlock(Blocks::never);
 
                 if (variant.isStained()) {
-                    return new StainedGlassHalfBlock(variant.getColor(), settings);
+                    return new StainedHalfBlock(variant.getColor(), settings);
                 } else {
-                    return new GlassHalfBlock(settings);
+                    return new HalfSlabBlock(settings);
                 }
             }
     );

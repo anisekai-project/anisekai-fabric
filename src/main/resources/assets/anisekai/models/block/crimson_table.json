@@ -1,8 +1,1 @@
-{
-  "parent": "anisekai:block/base/table",
-  "textures": {
-    "face": "minecraft:block/crimson_planks",
-    "particle": "minecraft:block/crimson_planks",
-    "support": "minecraft:block/crimson_stem"
-  }
-}
+{"parent":"anisekai:block/base/table","textures":{"face":"minecraft:block/crimson_planks","particle":"minecraft:block/crimson_planks","support":"minecraft:block/crimson_stem"}}

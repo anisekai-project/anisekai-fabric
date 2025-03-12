@@ -1,18 +1,1 @@
-{
-  "result": {
-    "count": 1,
-    "id": "anisekai:jungle_nightstand"
-  },
-  "pattern": [
-    "---",
-    "- -",
-    "|-|"
-  ],
-  "type": "minecraft:crafting_shaped",
-  "category": "building",
-  "key": {
-    "|": {"item": "minecraft:jungle_fence"},
-    "-": {"item": "anisekai:jungle_half_slab"}
-  },
-  "group": "nightstands"
-}
+{"result":{"count":1,"id":"anisekai:jungle_nightstand"},"pattern":["---","- -","|-|"],"type":"minecraft:crafting_shaped","category":"building","key":{"|":{"item":"minecraft:jungle_fence"},"-":{"item":"anisekai:jungle_half_slab"}},"group":"nightstands"}

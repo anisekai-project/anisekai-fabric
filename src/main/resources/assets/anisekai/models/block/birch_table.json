@@ -1,8 +1,1 @@
-{
-  "parent": "anisekai:block/base/table",
-  "textures": {
-    "face": "minecraft:block/birch_planks",
-    "particle": "minecraft:block/birch_planks",
-    "support": "minecraft:block/birch_log"
-  }
-}
+{"parent":"anisekai:block/base/table","textures":{"face":"minecraft:block/birch_planks","particle":"minecraft:block/birch_planks","support":"minecraft:block/birch_log"}}

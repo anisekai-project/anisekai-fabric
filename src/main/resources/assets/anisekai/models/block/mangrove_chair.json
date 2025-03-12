@@ -1,8 +1,1 @@
-{
-  "parent": "anisekai:block/base/chair",
-  "textures": {
-    "chair_legs": "minecraft:block/mangrove_log",
-    "particle": "minecraft:block/mangrove_planks",
-    "seat_backrest": "minecraft:block/mangrove_planks"
-  }
-}
+{"parent":"anisekai:block/base/chair","textures":{"chair_legs":"minecraft:block/mangrove_log","particle":"minecraft:block/mangrove_planks","seat_backrest":"minecraft:block/mangrove_planks"}}

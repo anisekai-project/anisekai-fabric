@@ -1,11 +1,1 @@
-{
-  "result": {
-    "count": 3,
-    "id": "anisekai:light_gray_stained_glass_half_slab"
-  },
-  "pattern": ["CCC"],
-  "type": "minecraft:crafting_shaped",
-  "category": "building",
-  "key": {"C": {"item": "minecraft:light_gray_stained_glass_pane"}},
-  "group": "half_slabs"
-}
+{"result":{"count":6,"id":"anisekai:light_gray_stained_glass_half_slab"},"pattern":["CCC"],"type":"minecraft:crafting_shaped","category":"building","key":{"C":{"item":"minecraft:light_gray_stained_glass_pane"}},"group":"half_slabs"}

@@ -1,18 +1,1 @@
-{
-  "result": {
-    "count": 1,
-    "id": "anisekai:dark_oak_chair"
-  },
-  "pattern": [
-    "F  ",
-    "CCC",
-    "F F"
-  ],
-  "type": "minecraft:crafting_shaped",
-  "category": "building",
-  "key": {
-    "C": {"item": "anisekai:dark_oak_half_slab"},
-    "F": {"item": "minecraft:dark_oak_fence"}
-  },
-  "group": "chairs"
-}
+{"result":{"count":1,"id":"anisekai:dark_oak_chair"},"pattern":["F  ","CCC","F F"],"type":"minecraft:crafting_shaped","category":"building","key":{"C":{"item":"anisekai:dark_oak_half_slab"},"F":{"item":"minecraft:dark_oak_fence"}},"group":"chairs"}

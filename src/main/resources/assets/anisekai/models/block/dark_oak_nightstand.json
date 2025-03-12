@@ -1,9 +1,1 @@
-{
-  "parent": "anisekai:block/base/nightstand",
-  "textures": {
-    "back": "minecraft:block/dark_oak_planks",
-    "drawer": "minecraft:block/stripped_dark_oak_log",
-    "particle": "minecraft:block/dark_oak_log",
-    "structure": "minecraft:block/dark_oak_log"
-  }
-}
+{"parent":"anisekai:block/base/nightstand","textures":{"back":"minecraft:block/dark_oak_planks","drawer":"minecraft:block/stripped_dark_oak_log","particle":"minecraft:block/dark_oak_log","structure":"minecraft:block/dark_oak_log"}}

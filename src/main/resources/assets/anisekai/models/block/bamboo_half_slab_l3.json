@@ -1,8 +1,1 @@
-{
-  "parent": "anisekai:block/base/half_slab_l3",
-  "textures": {
-    "side": "minecraft:block/bamboo_block",
-    "step": "minecraft:block/bamboo_planks",
-    "particle": "minecraft:block/bamboo_planks"
-  }
-}
+{"parent":"anisekai:block/base/half_slab_l3","textures":{"side":"minecraft:block/bamboo_block","face":"minecraft:block/bamboo_planks","particle":"minecraft:block/bamboo_block"}}

@@ -1,18 +1,1 @@
-{
-  "result": {
-    "count": 1,
-    "id": "anisekai:cherry_nightstand"
-  },
-  "pattern": [
-    "---",
-    "- -",
-    "|-|"
-  ],
-  "type": "minecraft:crafting_shaped",
-  "category": "building",
-  "key": {
-    "|": {"item": "minecraft:cherry_fence"},
-    "-": {"item": "anisekai:cherry_half_slab"}
-  },
-  "group": "nightstands"
-}
+{"result":{"count":1,"id":"anisekai:cherry_nightstand"},"pattern":["---","- -","|-|"],"type":"minecraft:crafting_shaped","category":"building","key":{"|":{"item":"minecraft:cherry_fence"},"-":{"item":"anisekai:cherry_half_slab"}},"group":"nightstands"}

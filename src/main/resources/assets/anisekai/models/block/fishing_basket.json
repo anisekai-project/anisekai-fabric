@@ -1,9 +1,1 @@
-{
-  "parent": "anisekai:block/base/fishing_basket",
-  "textures": {
-    "seat": "minecraft:block/bamboo_block",
-    "shell": "minecraft:block/bamboo_mosaic",
-    "particle": "minecraft:block/stonecutter_bottom",
-    "hinges": "minecraft:block/stonecutter_bottom"
-  }
-}
+{"parent":"anisekai:block/base/fishing_basket","textures":{"seat":"minecraft:block/bamboo_block","shell":"minecraft:block/bamboo_mosaic","particle":"minecraft:block/stonecutter_bottom","hinges":"minecraft:block/stonecutter_bottom"}}

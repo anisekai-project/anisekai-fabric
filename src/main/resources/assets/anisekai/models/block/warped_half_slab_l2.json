@@ -1,7 +1,1 @@
-{
-  "parent": "anisekai:block/base/half_slab_l2",
-  "textures": {
-    "side": "minecraft:block/warped_stem",
-    "step": "minecraft:block/warped_planks"
-  }
-}
+{"parent":"anisekai:block/base/half_slab_l2","textures":{"side":"minecraft:block/warped_stem","face":"minecraft:block/warped_planks","particle":"minecraft:block/warped_stem"}}

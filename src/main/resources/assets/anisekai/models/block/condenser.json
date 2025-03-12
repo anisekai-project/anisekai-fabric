@@ -1,8 +1,1 @@
-{
-  "parent": "anisekai:block/base/condenser",
-  "textures": {
-    "face": "minecraft:block/reinforced_deepslate_top",
-    "sides": "minecraft:block/reinforced_deepslate_bottom",
-    "particle": "minecraft:block/reinforced_deepslate_bottom"
-  }
-}
+{"parent":"anisekai:block/base/condenser","textures":{"face":"minecraft:block/reinforced_deepslate_top","sides":"minecraft:block/reinforced_deepslate_bottom","particle":"minecraft:block/reinforced_deepslate_bottom"}}

@@ -1,11 +1,1 @@
-{
-  "result": {
-    "count": 6,
-    "id": "anisekai:dark_oak_half_slab"
-  },
-  "pattern": ["CCC"],
-  "type": "minecraft:crafting_shaped",
-  "category": "building",
-  "key": {"C": {"item": "minecraft:dark_oak_slab"}},
-  "group": "half_slabs"
-}
+{"result":{"count":6,"id":"anisekai:dark_oak_half_slab"},"pattern":["CCC"],"type":"minecraft:crafting_shaped","category":"building","key":{"C":{"item":"minecraft:dark_oak_slab"}},"group":"half_slabs"}

@@ -1,8 +1,1 @@
-{
-  "parent": "anisekai:block/base/staircase",
-  "textures": {
-    "side": "block/crimson_stem",
-    "particle": "block/crimson_planks",
-    "steps": "block/crimson_planks"
-  }
-}
+{"parent":"anisekai:block/base/staircase_connect_right","textures":{"side":"minecraft:block/crimson_stem","particle":"minecraft:block/crimson_planks","steps":"minecraft:block/crimson_planks"}}

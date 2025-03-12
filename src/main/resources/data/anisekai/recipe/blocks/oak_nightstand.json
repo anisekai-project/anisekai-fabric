@@ -1,18 +1,1 @@
-{
-  "result": {
-    "count": 1,
-    "id": "anisekai:oak_nightstand"
-  },
-  "pattern": [
-    "---",
-    "- -",
-    "|-|"
-  ],
-  "type": "minecraft:crafting_shaped",
-  "category": "building",
-  "key": {
-    "|": {"item": "minecraft:oak_fence"},
-    "-": {"item": "anisekai:oak_half_slab"}
-  },
-  "group": "nightstands"
-}
+{"result":{"count":1,"id":"anisekai:oak_nightstand"},"pattern":["---","- -","|-|"],"type":"minecraft:crafting_shaped","category":"building","key":{"|":{"item":"minecraft:oak_fence"},"-":{"item":"anisekai:oak_half_slab"}},"group":"nightstands"}

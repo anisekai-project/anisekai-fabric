@@ -1,17 +1,1 @@
-{
-  "result": {
-    "count": 1,
-    "id": "anisekai:mangrove_stool"
-  },
-  "pattern": [
-    "CCC",
-    "F F"
-  ],
-  "type": "minecraft:crafting_shaped",
-  "category": "building",
-  "key": {
-    "C": {"item": "anisekai:mangrove_half_slab"},
-    "F": {"item": "minecraft:mangrove_fence"}
-  },
-  "group": "stools"
-}
+{"result":{"count":1,"id":"anisekai:mangrove_stool"},"pattern":["CCC","F F"],"type":"minecraft:crafting_shaped","category":"building","key":{"C":{"item":"anisekai:mangrove_half_slab"},"F":{"item":"minecraft:mangrove_fence"}},"group":"stools"}

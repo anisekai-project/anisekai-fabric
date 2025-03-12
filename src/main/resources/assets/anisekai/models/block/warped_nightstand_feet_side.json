@@ -1,7 +1,1 @@
-{
-  "parent": "anisekai:block/base/nightstand_feet_side",
-  "textures": {
-    "particle": "minecraft:block/warped_stem",
-    "structure": "minecraft:block/warped_stem"
-  }
-}
+{"parent":"anisekai:block/base/nightstand_feet_side","textures":{"particle":"minecraft:block/warped_stem","structure":"minecraft:block/warped_stem"}}

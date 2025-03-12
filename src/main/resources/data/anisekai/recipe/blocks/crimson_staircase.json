@@ -1,15 +1,1 @@
-{
-  "result": {
-    "count": 6,
-    "id": "anisekai:crimson_staircase"
-  },
-  "pattern": [
-    "S  ",
-    "SS ",
-    "SSS"
-  ],
-  "type": "minecraft:crafting_shaped",
-  "category": "building",
-  "key": {"S": {"item": "anisekai:crimson_half_slab"}},
-  "group": "staircases"
-}
+{"result":{"count":6,"id":"anisekai:crimson_staircase"},"pattern":["S  ","SS ","SSS"],"type":"minecraft:crafting_shaped","category":"building","key":{"S":{"item":"anisekai:crimson_half_slab"}},"group":"staircases"}

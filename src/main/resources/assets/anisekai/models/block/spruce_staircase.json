@@ -1,8 +1,1 @@
-{
-  "parent": "anisekai:block/base/staircase",
-  "textures": {
-    "side": "block/spruce_log",
-    "particle": "block/spruce_planks",
-    "steps": "block/spruce_planks"
-  }
-}
+{"parent":"anisekai:block/base/staircase","textures":{"side":"minecraft:block/spruce_log","particle":"minecraft:block/spruce_planks","steps":"minecraft:block/spruce_planks"}}

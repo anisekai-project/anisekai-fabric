@@ -1,18 +1,1 @@
-{
-  "result": {
-    "count": 1,
-    "id": "anisekai:mangrove_nightstand"
-  },
-  "pattern": [
-    "---",
-    "- -",
-    "|-|"
-  ],
-  "type": "minecraft:crafting_shaped",
-  "category": "building",
-  "key": {
-    "|": {"item": "minecraft:mangrove_fence"},
-    "-": {"item": "anisekai:mangrove_half_slab"}
-  },
-  "group": "nightstands"
-}
+{"result":{"count":1,"id":"anisekai:mangrove_nightstand"},"pattern":["---","- -","|-|"],"type":"minecraft:crafting_shaped","category":"building","key":{"|":{"item":"minecraft:mangrove_fence"},"-":{"item":"anisekai:mangrove_half_slab"}},"group":"nightstands"}

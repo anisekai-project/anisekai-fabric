@@ -1,9 +1,1 @@
-{
-  "parent": "anisekai:block/base/nightstand",
-  "textures": {
-    "back": "minecraft:block/warped_planks",
-    "drawer": "minecraft:block/stripped_warped_stem",
-    "particle": "minecraft:block/warped_stem",
-    "structure": "minecraft:block/warped_stem"
-  }
-}
+{"parent":"anisekai:block/base/nightstand","textures":{"back":"minecraft:block/warped_planks","drawer":"minecraft:block/stripped_warped_stem","particle":"minecraft:block/warped_stem","structure":"minecraft:block/warped_stem"}}

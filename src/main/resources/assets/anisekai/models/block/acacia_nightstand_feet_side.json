@@ -1,7 +1,1 @@
-{
-  "parent": "anisekai:block/base/nightstand_feet_side",
-  "textures": {
-    "particle": "minecraft:block/acacia_log",
-    "structure": "minecraft:block/acacia_log"
-  }
-}
+{"parent":"anisekai:block/base/nightstand_feet_side","textures":{"particle":"minecraft:block/acacia_log","structure":"minecraft:block/acacia_log"}}

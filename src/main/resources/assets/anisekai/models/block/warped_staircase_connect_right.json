@@ -1,8 +1,1 @@
-{
-  "parent": "anisekai:block/base/staircase",
-  "textures": {
-    "side": "block/warped_stem",
-    "particle": "block/warped_planks",
-    "steps": "block/warped_planks"
-  }
-}
+{"parent":"anisekai:block/base/staircase_connect_right","textures":{"side":"minecraft:block/warped_stem","particle":"minecraft:block/warped_planks","steps":"minecraft:block/warped_planks"}}

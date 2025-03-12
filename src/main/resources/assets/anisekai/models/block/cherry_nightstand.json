@@ -1,9 +1,1 @@
-{
-  "parent": "anisekai:block/base/nightstand",
-  "textures": {
-    "back": "minecraft:block/cherry_planks",
-    "drawer": "minecraft:block/stripped_cherry_log",
-    "particle": "minecraft:block/cherry_log",
-    "structure": "minecraft:block/cherry_log"
-  }
-}
+{"parent":"anisekai:block/base/nightstand","textures":{"back":"minecraft:block/cherry_planks","drawer":"minecraft:block/stripped_cherry_log","particle":"minecraft:block/cherry_log","structure":"minecraft:block/cherry_log"}}

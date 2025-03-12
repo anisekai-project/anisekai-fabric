@@ -1,9 +1,1 @@
-{
-  "parent": "anisekai:block/base/nightstand",
-  "textures": {
-    "back": "minecraft:block/crimson_planks",
-    "drawer": "minecraft:block/stripped_crimson_stem",
-    "particle": "minecraft:block/crimson_stem",
-    "structure": "minecraft:block/crimson_stem"
-  }
-}
+{"parent":"anisekai:block/base/nightstand","textures":{"back":"minecraft:block/crimson_planks","drawer":"minecraft:block/stripped_crimson_stem","particle":"minecraft:block/crimson_stem","structure":"minecraft:block/crimson_stem"}}

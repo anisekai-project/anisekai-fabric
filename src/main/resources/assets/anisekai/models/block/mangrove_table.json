@@ -1,8 +1,1 @@
-{
-  "parent": "anisekai:block/base/table",
-  "textures": {
-    "face": "minecraft:block/mangrove_planks",
-    "particle": "minecraft:block/mangrove_planks",
-    "support": "minecraft:block/mangrove_log"
-  }
-}
+{"parent":"anisekai:block/base/table","textures":{"face":"minecraft:block/mangrove_planks","particle":"minecraft:block/mangrove_planks","support":"minecraft:block/mangrove_log"}}

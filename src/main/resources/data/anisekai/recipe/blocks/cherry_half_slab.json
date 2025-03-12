@@ -1,11 +1,1 @@
-{
-  "result": {
-    "count": 6,
-    "id": "anisekai:cherry_half_slab"
-  },
-  "pattern": ["CCC"],
-  "type": "minecraft:crafting_shaped",
-  "category": "building",
-  "key": {"C": {"item": "minecraft:cherry_slab"}},
-  "group": "half_slabs"
-}
+{"result":{"count":6,"id":"anisekai:cherry_half_slab"},"pattern":["CCC"],"type":"minecraft:crafting_shaped","category":"building","key":{"C":{"item":"minecraft:cherry_slab"}},"group":"half_slabs"}

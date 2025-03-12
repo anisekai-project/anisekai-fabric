@@ -1,18 +1,1 @@
-{
-  "result": {
-    "count": 1,
-    "id": "anisekai:bamboo_chair"
-  },
-  "pattern": [
-    "F  ",
-    "CCC",
-    "F F"
-  ],
-  "type": "minecraft:crafting_shaped",
-  "category": "building",
-  "key": {
-    "C": {"item": "anisekai:bamboo_half_slab"},
-    "F": {"item": "minecraft:bamboo_fence"}
-  },
-  "group": "chairs"
-}
+{"result":{"count":1,"id":"anisekai:bamboo_chair"},"pattern":["F  ","CCC","F F"],"type":"minecraft:crafting_shaped","category":"building","key":{"C":{"item":"anisekai:bamboo_half_slab"},"F":{"item":"minecraft:bamboo_fence"}},"group":"chairs"}

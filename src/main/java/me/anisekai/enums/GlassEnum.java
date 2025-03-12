@@ -3,31 +3,49 @@ package me.anisekai.enums;
 import me.anisekai.interfaces.Nameable;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.util.DyeColor;
 
 public enum GlassEnum implements Nameable {
 
-    GLASS,
-    WHITE_STAINED_GLASS,
-    LIGHT_GRAY_STAINED_GLASS,
-    GRAY_STAINED_GLASS,
-    BLACK_STAINED_GLASS,
-    BROWN_STAINED_GLASS,
-    RED_STAINED_GLASS,
-    ORANGE_STAINED_GLASS,
-    YELLOW_STAINED_GLASS,
-    LIME_STAINED_GLASS,
-    GREEN_STAINED_GLASS,
-    CYAN_STAINED_GLASS,
-    LIGHT_BLUE_STAINED_GLASS,
-    BLUE_STAINED_GLASS,
-    PURPLE_STAINED_GLASS,
-    MAGENTA_STAINED_GLASS,
-    PINK_STAINED_GLASS;
+    GLASS(null),
+    WHITE_STAINED_GLASS(DyeColor.WHITE),
+    LIGHT_GRAY_STAINED_GLASS(DyeColor.LIGHT_GRAY),
+    GRAY_STAINED_GLASS(DyeColor.GRAY),
+    BLACK_STAINED_GLASS(DyeColor.BLACK),
+    BROWN_STAINED_GLASS(DyeColor.BROWN),
+    RED_STAINED_GLASS(DyeColor.RED),
+    ORANGE_STAINED_GLASS(DyeColor.ORANGE),
+    YELLOW_STAINED_GLASS(DyeColor.YELLOW),
+    LIME_STAINED_GLASS(DyeColor.LIME),
+    GREEN_STAINED_GLASS(DyeColor.GREEN),
+    CYAN_STAINED_GLASS(DyeColor.CYAN),
+    LIGHT_BLUE_STAINED_GLASS(DyeColor.LIGHT_BLUE),
+    BLUE_STAINED_GLASS(DyeColor.BLUE),
+    PURPLE_STAINED_GLASS(DyeColor.PURPLE),
+    MAGENTA_STAINED_GLASS(DyeColor.MAGENTA),
+    PINK_STAINED_GLASS(DyeColor.PINK);
+
+    private final DyeColor color;
+
+    GlassEnum(DyeColor color) {
+
+        this.color = color;
+    }
 
     @Override
     public String getName() {
 
         return this.name().toLowerCase();
+    }
+
+    public DyeColor getColor() {
+
+        return this.color;
+    }
+
+    public boolean isStained() {
+
+        return this.getColor() != null;
     }
 
     public Item asPane() {

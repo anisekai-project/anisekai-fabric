@@ -1,8 +1,1 @@
-{
-  "parent": "anisekai:block/base/table",
-  "textures": {
-    "face": "minecraft:block/oak_planks",
-    "particle": "minecraft:block/oak_planks",
-    "support": "minecraft:block/oak_log"
-  }
-}
+{"parent":"anisekai:block/base/table","textures":{"face":"minecraft:block/oak_planks","particle":"minecraft:block/oak_planks","support":"minecraft:block/oak_log"}}
