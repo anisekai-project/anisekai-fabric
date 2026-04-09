@@ -1,1 +1,9 @@
-{"parent":"anisekai:block/base/nightstand","textures":{"back":"minecraft:block/bamboo_planks","drawer":"minecraft:block/stripped_bamboo_block","particle":"minecraft:block/bamboo_block","structure":"minecraft:block/bamboo_block"}}
+{
+  "parent": "anisekai:block/base/nightstand",
+  "textures": {
+    "back": "minecraft:block/bamboo_planks",
+    "drawer": "minecraft:block/stripped_bamboo_block",
+    "particle": "minecraft:block/bamboo_block",
+    "structure": "minecraft:block/bamboo_block"
+  }
+}

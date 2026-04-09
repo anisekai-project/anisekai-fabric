@@ -1,1 +1,7 @@
-{"parent":"anisekai:block/base/nightstand_feet_full","textures":{"particle":"minecraft:block/crimson_stem","structure":"minecraft:block/crimson_stem"}}
+{
+  "parent": "anisekai:block/base/nightstand_feet_full",
+  "textures": {
+    "particle": "minecraft:block/crimson_stem",
+    "structure": "minecraft:block/crimson_stem"
+  }
+}

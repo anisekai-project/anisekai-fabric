@@ -1,1 +1,8 @@
-{"parent":"anisekai:block/base/half_slab_l3","textures":{"side":"minecraft:block/magenta_stained_glass","face":"minecraft:block/magenta_stained_glass","particle":"minecraft:block/magenta_stained_glass"}}
+{
+  "parent": "anisekai:block/base/half_slab_l3",
+  "textures": {
+    "side": "minecraft:block/magenta_stained_glass",
+    "face": "minecraft:block/magenta_stained_glass",
+    "particle": "minecraft:block/magenta_stained_glass"
+  }
+}

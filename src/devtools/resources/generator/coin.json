@@ -2,7 +2,7 @@
   "dynamic": {
     "coin": {
       "settings": {
-        "usingVariant": { "name": "coins" }
+        "usingVariant": {"name": "coins"}
       },
       "files":    {
         "assets/{{namespace}}/models/item/{{item}}.json": {
@@ -13,7 +13,7 @@
         }
       },
       "tags":     [
-        { "namespace": "{{namespace}}", "value": "item/{{name}}s" }
+        {"namespace": "{{namespace}}", "value": "item/{{name}}s"}
       ]
     }
   }

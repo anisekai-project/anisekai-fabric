@@ -1,1 +1,9 @@
-{"parent":"anisekai:block/base/nightstand","textures":{"back":"minecraft:block/birch_planks","drawer":"minecraft:block/stripped_birch_log","particle":"minecraft:block/birch_log","structure":"minecraft:block/birch_log"}}
+{
+  "parent": "anisekai:block/base/nightstand",
+  "textures": {
+    "back": "minecraft:block/birch_planks",
+    "drawer": "minecraft:block/stripped_birch_log",
+    "particle": "minecraft:block/birch_log",
+    "structure": "minecraft:block/birch_log"
+  }
+}

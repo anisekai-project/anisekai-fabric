@@ -1,1 +1,8 @@
-{"parent":"anisekai:block/base/half_slab_l0_topless","textures":{"side":"minecraft:block/warped_stem","face":"minecraft:block/warped_planks","particle":"minecraft:block/warped_stem"}}
+{
+  "parent": "anisekai:block/base/half_slab_l0_topless",
+  "textures": {
+    "side": "minecraft:block/warped_stem",
+    "face": "minecraft:block/warped_planks",
+    "particle": "minecraft:block/warped_stem"
+  }
+}

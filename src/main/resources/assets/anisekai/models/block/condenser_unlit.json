@@ -1,1 +1,7 @@
-{"parent":"anisekai:block/base/condenser_activity_sensor","textures":{"activity_sensor":"minecraft:block/dead_bubble_coral_block","particle":"minecraft:block/reinforced_deepslate_bottom"}}
+{
+  "parent": "anisekai:block/base/condenser_activity_sensor",
+  "textures": {
+    "activity_sensor": "minecraft:block/dead_bubble_coral_block",
+    "particle": "minecraft:block/reinforced_deepslate_bottom"
+  }
+}

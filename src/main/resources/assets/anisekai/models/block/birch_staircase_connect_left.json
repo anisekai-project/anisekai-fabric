@@ -1,1 +1,8 @@
-{"parent":"anisekai:block/base/staircase_connect_left","textures":{"side":"minecraft:block/birch_log","particle":"minecraft:block/birch_planks","steps":"minecraft:block/birch_planks"}}
+{
+  "parent": "anisekai:block/base/staircase_connect_left",
+  "textures": {
+    "side": "minecraft:block/birch_log",
+    "particle": "minecraft:block/birch_planks",
+    "steps": "minecraft:block/birch_planks"
+  }
+}

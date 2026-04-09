@@ -1,1 +1,9 @@
-{"parent":"anisekai:block/base/nightstand","textures":{"back":"minecraft:block/jungle_planks","drawer":"minecraft:block/stripped_jungle_log","particle":"minecraft:block/jungle_log","structure":"minecraft:block/jungle_log"}}
+{
+  "parent": "anisekai:block/base/nightstand",
+  "textures": {
+    "back": "minecraft:block/jungle_planks",
+    "drawer": "minecraft:block/stripped_jungle_log",
+    "particle": "minecraft:block/jungle_log",
+    "structure": "minecraft:block/jungle_log"
+  }
+}

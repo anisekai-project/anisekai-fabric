@@ -1,1 +1,8 @@
-{"parent":"anisekai:block/base/table","textures":{"face":"minecraft:block/bamboo_planks","particle":"minecraft:block/bamboo_planks","support":"minecraft:block/bamboo_block"}}
+{
+  "parent": "anisekai:block/base/table",
+  "textures": {
+    "face": "minecraft:block/bamboo_planks",
+    "particle": "minecraft:block/bamboo_planks",
+    "support": "minecraft:block/bamboo_block"
+  }
+}

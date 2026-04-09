@@ -1,1 +1,16 @@
-{"result":{"count":1,"id":"{{id}}"},"pattern":["SSS","SDS","SSS"],"type":"minecraft:crafting_shaped","key":{"S":{"item":"minecraft:deepslate"},"D":{"item":"minecraft:diamond"}}}
+{
+  "result": {
+    "count": 1,
+    "id": "anisekai:condenser"
+  },
+  "pattern": [
+    "SSS",
+    "SDS",
+    "SSS"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {"item": "minecraft:deepslate"},
+    "D": {"item": "minecraft:diamond"}
+  }
+}

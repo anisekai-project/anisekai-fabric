@@ -1,1 +1,19 @@
-{"result":{"count":1,"id":"anisekai:cherry_table"},"pattern":["TTT"," S "," F "],"type":"minecraft:crafting_shaped","category":"building","key":{"S":{"item":"minecraft:cherry_fence"},"T":{"item":"anisekai:cherry_half_slab"},"F":{"item":"minecraft:cherry_slab"}},"group":"tables"}
+{
+  "result": {
+    "count": 1,
+    "id": "anisekai:table"
+  },
+  "pattern": [
+    "TTT",
+    " S ",
+    " F "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "S": {"item": "minecraft:cherry_fence"},
+    "T": {"item": "anisekai:cherry_half_slab"},
+    "F": {"item": "minecraft:cherry_slab"}
+  },
+  "group": "tables"
+}

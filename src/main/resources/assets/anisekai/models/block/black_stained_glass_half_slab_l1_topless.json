@@ -1,1 +1,8 @@
-{"parent":"anisekai:block/base/half_slab_l1_topless","textures":{"side":"minecraft:block/black_stained_glass","face":"minecraft:block/black_stained_glass","particle":"minecraft:block/black_stained_glass"}}
+{
+  "parent": "anisekai:block/base/half_slab_l1_topless",
+  "textures": {
+    "side": "minecraft:block/black_stained_glass",
+    "face": "minecraft:block/black_stained_glass",
+    "particle": "minecraft:block/black_stained_glass"
+  }
+}

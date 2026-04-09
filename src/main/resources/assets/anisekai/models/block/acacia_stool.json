@@ -1,1 +1,8 @@
-{"parent":"anisekai:block/base/stool","textures":{"chair_legs":"minecraft:block/acacia_log","particle":"minecraft:block/acacia_planks","seat_backrest":"minecraft:block/acacia_planks"}}
+{
+  "parent": "anisekai:block/base/stool",
+  "textures": {
+    "chair_legs": "minecraft:block/acacia_log",
+    "particle": "minecraft:block/acacia_planks",
+    "seat_backrest": "minecraft:block/acacia_planks"
+  }
+}

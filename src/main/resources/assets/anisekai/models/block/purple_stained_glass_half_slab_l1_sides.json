@@ -1,1 +1,7 @@
-{"parent":"anisekai:block/base/half_slab_l1_sides","textures":{"side":"minecraft:block/purple_stained_glass","particle":"minecraft:block/purple_stained_glass"}}
+{
+  "parent": "anisekai:block/base/half_slab_l1_sides",
+  "textures": {
+    "side": "minecraft:block/purple_stained_glass",
+    "particle": "minecraft:block/purple_stained_glass"
+  }
+}

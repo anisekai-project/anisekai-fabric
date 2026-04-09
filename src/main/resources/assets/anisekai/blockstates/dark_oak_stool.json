@@ -1,1 +1,21 @@
-{"variants":{"facing=east":{"uvlock":false,"y":90,"model":"anisekai:block/dark_oak_stool"},"facing=south":{"uvlock":false,"y":180,"model":"anisekai:block/dark_oak_stool"},"facing=north":{"uvlock":false,"model":"anisekai:block/dark_oak_stool"},"facing=west":{"uvlock":false,"y":270,"model":"anisekai:block/dark_oak_stool"}}}
+{"variants": {
+  "facing=east": {
+    "uvlock": false,
+    "y": 90,
+    "model": "anisekai:block/dark_oak_stool"
+  },
+  "facing=south": {
+    "uvlock": false,
+    "y": 180,
+    "model": "anisekai:block/dark_oak_stool"
+  },
+  "facing=north": {
+    "uvlock": false,
+    "model": "anisekai:block/dark_oak_stool"
+  },
+  "facing=west": {
+    "uvlock": false,
+    "y": 270,
+    "model": "anisekai:block/dark_oak_stool"
+  }
+}}

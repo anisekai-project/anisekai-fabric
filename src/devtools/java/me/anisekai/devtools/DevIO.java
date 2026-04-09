@@ -1,14 +1,17 @@
 package me.anisekai.devtools;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class DevIO {
+
+    private static final Pattern TEMPLATE_PATTERN = Pattern.compile("\\{\\{([a-z]+)}}");
 
     private DevIO() {}
 
@@ -31,15 +34,22 @@ public final class DevIO {
         return new JSONObject(getFileContent(file));
     }
 
-    public static JSONArray getFileArray(File file) throws IOException {
-
-        return new JSONArray(getFileContent(file));
-    }
-
     public static void setFileContent(File file, CharSequence content) throws IOException {
 
         if (!ensureParentExists(file)) {
             return;
+        }
+
+        // Safety check: Ensure every template texts has been replaced to avoid any errors at runtime.
+        Matcher matcher = TEMPLATE_PATTERN.matcher(content);
+        if (matcher.find()) {
+            String unmapped = matcher.group();
+            throw new RuntimeException(String.format(
+                    "Found unmapped key %s for file %s\n%s\n\n",
+                    unmapped,
+                    file.getCanonicalPath(),
+                    content
+            ));
         }
 
         Files.writeString(
@@ -53,7 +63,7 @@ public final class DevIO {
 
     public static void setFileJson(File file, JSONObject json) throws IOException {
 
-        setFileContent(file, json.toString());
+        setFileContent(file, json.toString(2));
     }
 
 }

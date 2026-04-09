@@ -1,1 +1,19 @@
-{"result":{"count":1,"id":"anisekai:mangrove_table"},"pattern":["TTT"," S "," F "],"type":"minecraft:crafting_shaped","category":"building","key":{"S":{"item":"minecraft:mangrove_fence"},"T":{"item":"anisekai:mangrove_half_slab"},"F":{"item":"minecraft:mangrove_slab"}},"group":"tables"}
+{
+  "result": {
+    "count": 1,
+    "id": "anisekai:table"
+  },
+  "pattern": [
+    "TTT",
+    " S ",
+    " F "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "S": {"item": "minecraft:mangrove_fence"},
+    "T": {"item": "anisekai:mangrove_half_slab"},
+    "F": {"item": "minecraft:mangrove_slab"}
+  },
+  "group": "tables"
+}

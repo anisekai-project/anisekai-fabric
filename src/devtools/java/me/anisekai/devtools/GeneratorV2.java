@@ -76,6 +76,7 @@ public class GeneratorV2 {
 
             this.templatingLayer.addLayer(new HashMap<>() {{
                 this.put("name", filename);
+                this.put("id", String.format("%s:%s", GeneratorV2.this.namespace, filename));
             }});
 
             String     replaced = this.templatingLayer.doTemplating(content);
@@ -230,7 +231,10 @@ public class GeneratorV2 {
         }
 
         JSONObject        extendData     = dynamic.getJSONObject(settings.getExtendName());
-        GeneratorSettings extendSettings = new GeneratorSettings(this.configuration, extendData.getJSONObject("settings"));
+        GeneratorSettings extendSettings = new GeneratorSettings(
+                this.configuration,
+                extendData.getJSONObject("settings")
+        );
 
         // Do the extension logic first so that the latest extends overrides correctly.
         if (extendSettings.hasExtendName()) {

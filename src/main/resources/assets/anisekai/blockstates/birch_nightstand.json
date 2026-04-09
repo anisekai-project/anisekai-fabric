@@ -1,1 +1,96 @@
-{"multipart":[{"apply":{"uvlock":false,"model":"anisekai:block/birch_nightstand"},"when":{"facing":"north"}},{"apply":{"uvlock":false,"y":90,"model":"anisekai:block/birch_nightstand"},"when":{"facing":"east"}},{"apply":{"uvlock":false,"y":180,"model":"anisekai:block/birch_nightstand"},"when":{"facing":"south"}},{"apply":{"uvlock":false,"y":270,"model":"anisekai:block/birch_nightstand"},"when":{"facing":"west"}},{"apply":{"uvlock":false,"model":"anisekai:block/birch_nightstand_feet_full"},"when":{"east":false,"south":false,"north":false,"west":false}},{"apply":{"uvlock":false,"model":"anisekai:block/birch_nightstand_feet_side"},"when":{"east":false,"south":true,"north":false,"west":false}},{"apply":{"uvlock":false,"y":180,"model":"anisekai:block/birch_nightstand_feet_side"},"when":{"east":false,"south":false,"north":true,"west":false}},{"apply":{"uvlock":false,"y":270,"model":"anisekai:block/birch_nightstand_feet_side"},"when":{"east":true,"south":false,"north":false,"west":false}},{"apply":{"uvlock":false,"y":90,"model":"anisekai:block/birch_nightstand_feet_side"},"when":{"east":false,"south":false,"north":false,"west":true}}]}
+{"multipart": [
+  {
+    "apply": {
+      "uvlock": false,
+      "model": "anisekai:block/birch_nightstand"
+    },
+    "when": {"facing": "north"}
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 90,
+      "model": "anisekai:block/birch_nightstand"
+    },
+    "when": {"facing": "east"}
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 180,
+      "model": "anisekai:block/birch_nightstand"
+    },
+    "when": {"facing": "south"}
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 270,
+      "model": "anisekai:block/birch_nightstand"
+    },
+    "when": {"facing": "west"}
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "model": "anisekai:block/birch_nightstand_feet_full"
+    },
+    "when": {
+      "east": false,
+      "south": false,
+      "north": false,
+      "west": false
+    }
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "model": "anisekai:block/birch_nightstand_feet_side"
+    },
+    "when": {
+      "east": false,
+      "south": true,
+      "north": false,
+      "west": false
+    }
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 180,
+      "model": "anisekai:block/birch_nightstand_feet_side"
+    },
+    "when": {
+      "east": false,
+      "south": false,
+      "north": true,
+      "west": false
+    }
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 270,
+      "model": "anisekai:block/birch_nightstand_feet_side"
+    },
+    "when": {
+      "east": true,
+      "south": false,
+      "north": false,
+      "west": false
+    }
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 90,
+      "model": "anisekai:block/birch_nightstand_feet_side"
+    },
+    "when": {
+      "east": false,
+      "south": false,
+      "north": false,
+      "west": true
+    }
+  }
+]}
