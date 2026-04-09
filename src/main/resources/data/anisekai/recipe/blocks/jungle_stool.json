@@ -1,1 +1,17 @@
-{"result":{"count":1,"id":"anisekai:jungle_stool"},"pattern":["CCC","F F"],"type":"minecraft:crafting_shaped","category":"building","key":{"C":{"item":"anisekai:jungle_half_slab"},"F":{"item":"minecraft:jungle_fence"}},"group":"stools"}
+{
+  "result": {
+    "count": 1,
+    "id": "anisekai:stool"
+  },
+  "pattern": [
+    "CCC",
+    "F F"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "C": {"item": "anisekai:jungle_half_slab"},
+    "F": {"item": "minecraft:jungle_fence"}
+  },
+  "group": "stools"
+}

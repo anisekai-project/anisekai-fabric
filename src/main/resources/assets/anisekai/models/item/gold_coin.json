@@ -1,1 +1,4 @@
-{"parent":"item/generated","textures":{"layer0":"anisekai:item/gold_coin"}}
+{
+  "parent": "item/generated",
+  "textures": {"layer0": "anisekai:item/gold_coin"}
+}

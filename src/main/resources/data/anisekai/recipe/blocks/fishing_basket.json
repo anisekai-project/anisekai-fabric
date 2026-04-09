@@ -1,1 +1,16 @@
-{"result":{"count":1,"id":"{{id}}"},"pattern":["SSS","C C","CCC"],"type":"minecraft:crafting_shaped","key":{"S":{"item":"minecraft:bamboo_slab"},"C":{"item":"minecraft:bamboo_planks"}}}
+{
+  "result": {
+    "count": 1,
+    "id": "anisekai:fishing_basket"
+  },
+  "pattern": [
+    "SSS",
+    "C C",
+    "CCC"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {"item": "minecraft:bamboo_slab"},
+    "C": {"item": "minecraft:bamboo_planks"}
+  }
+}

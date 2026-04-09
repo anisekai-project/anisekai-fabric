@@ -1,1 +1,4 @@
-{"parent":"item/generated","textures":{"layer0":"anisekai:item/emerald_coin"}}
+{
+  "parent": "item/generated",
+  "textures": {"layer0": "anisekai:item/emerald_coin"}
+}

@@ -1,1 +1,11 @@
-{"result":{"count":6,"id":"anisekai:lime_stained_glass_half_slab"},"pattern":["CCC"],"type":"minecraft:crafting_shaped","category":"building","key":{"C":{"item":"minecraft:lime_stained_glass_pane"}},"group":"half_slabs"}
+{
+  "result": {
+    "count": 6,
+    "id": "anisekai:half_slab"
+  },
+  "pattern": ["CCC"],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {"C": {"item": "minecraft:lime_stained_glass_pane"}},
+  "group": "half_slabs"
+}

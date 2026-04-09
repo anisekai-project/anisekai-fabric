@@ -1,1 +1,170 @@
-{"multipart":[{"apply":{"uvlock":false,"model":"anisekai:block/condenser"},"when":{"facing":"north"}},{"apply":{"uvlock":false,"y":90,"model":"anisekai:block/condenser"},"when":{"facing":"east"}},{"apply":{"uvlock":false,"y":180,"model":"anisekai:block/condenser"},"when":{"facing":"south"}},{"apply":{"uvlock":false,"y":270,"model":"anisekai:block/condenser"},"when":{"facing":"west"}},{"apply":{"uvlock":false,"model":"anisekai:block/condenser_lit"},"when":{"lit":true,"facing":"north"}},{"apply":{"uvlock":false,"y":90,"model":"anisekai:block/condenser_lit"},"when":{"lit":true,"facing":"east"}},{"apply":{"uvlock":false,"y":180,"model":"anisekai:block/condenser_lit"},"when":{"lit":true,"facing":"south"}},{"apply":{"uvlock":false,"y":270,"model":"anisekai:block/condenser_lit"},"when":{"lit":true,"facing":"west"}},{"apply":{"uvlock":false,"model":"anisekai:block/condenser_unlit"},"when":{"lit":false,"facing":"north","jammed":false}},{"apply":{"uvlock":false,"y":90,"model":"anisekai:block/condenser_unlit"},"when":{"lit":false,"facing":"east","jammed":false}},{"apply":{"uvlock":false,"y":180,"model":"anisekai:block/condenser_unlit"},"when":{"lit":false,"facing":"south","jammed":false}},{"apply":{"uvlock":false,"y":270,"model":"anisekai:block/condenser_unlit"},"when":{"lit":false,"facing":"west","jammed":false}},{"apply":{"uvlock":false,"model":"anisekai:block/condenser_jammed"},"when":{"lit":false,"facing":"north","jammed":true}},{"apply":{"uvlock":false,"y":90,"model":"anisekai:block/condenser_jammed"},"when":{"lit":false,"facing":"east","jammed":true}},{"apply":{"uvlock":false,"y":180,"model":"anisekai:block/condenser_jammed"},"when":{"lit":false,"facing":"south","jammed":true}},{"apply":{"uvlock":false,"y":270,"model":"anisekai:block/condenser_jammed"},"when":{"lit":false,"facing":"west","jammed":true}}]}
+{"multipart": [
+  {
+    "apply": {
+      "uvlock": false,
+      "model": "anisekai:block/condenser"
+    },
+    "when": {"facing": "north"}
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 90,
+      "model": "anisekai:block/condenser"
+    },
+    "when": {"facing": "east"}
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 180,
+      "model": "anisekai:block/condenser"
+    },
+    "when": {"facing": "south"}
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 270,
+      "model": "anisekai:block/condenser"
+    },
+    "when": {"facing": "west"}
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "model": "anisekai:block/condenser_lit"
+    },
+    "when": {
+      "lit": true,
+      "facing": "north"
+    }
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 90,
+      "model": "anisekai:block/condenser_lit"
+    },
+    "when": {
+      "lit": true,
+      "facing": "east"
+    }
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 180,
+      "model": "anisekai:block/condenser_lit"
+    },
+    "when": {
+      "lit": true,
+      "facing": "south"
+    }
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 270,
+      "model": "anisekai:block/condenser_lit"
+    },
+    "when": {
+      "lit": true,
+      "facing": "west"
+    }
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "model": "anisekai:block/condenser_unlit"
+    },
+    "when": {
+      "lit": false,
+      "facing": "north",
+      "jammed": false
+    }
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 90,
+      "model": "anisekai:block/condenser_unlit"
+    },
+    "when": {
+      "lit": false,
+      "facing": "east",
+      "jammed": false
+    }
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 180,
+      "model": "anisekai:block/condenser_unlit"
+    },
+    "when": {
+      "lit": false,
+      "facing": "south",
+      "jammed": false
+    }
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 270,
+      "model": "anisekai:block/condenser_unlit"
+    },
+    "when": {
+      "lit": false,
+      "facing": "west",
+      "jammed": false
+    }
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "model": "anisekai:block/condenser_jammed"
+    },
+    "when": {
+      "lit": false,
+      "facing": "north",
+      "jammed": true
+    }
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 90,
+      "model": "anisekai:block/condenser_jammed"
+    },
+    "when": {
+      "lit": false,
+      "facing": "east",
+      "jammed": true
+    }
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 180,
+      "model": "anisekai:block/condenser_jammed"
+    },
+    "when": {
+      "lit": false,
+      "facing": "south",
+      "jammed": true
+    }
+  },
+  {
+    "apply": {
+      "uvlock": false,
+      "y": 270,
+      "model": "anisekai:block/condenser_jammed"
+    },
+    "when": {
+      "lit": false,
+      "facing": "west",
+      "jammed": true
+    }
+  }
+]}

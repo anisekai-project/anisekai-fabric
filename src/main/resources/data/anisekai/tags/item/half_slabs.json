@@ -1,1 +1,33 @@
-{"values":["anisekai:black_stained_glass_half_slab","anisekai:blue_stained_glass_half_slab","anisekai:brown_stained_glass_half_slab","anisekai:cyan_stained_glass_half_slab","anisekai:glass_half_slab","anisekai:gray_stained_glass_half_slab","anisekai:green_stained_glass_half_slab","anisekai:light_blue_stained_glass_half_slab","anisekai:light_gray_stained_glass_half_slab","anisekai:lime_stained_glass_half_slab","anisekai:magenta_stained_glass_half_slab","anisekai:orange_stained_glass_half_slab","anisekai:pink_stained_glass_half_slab","anisekai:purple_stained_glass_half_slab","anisekai:red_stained_glass_half_slab","anisekai:white_stained_glass_half_slab","anisekai:yellow_stained_glass_half_slab","anisekai:acacia_half_slab","anisekai:bamboo_half_slab","anisekai:birch_half_slab","anisekai:cherry_half_slab","anisekai:crimson_half_slab","anisekai:dark_oak_half_slab","anisekai:jungle_half_slab","anisekai:mangrove_half_slab","anisekai:oak_half_slab","anisekai:spruce_half_slab","anisekai:warped_half_slab"],"replace":false}
+{
+  "values": [
+    "anisekai:black_stained_glass_half_slab",
+    "anisekai:blue_stained_glass_half_slab",
+    "anisekai:brown_stained_glass_half_slab",
+    "anisekai:cyan_stained_glass_half_slab",
+    "anisekai:glass_half_slab",
+    "anisekai:gray_stained_glass_half_slab",
+    "anisekai:green_stained_glass_half_slab",
+    "anisekai:light_blue_stained_glass_half_slab",
+    "anisekai:light_gray_stained_glass_half_slab",
+    "anisekai:lime_stained_glass_half_slab",
+    "anisekai:magenta_stained_glass_half_slab",
+    "anisekai:orange_stained_glass_half_slab",
+    "anisekai:pink_stained_glass_half_slab",
+    "anisekai:purple_stained_glass_half_slab",
+    "anisekai:red_stained_glass_half_slab",
+    "anisekai:white_stained_glass_half_slab",
+    "anisekai:yellow_stained_glass_half_slab",
+    "anisekai:acacia_half_slab",
+    "anisekai:bamboo_half_slab",
+    "anisekai:birch_half_slab",
+    "anisekai:cherry_half_slab",
+    "anisekai:crimson_half_slab",
+    "anisekai:dark_oak_half_slab",
+    "anisekai:jungle_half_slab",
+    "anisekai:mangrove_half_slab",
+    "anisekai:oak_half_slab",
+    "anisekai:spruce_half_slab",
+    "anisekai:warped_half_slab"
+  ],
+  "replace": false
+}

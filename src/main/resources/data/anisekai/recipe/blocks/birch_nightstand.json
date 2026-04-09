@@ -1,1 +1,18 @@
-{"result":{"count":1,"id":"anisekai:birch_nightstand"},"pattern":["---","- -","|-|"],"type":"minecraft:crafting_shaped","category":"building","key":{"|":{"item":"minecraft:birch_fence"},"-":{"item":"anisekai:birch_half_slab"}},"group":"nightstands"}
+{
+  "result": {
+    "count": 1,
+    "id": "anisekai:nightstand"
+  },
+  "pattern": [
+    "---",
+    "- -",
+    "|-|"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "|": {"item": "minecraft:birch_fence"},
+    "-": {"item": "anisekai:birch_half_slab"}
+  },
+  "group": "nightstands"
+}

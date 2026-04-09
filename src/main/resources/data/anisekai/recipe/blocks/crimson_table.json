@@ -1,1 +1,19 @@
-{"result":{"count":1,"id":"anisekai:crimson_table"},"pattern":["TTT"," S "," F "],"type":"minecraft:crafting_shaped","category":"building","key":{"S":{"item":"minecraft:crimson_fence"},"T":{"item":"anisekai:crimson_half_slab"},"F":{"item":"minecraft:crimson_slab"}},"group":"tables"}
+{
+  "result": {
+    "count": 1,
+    "id": "anisekai:table"
+  },
+  "pattern": [
+    "TTT",
+    " S ",
+    " F "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "S": {"item": "minecraft:crimson_fence"},
+    "T": {"item": "anisekai:crimson_half_slab"},
+    "F": {"item": "minecraft:crimson_slab"}
+  },
+  "group": "tables"
+}

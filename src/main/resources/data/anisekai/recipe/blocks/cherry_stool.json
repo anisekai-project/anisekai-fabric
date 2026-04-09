@@ -1,1 +1,17 @@
-{"result":{"count":1,"id":"anisekai:cherry_stool"},"pattern":["CCC","F F"],"type":"minecraft:crafting_shaped","category":"building","key":{"C":{"item":"anisekai:cherry_half_slab"},"F":{"item":"minecraft:cherry_fence"}},"group":"stools"}
+{
+  "result": {
+    "count": 1,
+    "id": "anisekai:stool"
+  },
+  "pattern": [
+    "CCC",
+    "F F"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "C": {"item": "anisekai:cherry_half_slab"},
+    "F": {"item": "minecraft:cherry_fence"}
+  },
+  "group": "stools"
+}

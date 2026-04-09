@@ -1,1 +1,11 @@
-{"pools":[{"entries":[{"name":"anisekai:bamboo_staircase","type":"minecraft:item"}],"rolls":1,"conditions":[{"condition":"minecraft:survives_explosion"}]}],"type":"minecraft:block"}
+{
+  "pools": [{
+    "entries": [{
+      "name": "anisekai:staircase",
+      "type": "minecraft:item"
+    }],
+    "rolls": 1,
+    "conditions": [{"condition": "minecraft:survives_explosion"}]
+  }],
+  "type": "minecraft:block"
+}

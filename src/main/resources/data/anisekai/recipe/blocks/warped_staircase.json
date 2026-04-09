@@ -1,1 +1,15 @@
-{"result":{"count":6,"id":"anisekai:warped_staircase"},"pattern":["S  ","SS ","SSS"],"type":"minecraft:crafting_shaped","category":"building","key":{"S":{"item":"anisekai:warped_half_slab"}},"group":"staircases"}
+{
+  "result": {
+    "count": 6,
+    "id": "anisekai:staircase"
+  },
+  "pattern": [
+    "S  ",
+    "SS ",
+    "SSS"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {"S": {"item": "anisekai:warped_half_slab"}},
+  "group": "staircases"
+}

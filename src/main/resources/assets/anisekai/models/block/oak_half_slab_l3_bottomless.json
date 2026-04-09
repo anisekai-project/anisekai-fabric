@@ -1,1 +1,8 @@
-{"parent":"anisekai:block/base/half_slab_l3_bottomless","textures":{"side":"minecraft:block/oak_log","face":"minecraft:block/oak_planks","particle":"minecraft:block/oak_log"}}
+{
+  "parent": "anisekai:block/base/half_slab_l3_bottomless",
+  "textures": {
+    "side": "minecraft:block/oak_log",
+    "face": "minecraft:block/oak_planks",
+    "particle": "minecraft:block/oak_log"
+  }
+}

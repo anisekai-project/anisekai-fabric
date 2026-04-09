@@ -1,1 +1,7 @@
-{"parent":"anisekai:block/base/nightstand_feet_side","textures":{"particle":"minecraft:block/oak_log","structure":"minecraft:block/oak_log"}}
+{
+  "parent": "anisekai:block/base/nightstand_feet_side",
+  "textures": {
+    "particle": "minecraft:block/oak_log",
+    "structure": "minecraft:block/oak_log"
+  }
+}
