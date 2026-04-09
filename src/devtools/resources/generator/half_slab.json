@@ -9,62 +9,62 @@
     "assets/{{namespace}}/models/block/base/{{name}}.json":               {
       "elements": [
         {
-          "from":  [ 0, 8, 0 ], "to": [ 16, 12, 16 ],
+          "from":  [0, 8, 0], "to": [16, 12, 16],
           "faces": {
-            "north": { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
-            "east":  { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
-            "south": { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
-            "west":  { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
-            "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#face" },
-            "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#face" }
+            "north": {"uv": [0, 4, 16, 8], "texture": "#side"},
+            "east":  {"uv": [0, 4, 16, 8], "texture": "#side"},
+            "south": {"uv": [0, 4, 16, 8], "texture": "#side"},
+            "west":  {"uv": [0, 4, 16, 8], "texture": "#side"},
+            "up":    {"uv": [0, 0, 16, 16], "texture": "#face"},
+            "down":  {"uv": [0, 0, 16, 16], "texture": "#face"}
           }
         }
       ],
       "display":  {
         "thirdperson_righthand": {
-          "rotation": [ 0, 90, 0 ],
-          "scale":    [ 0.5, 0.5, 0.5 ]
+          "rotation": [0, 90, 0],
+          "scale":    [0.5, 0.5, 0.5]
         },
         "thirdperson_lefthand":  {
-          "rotation": [ 0, 90, 0 ],
-          "scale":    [ 0.5, 0.5, 0.5 ]
+          "rotation": [0, 90, 0],
+          "scale":    [0.5, 0.5, 0.5]
         },
         "firstperson_righthand": {
-          "rotation": [ 0, 90, 0 ],
-          "scale":    [ 0.5, 0.5, 0.5 ]
+          "rotation": [0, 90, 0],
+          "scale":    [0.5, 0.5, 0.5]
         },
         "firstperson_lefthand":  {
-          "rotation": [ 0, 90, 0 ],
-          "scale":    [ 0.5, 0.5, 0.5 ]
+          "rotation": [0, 90, 0],
+          "scale":    [0.5, 0.5, 0.5]
         },
         "ground":                {
-          "translation": [ 0, 3, 0 ],
-          "scale":       [ 0.25, 0.25, 0.25 ]
+          "translation": [0, 3, 0],
+          "scale":       [0.25, 0.25, 0.25]
         },
         "gui":                   {
-          "rotation": [ 15, 140, 0 ],
-          "scale":    [ 0.5, 0.5, 0.5 ]
+          "rotation": [15, 140, 0],
+          "scale":    [0.5, 0.5, 0.5]
         },
         "head":                  {
-          "rotation": [ 0, 90, 0 ]
+          "rotation": [0, 90, 0]
         },
         "fixed":                 {
-          "translation": [ 0, -1.25, -2.5 ],
-          "scale":       [ 0.5, 0.5, 0.5 ]
+          "translation": [0, -1.25, -2.5],
+          "scale":       [0.5, 0.5, 0.5]
         }
       }
     },
     "assets/{{namespace}}/models/block/base/{{name}}_l0.json":            {
       "elements": [
         {
-          "from":  [ 0, 0, 0 ], "to": [ 16, 4, 16 ],
+          "from":  [0, 0, 0], "to": [16, 4, 16],
           "faces": {
-            "north": { "uv": [ 0, 12, 16, 16 ], "texture": "#side" },
-            "east":  { "uv": [ 0, 12, 16, 16 ], "texture": "#side" },
-            "south": { "uv": [ 0, 12, 16, 16 ], "texture": "#side" },
-            "west":  { "uv": [ 0, 12, 16, 16 ], "texture": "#side" },
-            "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#face" },
-            "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#face" }
+            "north": {"uv": [0, 12, 16, 16], "texture": "#side"},
+            "east":  {"uv": [0, 12, 16, 16], "texture": "#side"},
+            "south": {"uv": [0, 12, 16, 16], "texture": "#side"},
+            "west":  {"uv": [0, 12, 16, 16], "texture": "#side"},
+            "up":    {"uv": [0, 0, 16, 16], "texture": "#face"},
+            "down":  {"uv": [0, 0, 16, 16], "texture": "#face"}
           }
         }
       ]
@@ -72,13 +72,13 @@
     "assets/{{namespace}}/models/block/base/{{name}}_l0_topless.json":    {
       "elements": [
         {
-          "from":  [ 0, 0, 0 ], "to": [ 16, 4, 16 ],
+          "from":  [0, 0, 0], "to": [16, 4, 16],
           "faces": {
-            "north": { "uv": [ 0, 12, 16, 16 ], "texture": "#side" },
-            "east":  { "uv": [ 0, 12, 16, 16 ], "texture": "#side" },
-            "south": { "uv": [ 0, 12, 16, 16 ], "texture": "#side" },
-            "west":  { "uv": [ 0, 12, 16, 16 ], "texture": "#side" },
-            "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#face" }
+            "north": {"uv": [0, 12, 16, 16], "texture": "#side"},
+            "east":  {"uv": [0, 12, 16, 16], "texture": "#side"},
+            "south": {"uv": [0, 12, 16, 16], "texture": "#side"},
+            "west":  {"uv": [0, 12, 16, 16], "texture": "#side"},
+            "down":  {"uv": [0, 0, 16, 16], "texture": "#face"}
           }
         }
       ]
@@ -86,14 +86,14 @@
     "assets/{{namespace}}/models/block/base/{{name}}_l1.json":            {
       "elements": [
         {
-          "from":  [ 0, 4, 0 ], "to": [ 16, 8, 16 ],
+          "from":  [0, 4, 0], "to": [16, 8, 16],
           "faces": {
-            "north": { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
-            "east":  { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
-            "south": { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
-            "west":  { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
-            "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#face" },
-            "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#face" }
+            "north": {"uv": [0, 8, 16, 12], "texture": "#side"},
+            "east":  {"uv": [0, 8, 16, 12], "texture": "#side"},
+            "south": {"uv": [0, 8, 16, 12], "texture": "#side"},
+            "west":  {"uv": [0, 8, 16, 12], "texture": "#side"},
+            "up":    {"uv": [0, 0, 16, 16], "texture": "#face"},
+            "down":  {"uv": [0, 0, 16, 16], "texture": "#face"}
           }
         }
       ]
@@ -101,13 +101,13 @@
     "assets/{{namespace}}/models/block/base/{{name}}_l1_bottomless.json": {
       "elements": [
         {
-          "from":  [ 0, 4, 0 ], "to": [ 16, 8, 16 ],
+          "from":  [0, 4, 0], "to": [16, 8, 16],
           "faces": {
-            "north": { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
-            "east":  { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
-            "south": { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
-            "west":  { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
-            "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#face" }
+            "north": {"uv": [0, 8, 16, 12], "texture": "#side"},
+            "east":  {"uv": [0, 8, 16, 12], "texture": "#side"},
+            "south": {"uv": [0, 8, 16, 12], "texture": "#side"},
+            "west":  {"uv": [0, 8, 16, 12], "texture": "#side"},
+            "up":    {"uv": [0, 0, 16, 16], "texture": "#face"}
           }
         }
       ]
@@ -115,13 +115,13 @@
     "assets/{{namespace}}/models/block/base/{{name}}_l1_topless.json":    {
       "elements": [
         {
-          "from":  [ 0, 4, 0 ], "to": [ 16, 8, 16 ],
+          "from":  [0, 4, 0], "to": [16, 8, 16],
           "faces": {
-            "north": { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
-            "east":  { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
-            "south": { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
-            "west":  { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
-            "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#face" }
+            "north": {"uv": [0, 8, 16, 12], "texture": "#side"},
+            "east":  {"uv": [0, 8, 16, 12], "texture": "#side"},
+            "south": {"uv": [0, 8, 16, 12], "texture": "#side"},
+            "west":  {"uv": [0, 8, 16, 12], "texture": "#side"},
+            "down":  {"uv": [0, 0, 16, 16], "texture": "#face"}
           }
         }
       ]
@@ -129,12 +129,12 @@
     "assets/{{namespace}}/models/block/base/{{name}}_l1_sides.json":      {
       "elements": [
         {
-          "from":  [ 0, 4, 0 ], "to": [ 16, 8, 16 ],
+          "from":  [0, 4, 0], "to": [16, 8, 16],
           "faces": {
-            "north": { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
-            "east":  { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
-            "south": { "uv": [ 0, 8, 16, 12 ], "texture": "#side" },
-            "west":  { "uv": [ 0, 8, 16, 12 ], "texture": "#side" }
+            "north": {"uv": [0, 8, 16, 12], "texture": "#side"},
+            "east":  {"uv": [0, 8, 16, 12], "texture": "#side"},
+            "south": {"uv": [0, 8, 16, 12], "texture": "#side"},
+            "west":  {"uv": [0, 8, 16, 12], "texture": "#side"}
           }
         }
       ]
@@ -142,14 +142,14 @@
     "assets/{{namespace}}/models/block/base/{{name}}_l2.json":            {
       "elements": [
         {
-          "from":  [ 0, 8, 0 ], "to": [ 16, 12, 16 ],
+          "from":  [0, 8, 0], "to": [16, 12, 16],
           "faces": {
-            "north": { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
-            "east":  { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
-            "south": { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
-            "west":  { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
-            "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#face" },
-            "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#face" }
+            "north": {"uv": [0, 4, 16, 8], "texture": "#side"},
+            "east":  {"uv": [0, 4, 16, 8], "texture": "#side"},
+            "south": {"uv": [0, 4, 16, 8], "texture": "#side"},
+            "west":  {"uv": [0, 4, 16, 8], "texture": "#side"},
+            "up":    {"uv": [0, 0, 16, 16], "texture": "#face"},
+            "down":  {"uv": [0, 0, 16, 16], "texture": "#face"}
           }
         }
       ]
@@ -157,13 +157,13 @@
     "assets/{{namespace}}/models/block/base/{{name}}_l2_topless.json":    {
       "elements": [
         {
-          "from":  [ 0, 8, 0 ], "to": [ 16, 12, 16 ],
+          "from":  [0, 8, 0], "to": [16, 12, 16],
           "faces": {
-            "north": { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
-            "east":  { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
-            "south": { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
-            "west":  { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
-            "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#face" }
+            "north": {"uv": [0, 4, 16, 8], "texture": "#side"},
+            "east":  {"uv": [0, 4, 16, 8], "texture": "#side"},
+            "south": {"uv": [0, 4, 16, 8], "texture": "#side"},
+            "west":  {"uv": [0, 4, 16, 8], "texture": "#side"},
+            "down":  {"uv": [0, 0, 16, 16], "texture": "#face"}
           }
         }
       ]
@@ -171,13 +171,13 @@
     "assets/{{namespace}}/models/block/base/{{name}}_l2_bottomless.json": {
       "elements": [
         {
-          "from":  [ 0, 8, 0 ], "to": [ 16, 12, 16 ],
+          "from":  [0, 8, 0], "to": [16, 12, 16],
           "faces": {
-            "north": { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
-            "east":  { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
-            "south": { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
-            "west":  { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
-            "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#face" }
+            "north": {"uv": [0, 4, 16, 8], "texture": "#side"},
+            "east":  {"uv": [0, 4, 16, 8], "texture": "#side"},
+            "south": {"uv": [0, 4, 16, 8], "texture": "#side"},
+            "west":  {"uv": [0, 4, 16, 8], "texture": "#side"},
+            "up":    {"uv": [0, 0, 16, 16], "texture": "#face"}
           }
         }
       ]
@@ -185,12 +185,12 @@
     "assets/{{namespace}}/models/block/base/{{name}}_l2_sides.json":      {
       "elements": [
         {
-          "from":  [ 0, 8, 0 ], "to": [ 16, 12, 16 ],
+          "from":  [0, 8, 0], "to": [16, 12, 16],
           "faces": {
-            "north": { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
-            "east":  { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
-            "south": { "uv": [ 0, 4, 16, 8 ], "texture": "#side" },
-            "west":  { "uv": [ 0, 4, 16, 8 ], "texture": "#side" }
+            "north": {"uv": [0, 4, 16, 8], "texture": "#side"},
+            "east":  {"uv": [0, 4, 16, 8], "texture": "#side"},
+            "south": {"uv": [0, 4, 16, 8], "texture": "#side"},
+            "west":  {"uv": [0, 4, 16, 8], "texture": "#side"}
           }
         }
       ]
@@ -198,15 +198,15 @@
     "assets/{{namespace}}/models/block/base/{{name}}_l3.json":            {
       "elements": [
         {
-          "from":  [ 0, 12, 0 ],
-          "to":    [ 16, 16, 16 ],
+          "from":  [0, 12, 0],
+          "to":    [16, 16, 16],
           "faces": {
-            "north": { "uv": [ 0, 0, 16, 4 ], "texture": "#side" },
-            "east":  { "uv": [ 0, 0, 16, 4 ], "texture": "#side" },
-            "south": { "uv": [ 0, 0, 16, 4 ], "texture": "#side" },
-            "west":  { "uv": [ 0, 0, 16, 4 ], "texture": "#side" },
-            "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#face" },
-            "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#face" }
+            "north": {"uv": [0, 0, 16, 4], "texture": "#side"},
+            "east":  {"uv": [0, 0, 16, 4], "texture": "#side"},
+            "south": {"uv": [0, 0, 16, 4], "texture": "#side"},
+            "west":  {"uv": [0, 0, 16, 4], "texture": "#side"},
+            "up":    {"uv": [0, 0, 16, 16], "texture": "#face"},
+            "down":  {"uv": [0, 0, 16, 16], "texture": "#face"}
           }
         }
       ]
@@ -214,14 +214,14 @@
     "assets/{{namespace}}/models/block/base/{{name}}_l3_bottomless.json": {
       "elements": [
         {
-          "from":  [ 0, 12, 0 ],
-          "to":    [ 16, 16, 16 ],
+          "from":  [0, 12, 0],
+          "to":    [16, 16, 16],
           "faces": {
-            "north": { "uv": [ 0, 0, 16, 4 ], "texture": "#side" },
-            "east":  { "uv": [ 0, 0, 16, 4 ], "texture": "#side" },
-            "south": { "uv": [ 0, 0, 16, 4 ], "texture": "#side" },
-            "west":  { "uv": [ 0, 0, 16, 4 ], "texture": "#side" },
-            "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#face" }
+            "north": {"uv": [0, 0, 16, 4], "texture": "#side"},
+            "east":  {"uv": [0, 0, 16, 4], "texture": "#side"},
+            "south": {"uv": [0, 0, 16, 4], "texture": "#side"},
+            "west":  {"uv": [0, 0, 16, 4], "texture": "#side"},
+            "up":    {"uv": [0, 0, 16, 16], "texture": "#face"}
           }
         }
       ]
@@ -236,52 +236,52 @@
         "assets/{{namespace}}/blockstates/{{item}}.json":                {
           "multipart": [
             {
-              "apply": { "model": "{{namespace}}:block/{{item}}_l3", "uvlock": false },
-              "when":  { "layer3": true, "layer2": false }
+              "apply": {"model": "{{namespace}}:block/{{item}}_l3", "uvlock": false},
+              "when":  {"layer3": true, "layer2": false}
             },
             {
-              "apply": { "model": "{{namespace}}:block/{{item}}_l3_bottomless", "uvlock": false },
-              "when":  { "layer3": true, "layer2": true }
+              "apply": {"model": "{{namespace}}:block/{{item}}_l3_bottomless", "uvlock": false},
+              "when":  {"layer3": true, "layer2": true}
             },
             {
-              "apply": { "model": "{{namespace}}:block/{{item}}_l2", "uvlock": false },
-              "when":  { "layer2": true, "layer1": false, "layer3": false }
+              "apply": {"model": "{{namespace}}:block/{{item}}_l2", "uvlock": false},
+              "when":  {"layer2": true, "layer1": false, "layer3": false}
             },
             {
-              "apply": { "model": "{{namespace}}:block/{{item}}_l2_topless", "uvlock": false },
-              "when":  { "layer2": true, "layer1": false, "layer3": true }
+              "apply": {"model": "{{namespace}}:block/{{item}}_l2_topless", "uvlock": false},
+              "when":  {"layer2": true, "layer1": false, "layer3": true}
             },
             {
-              "apply": { "model": "{{namespace}}:block/{{item}}_l2_bottomless", "uvlock": false },
-              "when":  { "layer2": true, "layer1": true, "layer3": false }
+              "apply": {"model": "{{namespace}}:block/{{item}}_l2_bottomless", "uvlock": false},
+              "when":  {"layer2": true, "layer1": true, "layer3": false}
             },
             {
-              "apply": { "model": "{{namespace}}:block/{{item}}_l2_sides", "uvlock": false },
-              "when":  { "layer2": true, "layer1": true, "layer3": true }
+              "apply": {"model": "{{namespace}}:block/{{item}}_l2_sides", "uvlock": false},
+              "when":  {"layer2": true, "layer1": true, "layer3": true}
             },
             {
-              "apply": { "model": "{{namespace}}:block/{{item}}_l1", "uvlock": false },
-              "when":  { "layer1": true, "layer0": false, "layer2": false }
+              "apply": {"model": "{{namespace}}:block/{{item}}_l1", "uvlock": false},
+              "when":  {"layer1": true, "layer0": false, "layer2": false}
             },
             {
-              "apply": { "model": "{{namespace}}:block/{{item}}_l1_topless", "uvlock": false },
-              "when":  { "layer1": true, "layer0": false, "layer2": true }
+              "apply": {"model": "{{namespace}}:block/{{item}}_l1_topless", "uvlock": false},
+              "when":  {"layer1": true, "layer0": false, "layer2": true}
             },
             {
-              "apply": { "model": "{{namespace}}:block/{{item}}_l1_bottomless", "uvlock": false },
-              "when":  { "layer1": true, "layer0": true, "layer2": false }
+              "apply": {"model": "{{namespace}}:block/{{item}}_l1_bottomless", "uvlock": false},
+              "when":  {"layer1": true, "layer0": true, "layer2": false}
             },
             {
-              "apply": { "model": "{{namespace}}:block/{{item}}_l1_sides", "uvlock": false },
-              "when":  { "layer1": true, "layer0": true, "layer2": true }
+              "apply": {"model": "{{namespace}}:block/{{item}}_l1_sides", "uvlock": false},
+              "when":  {"layer1": true, "layer0": true, "layer2": true}
             },
             {
-              "apply": { "model": "{{namespace}}:block/{{item}}_l0", "uvlock": false },
-              "when":  { "layer0": true, "layer1": false }
+              "apply": {"model": "{{namespace}}:block/{{item}}_l0", "uvlock": false},
+              "when":  {"layer0": true, "layer1": false}
             },
             {
-              "apply": { "model": "{{namespace}}:block/{{item}}_l0_topless", "uvlock": false },
-              "when":  { "layer0": true, "layer1": true }
+              "apply": {"model": "{{namespace}}:block/{{item}}_l0_topless", "uvlock": false},
+              "when":  {"layer0": true, "layer1": true}
             }
           ]
         },
@@ -394,13 +394,13 @@
           "type":     "minecraft:crafting_shaped",
           "category": "building",
           "group":    "{{name}}s",
-          "pattern":  [ "CCC" ],
-          "key":      { "C": { "item": "{{craft}}" } },
-          "result":   { "id": "{{id}}", "count": 6 }
+          "pattern":  ["CCC"],
+          "key":      {"C": {"item": "{{craft}}"}},
+          "result":   {"id": "{{id}}", "count": 6}
         }
       },
       "tags":     [
-        { "namespace": "{{namespace}}", "value": "item/{{name}}s" }
+        {"namespace": "{{namespace}}", "value": "item/{{name}}s"}
       ]
     },
     "wood":  {
@@ -428,19 +428,28 @@
                     {
                       "function":   "minecraft:set_count", "add": false, "count": 2.0,
                       "conditions": [
-                        { "block": "{{id}}", "condition": "minecraft:block_state_property", "properties": { "layer_count": 2 } }
+                        {
+                          "block":      "{{id}}", "condition": "minecraft:block_state_property",
+                          "properties": {"layer_count": 2}
+                        }
                       ]
                     },
                     {
                       "function":   "minecraft:set_count", "add": false, "count": 3.0,
                       "conditions": [
-                        { "block": "{{id}}", "condition": "minecraft:block_state_property", "properties": { "layer_count": 3 } }
+                        {
+                          "block":      "{{id}}", "condition": "minecraft:block_state_property",
+                          "properties": {"layer_count": 3}
+                        }
                       ]
                     },
                     {
                       "function":   "minecraft:set_count", "add": false, "count": 4.0,
                       "conditions": [
-                        { "block": "{{id}}", "condition": "minecraft:block_state_property", "properties": { "layer_count": 4 } }
+                        {
+                          "block":      "{{id}}", "condition": "minecraft:block_state_property",
+                          "properties": {"layer_count": 4}
+                        }
                       ]
                     },
                     {
@@ -456,9 +465,9 @@
         }
       },
       "tags":     [
-        { "namespace": "{{namespace}}", "value": "item/wooden_{{name}}s" },
-        { "namespace": "{{namespace}}", "value": "block/wooden_{{name}}s" },
-        { "namespace": "minecraft", "value": "block/mineable/axe" }
+        {"namespace": "{{namespace}}", "value": "item/wooden_{{name}}s"},
+        {"namespace": "{{namespace}}", "value": "block/wooden_{{name}}s"},
+        {"namespace": "minecraft", "value": "block/mineable/axe"}
       ]
     },
     "glass": {
@@ -484,7 +493,7 @@
                   "condition": "minecraft:match_tool",
                   "predicate": {
                     "predicates": {
-                      "minecraft:enchantments": [ { "enchantments": "minecraft:silk_touch", "levels": { "min": 1 } } ]
+                      "minecraft:enchantments": [{"enchantments": "minecraft:silk_touch", "levels": {"min": 1}}]
                     }
                   }
                 }
@@ -496,19 +505,28 @@
                     {
                       "function":   "minecraft:set_count", "add": false, "count": 2.0,
                       "conditions": [
-                        { "block": "{{id}}", "condition": "minecraft:block_state_property", "properties": { "layer_count": 2 } }
+                        {
+                          "block":      "{{id}}", "condition": "minecraft:block_state_property",
+                          "properties": {"layer_count": 2}
+                        }
                       ]
                     },
                     {
                       "function":   "minecraft:set_count", "add": false, "count": 3.0,
                       "conditions": [
-                        { "block": "{{id}}", "condition": "minecraft:block_state_property", "properties": { "layer_count": 3 } }
+                        {
+                          "block":      "{{id}}", "condition": "minecraft:block_state_property",
+                          "properties": {"layer_count": 3}
+                        }
                       ]
                     },
                     {
                       "function":   "minecraft:set_count", "add": false, "count": 4.0,
                       "conditions": [
-                        { "block": "{{id}}", "condition": "minecraft:block_state_property", "properties": { "layer_count": 4 } }
+                        {
+                          "block":      "{{id}}", "condition": "minecraft:block_state_property",
+                          "properties": {"layer_count": 4}
+                        }
                       ]
                     },
                     {
@@ -523,7 +541,7 @@
         }
       },
       "tags":     [
-        { "namespace": "{{namespace}}", "value": "item/glass_{{name}}s" }
+        {"namespace": "{{namespace}}", "value": "item/glass_{{name}}s"}
       ]
     }
   }

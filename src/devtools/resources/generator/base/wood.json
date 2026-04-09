@@ -8,33 +8,33 @@
       ],
       "display":  {
         "thirdperson_righthand": {
-          "rotation":    [ 75, 45, 0 ],
-          "translation": [ 0, 2.5, 0 ],
-          "scale":       [ 0.375, 0.375, 0.375 ]
+          "rotation":    [75, 45, 0],
+          "translation": [0, 2.5, 0],
+          "scale":       [0.375, 0.375, 0.375]
         },
         "thirdperson_lefthand":  {
-          "rotation":    [ 75, 45, 0 ],
-          "translation": [ 0, 2.5, 0 ],
-          "scale":       [ 0.375, 0.375, 0.375 ]
+          "rotation":    [75, 45, 0],
+          "translation": [0, 2.5, 0],
+          "scale":       [0.375, 0.375, 0.375]
         },
         "firstperson_righthand": {
-          "rotation": [ 0, 135, 0 ],
-          "scale":    [ 0.4, 0.4, 0.4 ]
+          "rotation": [0, 135, 0],
+          "scale":    [0.4, 0.4, 0.4]
         },
         "firstperson_lefthand":  {
-          "rotation": [ 0, 135, 0 ],
-          "scale":    [ 0.4, 0.4, 0.4 ]
+          "rotation": [0, 135, 0],
+          "scale":    [0.4, 0.4, 0.4]
         },
         "ground":                {
-          "translation": [ 0, 3, 0 ],
-          "scale":       [ 0.25, 0.25, 0.25 ]
+          "translation": [0, 3, 0],
+          "scale":       [0.25, 0.25, 0.25]
         },
         "gui":                   {
-          "rotation": [ 30, 225, 0 ],
-          "scale":    [ 0.625, 0.625, 0.625 ]
+          "rotation": [30, 225, 0],
+          "scale":    [0.625, 0.625, 0.625]
         },
         "fixed":                 {
-          "scale": [ 0.5, 0.5, 0.5 ]
+          "scale": [0.5, 0.5, 0.5]
         }
       }
     }
@@ -42,13 +42,13 @@
   "dynamic":  {
     "wood": {
       "settings": {
-        "usingVariant": { "name": "woods" }
+        "usingVariant": {"name": "woods"}
       },
       "files":    {
-        "assets/{{namespace}}/blockstates/{{item}}.json":     { },
+        "assets/{{namespace}}/blockstates/{{item}}.json":     {},
         "assets/{{namespace}}/models/block/{{item}}.json":    {
           "parent":   "{{namespace}}:block/base/{{name}}",
-          "textures": { }
+          "textures": {}
         },
         "assets/{{namespace}}/models/item/{{item}}.json":     {
           "parent": "{{namespace}}:block/{{item}}"
@@ -58,17 +58,17 @@
           "pools": [
             {
               "rolls":      1,
-              "entries":    [ { "type": "minecraft:item", "name": "{{id}}" } ],
-              "conditions": [ { "condition": "minecraft:survives_explosion" } ]
+              "entries":    [{"type": "minecraft:item", "name": "{{id}}"}],
+              "conditions": [{"condition": "minecraft:survives_explosion"}]
             }
           ]
         },
-        "data/{{namespace}}/recipe/blocks/{{item}}.json":     { }
+        "data/{{namespace}}/recipe/blocks/{{item}}.json":     {}
       },
       "tags":     [
-        { "namespace": "{{namespace}}", "value": "item/wooden_{{name}}s" },
-        { "namespace": "{{namespace}}", "value": "block/wooden_{{name}}s" },
-        { "namespace": "minecraft", "value": "block/mineable/axe" }
+        {"namespace": "{{namespace}}", "value": "item/wooden_{{name}}s"},
+        {"namespace": "{{namespace}}", "value": "block/wooden_{{name}}s"},
+        {"namespace": "minecraft", "value": "block/mineable/axe"}
       ]
     }
   }
