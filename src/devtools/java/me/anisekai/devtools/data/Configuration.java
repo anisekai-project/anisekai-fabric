@@ -11,15 +11,13 @@ import java.util.List;
 
 public class Configuration {
 
-    private final JSONObject config;
-
     private final List<BlockVariantsGroup> variantsGroups = new ArrayList<>();
 
     public Configuration(File file) throws IOException {
 
-        this.config = DevIO.getFileJson(file);
+        JSONObject config = DevIO.getFileJson(file);
 
-        JSONArray variantGroups = this.config.getJSONArray("variants");
+        JSONArray variantGroups = config.getJSONArray("variants");
 
         for (int i = 0; i < variantGroups.length(); i++) {
             JSONObject group = variantGroups.getJSONObject(i);
@@ -27,7 +25,7 @@ public class Configuration {
             String    groupName = group.getString("name");
             JSONArray values    = group.getJSONArray("values");
 
-            this.variantsGroups.add(new BlockVariantsGroup(group.getString("name"), values));
+            this.variantsGroups.add(new BlockVariantsGroup(groupName, values));
         }
     }
 
@@ -38,10 +36,11 @@ public class Configuration {
 
     public BlockVariantsGroup getVariantsGroup(String name) {
 
-        return this.variantsGroups.stream()
-                                  .filter(g -> g.getName().equals(name))
-                                  .findFirst()
-                                  .orElseThrow(() -> new IllegalArgumentException("No such variant: " + name));
+        return this.getVariantsGroups()
+                   .stream()
+                   .filter(g -> g.getName().equals(name))
+                   .findFirst()
+                   .orElseThrow(() -> new IllegalArgumentException("No such variant: " + name));
     }
 
 }
