@@ -1,6 +1,5 @@
 package me.anisekai.devtools;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -33,11 +32,6 @@ public final class DevIO {
     public static JSONObject getFileJson(File file) throws IOException {
 
         return new JSONObject(getFileContent(file));
-    }
-
-    public static JSONArray getFileArray(File file) throws IOException {
-
-        return new JSONArray(getFileContent(file));
     }
 
     public static void setFileContent(File file, CharSequence content) throws IOException {
