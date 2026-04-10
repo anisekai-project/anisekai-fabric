@@ -1,29 +1,26 @@
-# Anisekai Fabric
+# Anisekai Fabric Mod
 
-This is a personal mod for my server.
-This mod is free to use but very limited support will be provided (ie: only bugfixes)
+This is a personal mod created for my server. You are welcome to use it, but please note that very limited support will be provided. 
 
-Few features of this mod has to be used alongside a datapack (not provided).
+**Note:** A few features in this mod (specifically the Coins and Condenser) require a datapack to function fully.
 
 ### Furniture
 
-The mod provides a set of furniture blocks for each vanilla wood variant (as of 1.21):
+This mod adds a set of furniture blocks for every vanilla wood variant (updated for 1.21):
 
-- Half Slab (1/4 block, the real "half slab")
-- Staircase (a design one that you don't want to use as roof)
-- Nightstand
-- Stool
-- Table
+- **Half Slab:** A true 1/4 block slab.
+- **Decorative Staircase:** A sleek staircase design meant for interiors, rather than roofs.
+- **Nightstand**
+- **Stool**
+- **Table**
 
-All of those uses references to vanilla resources, which mean that if you use a resourcepack, those texture will be
-applied instead of the vanilla one.
+All of these blocks dynamically reference vanilla textures. This means if you use a resource pack, the furniture will automatically use your resource pack's textures instead of the default vanilla ones!
 
 ### Coins
 
-The mod provides coins item without any craft / features associated to it to let you handle how your player may use it.
-You can use them in your economy by adding
-those in villager trades, loot tables, craft, etc...
+The mod provides coin items without any built-in crafting recipes or mechanics, giving you complete freedom to decide how your players use them. You can integrate them into your server's economy by adding them to villager trades, loot tables, or custom crafting recipes via a datapack.
 
+Available coins:
 - `anisekai:copper_coin`
 - `anisekai:iron_coin`
 - `anisekai:gold_coin`
@@ -32,28 +29,24 @@ those in villager trades, loot tables, craft, etc...
 
 ### Fishing Basket
 
-This one is more of a "I want to try to do that" thing more than something that was actually planned. It is basically a
-shulkerbox that only accept fish-type items which you can sit on.
+This feature started as an experimental "I want to try to make this" idea! It is essentially a shulker box that you can sit on, and it only accepts fish-type items. 
 
-If you fish something out of the water and the item reeled in is a fish-type item, it will go directly into the basket,
-otherwise it will act as normal.
+When you reel in an item while fishing and sitting on it, if it is a fish, it will bypass your inventory and go directly into the basket. Non-fish items (like junk or treasure) will behave normally and go to your inventory.
 
-### Hoes And Shovels
+### Quality of Life: Hoes & Shovels
 
-Right-clicking a fully aged crop with a hoe will harvest it and reset its age to 0. This avoids the pain of breaking all
-of your crops to replant right after.
+- **Easy Harvest:** Right-clicking fully grown crops with a hoe will automatically harvest them and reset their growth stage to 0. This saves you the hassle of breaking and replanting all your crops!
+- **Easy Dirt:** Right-clicking farmland with a shovel converts it back to dirt. No more jumping around to trample it or breaking and replacing blocks!
 
-Right-clicking a farmland with a shovel convert it back to dirt. No more jumping or breaking/placing block !
+### Spawners
 
-### Spawner
-
-Retrieve spawners with Silk Touch !
+Spawners can now be mined and retrieved using the **Silk Touch** enchantment.
 
 ### Condenser
 
-The mod provides a block called `condenser` which allows you to create resources in a less "cheating" or "non-vanilla"
-way (if you use it / configure it correctly).
+The `condenser` is a new block that allows you to generate resources in a balanced, vanilla-friendly way, depending on how you configure it via datapacks.
 
+**Example Datapack Recipe:**
 ```json
 {
   "type":    "anisekai:condenser",
@@ -69,16 +62,13 @@ way (if you use it / configure it correctly).
 }
 ```
 
-Here `apply` refer to the first slot (top-left), `onto` the second (top-right), `booster` the third one (bottom-middle)
-and `tool` to the last slot (right).
+**How it works:**
+*   **`apply` (Top-Left Slot):** The primary item. In the example above, an oak sapling.
+*   **`onto` (Top-Right Slot):** The secondary item/catalyst. In the example above, dirt.
+*   **`booster` (Bottom-Middle Slot):** An optional boosting item.
+*   **`tool` (Right Slot):** The tool required to process the recipe. 
 
-When `consume` is set to `true`, upon *condensing* the result, one unit will be removed from the slot. In the example
-above, one sapling will be consumed but the dirt will stay in the condenser. You could set both to `false` to create a
-cobblestone generator using a water bucket and a lava bucket.
-
-The way durability is processed is the same as vanilla, as it uses the game method to damage the tool (1 durability per
-block without unbreaking, or random for each damage depending on the unbreaking level).
-
-The time required to complete the *condensing* is declared using `time` which represent the amount of tick required to
-produce the output. This does not scale with the amount of block produced as output; 400 ticks for 6 blocks will
-still be 400 ticks, much like 400 ticks for 12 blocks will also be 400 ticks.
+**Mechanics:**
+*   **Consumption (`consume`):** When set to `true`, one unit will be removed from the slot when the recipe finishes. In the example above, the sapling is consumed (`true`), but the dirt stays in the condenser (`false`). *Tip: You could set both to `false` to create a cobblestone generator using a water bucket and a lava bucket!*
+*   **Tool Durability:** Durability is processed exactly like vanilla Minecraft. The game applies damage to the tool (1 durability per block, factoring in the Unbreaking enchantment if applicable).
+*   **Processing Time (`time`):** This represents the exact amount of ticks required to complete the condensing process and produce the output. **Note:** This time does not scale with the output amount. 400 ticks will take 400 ticks, whether the output gives you 6 blocks or 12 blocks.
